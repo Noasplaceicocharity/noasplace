@@ -7,8 +7,10 @@ export default function ScrollToTop() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // When the pathname changes, scroll to top
-    window.scrollTo(0, 0);
+    // When the pathname changes, scroll to top if there's no hash
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   useEffect(() => {
@@ -27,15 +29,29 @@ export default function ScrollToTop() {
 
     // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
-    
-    // Handle initial hash if present
-    if (window.location.hash) {
-      handleHashChange();
+
+    // Only handle initial hash if explicitly navigating to a hash
+    if (window.location.hash && window.performance) {
+      const navEntry = window.performance.getEntriesByType('navigation')[0];
+      if (navEntry instanceof PerformanceNavigationTiming) {
+        // Only scroll to hash if it's not the initial page load
+        if (navEntry.type !== 'reload' && navEntry.type !== 'navigate') {
+          handleHashChange();
+        }
+      }
     }
 
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
+  }, []);
+
+  // Force scroll to top on initial page load
+  useEffect(() => {
+    // Only scroll to top if there's no hash in the URL
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   return null;

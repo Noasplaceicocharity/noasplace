@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, Inter } from "next/font/google";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.variable} ${inter.variable} antialiased bg-background text-foreground`}>
+        <ScrollToTop />
         {children}
       </body>
     </html>

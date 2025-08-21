@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand palette */
+  --brand-900: #49225B;
+  --brand-800: #6E3482;
+  --brand-500: #A56ABD;
+  --brand-100: #E7DBEF;
+  --brand-50: #F5EBFA;
+
+  /* Neutrals */
+  --ink: #1F1F1F;
+  --muted: #6B7280;
+  --bg: #FFFFFF;
+
+  /* Font variables populated via next/font in layout */
+  --font-ui: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  --font-body: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Expose colours as Tailwind tokens */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-brand-900: var(--brand-900);
+  --color-brand-800: var(--brand-800);
+  --color-brand-500: var(--brand-500);
+  --color-brand-100: var(--brand-100);
+  --color-brand-50: var(--brand-50);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Fonts */
+  --font-ui: var(--font-ui);
+  --font-body: var(--font-body);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-ui);
+  letter-spacing: -0.01em;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 320ms ease-out;
 }

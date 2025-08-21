@@ -9,7 +9,10 @@ export default function ScrollToTop() {
   useEffect(() => {
     // When the pathname changes, scroll to top if there's no hash
     if (!window.location.hash) {
-      window.scrollTo(0, 0);
+      // Scroll after next paint to avoid layout-shift jumps
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      });
     }
   }, [pathname]);
 
@@ -46,11 +49,22 @@ export default function ScrollToTop() {
     };
   }, []);
 
-  // Force scroll to top on initial page load
+  // Force scroll to top on initial page load and disable browser restoration
   useEffect(() => {
-    // Only scroll to top if there's no hash in the URL
+    try {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+    } catch {}
+
     if (!window.location.hash) {
-      window.scrollTo(0, 0);
+      // Do two passes to be extra safe against late layout shifts
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      });
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 0);
     }
   }, []);
 

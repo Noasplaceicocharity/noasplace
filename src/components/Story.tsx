@@ -1,11 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, ReactElement } from "react";
 
 type StoryStep = {
 	id: string;
 	title: string;
-	content: JSX.Element;
+	content: ReactElement;
 };
 
 export default function Story() {

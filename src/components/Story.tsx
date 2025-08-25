@@ -19,94 +19,76 @@ export default function Story() {
 						<h2 className="text-balance text-center text-3xl font-extrabold text-brand-800 sm:text-4xl md:text-5xl">
 							Some stories don't begin with answers. Ours began with questions.
 						</h2>
-						<div className="mx-auto max-w-xl space-y-2 text-center text-lg font-medium text-brand-800">
-							<p>Why won't he eat?</p>
-							<p>Why is he screaming like he's in pain?</p>
-							<p>Why won't he sleep?</p>
-							<p>Why is he hurting himself?</p>
-							<p>Why won't anyone help us?</p>
+						<div className="mx-auto max-w-xl space-y-4 text-center">
+							<div className="space-y-2 text-lg font-medium text-brand-800">
+								<p>Why was everyday life so hard?</p>
+								<p>Why was support so far away?</p>
+								<p>Why were we told to wait when we desperately needed help?</p>
+							</div>
+							<p className="text-lg leading-relaxed text-ink/80">
+								These questions echoed through our days and nights, as we watched our beautiful son struggle to navigate a world that wasn't built for him. We knew we needed help, but everywhere we turned, the answers seemed just out of reach.
+							</p>
 						</div>
 					</div>
 				),
 			},
 			{
-				id: "daily-life",
-				title: "Daily life behind closed doors",
+				id: "isolation",
+				title: "Isolation and Waiting",
 				content: (
 					<div className="space-y-6 text-lg leading-relaxed text-ink/80">
-						<p>
-							Our son, Noa, wasn't even two, but he had already faced more than most do in a
-								lifetime. From the outside, he looked like any other toddler. But inside our home, every
-								day is a battle to keep him safe, help him calm, and understand a world that clearly
-								overwhelmed him.
-						</p>
-						<p>
-							Noa throws himself onto the floor. He smashes his head against doors and walls. He tips
-							over his food and refuses almost every texture except liquid. He doesn't speak, can't explain,
-							and won't respond to his name. He often laughs when we tell him "no", not because he's
-							being naughty, but because something in his world just doesn't connect the way it should.
-						</p>
-					</div>
-				),
-			},
-			{
-				id: "waiting",
-				title: "Told to wait",
-				content: (
-					<div className="space-y-6">
-						<p className="text-lg leading-relaxed text-ink/80">
-							We went to doctors, hospitals, and health visitors desperate for help. But again and again,
-							we were told,
-						</p>
-						<div className="space-y-1 text-center font-medium text-brand-800">
-							<h3 className="text-2xl font-bold sm:text-3xl">"There's nothing we can do right now."</h3>
+						<div className="mx-auto max-w-2xl space-y-6">
+							<p>
+								Like so many families, we found ourselves isolated — trying to cope on our own while waiting for assessments, services, and answers that always seemed out of reach. The days were exhausting, overwhelming, and at times lonely.
+							</p>
+							<p className="text-center font-medium text-brand-800">
+								We discovered that isolation isn't just about being alone — it's about feeling unseen, unheard, and misunderstood by a world that keeps moving forward while your family's life feels frozen in time.
+							</p>
+							<p>
+								Every day brought new challenges, and every night left us wondering if tomorrow would be the day help finally arrived. But tomorrow kept turning into next week, next month, next year.
+							</p>
 						</div>
 					</div>
 				),
 			},
 			{
-				id: "holding-on",
-				title: "Holding on",
+				id: "strength",
+				title: "Love and Strength",
 				content: (
-					<div className="space-y-2 text-center text-lg">
-						<p>So we waited. And during that time, we cried in secret.</p>
-						<p>Held our boy through bruising meltdowns.</p>
-						<p>Watched him injure himself while we tried everything to protect him.</p>
-						<p>Felt guilt, fear, grief, and love that never once wavered.</p>
+					<div className="space-y-6">
+						<div className="mx-auto max-w-2xl space-y-6">
+							<p className="text-lg leading-relaxed text-ink/80">
+								But even in the hardest moments, there was love, joy, and courage. Our son, Noa, has shown us more strength, resilience, and wonder than we could ever put into words. He has taught us to see the world differently — and he has inspired us to make sure no other family feels the same isolation we did.
+							</p>
+							<p className="text-center text-xl font-medium text-brand-800">
+								Through Noa's eyes, we learned that different isn't less — it's just different.
+							</p>
+							<p className="text-lg leading-relaxed text-ink/80">
+								His determination to connect, to learn, to grow in his own unique way showed us that the problem wasn't him — it was a world that wasn't ready to embrace his way of being. We knew then that something had to change.
+							</p>
+						</div>
 					</div>
 				),
 			},
 			{
-				id: "extraordinary",
-				title: "Noa is extraordinary",
+				id: "vision",
+				title: "Our Vision",
 				content: (
 					<div className="space-y-6">
 						<h3 className="text-center text-2xl font-bold text-brand-800 sm:text-3xl">
-							Noa is extraordinary. He is kind, curious, gentle-hearted, and stronger than we can put into words.
+							That's why we're building Noa's Place.
 						</h3>
-						<p className="text-lg leading-relaxed text-ink/80">
-							Despite everything, he laughs. He plays. He flaps with joy when he hears nursery rhymes and
-							lights up when his toy dinosaurs are near. He's clever, creative, and full of wonder, he just
-							experiences the world in a very different way.
-						</p>
-					</div>
-				),
-			},
-			{
-				id: "calling",
-				title: "A bigger calling",
-				content: (
-					<div className="space-y-6">
-						<h3 className="text-center text-2xl font-bold text-brand-800 sm:text-3xl">
-							Out of our journey, full of pain and hope, we now feel called to do something bigger.
-						</h3>
-						<p className="text-lg leading-relaxed text-ink/80">
-							We want to create a space where families like ours are not told to "wait." A place where
-							children and adults with additional needs feel welcomed, understood, and free to just be.
-							Where there are sensory rooms, soft play, a café, classrooms, and even a charity shop, all in
-							one space. A hub of safety, joy, support and belonging, for the child melting down, for the
-							parent on the edge, for the siblings watching, and for every carer walking this unseen road.
-						</p>
+						<div className="mx-auto max-w-2xl space-y-6">
+							<p className="text-lg leading-relaxed text-ink/80">
+								A safe, inclusive hub where children and adults with additional needs can play, learn, and belong. A place with sensory rooms, soft play, classrooms, a café, and even a charity shop — designed to bring safety, joy, and connection to families who need it most.
+							</p>
+							<p className="text-center text-xl font-medium text-brand-800">
+								A community where everyone belongs, exactly as they are.
+							</p>
+							<p className="text-lg leading-relaxed text-ink/80">
+								Where parents and carers find support, siblings are included, and no one feels invisible. Where understanding replaces judgment, and where families can find the help they need before reaching crisis point.
+							</p>
+						</div>
 					</div>
 				),
 			},
@@ -114,21 +96,33 @@ export default function Story() {
 				id: "because",
 				title: "Why this matters",
 				content: (
-					<div className="space-y-4 text-center">
-						<h3 className="text-2xl font-bold text-brand-800">Because no one should have to go through this alone.</h3>
-						<h3 className="text-2xl font-bold text-brand-800">Because every Noa deserves to be celebrated.</h3>
-						<h3 className="text-2xl font-bold text-brand-800">Because help shouldn't come after the crisis, it should come before.</h3>
+					<div className="mx-auto max-w-2xl space-y-8">
+						<div className="space-y-4 text-center">
+							<h3 className="text-2xl font-bold text-brand-800">Because no child should feel left out.</h3>
+							<h3 className="text-2xl font-bold text-brand-800">Because no parent should feel alone.</h3>
+							<h3 className="text-2xl font-bold text-brand-800">Because help shouldn't come after the crisis — it should come before.</h3>
+						</div>
+						<p className="text-lg leading-relaxed text-center text-ink/80">
+							Every child deserves to play, learn, and grow in a space that understands them. Every parent deserves support that arrives before the breaking point. Every family deserves to feel like they belong.
+						</p>
 					</div>
 				),
 			},
 			{
 				id: "hope",
-				title: "Hope",
+				title: "Join Us",
 				content: (
-					<p className="text-center text-lg font-medium italic text-ink/90">
-						We're building this with faith, love, and the strength that Noa has shown us day after day.
-						And we hope you'll stand with us as we do.
-					</p>
+					<div className="mx-auto max-w-2xl space-y-6 text-center">
+						<p className="text-xl font-medium text-brand-800">
+							We're building this with faith, love, and determination.
+						</p>
+						<p className="text-lg leading-relaxed text-ink/80">
+							Noa's Place isn't just a building — it's a promise to every family walking a similar path. A promise that says you're not alone, you're not invisible, and together we can create something beautiful.
+						</p>
+						<p className="text-xl font-medium italic text-brand-800">
+							We'd love for you to stand with us as we make Noa's Place a reality.
+						</p>
+					</div>
 				),
 			},
 		],

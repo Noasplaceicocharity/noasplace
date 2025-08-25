@@ -2,6 +2,7 @@ import DonationWidget from "@/components/DonationWidget";
 import Faq from "@/components/Faq";
 import Squiggle from "@/components/Squiggle";
 import StickerCard from "@/components/StickerCard";
+import Story from "@/components/Story";
 import Image from "next/image";
 
 export default function Home() {
@@ -115,74 +116,7 @@ export default function Home() {
 					<div className="absolute right-1/3 bottom-1/4 size-3 rounded-full bg-[#6E3482]/20" />
 				</div>
 				
-				<div className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
-					<h2 className="text-balance text-center text-3xl font-extrabold text-brand-800 sm:text-4xl md:text-5xl">
-						Some stories don't begin with answers. Ours began with questions.
-					</h2>
-
-					<div className="mt-12 space-y-8 text-lg leading-relaxed text-ink/80">
-						<div className="mx-auto max-w-xl space-y-2 text-center font-medium text-brand-800">
-							<p>Why won't he eat?</p>
-							<p>Why is he screaming like he's in pain?</p>
-							<p>Why won't he sleep?</p>
-							<p>Why is he hurting himself?</p>
-							<p>Why won't anyone help us?</p>
-						</div>
-
-						<p>
-							Our son, Noa, wasn't even two, but he had already faced more than most do in a lifetime. From the outside, he looked like any other toddler. But inside our home, every day is a battle to keep him safe, help him calm, and understand a world that clearly overwhelmed him.
-						</p>
-
-						<p>
-							Noa throws himself onto the floor. He smashes his head against doors and walls. He tips over his food and refuses almost every texture except liquid. He doesn't speak, can't explain, and won't respond to his name. He often laughs when we tell him "no", not because he's being naughty, but because something in his world just doesn't connect the way it should.
-						</p>
-
-						<p>
-							We went to doctors, hospitals, and health visitors desperate for help. But again and again, we were told,
-						</p>
-
-						<div className="space-y-1 text-center font-medium text-brand-800">
-							<h3 className="text-2xl font-bold sm:text-3xl">"There's nothing we can do right now."</h3>
-						</div>
-
-						<div className="space-y-2 text-center">
-							<p>So we waited. And during that time, we cried in secret.</p>
-							<p>Held our boy through bruising meltdowns.</p>
-							<p>Watched him injure himself while we tried everything to protect him.</p>
-							<p>Felt guilt, fear, grief, and love that never once wavered.</p>
-						</div>
-
-						<h3 className="text-center text-2xl font-bold text-brand-800 sm:text-3xl">
-							Noa is extraordinary. He is kind, curious, gentle-hearted, and stronger than we can put into words.
-						</h3>
-
-						<p>
-							Despite everything, he laughs. He plays. He flaps with joy when he hears nursery rhymes and lights up when his toy dinosaurs are near. He's clever, creative, and full of wonder, he just experiences the world in a very different way.
-						</p>
-
-						<h3 className="text-center text-2xl font-bold text-brand-800 sm:text-3xl">
-							Out of our journey, full of pain and hope, we now feel called to do something bigger.
-						</h3>
-
-						<p>
-							We want to create a space where families like ours are not told to "wait."<br />
-							A place where children and adults with additional needs feel welcomed, understood, and free to just be.<br />
-							Where there are sensory rooms, soft play, a café, classrooms, and even a charity shop, all in one space.<br />
-							A hub of safety, joy, support and belonging, for the child melting down, for the parent on the edge, for the siblings watching, and for every carer walking this unseen road.
-						</p>
-
-						<div className="space-y-4 text-center">
-							<h3 className="text-2xl font-bold text-brand-800">Because no one should have to go through this alone.</h3>
-							<h3 className="text-2xl font-bold text-brand-800">Because every Noa deserves to be celebrated.</h3>
-							<h3 className="text-2xl font-bold text-brand-800">Because help shouldn't come after the crisis, it should come before.</h3>
-						</div>
-
-						<p className="text-center font-medium italic">
-							We're building this with faith, love, and the strength that Noa has shown us day after day.<br />
-							And we hope you'll stand with us as we do.
-						</p>
-					</div>
-				</div>
+				<Story />
 			</section>
 
 			{/* Image Gallery */}

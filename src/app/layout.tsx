@@ -16,9 +16,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Noa’s Place — A kinder world for kids | Donate today",
+  title: "Noa's Place — A kinder world for kids | Donate today",
   description:
-    "Noa’s Place is a kids’ charity creating safe spaces, warm meals, and joyful learning. Donate today to help children and families thrive.",
+    "Noa's Place is a kids' charity creating safe spaces, warm meals, and joyful learning. Donate today to help children and families thrive.",
+  icons: {
+    icon: '/images/noas place logo.png',
+    apple: '/images/noas place logo.png',
+  },
 };
 
 export default function RootLayout({

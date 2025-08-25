@@ -15,19 +15,20 @@ export default function Story() {
 				id: "questions",
 				title: "Questions with no easy answers",
 				content: (
-					<div className="space-y-8">
-						<h2 className="text-balance text-center text-3xl font-extrabold text-brand-800 sm:text-4xl md:text-5xl">
-							Some stories don't begin with answers. Ours began with questions.
+					<div className="space-y-6 sm:space-y-8">
+						<h2 className="text-balance text-center text-2xl sm:text-3xl font-extrabold text-brand-800 md:text-4xl">
+							Some stories don't begin with answers. Ours began with waiting.
 						</h2>
-						<div className="mx-auto max-w-xl space-y-4 text-center">
-							<div className="space-y-2 text-lg font-medium text-brand-800">
-								<p>Why was everyday life so hard?</p>
-								<p>Why was support so far away?</p>
-								<p>Why were we told to wait when we desperately needed help?</p>
-							</div>
-							<p className="text-lg leading-relaxed text-ink/80">
-								These questions echoed through our days and nights, as we watched our beautiful son struggle to navigate a world that wasn't built for him. We knew we needed help, but everywhere we turned, the answers seemed just out of reach.
+						<div className="mx-auto max-w-2xl space-y-4 sm:space-y-6">
+							<p className="text-base sm:text-lg leading-relaxed text-ink/80">
+								When our little boy, Noa, was still so young, we began to notice early signs that he was experiencing the world differently. He struggled with things that other children seemed to manage more easily, yet again and again, our concerns were dismissed.
 							</p>
+							<div className="text-center space-y-1 sm:space-y-2">
+								<p className="text-lg sm:text-xl font-medium text-brand-800">We were told to wait.</p>
+								<p className="text-base sm:text-lg font-medium text-brand-800">To wait for age milestones.</p>
+								<p className="text-base sm:text-lg font-medium text-brand-800">To wait for services.</p>
+								<p className="text-base sm:text-lg font-medium text-brand-800">To wait for support that always seemed just out of reach.</p>
+							</div>
 						</div>
 					</div>
 				),
@@ -36,16 +37,16 @@ export default function Story() {
 				id: "isolation",
 				title: "Isolation and Waiting",
 				content: (
-					<div className="space-y-6 text-lg leading-relaxed text-ink/80">
-						<div className="mx-auto max-w-2xl space-y-6">
-							<p>
-								Like so many families, we found ourselves isolated — trying to cope on our own while waiting for assessments, services, and answers that always seemed out of reach. The days were exhausting, overwhelming, and at times lonely.
+					<div className="space-y-6 sm:space-y-8">
+						<div className="mx-auto max-w-2xl space-y-4 sm:space-y-6">
+							<p className="text-base sm:text-lg leading-relaxed text-ink/80">
+								Like so many families, we felt isolated, coping as best we could while carrying the weight of unanswered questions. We were exhausted, overwhelmed, and left wondering how long it would be before someone stepped in.
 							</p>
-							<p className="text-center font-medium text-brand-800">
-								We discovered that isolation isn't just about being alone — it's about feeling unseen, unheard, and misunderstood by a world that keeps moving forward while your family's life feels frozen in time.
+							<p className="text-base sm:text-lg leading-relaxed text-ink/80">
+								That is when we realised something important: the real struggle isn't only about getting a diagnosis or therapies. It is about the silence in between — the waiting, the gap where families are left to cope alone.
 							</p>
-							<p>
-								Every day brought new challenges, and every night left us wondering if tomorrow would be the day help finally arrived. But tomorrow kept turning into next week, next month, next year.
+							<p className="text-center text-lg sm:text-xl font-medium text-brand-800">
+								No family should have to face that silence by themselves.
 							</p>
 						</div>
 					</div>
@@ -74,19 +75,16 @@ export default function Story() {
 				id: "vision",
 				title: "Our Vision",
 				content: (
-					<div className="space-y-6">
-						<h3 className="text-center text-2xl font-bold text-brand-800 sm:text-3xl">
-							That's why we're building Noa's Place.
+					<div className="space-y-6 sm:space-y-8">
+						<h3 className="text-center text-xl sm:text-2xl font-bold text-brand-800 sm:text-3xl">
+							That is why we are building Noa's Place.
 						</h3>
-						<div className="mx-auto max-w-2xl space-y-6">
-							<p className="text-lg leading-relaxed text-ink/80">
-								A safe, inclusive hub where children and adults with additional needs can play, learn, and belong. A place with sensory rooms, soft play, classrooms, a café, and even a charity shop — designed to bring safety, joy, and connection to families who need it most.
+						<div className="mx-auto max-w-2xl space-y-4 sm:space-y-6">
+							<p className="text-base sm:text-lg leading-relaxed text-ink/80">
+								A safe, inclusive hub where children and adults with additional needs are supported, celebrated, and given space to belong — not years from now, but today.
 							</p>
-							<p className="text-center text-xl font-medium text-brand-800">
-								A community where everyone belongs, exactly as they are.
-							</p>
-							<p className="text-lg leading-relaxed text-ink/80">
-								Where parents and carers find support, siblings are included, and no one feels invisible. Where understanding replaces judgment, and where families can find the help they need before reaching crisis point.
+							<p className="text-base sm:text-lg leading-relaxed text-ink/80">
+								A place with sensory rooms, soft play, classrooms, a café, and even a charity shop, all designed to bring joy, relief, and connection to families before they reach breaking point.
 							</p>
 						</div>
 					</div>
@@ -96,15 +94,12 @@ export default function Story() {
 				id: "because",
 				title: "Why this matters",
 				content: (
-					<div className="mx-auto max-w-2xl space-y-8">
-						<div className="space-y-4 text-center">
-							<h3 className="text-2xl font-bold text-brand-800">Because no child should feel left out.</h3>
-							<h3 className="text-2xl font-bold text-brand-800">Because no parent should feel alone.</h3>
-							<h3 className="text-2xl font-bold text-brand-800">Because help shouldn't come after the crisis — it should come before.</h3>
+					<div className="mx-auto max-w-2xl space-y-4 sm:space-y-6">
+						<div className="space-y-3 sm:space-y-4 text-center">
+							<h3 className="text-lg sm:text-xl font-bold text-brand-800">Because help should not come after the crisis; it should come before.</h3>
+							<h3 className="text-lg sm:text-xl font-bold text-brand-800">Because no child should feel left out.</h3>
+							<h3 className="text-lg sm:text-xl font-bold text-brand-800">Because no parent should feel invisible.</h3>
 						</div>
-						<p className="text-lg leading-relaxed text-center text-ink/80">
-							Every child deserves to play, learn, and grow in a space that understands them. Every parent deserves support that arrives before the breaking point. Every family deserves to feel like they belong.
-						</p>
 					</div>
 				),
 			},
@@ -112,15 +107,12 @@ export default function Story() {
 				id: "hope",
 				title: "Join Us",
 				content: (
-					<div className="mx-auto max-w-2xl space-y-6 text-center">
-						<p className="text-xl font-medium text-brand-800">
-							We're building this with faith, love, and determination.
+					<div className="mx-auto max-w-2xl space-y-4 sm:space-y-6 text-center">
+						<p className="text-base sm:text-lg leading-relaxed text-ink/80">
+							We are building this with faith, love, and determination. Noa's Place is not just a building; it is a promise that families do not have to wait alone.
 						</p>
-						<p className="text-lg leading-relaxed text-ink/80">
-							Noa's Place isn't just a building — it's a promise to every family walking a similar path. A promise that says you're not alone, you're not invisible, and together we can create something beautiful.
-						</p>
-						<p className="text-xl font-medium italic text-brand-800">
-							We'd love for you to stand with us as we make Noa's Place a reality.
+						<p className="text-lg sm:text-xl font-medium italic text-brand-800">
+							And we would love for you to stand with us as we make it a reality.
 						</p>
 					</div>
 				),
@@ -164,7 +156,7 @@ export default function Story() {
 	const progressPercent = ((currentIndex + 1) / steps.length) * 100;
 
 	return (
-		<div className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
+		<div className="mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-16">
 			<div className="rounded-3xl bg-white/70 p-6 shadow-sm ring-1 ring-brand-100 backdrop-blur-sm">
 				{/* Progress */}
 				<div className="mb-6">
@@ -183,15 +175,15 @@ export default function Story() {
 					role="region"
 					aria-live="polite"
 					aria-label={`Story step ${currentIndex + 1} of ${steps.length}: ${steps[currentIndex].title}`}
-					className="min-h-[240px]"
+					className="min-h-[300px] sm:h-[400px] flex items-center justify-center py-4"
 				>
-					<div className="animate-fade-in">
+					<div className="animate-fade-in w-full">
 						{steps[currentIndex].content}
 					</div>
 				</div>
 
 				{/* Controls */}
-				<div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+				<div className="mt-6 sm:mt-8 flex flex-col gap-2 sm:gap-3 sm:flex-row sm:items-center sm:justify-between">
 					<button
 						onClick={goPrev}
 						disabled={currentIndex === 0}

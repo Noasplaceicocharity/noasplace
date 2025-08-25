@@ -23,6 +23,24 @@ export const metadata: Metadata = {
     icon: '/images/noas place logo.png',
     apple: '/images/noas place logo.png',
   },
+  openGraph: {
+    title: "Noa's Place",
+    description: "No family should feel alone while they wait for support",
+    images: [
+      {
+        url: '/images/socialsharing.jpg',
+        width: 1200,
+        height: 630,
+        alt: "Noa's Place - Supporting families in need"
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Noa's Place",
+    description: "No family should feel alone while they wait for support",
+    images: ['/images/socialsharing.jpg']
+  }
 };
 
 export default function RootLayout({

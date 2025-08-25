@@ -51,6 +51,8 @@ export default function ImageModal({ isOpen, onClose, image, title, description,
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
       className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity duration-300 ${
         isOpen ? "opacity-100" : "opacity-0"
       }`}
@@ -58,14 +60,14 @@ export default function ImageModal({ isOpen, onClose, image, title, description,
       onTransitionEnd={handleAnimationEnd}
     >
       <div
-        className={`relative w-full max-w-3xl rounded-2xl bg-white shadow-2xl transition-all duration-300 ${
+        className={`relative w-full max-w-3xl max-h-[90vh] sm:max-h-[85vh] overflow-hidden rounded-2xl bg-white shadow-2xl transition-all duration-300 ${
           isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute -right-3 -top-3 z-10 rounded-full bg-white p-2 text-ink shadow-lg ring-1 ring-brand-100 transition hover:bg-brand-50"
+          className="absolute right-2 top-2 sm:right-4 sm:top-4 z-20 rounded-full bg-white p-3 text-ink shadow-lg ring-1 ring-brand-100 transition hover:bg-brand-50"
           aria-label="Close modal"
         >
           <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -73,35 +75,37 @@ export default function ImageModal({ isOpen, onClose, image, title, description,
           </svg>
         </button>
 
-        {/* Image */}
-        {hasValidImage && (
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-2xl bg-brand-50">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className={`object-cover ${
-                image.src.includes("all in one rooms") ? "object-center scale-125" : ""
-              }`}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
-            />
-          </div>
-        )}
+        <div className="max-h-[90vh] sm:max-h-[85vh] overflow-y-auto">
+          {/* Image */}
+          {hasValidImage && (
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-2xl bg-brand-50">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className={`object-cover ${
+                  image.src.includes("all in one rooms") ? "object-center scale-125" : ""
+                }`}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
+              />
+            </div>
+          )}
 
-        {/* Content */}
-        <div className="p-6 sm:p-8">
-          <h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">{title}</h3>
-          <p className="mt-4 text-lg text-ink/80">{description}</p>
-          <ul className="mt-6 space-y-2">
-            {features.map((feature, index) => (
-              <li key={index} className="flex items-start gap-3 text-ink/80">
-                <svg className="mt-1.5 size-4 shrink-0 text-brand-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
+          {/* Content */}
+          <div className="p-6 sm:p-8">
+            <h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">{title}</h3>
+            <p className="mt-4 text-lg text-ink/80">{description}</p>
+            <ul className="mt-6 space-y-2">
+              {features.map((feature, index) => (
+                <li key={index} className="flex items-start gap-3 text-ink/80">
+                  <svg className="mt-1.5 size-4 shrink-0 text-brand-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

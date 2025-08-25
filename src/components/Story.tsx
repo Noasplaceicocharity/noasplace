@@ -17,7 +17,7 @@ export default function Story() {
 				content: (
 					<div className="space-y-6 sm:space-y-8">
 						<h2 className="text-balance text-center text-2xl sm:text-3xl font-extrabold text-brand-800 md:text-4xl">
-							Some stories don't begin with answers. Ours began with waiting.
+							Some stories don’t begin with answers. Ours began with waiting.
 						</h2>
 						<div className="mx-auto max-w-2xl space-y-4 sm:space-y-6">
 							<p className="text-base sm:text-lg leading-relaxed text-ink/80">
@@ -43,29 +43,10 @@ export default function Story() {
 								Like so many families, we felt isolated, coping as best we could while carrying the weight of unanswered questions. We were exhausted, overwhelmed, and left wondering how long it would be before someone stepped in.
 							</p>
 							<p className="text-base sm:text-lg leading-relaxed text-ink/80">
-								That is when we realised something important: the real struggle isn't only about getting a diagnosis or therapies. It is about the silence in between — the waiting, the gap where families are left to cope alone.
+								That is when we realised something important: the real struggle isn’t only about getting a diagnosis or therapies. It is about the silence in between — the waiting, the gap where families are left to cope alone.
 							</p>
 							<p className="text-center text-lg sm:text-xl font-medium text-brand-800">
 								No family should have to face that silence by themselves.
-							</p>
-						</div>
-					</div>
-				),
-			},
-			{
-				id: "strength",
-				title: "Love and Strength",
-				content: (
-					<div className="space-y-6">
-						<div className="mx-auto max-w-2xl space-y-6">
-							<p className="text-lg leading-relaxed text-ink/80">
-								But even in the hardest moments, there was love, joy, and courage. Our son, Noa, has shown us more strength, resilience, and wonder than we could ever put into words. He has taught us to see the world differently — and he has inspired us to make sure no other family feels the same isolation we did.
-							</p>
-							<p className="text-center text-xl font-medium text-brand-800">
-								Through Noa's eyes, we learned that different isn't less — it's just different.
-							</p>
-							<p className="text-lg leading-relaxed text-ink/80">
-								His determination to connect, to learn, to grow in his own unique way showed us that the problem wasn't him — it was a world that wasn't ready to embrace his way of being. We knew then that something had to change.
 							</p>
 						</div>
 					</div>
@@ -77,7 +58,7 @@ export default function Story() {
 				content: (
 					<div className="space-y-6 sm:space-y-8">
 						<h3 className="text-center text-xl sm:text-2xl font-bold text-brand-800 sm:text-3xl">
-							That is why we are building Noa's Place.
+							That is why we are building Noa’s Place.
 						</h3>
 						<div className="mx-auto max-w-2xl space-y-4 sm:space-y-6">
 							<p className="text-base sm:text-lg leading-relaxed text-ink/80">
@@ -109,7 +90,7 @@ export default function Story() {
 				content: (
 					<div className="mx-auto max-w-2xl space-y-4 sm:space-y-6 text-center">
 						<p className="text-base sm:text-lg leading-relaxed text-ink/80">
-							We are building this with faith, love, and determination. Noa's Place is not just a building; it is a promise that families do not have to wait alone.
+							We are building this with faith, love, and determination. Noa’s Place is not just a building; it is a promise that families do not have to wait alone.
 						</p>
 						<p className="text-lg sm:text-xl font-medium italic text-brand-800">
 							And we would love for you to stand with us as we make it a reality.

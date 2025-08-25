@@ -5,7 +5,7 @@ export const mailchimpConfig = {
   serverPrefix: process.env.NEXT_PUBLIC_MAILCHIMP_SERVER_PREFIX,
 };
 
-// Validate Mailchimp configuration
-if (!mailchimpConfig.apiKey || !mailchimpConfig.audienceId || !mailchimpConfig.serverPrefix) {
-  throw new Error('Missing required Mailchimp configuration. Please check your .env.local file.');
-}
+// Helper flag to indicate whether configuration is present. Avoid throwing at module load to prevent build-time failures.
+export const isMailchimpConfigured = Boolean(
+  mailchimpConfig.apiKey && mailchimpConfig.audienceId && mailchimpConfig.serverPrefix
+);

@@ -109,7 +109,7 @@ export const DownloadResource = () => {
                   : 'bg-[#FFB800] text-ink hover:bg-[#ffc533] hover:scale-105'}`}
             >
               {status === 'loading' ? 'Sending...' : 'Get Your Free Guide'}
-              {!status === 'loading' && (
+              {status !== 'loading' && (
                 <svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 17L17 7M17 7H7M17 7V17"/>
                 </svg>

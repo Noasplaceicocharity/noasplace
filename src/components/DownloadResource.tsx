@@ -8,17 +8,33 @@ export const DownloadResource = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
-  const openPDF = () => {
-    const pdfWindow = window.open('/PDF/10_Things_Every_Family_with_Additional_Needs_Should_Know_in_Calderdale.pdf', '_blank');
-    if (pdfWindow === null) {
-      setMessage('Please allow pop-ups to view the PDF. You can also check your email for a copy.');
-    }
+  const pdfUrl = '/PDF/10_Things_Every_Family_with_Additional_Needs_Should_Know_in_Calderdale.pdf';
+  const pdfFilename = '10_Things_Every_Family_with_Additional_Needs_Should_Know_in_Calderdale.pdf';
+
+  const downloadPdfFile = async () => {
+    const response = await fetch(pdfUrl);
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = pdfFilename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(blobUrl);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
+    setMessage('');
     
+    // Open the PDF in a new tab synchronously; do not touch the current tab
+    const newTab = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+    if (newTab === null) {
+      setMessage('Please allow pop-ups to view the PDF. You can also check your email for a copy.');
+    }
+
     try {
       const response = await fetch('/api/subscribe-resource', {
         method: 'POST',
@@ -32,10 +48,14 @@ export const DownloadResource = () => {
 
       if (!response.ok) throw new Error(data.message || 'Something went wrong');
 
-      // Open PDF and handle success
-      openPDF();
+      // Trigger a file download to the device
+      try {
+        await downloadPdfFile();
+      } catch {
+        // If download fails, we still showed the PDF in a tab; inform gently
+      }
       setStatus('success');
-      setMessage('Thank you! Your guide should open in a new tab. We\'ve also sent a copy to your email.');
+      setMessage('Thank you! The guide has opened in a new tab and a download has started. We\'ve also emailed you a copy.');
       setEmail('');
     } catch (error) {
       setStatus('error');

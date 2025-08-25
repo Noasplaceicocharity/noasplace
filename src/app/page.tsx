@@ -4,6 +4,7 @@ import DonationWidget from "@/components/DonationWidget";
 import DownloadResource from "@/components/DownloadResource";
 import Faq from "@/components/Faq";
 import ImageModal from "@/components/ImageModal";
+import MailchimpSubscribeForm from "@/components/MailchimpSubscribeForm";
 import Squiggle from "@/components/Squiggle";
 import StickerCard from "@/components/StickerCard";
 import Story from "@/components/Story";
@@ -462,24 +463,8 @@ export default function Home() {
 					</div>
 
 					<div className="mt-12">
-						<div className="overflow-hidden rounded-2xl shadow-lg">
-							<iframe 
-								src="https://docs.google.com/forms/d/e/1FAIpQLSffbGfNPdb32UudXu8i_0NrIQ_S66ghh418GfNEyUepbGK0uA/viewform?embedded=true" 
-								width="100%" 
-								height="1600"
-								className="w-full"
-								loading="lazy"
-								title="Support Noa's Place — Google Form"
-								tabIndex={-1}
-								style={{ 
-									border: 0,
-									height: '1600px',
-									overflow: 'hidden'
-								}}
-								scrolling="no"
-							>
-								Loading…
-							</iframe>
+						<div className="overflow-hidden rounded-2xl bg-white shadow-lg p-8">
+							<MailchimpSubscribeForm />
 						</div>
 					</div>
 				</div>

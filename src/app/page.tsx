@@ -1,11 +1,117 @@
+"use client";
+
 import DonationWidget from "@/components/DonationWidget";
+import DownloadResource from "@/components/DownloadResource";
 import Faq from "@/components/Faq";
+import ImageModal from "@/components/ImageModal";
 import Squiggle from "@/components/Squiggle";
 import StickerCard from "@/components/StickerCard";
 import Story from "@/components/Story";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [selectedSpace, setSelectedSpace] = useState<{
+    id: string;
+    image: { src: string; alt: string };
+    title: string;
+    description: string;
+    features: string[];
+  } | null>(null);
+
+  const spaces = [
+    {
+      id: "kids-sensory",
+      image: {
+        src: "/images/kids sensory rooms.jpg",
+        alt: "Kids sensory room with soft play equipment and calming lights",
+      },
+      title: "Kids Sensory",
+      description: "A safe, calming space designed specifically for children with sensory needs. Features include:",
+      features: [
+        "Soft play equipment and climbing frames",
+        "Adjustable lighting and sound environments",
+        "Tactile walls and interactive features",
+        "Quiet corners for when it all gets too much",
+      ],
+    },
+    {
+      id: "adult-sensory",
+      image: {
+        src: "/images/adult sensory rooms.jpg",
+        alt: "Adult sensory room designed for comfort and stimulation",
+      },
+      title: "Adult Sensory",
+      description: "A dignified, age-appropriate space for adults to regulate, relax, and engage their senses:",
+      features: [
+        "Comfortable seating and relaxation areas",
+        "Sensory equipment designed for adult users",
+        "Customisable environment for individual needs",
+        "Private spaces for one-to-one support",
+      ],
+    },
+    {
+      id: "indoor-playground",
+      image: {
+        src: "/images/all play.jpg",
+        alt: "Indoor playground and soft play area",
+      },
+      title: "Indoor Playground",
+      description: "An inclusive play space where children of all abilities can explore and have fun:",
+      features: [
+        "Accessible play equipment for all abilities",
+        "Sensory-friendly zones and quiet areas",
+        "Safe, padded surfaces throughout",
+        "Adaptive equipment and support aids available",
+      ],
+    },
+    {
+      id: "event-spaces",
+      image: {
+        src: "/images/all in one rooms.jpg",
+        alt: "Flexible event and activity spaces",
+      },
+      title: "Event Spaces",
+      description: "Flexible spaces for community activities, workshops, and celebrations:",
+      features: [
+        "Adaptable rooms for various group sizes",
+        "Fully accessible facilities and equipment",
+        "Sensory-aware environment controls",
+        "Perfect for classes, groups, and family events",
+      ],
+    },
+    {
+      id: "community-cafe",
+      image: {
+        src: "/images/cafe.jpg",
+        alt: "Welcoming community café space",
+      },
+      title: "Cafe",
+      description: "More than just a café – a welcoming hub where everyone belongs:",
+      features: [
+        "Sensory-friendly environment with quiet zones",
+        "Accessible menus and dietary options",
+        "Family-friendly seating and facilities",
+        "Regular community events and meetups",
+      ],
+    },
+    {
+      id: "charity-shop",
+      image: {
+        src: "/images/charity shop.jpg",
+        alt: "Our charity shop supporting the community",
+      },
+      title: "Charity Shop",
+      description: "A sustainable way to support our community while finding treasures:",
+      features: [
+        "Quality pre-loved items at affordable prices",
+        "Volunteer opportunities for all abilities",
+        "Supported work experience placements",
+        "Income generation to support our services",
+      ],
+    },
+  ];
+
   return (
 		<main className="bg-background text-ink">
 			<section className="relative isolate min-h-[700px] overflow-hidden">
@@ -122,244 +228,65 @@ export default function Home() {
 			{/* Image Gallery */}
 			<section className="overflow-hidden bg-white py-24">
 				<div className="mx-auto max-w-6xl px-6">
+					<h2 className="text-center text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl mb-12">
+						Our Dreamboard
+					</h2>
+					<p className="mx-auto mt-4 max-w-2xl text-center text-lg text-ink/80">
+						This is what we imagine Noa's Place will look like - a vibrant, inclusive space for everyone.
+					</p>
+					<p className="mx-auto mt-3 max-w-2xl text-center text-base text-brand-800 flex items-center justify-center gap-2 mb-12">
+						<svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+							<path d="M21 2H3v16h5v4l4-4h5l4-4V2zM12 7v4M12 15h.01" />
+						</svg>
+						Click any space to learn more about it
+					</p>
 					<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-						<a href="#kids-sensory" className="group relative aspect-[4/3] block overflow-hidden rounded-2xl bg-brand-50 lg:col-span-2">
-							<Image
-								src="/images/kids sensory rooms.jpg"
-								alt="Kids sensory room with soft play equipment and calming lights"
-								width={600}
-								height={450}
-								className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-							<span className="absolute bottom-4 left-4 text-lg font-bold text-white group-hover:underline">Kids Sensory</span>
-						</a>
-						<a href="#adult-sensory" className="group relative aspect-[4/3] block overflow-hidden rounded-2xl bg-brand-50 lg:col-span-2">
-							<Image
-								src="/images/adult sensory rooms.jpg"
-								alt="Adult sensory room designed for comfort and stimulation"
-								width={600}
-								height={450}
-								className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-							<span className="absolute bottom-4 left-4 text-lg font-bold text-white group-hover:underline">Adult Sensory</span>
-						</a>
-						<a href="#indoor-playground" className="group relative aspect-[4/3] block overflow-hidden rounded-2xl bg-brand-50 lg:col-span-2">
-							<Image
-								src="/images/all play.jpg"
-								alt="Indoor playground and soft play area"
-								width={600}
-								height={450}
-								className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-							<span className="absolute bottom-4 left-4 text-lg font-bold text-white group-hover:underline">Indoor Playground</span>
-						</a>
-						<a href="#event-spaces" className="group relative aspect-[4/3] block overflow-hidden rounded-2xl bg-brand-50 lg:col-span-2">
-							<Image
-								src="/images/all in one rooms.jpg"
-								alt="Flexible event and activity spaces"
-								width={800}
-								height={600}
-								className="absolute inset-0 h-full w-full object-cover object-center scale-125 transition duration-500 group-hover:scale-[1.35]"
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-							<span className="absolute bottom-4 left-4 text-lg font-bold text-white group-hover:underline">Event Spaces</span>
-						</a>
-						<a href="#community-cafe" className="group relative aspect-[4/3] block overflow-hidden rounded-2xl bg-brand-50 lg:col-span-2">
-							<Image
-								src="/images/cafe.jpg"
-								alt="Welcoming community café space"
-								width={600}
-								height={450}
-								className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-							<span className="absolute bottom-4 left-4 text-lg font-bold text-white group-hover:underline">Community Café</span>
-						</a>
-						<a href="#charity-shop" className="group relative aspect-[4/3] block overflow-hidden rounded-2xl bg-brand-50 lg:col-span-2">
-          <Image
-								src="/images/charity shop.jpg"
-								alt="Our charity shop supporting the community"
-								width={600}
-								height={450}
-								className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-							<span className="absolute bottom-4 left-4 text-lg font-bold text-white group-hover:underline">Charity Shop</span>
-						</a>
+						{spaces.map((space) => (
+							<button
+								key={space.id}
+								onClick={() => setSelectedSpace(space)}
+								className="group relative aspect-[4/3] block overflow-hidden rounded-2xl bg-brand-50 lg:col-span-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-800 focus:ring-offset-2 transition duration-300 hover:shadow-xl hover:-translate-y-1"
+							>
+								<Image
+									src={space.image.src}
+									alt={space.image.alt}
+									width={600}
+									height={450}
+									className={`h-full w-full object-cover transition duration-500 group-hover:scale-105 ${
+										space.id === "event-spaces" ? "object-center scale-125 group-hover:scale-[1.35]" : ""
+									}`}
+								/>
+								<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+								<div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+									<span className="text-lg font-bold text-white group-hover:underline">
+										{space.title}
+									</span>
+									<span className="text-sm text-white/90 bg-black/30 px-3 py-1 rounded-full backdrop-blur-sm opacity-0 translate-y-2 transition duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+										Click to learn more
+									</span>
+								</div>
+							</button>
+						))}
 					</div>
+
+					{/* Modal */}
+					{selectedSpace && (
+						<ImageModal
+							isOpen={true}
+							onClose={() => setSelectedSpace(null)}
+							image={selectedSpace.image}
+							title={selectedSpace.title}
+							description={selectedSpace.description}
+							features={selectedSpace.features}
+						/>
+					)}
 				</div>
 			</section>
 
-			{/* Our Spaces */}
-			<section className="bg-white py-24">
-				<div className="mx-auto max-w-6xl px-6">
-					<h2 className="text-center text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
-						Our Spaces
-					</h2>
-					<p className="mx-auto mt-4 max-w-2xl text-center text-lg text-ink/80">
-						Every space at Noa's Place is designed with purpose, accessibility, and community in mind.
-					</p>
-
-					<div className="mt-16 space-y-24">
-												{/* Kids Sensory */}
-						<div id="kids-sensory" className="scroll-mt-24">
-							<div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-								<div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-50">
-									<Image
-										src="/images/kids sensory rooms.jpg"
-										alt="Kids sensory room with soft play equipment and calming lights"
-										fill
-										className="object-cover"
-									/>
-								</div>
-								<div className="flex flex-col justify-center">
-									<h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">Kids Sensory Room</h3>
-									<div className="mt-6 space-y-4 text-lg text-ink/80">
-										<p>A safe, calming space designed specifically for children with sensory needs. Features include:</p>
-										<ul className="ml-6 list-disc space-y-2">
-											<li>Soft play equipment and climbing frames</li>
-											<li>Adjustable lighting and sound environments</li>
-											<li>Tactile walls and interactive features</li>
-											<li>Quiet corners for when it all gets too much</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						{/* Adult Sensory */}
-						<div id="adult-sensory" className="scroll-mt-24">
-							<div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-								<div className="flex flex-col justify-center order-2 lg:order-1">
-									<h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">Adult Sensory Room</h3>
-									<div className="mt-6 space-y-4 text-lg text-ink/80">
-										<p>A dignified, age-appropriate space for adults to regulate, relax, and engage their senses:</p>
-										<ul className="ml-6 list-disc space-y-2">
-											<li>Comfortable seating and relaxation areas</li>
-											<li>Sensory equipment designed for adult users</li>
-											<li>Customisable environment for individual needs</li>
-											<li>Private spaces for one-to-one support</li>
-										</ul>
-									</div>
-								</div>
-								<div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-50 order-1 lg:order-2">
-									<Image
-										src="/images/adult sensory rooms.jpg"
-										alt="Adult sensory room designed for comfort and stimulation"
-										fill
-										className="object-cover"
-									/>
-								</div>
-							</div>
-						</div>
-
-						{/* Indoor Playground */}
-						<div id="indoor-playground" className="scroll-mt-24">
-							<div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-								<div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-50">
-									<Image
-										src="/images/all play.jpg"
-										alt="Indoor playground and soft play area"
-										fill
-										className="object-cover"
-									/>
-								</div>
-								<div className="flex flex-col justify-center">
-									<h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">Indoor Playground</h3>
-									<div className="mt-6 space-y-4 text-lg text-ink/80">
-										<p>An inclusive play space where children of all abilities can explore and have fun:</p>
-										<ul className="ml-6 list-disc space-y-2">
-											<li>Accessible play equipment for all abilities</li>
-											<li>Sensory-friendly zones and quiet areas</li>
-											<li>Safe, padded surfaces throughout</li>
-											<li>Adaptive equipment and support aids available</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						{/* Event Spaces */}
-						<div id="event-spaces" className="scroll-mt-24">
-							<div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-								<div className="flex flex-col justify-center order-2 lg:order-1">
-									<h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">Event Spaces</h3>
-									<div className="mt-6 space-y-4 text-lg text-ink/80">
-										<p>Flexible spaces for community activities, workshops, and celebrations:</p>
-										<ul className="ml-6 list-disc space-y-2">
-											<li>Adaptable rooms for various group sizes</li>
-											<li>Fully accessible facilities and equipment</li>
-											<li>Sensory-aware environment controls</li>
-											<li>Perfect for classes, groups, and family events</li>
-										</ul>
-									</div>
-								</div>
-								<div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-50 order-1 lg:order-2">
-									<Image
-										src="/images/all in one rooms.jpg"
-										alt="Flexible event and activity spaces"
-										fill
-										className="object-cover object-center scale-125"
-									/>
-								</div>
-							</div>
-						</div>
-
-						{/* Community Café */}
-						<div id="community-cafe" className="scroll-mt-24">
-							<div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-								<div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-50">
-									<Image
-										src="/images/cafe.jpg"
-										alt="Welcoming community café space"
-										fill
-										className="object-cover"
-									/>
-								</div>
-								<div className="flex flex-col justify-center">
-									<h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">Community Café</h3>
-									<div className="mt-6 space-y-4 text-lg text-ink/80">
-										<p>More than just a café – a welcoming hub where everyone belongs:</p>
-										<ul className="ml-6 list-disc space-y-2">
-											<li>Sensory-friendly environment with quiet zones</li>
-											<li>Accessible menus and dietary options</li>
-											<li>Family-friendly seating and facilities</li>
-											<li>Regular community events and meetups</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						{/* Charity Shop */}
-						<div id="charity-shop" className="scroll-mt-24">
-							<div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-								<div className="flex flex-col justify-center order-2 lg:order-1">
-									<h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">Charity Shop</h3>
-									<div className="mt-6 space-y-4 text-lg text-ink/80">
-										<p>A sustainable way to support our community while finding treasures:</p>
-										<ul className="ml-6 list-disc space-y-2">
-											<li>Quality pre-loved items at affordable prices</li>
-											<li>Volunteer opportunities for all abilities</li>
-											<li>Supported work experience placements</li>
-											<li>Income generation to support our services</li>
-										</ul>
-									</div>
-								</div>
-								<div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-50 order-1 lg:order-2">
-									<Image
-										src="/images/charity shop.jpg"
-										alt="Our charity shop supporting the community"
-										fill
-										className="object-cover"
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
+			{/* Free Resource Section */}
+			<section className="overflow-hidden bg-brand-50/30 py-24">
+				<div className="mx-auto max-w-4xl px-6">
+					<DownloadResource />
 				</div>
 			</section>
 

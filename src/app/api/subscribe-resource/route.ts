@@ -35,8 +35,35 @@ export async function POST(request: Request) {
 
     if (!audienceResponse.ok) {
       const error = await audienceResponse.json();
-      // If the member already exists, we can continue with triggering the journey
-      if (error.title !== 'Member Exists') {
+      
+      if (error.title === 'Member Exists') {
+        // If member exists, update their tags
+        const subscriberHash = require('crypto')
+          .createHash('md5')
+          .update(email.toLowerCase())
+          .digest('hex');
+        
+        const updateResponse = await fetch(
+          `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}/tags`,
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `apikey ${API_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              tags: [
+                { name: 'Resource Download - 10 Things Guide', status: 'active' },
+                { name: 'download PDF', status: 'active' }
+              ]
+            }),
+          }
+        );
+
+        if (!updateResponse.ok) {
+          console.error('Failed to update member tags but continuing');
+        }
+      } else {
         throw new Error(error.detail || 'Failed to add to mailing list');
       }
     }

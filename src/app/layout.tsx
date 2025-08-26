@@ -16,9 +16,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Noa's Place Halifax | Children's Charity & Family Support Centre West Yorkshire",
+  title: "Noa's Place Halifax | Family Support Centre West Yorkshire",
   description:
-    "Noa's Place in Halifax, West Yorkshire is a leading children's charity providing safe spaces, warm meals, and family support services. Visit our welcoming centre for sensory rooms, SEND support, and community activities.",
+    "Noa's Place in Halifax, West Yorkshire is a welcoming family support centre providing safe spaces, warm meals, and support services. Visit our centre for sensory rooms, SEND support, and community activities.",
   keywords: "children's charity Halifax, family support West Yorkshire, SEND support Halifax, sensory rooms Yorkshire, community centre Halifax, family activities West Yorkshire, charity donation Halifax",
   authors: [{ name: "Noa's Place" }],
   creator: "Noa's Place",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     apple: '/images/noas place logo.png',
   },
   openGraph: {
-    title: "Noa's Place - Halifax's Leading Children's Charity & Family Support Centre",
+    title: "Noa's Place - Halifax Family Support Centre",
     description: "Supporting Halifax families with sensory rooms, SEND spaces, and community activities. No family should feel alone while they wait for support.",
     url: 'https://noasplace.org.uk',
     siteName: "Noa's Place",

@@ -38,10 +38,11 @@ export async function POST(request: Request) {
       
       if (error.title === 'Member Exists') {
         // If member exists, update their tags
-        const subscriberHash = require('crypto')
-          .createHash('md5')
-          .update(email.toLowerCase())
-          .digest('hex');
+        const encoder = new TextEncoder();
+        const data = encoder.encode(email.toLowerCase());
+        const hashBuffer = await crypto.subtle.digest('MD5', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const subscriberHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         
         const updateResponse = await fetch(
           `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}/tags`,

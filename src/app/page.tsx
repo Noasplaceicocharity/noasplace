@@ -478,6 +478,32 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
+
+			{/* Get in Touch Section */}
+			<section id="contact" className="bg-white">
+				<div className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
+					<div className="text-center">
+						<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
+							Get in touch
+						</h2>
+						<p className="mx-auto mt-6 max-w-2xl text-lg text-ink/80">
+							Have a question or want to get involved? We'd love to hear from you.
+						</p>
+						<div className="mt-8 flex items-center justify-center">
+							<a
+								href="mailto:hello@noasplace.org.uk"
+								className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
+							>
+								Email hello@noasplace.org.uk
+								<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+									<path d="M4 4h16v16H4z"/>
+									<path d="m22 6-10 7L2 6"/>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
 		</main>
 	);
 }

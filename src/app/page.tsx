@@ -461,24 +461,26 @@ export default function Home() {
 			<section id="register-form" className="bg-brand-50/30 py-24">
 				<div className="mx-auto max-w-4xl px-6">
 					<div className="text-center">
+						{/* Signature Count Card */}
+						<div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-4 py-2.5 rounded-full border border-brand-100 shadow-sm mb-8">
+							<div className="relative">
+								<div className="bg-brand-50 rounded-full h-11 w-11 flex items-center justify-center">
+									<span className="text-lg font-bold text-brand-800 tracking-tight">100+</span>
+								</div>
+								<div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-brand-200/50 rounded-full"></div>
+							</div>
+							<div className="flex flex-col">
+								<span className="text-brand-800 font-semibold text-base">Supporters</span>
+								<span className="text-brand-600 text-sm">in the last 24 hours</span>
+							</div>
+						</div>
+
 						<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
 							Show Your Support
 						</h2>
 						<div className="mt-6 space-y-4 text-lg text-ink/80">
 							<p>We're dreaming of something amazing for Halifax but we need to know the community wants it.</p>
 							<p>Add your name today to show your support for Noa's Place.</p>
-							
-							{/* Signature Count Card */}
-							<div className="mx-auto max-w-sm my-8 transform hover:scale-105 transition-transform duration-300">
-								<div className="bg-white rounded-2xl shadow-lg border-2 border-brand-100 p-6 relative overflow-hidden">
-									<div className="absolute top-0 right-0 w-24 h-24 bg-brand-50 rounded-full -mr-12 -mt-12"></div>
-									<div className="relative z-10">
-										<span className="block text-4xl font-bold text-brand-600 mb-2">100+</span>
-										<span className="block text-lg text-brand-800">People have shown their support</span>
-										<span className="text-sm text-brand-600 font-medium">in the last 24 hours!</span>
-									</div>
-								</div>
-							</div>
 							
 							<p className="font-medium text-brand-800">Together, we can create a safe, inclusive space for children, adults, and families of every ability.</p>
 						</div>

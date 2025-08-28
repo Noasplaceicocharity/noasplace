@@ -450,11 +450,11 @@ export default function Home() {
 								This isn't just about building a centre. It's about creating a future of belonging for children, adults, and families who too often feel excluded.
 							</p>
 							<p className="mx-auto mt-6 max-w-2xl text-xl font-medium">
-								With your help, Noa's Place will be a safe haven — full of joy, acceptance, and hope.
+																With your help, Noa's Place will be a safe haven — full of joy, acceptance, and hope.
 							</p>
 						</div>
 					</div>
-    </div>
+				</div>
 			</section>
 
 			{/* Support Form Section */}
@@ -474,6 +474,33 @@ export default function Home() {
 					<div className="mt-12">
 						<div className="overflow-hidden rounded-2xl bg-white shadow-lg p-8">
 							<MailchimpSubscribeForm />
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Testimonials Image Section */}
+			<section className="py-24 bg-white">
+				<div className="relative mx-auto max-w-7xl px-6">
+					{/* Section Title */}
+					<div className="text-center mb-8">
+						<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
+							What People Are Saying
+						</h2>
+					</div>
+
+					{/* Decorative elements */}
+					<div className="absolute -left-4 -top-4 w-72 h-72 bg-brand-50 rounded-full opacity-50 blur-3xl"></div>
+					<div className="absolute -right-4 -bottom-4 w-72 h-72 bg-brand-50 rounded-full opacity-50 blur-3xl"></div>
+					
+					{/* Image container */}
+					<div className="relative">
+						<div className="aspect-[16/9] overflow-hidden rounded-2xl">
+							<img
+								src="/images/testimonials.png"
+								alt="Community testimonials and quotes supporting Noa's Place"
+								className="w-full h-full object-cover"
+							/>
 						</div>
 					</div>
 				</div>

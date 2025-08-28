@@ -467,6 +467,19 @@ export default function Home() {
 						<div className="mt-6 space-y-4 text-lg text-ink/80">
 							<p>We're dreaming of something amazing for Halifax but we need to know the community wants it.</p>
 							<p>Add your name today to show your support for Noa's Place.</p>
+							
+							{/* Signature Count Card */}
+							<div className="mx-auto max-w-sm my-8 transform hover:scale-105 transition-transform duration-300">
+								<div className="bg-white rounded-2xl shadow-lg border-2 border-brand-100 p-6 relative overflow-hidden">
+									<div className="absolute top-0 right-0 w-24 h-24 bg-brand-50 rounded-full -mr-12 -mt-12"></div>
+									<div className="relative z-10">
+										<span className="block text-4xl font-bold text-brand-600 mb-2">100+</span>
+										<span className="block text-lg text-brand-800">People have shown their support</span>
+										<span className="text-sm text-brand-600 font-medium">in the last 24 hours!</span>
+									</div>
+								</div>
+							</div>
+							
 							<p className="font-medium text-brand-800">Together, we can create a safe, inclusive space for children, adults, and families of every ability.</p>
 						</div>
 					</div>

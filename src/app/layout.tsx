@@ -96,6 +96,19 @@ fbq('init', '1086670053658224');
 fbq('track', 'PageView');
           `}
         </Script>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-44FQT7M8RH"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-gtag" strategy="afterInteractive">
+          {`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-44FQT7M8RH');
+          `}
+        </Script>
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",

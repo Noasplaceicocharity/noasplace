@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { cookies } from "next/headers";
+import CookieConsent from "@/components/CookieConsent";
 import { Nunito, Inter } from "next/font/google";
 import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
@@ -74,16 +76,20 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const hasAnalyticsConsent = cookieStore.get('analytics_consent')?.value === 'granted';
   return (
     <html lang="en">
       <head>
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`
+        {hasAnalyticsConsent && (
+          <>
+            <Script id="meta-pixel" strategy="afterInteractive">
+              {`
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -94,21 +100,23 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1086670053658224');
 fbq('track', 'PageView');
-          `}
-        </Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-44FQT7M8RH"
-          strategy="afterInteractive"
-        />
-        <Script id="ga-gtag" strategy="afterInteractive">
-          {`
+              `}
+            </Script>
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-44FQT7M8RH"
+              strategy="afterInteractive"
+            />
+            <Script id="ga-gtag" strategy="afterInteractive">
+              {`
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){dataLayer.push(arguments);} 
   gtag('js', new Date());
 
   gtag('config', 'G-44FQT7M8RH');
-          `}
-        </Script>
+              `}
+            </Script>
+          </>
+        )}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -157,14 +165,17 @@ fbq('track', 'PageView');
         </script>
       </head>
       <body className={`${nunito.variable} ${inter.variable} antialiased bg-background text-foreground`}>
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html:
-              '<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1086670053658224&ev=PageView&noscript=1" />',
-          }}
-        />
+        {hasAnalyticsConsent && (
+          <noscript
+            dangerouslySetInnerHTML={{
+              __html:
+                '<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1086670053658224&ev=PageView&noscript=1" />',
+            }}
+          />
+        )}
         <ScrollToTop />
         {children}
+        <CookieConsent initiallyConsented={hasAnalyticsConsent} />
       </body>
     </html>
   );

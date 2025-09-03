@@ -214,6 +214,72 @@ export default function Home() {
 
 			</section>
 
+			{/* Press Coverage Section */}
+			<section className="py-16 bg-gradient-to-b from-white to-gray-50/50">
+				<div className="mx-auto max-w-7xl px-6">
+					<div className="text-center">
+						<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">As Seen In</h2>
+					</div>
+					<div className="mt-8">
+						<div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+							{/* Halifax Courier */}
+							<div className="flex flex-col items-center">
+								<a 
+									href="https://www.halifaxcourier.co.uk/community/calderdale-family-launch-vision-for-inclusive-hub-for-children-and-adults-with-additional-needs-5289769"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="relative h-24 w-full cursor-pointer"
+								>
+									<Image
+										src="/images/halifaxcourier.webp"
+										alt="Halifax Courier"
+										fill
+										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
+										style={{ objectPosition: 'center' }}
+									/>
+								</a>
+							</div>
+
+							{/* Yorkshire Live */}
+							<div className="flex flex-col items-center">
+								<a 
+									href="https://www.examinerlive.co.uk/news/west-yorkshire-news/halifax-family-absolutely-blown-away-32400258?int_source=nba"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="relative h-24 w-full cursor-pointer"
+								>
+									<Image
+										src="/images/yorkshirelive.png"
+										alt="Yorkshire Live"
+										fill
+										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
+										style={{ objectPosition: 'center' }}
+									/>
+								</a>
+							</div>
+
+							{/* Yorkshire Post */}
+							<div className="flex flex-col items-center">
+								<a 
+									href="https://www.yorkshirepost.co.uk/community/calderdale-family-launch-vision-for-inclusive-hub-for-children-and-adults-with-additional-needs-5291748"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="relative h-24 w-full cursor-pointer"
+								>
+									<Image
+										src="/images/yorkshirepost.png"
+										alt="Yorkshire Post"
+										fill
+										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
+										style={{ objectPosition: 'center' }}
+									/>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<section className="relative overflow-hidden bg-brand-50/30">
 				<div className="pointer-events-none absolute inset-0">
 					<svg className="absolute right-0 top-0 h-32 w-32 rotate-90 text-[#40BFBF]/20" viewBox="0 0 100 100" fill="currentColor">

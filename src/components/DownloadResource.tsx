@@ -120,6 +120,10 @@ export const DownloadResource = () => {
               />
             </div>
 
+            <p className="text-xs text-ink/60 text-center">
+              By entering your email, you consent to us contacting you about our services and updates.
+            </p>
+
             <button
               type="submit"
               disabled={status === 'loading'}

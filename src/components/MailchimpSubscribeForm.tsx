@@ -170,6 +170,10 @@ const MailchimpSubscribeForm = () => {
           </select>
         </div>
 
+        <p className="text-xs text-ink/60 text-center mb-4">
+          By filling out this form, you consent to us keeping you updated via the communication information you have entered.
+        </p>
+
         <button
           type="submit"
           disabled={status === 'loading'}

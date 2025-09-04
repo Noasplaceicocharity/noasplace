@@ -196,17 +196,6 @@ export default function Home() {
 										<path d="m6 9 6 6 6-6"/>
 									</svg>
 								</a>
-								<a
-									href="https://forms.gle/LXt8FCp61v4yiSXs9"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="inline-flex items-center justify-center rounded-xl bg-white/90 px-8 py-4 text-lg font-bold text-brand-800 shadow-lg ring-1 ring-brand-100 hover:bg-white hover:scale-105 transition duration-200"
-								>
-									Become a Board Member
-									<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-										<path d="M7 17L17 7M17 7H7M17 7V17"/>
-									</svg>
-								</a>
 							</div>
 						</div>
 					</div>
@@ -486,24 +475,6 @@ export default function Home() {
 										</a>
 									</div>
 								</div>
-								<div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-brand-100">
-									<div className="mb-4 inline-flex size-12 items-center justify-center rounded-xl bg-brand-50 text-2xl text-brand-800">👥</div>
-									<h3 className="text-xl font-bold text-brand-800">Become a Board Member</h3>
-									<p className="mt-2 text-ink/80">Join our board and help shape the future of Noa's Place.</p>
-									<div className="mt-6">
-										<a 
-											href="https://forms.gle/LXt8FCp61v4yiSXs9"
-											target="_blank"
-											rel="noopener noreferrer"
-											className="inline-flex w-full items-center justify-center rounded-xl bg-[#FFB800] px-6 py-3 text-base font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
-										>
-											Apply Now
-											<svg className="ml-2 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-												<path d="M7 17L17 7M17 7H7M17 7V17"/>
-											</svg>
-										</a>
-									</div>
-								</div>
 							</div>
 						</div>
 
@@ -531,13 +502,13 @@ export default function Home() {
 						<div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-4 py-2.5 rounded-full border border-brand-100 shadow-sm mb-8">
 							<div className="relative">
 								<div className="bg-brand-50 rounded-full h-11 w-11 flex items-center justify-center">
-									<span className="text-lg font-bold text-brand-800 tracking-tight">100+</span>
+									<span className="text-lg font-bold text-brand-800 tracking-tight">500+</span>
 								</div>
 								<div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-brand-200/50 rounded-full"></div>
 							</div>
 							<div className="flex flex-col">
 								<span className="text-brand-800 font-semibold text-base">Supporters</span>
-								<span className="text-brand-600 text-sm">in the last 24 hours</span>
+								<span className="text-brand-600 text-sm">in just 4 days</span>
 							</div>
 						</div>
 

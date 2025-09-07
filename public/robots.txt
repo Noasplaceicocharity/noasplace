@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://noasplace.org.uk
+
+# Sitemaps
+Sitemap: https://noasplace.org.uk/sitemap.xml

@@ -166,24 +166,24 @@ export default function Home() {
 							/>
         </div>
 						{/* Center content */}
-						<div className="relative mx-auto max-w-2xl text-center">
+						<div className="relative mx-auto max-w-4xl text-center">
 														<div className="flex justify-center">
           <Image
 									src="/images/noas place logo.png"
 									alt="Noa's Place"
 									width={500}
 									height={500}
-									className="h-auto w-[400px] sm:w-[500px]"
+									className="h-auto w-[200px] sm:w-[300px]"
 									priority
 								/>
 							</div>
-							<h1 className="mx-auto mt-16 max-w-4xl text-balance">
+							<h1 className="mx-auto mt-12 max-w-5xl text-balance">
 								<span className="block bg-gradient-to-r from-brand-800 to-brand-500 bg-clip-text text-4xl font-black text-transparent sm:text-6xl md:text-7xl">
-									Help us build Noa's Place.
+									A lifeline for families with additional needs
 								</span>
-								<span className="mt-6 block text-2xl font-bold leading-relaxed text-ink sm:text-3xl md:text-4xl">
-									No one should feel left out.<br />
-									No family should feel alone.
+								<span className="mt-6 block text-xl font-bold leading-relaxed text-ink sm:text-2xl md:text-3xl">
+									We're building an inclusive hub with sensory rooms, quiet spaces, and play.<br />
+									Support that doesn't run on waiting lists.
 								</span>
 							</h1>
 							<div className="mt-12 mb-24 sm:mb-32 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -214,7 +214,7 @@ export default function Home() {
 							{/* Halifax Courier */}
 							<div className="flex flex-col items-center">
 								<a 
-									href="https://www.halifaxcourier.co.uk/community/calderdale-family-launch-vision-for-inclusive-hub-for-children-and-adults-with-additional-needs-5289769"
+									href="https://www.halifaxcourier.co.uk/news/people/families-are-left-isolated-and-it-can-feel-like-a-storm-ripponden-family-launch-vision-for-noas-place-5304261"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="relative h-24 w-full cursor-pointer"
@@ -346,9 +346,9 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="bg-brand-50/60">
-				<div className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
-					<div className="space-y-20">
+			<section className="bg-brand-50/60 py-16">
+				<div className="mx-auto max-w-4xl px-6">
+					<div className="space-y-16">
 						{/* Vision */}
 						<div className="text-center">
 							<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
@@ -362,26 +362,13 @@ export default function Home() {
 							</p>
 						</div>
 
-						{/* Vision Gallery */}
-						<div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl">
-          <Image
-								src="/images/SEND spaces.jpg"
-								alt="Our vision for Noa's Place - an inclusive community hub"
-								width={1200}
-								height={600}
-								className="w-full"
-								priority
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-						</div>
-
 						{/* Mission */}
 						<div className="text-center">
 							<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
 								Our Mission
 							</h2>
 							<p className="mx-auto mt-6 text-lg text-ink/80">
-								To create an inclusive community hub in Halifax that provides:
+								To create an inclusive community hub that provides:
 							</p>
 							<div className="mt-8 grid gap-6 sm:grid-cols-2">
 								<div className="rounded-2xl bg-white/80 p-6 text-left shadow-sm ring-1 ring-brand-100">
@@ -414,88 +401,8 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="bg-white">
-				<div className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
-					<div className="space-y-20">
-						{/* How You Can Help */}
-						<div>
-							<h2 className="text-center text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
-								How You Can Help
-							</h2>
-
-							<div className="mt-8 grid gap-6 sm:grid-cols-2">
-								<div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-brand-100">
-									<div className="mb-4 inline-flex size-12 items-center justify-center rounded-xl bg-brand-50 text-2xl text-brand-800">📝</div>
-									<h3 className="text-xl font-bold text-brand-800">Register to build Noa's Place</h3>
-									<p className="mt-2 text-ink/80">Show your support by registering your interest in our vision.</p>
-									<div className="mt-6">
-										<a 
-											href="#register-form"
-											className="inline-flex w-full items-center justify-center rounded-xl bg-[#FFB800] px-6 py-3 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
-										>
-											Add Your Name Today
-											<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-												<path d="m6 9 6 6 6-6"/>
-											</svg>
-										</a>
-									</div>
-								</div>
-								<div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-brand-100">
-									<div className="mb-4 inline-flex size-12 items-center justify-center rounded-xl bg-brand-50 text-2xl text-brand-800">💫</div>
-									<h3 className="text-xl font-bold text-brand-800">Share our vision</h3>
-									<p className="mt-2 text-ink/80">Help spread the word about Noa's Place.</p>
-									<div className="mt-4 flex gap-3">
-
-										<a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("https://noasplace.org")}&quote=${encodeURIComponent("No family should feel alone. No child should feel left out.\n\nI've just discovered Noa's Place — a new charity being built in Halifax to create a safe, inclusive hub for children, adults, and families with additional needs.\n\nSensory rooms, soft play, a café, and spaces for support and community — all designed to make sure help comes before the crisis.\n\nThis vision really touched my heart. If you believe families deserve better, take a look and join me in supporting Noa's Place. 🌈")}`}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="inline-flex items-center justify-center rounded-full bg-[#1877F2] p-2 text-white hover:bg-[#166fe5] transition"
-										>
-											<svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
-												<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-											</svg>
-										</a>
-										<a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("No family should feel alone. No child should feel left out.\n\nI've just discovered Noa's Place — a new charity being built in Halifax to create a safe, inclusive hub for children, adults, and families with additional needs.\n\nSensory rooms, soft play, a café, and spaces for support and community — all designed to make sure help comes before the crisis.\n\nThis vision really touched my heart. If you believe families deserve better, take a look and join me in supporting Noa's Place. 🌈")}&url=${encodeURIComponent("https://noasplace.org")}`}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="inline-flex items-center justify-center rounded-full bg-black p-2 text-white hover:bg-gray-800 transition"
-										>
-											<svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
-												<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-											</svg>
-										</a>
-										<a href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent("https://noasplace.org")}&title=${encodeURIComponent("Support Noa's Place")}&summary=${encodeURIComponent("Join me in supporting Noa's Place - creating a safe, inclusive space for children, adults, and families of every ability in Halifax.")}`}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="inline-flex items-center justify-center rounded-full bg-[#0A66C2] p-2 text-white hover:bg-[#095196] transition"
-										>
-											<svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
-												<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-											</svg>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						{/* Join the Movement */}
-						<div className="rounded-3xl bg-gradient-to-br from-brand-800 to-brand-500 p-8 text-center text-white sm:p-12">
-							<h2 className="text-3xl font-extrabold sm:text-4xl">
-								Join the Movement
-							</h2>
-							<p className="mx-auto mt-6 max-w-2xl text-lg text-white/90">
-								This isn't just about building a centre. It's about creating a future of belonging for children, adults, and families who too often feel excluded.
-							</p>
-							<p className="mx-auto mt-6 max-w-2xl text-xl font-medium">
-																With your help, Noa's Place will be a safe haven — full of joy, acceptance, and hope.
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
-
 			{/* Support Form Section */}
-			<section id="register-form" className="bg-brand-50/30 py-24">
+			<section id="register-form" className="bg-brand-50/30 py-16">
 				<div className="mx-auto max-w-4xl px-6">
 					<div className="text-center">
 						{/* Signature Count Card */}
@@ -516,16 +423,45 @@ export default function Home() {
 							Show Your Support
 						</h2>
 						<div className="mt-6 space-y-4 text-lg text-ink/80">
-							<p>We're dreaming of something amazing for Halifax but we need to know the community wants it.</p>
-							<p>Add your name today to show your support for Noa's Place.</p>
+							<p>The overwhelming response shows just how much our community needs this space.</p>
+							<p>Add your name to join hundreds of others who believe in our vision.</p>
 							
-							<p className="font-medium text-brand-800">Together, we can create a safe, inclusive space for children, adults, and families of every ability.</p>
+							<p className="font-medium text-brand-800">Together, we're creating a safe, inclusive space for children, adults, and families of every ability.</p>
 						</div>
 					</div>
 
 					<div className="mt-12">
 						<div className="overflow-hidden rounded-2xl bg-white shadow-lg p-8">
 							<MailchimpSubscribeForm />
+						</div>
+					</div>
+
+					{/* Social Media Links */}
+					<div className="mt-16 text-center">
+						<h3 className="text-xl font-bold text-ink mb-6">Follow Our Journey</h3>
+						<div className="flex items-center justify-center gap-4">
+							<a
+								href="https://www.facebook.com/noasplaceuk"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center justify-center rounded-full bg-[#1877F2] p-3 text-white hover:bg-[#166fe5] transition"
+							>
+								<span className="sr-only">Follow us on Facebook</span>
+								<svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+								</svg>
+							</a>
+							<a
+								href="https://www.instagram.com/noasplaceuk"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center justify-center rounded-full bg-[#E4405F] p-3 text-white hover:bg-[#d62e4c] transition"
+							>
+								<span className="sr-only">Follow us on Instagram</span>
+								<svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+								</svg>
+							</a>
 						</div>
 					</div>
 				</div>

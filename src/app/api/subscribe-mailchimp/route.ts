@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { mailchimpConfig } from '@/lib/mailchimp';
+import { createHash } from 'crypto';
 
 export async function POST(request: Request) {
   try {
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
       {
         method: 'POST',
         headers: {
-          Authorization: `Basic ${Buffer.from(`anystring:${mailchimpConfig.apiKey}`).toString('base64')}`,
+          Authorization: `apikey ${mailchimpConfig.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
@@ -64,21 +65,59 @@ export async function POST(request: Request) {
 
     // Handle existing subscribers
     if (responseData.title === 'Member Exists') {
-      // Update the existing member with new tags
+      // Calculate MD5 hash of lowercase email for Mailchimp
+      const subscriberHash = createHash('md5')
+        .update(email.toLowerCase())
+        .digest('hex');
+
+      // First update the member's information
       const updateResponse = await fetch(
-        `https://${mailchimpConfig.serverPrefix}.api.mailchimp.com/3.0/lists/${mailchimpConfig.audienceId}/members/${Buffer.from(email.toLowerCase()).toString('base64')}`,
+        `https://${mailchimpConfig.serverPrefix}.api.mailchimp.com/3.0/lists/${mailchimpConfig.audienceId}/members/${subscriberHash}`,
         {
           method: 'PATCH',
           headers: {
-            Authorization: `Basic ${Buffer.from(`anystring:${mailchimpConfig.apiKey}`).toString('base64')}`,
+            Authorization: `apikey ${mailchimpConfig.apiKey}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            email_address: email,
+            status_if_new: 'subscribed',
+            merge_fields: {
+              FNAME: firstName,
+              LNAME: lastName,
+              PHONE: mobile || '',
+              USERTYPE: userType,
+            },
+          }),
         }
       );
 
       if (!updateResponse.ok) {
-        throw new Error('Failed to update existing subscriber');
+        console.error('Failed to update member:', await updateResponse.text());
+        throw new Error('Failed to update member information');
+      }
+
+      // Then update their tags
+      const tagResponse = await fetch(
+        `https://${mailchimpConfig.serverPrefix}.api.mailchimp.com/3.0/lists/${mailchimpConfig.audienceId}/members/${subscriberHash}/tags`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `apikey ${mailchimpConfig.apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            tags: [
+              { name: 'Supporter', status: 'active' },
+              { name: userType, status: 'active' }
+            ]
+          }),
+        }
+      );
+
+      if (!tagResponse.ok) {
+        console.error('Failed to update tags:', await tagResponse.text());
+        throw new Error('Failed to update member tags');
       }
 
       return NextResponse.json(

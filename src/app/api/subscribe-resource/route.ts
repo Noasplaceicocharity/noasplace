@@ -5,7 +5,7 @@ export const runtime = 'nodejs';
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json();
+    const { email, firstName, lastName } = await request.json();
 
     if (!email || !email.includes('@')) {
       return NextResponse.json(
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const API_KEY = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY;
     const SERVER_PREFIX = process.env.NEXT_PUBLIC_MAILCHIMP_SERVER_PREFIX;
     const AUDIENCE_ID = process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE_ID;
-    const JOURNEY_TRIGGER = 'https://us2.api.mailchimp.com/3.0/customer-journeys/journeys/5413/steps/57854/actions/trigger';
+    const JOURNEY_TRIGGER = 'https://us2.api.mailchimp.com/3.0/customer-journeys/journeys/5416/steps/57869/actions/trigger';
 
     // First, add the contact to your audience
     const audienceResponse = await fetch(
@@ -32,6 +32,10 @@ export async function POST(request: Request) {
           email_address: email,
           status: 'subscribed',
           tags: ['Resource Download - 10 Things Guide', 'download PDF'],
+          merge_fields: {
+            FNAME: firstName || '',
+            LNAME: lastName || ''
+          }
         }),
       }
     );

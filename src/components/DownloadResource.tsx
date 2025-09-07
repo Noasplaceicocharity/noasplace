@@ -4,36 +4,18 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 export const DownloadResource = () => {
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: ''
+  });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
-
-  const pdfUrl = '/PDF/10_Things_Every_Family_with_Additional_Needs_Should_Know_in_Calderdale.pdf';
-  const pdfFilename = '10_Things_Every_Family_with_Additional_Needs_Should_Know_in_Calderdale.pdf';
-
-  const downloadPdfFile = async () => {
-    const response = await fetch(pdfUrl);
-    const blob = await response.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = blobUrl;
-    a.download = pdfFilename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    window.URL.revokeObjectURL(blobUrl);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
     setMessage('');
-    
-    // Open the PDF in a new tab synchronously; do not touch the current tab
-    const newTab = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
-    if (newTab === null) {
-      setMessage('Please allow pop-ups to view the PDF. You can also check your email for a copy.');
-    }
 
     try {
       const response = await fetch('/api/subscribe-resource', {
@@ -41,22 +23,16 @@ export const DownloadResource = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (!response.ok) throw new Error(data.message || 'Something went wrong');
-
-      // Trigger a file download to the device
-      try {
-        await downloadPdfFile();
-      } catch {
-        // If download fails, we still showed the PDF in a tab; inform gently
-      }
+      
       setStatus('success');
-      setMessage('Thank you! The guide has opened in a new tab and a download has started. We\'ve also emailed you a copy.');
-      setEmail('');
+      setMessage('Thank you! You should receive an email shortly.');
+      setFormData({ firstName: '', lastName: '', email: '' });
     } catch (error) {
       setStatus('error');
       setMessage(error instanceof Error ? error.message : 'Failed to subscribe');
@@ -83,8 +59,8 @@ export const DownloadResource = () => {
       <div className="relative flex flex-col md:flex-row items-center gap-8 p-8 sm:p-12">
         <div className="md:w-1/2">
           <Image
-            src="/images/10_Things_Every_Family_with_Additional_Needs_Should_Know_in_Calderdale.jpg"
-            alt="10 Things Every Family with Additional Needs Should Know in Calderdale"
+            src="/images/10 Things Every Family With Additional Needs Should Know.jpg"
+            alt="10 Things Every Family With Additional Needs Should Know"
             width={500}
             height={375}
             className="rounded-2xl shadow-lg ring-1 ring-brand-100"
@@ -95,33 +71,63 @@ export const DownloadResource = () => {
           <div>
             <h2 className="text-3xl font-extrabold text-ink">Free Resource Guide</h2>
             <h3 className="mt-4 text-xl font-bold text-brand-800">
-              10 Things Every Family with Additional Needs Should Know in Calderdale
+              10 Things Every Family With Additional Needs Should Know
             </h3>
           </div>
           
           <p className="text-lg text-ink/80">
             Get instant access to our comprehensive guide packed with essential information
-            for families with additional needs in Calderdale.
+            for families with additional needs.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-ink/80 mb-2">
-                Enter your email to receive the guide
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                required
-                className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
-              />
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-medium text-ink/80 mb-2">
+                    First Name (optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                    placeholder="First name"
+                    className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-medium text-ink/80 mb-2">
+                    Last Name (optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                    placeholder="Last name"
+                    className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-ink/80 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  placeholder="your@email.com"
+                  required
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             <p className="text-xs text-ink/60 text-center">
-              By entering your email, you consent to us contacting you about our services and updates.
+              By entering your details, you consent to us contacting you about our services and updates.
             </p>
 
             <button

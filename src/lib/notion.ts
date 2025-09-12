@@ -34,20 +34,20 @@ const notionApi = new NotionAPI();
 const cache = new Map();
 const CACHE_TTL = 1000 * 30; // 30 seconds for fresher content
 
-interface CacheEntry {
-  data: any;
+interface CacheEntry<T = unknown> {
+  data: T;
   timestamp: number;
 }
 
-function getCachedData(key: string) {
-  const entry = cache.get(key) as CacheEntry;
+function getCachedData<T = unknown>(key: string): T | null {
+  const entry = cache.get(key) as CacheEntry<T> | undefined;
   if (entry && Date.now() - entry.timestamp < CACHE_TTL) {
     return entry.data;
   }
   return null;
 }
 
-function setCachedData(key: string, data: any) {
+function setCachedData<T = unknown>(key: string, data: T): void {
   cache.set(key, { data, timestamp: Date.now() });
 }
 
@@ -273,18 +273,37 @@ function generateSlug(title: string): string {
 /**
  * Map Notion page to NotionPost according to your database schema
  */
-function mapNotionPageToPost(page: any): NotionPost {
-  const properties = (page as any).properties || {};
+type NotionProperty = {
+  id?: string;
+  type?: string;
+  title?: Array<{ plain_text?: string; text?: { content?: string } }>;
+  rich_text?: Array<{ plain_text?: string; text?: { content?: string } }>;
+  date?: { start?: string | null; end?: string | null } | null;
+  checkbox?: boolean;
+  files?: Array<{ file?: { url?: string }; external?: { url?: string } }>;
+  url?: string | null;
+};
+
+interface NotionApiPage {
+  id: string;
+  created_time: string;
+  last_edited_time: string;
+  cover?: { file?: { url?: string }; external?: { url?: string } } | null;
+  properties?: Record<string, NotionProperty>;
+}
+
+function mapNotionPageToPost(page: NotionApiPage): NotionPost {
+  const properties: Record<string, NotionProperty> = page.properties || {};
 
   // Helper: get property by case-insensitive name
-  const getProp = (name: string) => {
+  const getProp = (name: string): NotionProperty | undefined => {
     const entry = Object.entries(properties).find(([key]) => key.toLowerCase() === name.toLowerCase());
-    return entry ? (entry[1] as any) : undefined;
+    return entry ? entry[1] : undefined;
   };
 
   // Title: prefer explicit 'Title' property, otherwise first title property
   let title = '';
-  const titleProp = getProp('Title') || Object.values(properties).find((p: any) => p?.type === 'title') as any;
+  const titleProp = getProp('Title') || (Object.values(properties).find((p) => p?.type === 'title') as NotionProperty | undefined);
   if (titleProp?.type === 'title' && Array.isArray(titleProp.title)) {
     title = titleProp.title.map((t: any) => t.plain_text || t.text?.content || '').join('').trim();
   }
@@ -351,11 +370,18 @@ export function clearNotionCache() {
 /**
  * Helper: query a Notion database using SDK when available, otherwise raw REST fetch
  */
+type NotionQueryParams = {
+  filter?: unknown;
+  sorts?: Array<{ property: string; direction: 'ascending' | 'descending' }>; 
+  page_size?: number;
+  start_cursor?: string;
+};
+
 async function queryNotionDatabase(
   databaseId: string,
-  params: any,
+  params: NotionQueryParams,
   client: Client | null
-): Promise<any> {
+): Promise<{ results: NotionApiPage[]; has_more?: boolean; next_cursor?: string | null }> {
   // Prefer SDK when the method exists
   const hasSdk = client && (client as any).databases && typeof (client as any).databases.query === 'function';
   if (hasSdk) {

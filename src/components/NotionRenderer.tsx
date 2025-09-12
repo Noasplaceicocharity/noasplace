@@ -19,7 +19,7 @@ interface NotionRendererProps {
   rootPageId?: string;
   rootDomain?: string;
   mapPageUrl?: (pageId: string) => string;
-  mapImageUrl?: (url: string, block: any) => string;
+  mapImageUrl?: (url: string) => string;
 }
 
 export function NotionRenderer({
@@ -43,7 +43,7 @@ export function NotionRenderer({
     );
   }
 
-  const defaultMapImageUrl = (url: string, block: any) => {
+  const defaultMapImageUrl = (url: string) => {
     // For better performance with Next.js Image component
     if (url.startsWith('/')) {
       return `https://www.notion.so${url}`;

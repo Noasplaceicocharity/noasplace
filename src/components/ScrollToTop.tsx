@@ -27,8 +27,9 @@ export default function ScrollToTop() {
         element = document.getElementById(rawId);
         if (!element) {
           // Fallback to querySelector with CSS.escape where available
-          const safeSelector = (window as any).CSS?.escape
-            ? `#${(window as any).CSS.escape(rawId)}`
+          const win = window as unknown as { CSS?: { escape?: (s: string) => string } };
+          const safeSelector = win.CSS?.escape
+            ? `#${win.CSS.escape!(rawId)}`
             : `#${rawId.replace(/([^a-zA-Z0-9_-])/g, '\\$1')}`;
           try {
             element = document.querySelector(safeSelector);

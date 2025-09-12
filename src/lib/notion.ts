@@ -40,13 +40,21 @@ async function notionApi<T>(path: string, body?: unknown): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-function getPlainText(richText: any[] | undefined): string {
+type RichTextItem = {
+  plain_text?: string;
+};
+
+function getPlainText(richText: RichTextItem[] | undefined): string {
   if (!richText || !Array.isArray(richText)) return "";
-  return richText.map((t: any) => t.plain_text || "").join("");
+  return richText.map((t) => t.plain_text || "").join("");
 }
 
+type FilesOrUrlProperty =
+  | { type: "files"; files: Array<{ type: "file" | "external"; file?: { url?: string }; external?: { url?: string } }> }
+  | { type: "url"; url: string | null };
+
 function extractCoverFromProperty(page: PageObjectResponse): string | null {
-  const prop = (page.properties as any)["Cover Image"];
+  const prop = (page.properties as Record<string, unknown>)["Cover Image"] as FilesOrUrlProperty | undefined;
   if (!prop) return null;
   if (prop.type === "files" && Array.isArray(prop.files) && prop.files.length) {
     const f = prop.files[0];
@@ -58,18 +66,24 @@ function extractCoverFromProperty(page: PageObjectResponse): string | null {
 }
 
 function extractPageCover(page: PageObjectResponse): string | null {
-  const cover = page.cover as any;
+  const cover = page.cover as { type: "file" | "external"; file?: { url?: string }; external?: { url?: string } } | null;
   if (!cover) return null;
   if (cover.type === "file") return cover.file?.url || null;
   if (cover.type === "external") return cover.external?.url || null;
   return null;
 }
 
+type TitleProperty = { type: "title"; title: RichTextItem[] };
+type RichTextProperty = { type: "rich_text"; rich_text: RichTextItem[] } | { type: "url"; url: string | null };
+type DateProperty = { type: "date"; date: { start: string | null } | null };
+type CheckboxProperty = { type: "checkbox"; checkbox: boolean };
+
 function mapPageToPost(page: PageObjectResponse): BlogPost | null {
-  const titleProp: any = (page.properties as any)["Title"];
-  const slugProp: any = (page.properties as any)["Slug"];
-  const dateProp: any = (page.properties as any)["Date"];
-  const publishedProp: any = (page.properties as any)["Published"];
+  const props = page.properties as Record<string, unknown>;
+  const titleProp = props["Title"] as TitleProperty | undefined;
+  const slugProp = props["Slug"] as RichTextProperty | undefined;
+  const dateProp = props["Date"] as DateProperty | undefined;
+  const publishedProp = props["Published"] as CheckboxProperty | undefined;
 
   const title = titleProp?.type === "title" ? getPlainText(titleProp.title) : "";
   const slug = slugProp?.type === "rich_text" ? getPlainText(slugProp.rich_text) : slugProp?.type === "url" ? slugProp.url || "" : "";

@@ -6,7 +6,7 @@ import { NotionRenderer } from "react-notion-x";
 import "@/styles/notion-overrides.css";
 
 type NotionContentProps = {
-  recordMap: any;
+  recordMap: import("notion-types").ExtendedRecordMap;
 };
 
 export default function NotionContent({ recordMap }: NotionContentProps) {

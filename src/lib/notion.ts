@@ -56,7 +56,7 @@ interface CacheEntry<T = unknown> {
   timestamp: number;
 }
 
-function getCachedData<T = unknown>(key: string): T | null {
+function getCachedData<T>(key: string): T | null {
   const entry = cache.get(key) as CacheEntry<T> | undefined;
   if (entry && Date.now() - entry.timestamp < CACHE_TTL) {
     return entry.data;
@@ -77,7 +77,7 @@ export async function getBlogPosts(
 ): Promise<BlogListResponse> {
   try {
     const cacheKey = `blog-posts-${pageSize}-${startCursor || 'start'}`;
-    const cached = getCachedData(cacheKey);
+    const cached = getCachedData<BlogListResponse>(cacheKey);
     if (cached) return cached;
 
     // Get Notion client and return empty result if not configured
@@ -133,7 +133,7 @@ export async function getBlogPosts(
  */
 export async function getBlogPost(slug: string): Promise<NotionPost | null> {
   const cacheKey = `blog-post-${slug}`;
-  const cached = getCachedData(cacheKey);
+  const cached = getCachedData<NotionPost | null>(cacheKey);
   if (cached) return cached;
 
   // Get Notion client and return null if not configured
@@ -191,7 +191,7 @@ export async function getBlogPost(slug: string): Promise<NotionPost | null> {
  */
 export async function getNotionPage(pageId: string): Promise<NotionPage | null> {
   const cacheKey = `notion-page-${pageId}`;
-  const cached = getCachedData(cacheKey);
+  const cached = getCachedData<NotionPage | null>(cacheKey);
   if (cached) return cached;
 
   try {
@@ -217,7 +217,7 @@ export async function getNotionPage(pageId: string): Promise<NotionPage | null> 
  */
 export async function getFeaturedPosts(limit: number = 3): Promise<NotionPost[]> {
   const cacheKey = `featured-posts-${limit}`;
-  const cached = getCachedData(cacheKey);
+  const cached = getCachedData<NotionPost[]>(cacheKey);
   if (cached) return cached;
 
   // Get Notion client and return empty array if not configured

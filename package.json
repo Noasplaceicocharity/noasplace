@@ -11,16 +11,26 @@
     "sitemap": "next-sitemap"
   },
   "dependencies": {
+    "@notionhq/client": "^5.0.0",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.23.12",
+    "gray-matter": "^4.0.3",
     "next": "15.5.0",
     "next-sitemap": "^4.2.3",
+    "notion-client": "^7.4.3",
+    "notion-types": "^7.4.3",
+    "notion-utils": "^7.4.3",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-notion-x": "^7.4.3",
+    "remark": "^15.0.1",
+    "remark-breaks": "^4.0.0",
+    "remark-html": "^16.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.19.13",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

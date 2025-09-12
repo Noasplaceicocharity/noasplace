@@ -21,7 +21,21 @@ export default function ScrollToTop() {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash) {
-        const element = document.querySelector(hash);
+        const rawId = hash.startsWith('#') ? hash.slice(1) : hash;
+        let element: Element | null = null;
+        // Prefer getElementById to support IDs that start with numbers
+        element = document.getElementById(rawId);
+        if (!element) {
+          // Fallback to querySelector with CSS.escape where available
+          const safeSelector = (window as any).CSS?.escape
+            ? `#${(window as any).CSS.escape(rawId)}`
+            : `#${rawId.replace(/([^a-zA-Z0-9_-])/g, '\\$1')}`;
+          try {
+            element = document.querySelector(safeSelector);
+          } catch {
+            element = null;
+          }
+        }
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }

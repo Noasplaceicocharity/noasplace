@@ -9,6 +9,7 @@ import Squiggle from "@/components/Squiggle";
 import StickerCard from "@/components/StickerCard";
 import Story from "@/components/Story";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {

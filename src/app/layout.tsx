@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { cookies } from "next/headers";
 import CookieConsent from "@/components/CookieConsent";
+import Header from "@/components/Header";
 import { Nunito, Inter } from "next/font/google";
 import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
+import "../styles/notion.css";
 
 const nunito = Nunito({
   variable: "--font-ui",
@@ -174,6 +176,7 @@ fbq('track', 'PageView');
           />
         )}
         <ScrollToTop />
+        <Header />
         {children}
         <CookieConsent initiallyConsented={hasAnalyticsConsent} />
       </body>

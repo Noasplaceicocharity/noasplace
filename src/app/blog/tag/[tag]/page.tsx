@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getPostsByTag, getAllTags } from '@/lib/notion';
 import { format } from 'date-fns';
+import type { NotionPost } from '@/types/notion';
 import type { Metadata } from 'next';
 
 interface TagPageProps {
@@ -42,7 +43,8 @@ export default async function TagPage({ params }: TagPageProps) {
   const resolvedParams = await params;
   const tag = decodeURIComponent(resolvedParams.tag);
   
-  let posts, allTags;
+  let posts: NotionPost[] = [];
+  let allTags: string[] = [];
   
   try {
     [posts, allTags] = await Promise.all([

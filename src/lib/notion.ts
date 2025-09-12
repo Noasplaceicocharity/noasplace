@@ -110,9 +110,9 @@ export async function getBlogPosts(
 
     const posts: NotionPost[] = response.results.map((page: NotionApiPage) => mapNotionPageToPost(page));
 
-    const result = {
+    const result: BlogListResponse = {
       posts,
-      hasMore: response.has_more,
+      hasMore: response.has_more || false,
       nextCursor: response.next_cursor || undefined,
     };
 

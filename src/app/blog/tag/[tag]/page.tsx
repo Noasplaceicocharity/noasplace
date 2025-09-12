@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 
 interface TagPageProps {
   params: Promise<{ tag: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {

@@ -57,8 +57,8 @@ function extractCoverFromProperty(page: PageObjectResponse): string | null {
   if (!prop) return null;
   if (prop.type === "files" && Array.isArray(prop.files) && prop.files.length) {
     const f = prop.files[0];
-    if (f.type === "file") return f.file.url || null;
-    if (f.type === "external") return f.external.url || null;
+    if (f.type === "file") return f.file?.url || null;
+    if (f.type === "external") return f.external?.url || null;
   }
   if (prop.type === "url" && prop.url) return prop.url;
   return null;

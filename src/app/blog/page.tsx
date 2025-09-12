@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { getBlogPosts, getFeaturedPosts, getAllTags } from '@/lib/notion';
 import type { NotionPost, BlogListResponse } from '@/types/notion';
 import BlogSetupGuide from '@/components/BlogSetupGuide';
+import BlogErrorBoundary from '@/components/BlogErrorBoundary';
+import BlogLinkDebugger from '@/components/BlogLinkDebugger';
 import { format } from 'date-fns';
 import type { Metadata } from 'next';
 
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
 
 // Revalidate every hour
 export const revalidate = 60;
-export const runtime = 'nodejs';
+// Remove runtime specification to use default edge runtime
 
 export default async function BlogPage() {
   let posts: BlogListResponse = { posts: [], hasMore: false };
@@ -25,13 +27,30 @@ export default async function BlogPage() {
   let tags: string[] = [];
   
   try {
-    [posts, featuredPosts, tags] = await Promise.all([
-      getBlogPosts(12),
-      getFeaturedPosts(3),
-      getAllTags(),
-    ]);
+    // Use timeout and retry logic for production
+    const timeout = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('API timeout')), 10000)
+    );
+    
+    [posts, featuredPosts, tags] = await Promise.race([
+      Promise.all([
+        getBlogPosts(12),
+        getFeaturedPosts(3),
+        getAllTags(),
+      ]),
+      timeout
+    ]) as [BlogListResponse, NotionPost[], string[]];
   } catch (error) {
     console.error('Error loading blog data:', error);
+    // Log additional context in production
+    if (process.env.NODE_ENV === 'production') {
+      console.error('Production blog data loading failed:', {
+        error: error instanceof Error ? error.message : error,
+        timestamp: new Date().toISOString(),
+        notionToken: !!process.env.NOTION_TOKEN,
+        notionDatabase: !!process.env.NOTION_DATABASE_ID,
+      });
+    }
     posts = { posts: [], hasMore: false };
     featuredPosts = [];
     tags = [];
@@ -49,7 +68,8 @@ export default async function BlogPage() {
   };
 
   return (
-    <main className="bg-background text-ink">
+    <BlogErrorBoundary>
+      <main className="bg-background text-ink">
       {/* Header Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/30 to-white pt-20 pb-16">
         {/* Background decorative elements */}
@@ -84,7 +104,7 @@ export default async function BlogPage() {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {featuredPosts.map((post) => (
                 <article key={post.id} className="group">
-                  <Link href={`/blog/${post.slug}`}>
+                  <BlogLinkDebugger href={`/blog/${post.slug}`}>
                     <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-brand-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                       {post.coverImage && (
                         <div className="aspect-[16/9] overflow-hidden">
@@ -112,7 +132,7 @@ export default async function BlogPage() {
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </BlogLinkDebugger>
                 </article>
               ))}
             </div>
@@ -171,7 +191,7 @@ export default async function BlogPage() {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {posts.posts.map((post) => (
                 <article key={post.id} className="group">
-                  <Link href={`/blog/${post.slug}`}>
+                  <BlogLinkDebugger href={`/blog/${post.slug}`}>
                     <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                       {post.coverImage && (
                         <div className="aspect-[16/9] overflow-hidden">
@@ -199,7 +219,7 @@ export default async function BlogPage() {
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </BlogLinkDebugger>
                 </article>
               ))}
             </div>
@@ -222,5 +242,6 @@ export default async function BlogPage() {
         </div>
       </section>
     </main>
+    </BlogErrorBoundary>
   );
 }

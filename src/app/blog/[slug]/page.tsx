@@ -65,7 +65,7 @@ export async function generateStaticParams() {
 
 // Revalidate every hour
 export const revalidate = 60;
-export const runtime = 'nodejs';
+// Remove runtime specification to use default edge runtime
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;

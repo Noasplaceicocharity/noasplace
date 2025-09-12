@@ -6,7 +6,6 @@ import Header from "@/components/Header";
 import { Nunito, Inter } from "next/font/google";
 import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
-import "../styles/notion.css";
 
 const nunito = Nunito({
   variable: "--font-ui",

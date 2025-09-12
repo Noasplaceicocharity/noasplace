@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     let responseData;
     try {
       responseData = JSON.parse(responseText);
-    } catch {
+    } catch (e) {
       console.error('Failed to parse Mailchimp response:', responseText);
       throw new Error('Invalid response from Mailchimp');
     }

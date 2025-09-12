@@ -6,8 +6,12 @@ import { NotionRenderer } from '@/components/NotionRenderer';
 import { format } from 'date-fns';
 import type { Metadata } from 'next';
 
-interface BlogPostPageProps {
-  params: { slug: string };
+import { PageProps } from 'next';
+
+interface BlogPostPageProps extends PageProps {
+  params: {
+    slug: string;
+  };
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {

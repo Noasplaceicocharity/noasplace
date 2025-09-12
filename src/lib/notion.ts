@@ -3,6 +3,23 @@ import { NotionAPI } from 'notion-client';
 import { getPageTitle } from 'notion-utils';
 import type { NotionPost, NotionPage, BlogListResponse } from '@/types/notion';
 
+interface NotionTextContent {
+  plain_text?: string;
+  text?: { content?: string };
+}
+
+interface NotionQueryResponse {
+  results: NotionApiPage[];
+  has_more?: boolean;
+  next_cursor?: string | null;
+}
+
+interface NotionDatabasesQuery {
+  databases: {
+    query: (params: { database_id: string } & NotionQueryParams) => Promise<NotionQueryResponse>;
+  };
+}
+
 // Lazy async initialization of Notion client (dynamic import to avoid edge/bundling issues)
 let notionClientPromise: Promise<Client | null> | null = null;
 
@@ -91,7 +108,7 @@ export async function getBlogPosts(
         start_cursor: startCursor,
       }, notionClient);
 
-    const posts: NotionPost[] = response.results.map((page: any) => mapNotionPageToPost(page));
+    const posts: NotionPost[] = response.results.map((page: NotionApiPage) => mapNotionPageToPost(page));
 
     const result = {
       posts,
@@ -151,14 +168,14 @@ export async function getBlogPost(slug: string): Promise<NotionPost | null> {
         page_size: 100,
       }, notionClient);
 
-      const mapped = (fallback.results || []).map((p: any) => mapNotionPageToPost(p));
+      const mapped = (fallback.results || []).map((p: NotionApiPage) => mapNotionPageToPost(p));
       const match = mapped.find((p: NotionPost) => p.slug.toLowerCase() === slug.toLowerCase());
       if (!match) return null;
       setCachedData(cacheKey, match);
       return match;
     }
 
-    const page = response.results[0] as any;
+    const page = response.results[0] as NotionApiPage;
     const post: NotionPost = mapNotionPageToPost(page);
 
     setCachedData(cacheKey, post);
@@ -228,7 +245,7 @@ export async function getFeaturedPosts(limit: number = 3): Promise<NotionPost[]>
       page_size: limit,
     }, notionClient);
 
-    const posts: NotionPost[] = response.results.map((page: any) => mapNotionPageToPost(page));
+    const posts: NotionPost[] = response.results.map((page: NotionApiPage) => mapNotionPageToPost(page));
 
     setCachedData(cacheKey, posts);
     return posts;
@@ -305,7 +322,7 @@ function mapNotionPageToPost(page: NotionApiPage): NotionPost {
   let title = '';
   const titleProp = getProp('Title') || (Object.values(properties).find((p) => p?.type === 'title') as NotionProperty | undefined);
   if (titleProp?.type === 'title' && Array.isArray(titleProp.title)) {
-    title = titleProp.title.map((t: any) => t.plain_text || t.text?.content || '').join('').trim();
+    title = titleProp.title.map((t: NotionTextContent) => t.plain_text || t.text?.content || '').join('').trim();
   }
   if (!title) title = 'Untitled';
 
@@ -313,7 +330,7 @@ function mapNotionPageToPost(page: NotionApiPage): NotionPost {
   let slug = '';
   const slugProp = getProp('Slug');
   if (slugProp?.type === 'rich_text' && Array.isArray(slugProp.rich_text)) {
-    slug = slugProp.rich_text.map((t: any) => t.plain_text || t.text?.content || '').join('').trim();
+    slug = slugProp.rich_text.map((t: NotionTextContent) => t.plain_text || t.text?.content || '').join('').trim();
   }
   if (!slug) slug = generateSlug(title);
 
@@ -383,9 +400,9 @@ async function queryNotionDatabase(
   client: Client | null
 ): Promise<{ results: NotionApiPage[]; has_more?: boolean; next_cursor?: string | null }> {
   // Prefer SDK when the method exists
-  const hasSdk = client && (client as any).databases && typeof (client as any).databases.query === 'function';
+  const hasSdk = client && (client as unknown as NotionDatabasesQuery).databases?.query;
   if (hasSdk) {
-    return (client as any).databases.query({
+    return (client as unknown as NotionDatabasesQuery).databases.query({
       database_id: databaseId,
       ...params,
     });
@@ -403,9 +420,9 @@ async function queryNotionDatabase(
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(params || {}),
-    // @ts-ignore Node.js runtime ensured on pages
+    // @ts-expect-error Node.js runtime ensures cache option is available
     cache: 'no-store',
-  } as any);
+  } as RequestInit);
 
   if (!res.ok) {
     const text = await res.text();

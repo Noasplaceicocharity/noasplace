@@ -36,7 +36,6 @@ export default async function BlogPage() {
 
   // Check if Notion is configured
   const isNotionConfigured = process.env.NOTION_TOKEN && process.env.NOTION_DATABASE_ID;
-  const hasContent = posts.posts.length > 0 || featuredPosts.length > 0;
 
   const formatDate = (dateString: string) => {
     try {

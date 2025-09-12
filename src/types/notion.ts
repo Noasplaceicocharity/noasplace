@@ -10,13 +10,13 @@ export interface NotionPost {
   published: boolean;
   author?: string;
   coverImage?: string;
-  content?: any; // Notion block content
+  content?: unknown; // Notion block content
 }
 
 export interface NotionPage {
   id: string;
   title: string;
-  blocks: any[];
+  blocks: unknown;
 }
 
 export interface BlogListResponse {

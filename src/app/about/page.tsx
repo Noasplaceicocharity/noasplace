@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About Us | Noa's Place",
@@ -286,7 +287,7 @@ export default function AboutUs() {
             Together, we can create a community where every family feels supported, seen, and valued.
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <a
+            <Link
               href="/#register-form"
               className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
             >
@@ -294,7 +295,7 @@ export default function AboutUs() {
               <svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </a>
+            </Link>
             <a
               href="mailto:hello@noasplace.org.uk"
               className="inline-flex items-center justify-center rounded-xl border-2 border-brand-800 px-8 py-4 text-lg font-bold text-brand-800 hover:bg-brand-800 hover:text-white transition duration-200"

@@ -484,11 +484,12 @@ export default function Home() {
 					
 					{/* Image container */}
 					<div className="relative">
-						<div className="aspect-[16/9] overflow-hidden rounded-2xl">
-							<img
+						<div className="aspect-[16/9] overflow-hidden rounded-2xl relative">
+							<Image
 								src="/images/testimonials.png"
 								alt="Community testimonials and quotes supporting Noa's Place"
-								className="w-full h-full object-cover"
+								fill
+								className="object-cover"
 							/>
 						</div>
 					</div>

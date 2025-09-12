@@ -420,7 +420,6 @@ async function queryNotionDatabase(
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(params || {}),
-    // @ts-expect-error Node.js runtime ensures cache option is available
     cache: 'no-store',
   } as RequestInit);
 

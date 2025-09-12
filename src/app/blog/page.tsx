@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getBlogPosts, getFeaturedPosts, getAllTags } from '@/lib/notion';
+import type { NotionPost, BlogListResponse } from '@/types/notion';
 import BlogSetupGuide from '@/components/BlogSetupGuide';
 import { format } from 'date-fns';
 import type { Metadata } from 'next';
@@ -19,7 +20,9 @@ export const revalidate = 60;
 export const runtime = 'nodejs';
 
 export default async function BlogPage() {
-  let posts, featuredPosts, tags;
+  let posts: BlogListResponse = { posts: [], hasMore: false };
+  let featuredPosts: NotionPost[] = [];
+  let tags: string[] = [];
   
   try {
     [posts, featuredPosts, tags] = await Promise.all([

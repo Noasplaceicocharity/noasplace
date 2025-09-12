@@ -19,9 +19,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Noa's Place | Inclusive Hub for Families with Additional Needs",
+  title: "Noa's Place | A Safe, Inclusive Hub for SEND Families",
   description:
-    "We're building Noa's Place — a lifeline with sensory rooms, quiet spaces & play. Support that doesn't run on waiting lists. Join us and show your support.",
+    "Noa's Place is a new community project creating a safe, inclusive hub with sensory rooms, play spaces, and support for children, adults, and families with additional needs.",
   keywords: "children's charity Halifax, family support West Yorkshire, SEND support Halifax, sensory rooms Yorkshire, community centre Halifax, family activities West Yorkshire, charity donation Halifax",
   authors: [{ name: "Noa's Place" }],
   creator: "Noa's Place",
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     apple: '/images/noas place logo.png',
   },
   openGraph: {
-    title: "Noa's Place | Inclusive Hub for Families with Additional Needs",
-    description: "We're building Noa's Place — a lifeline with sensory rooms, quiet spaces & play. Support that doesn't run on waiting lists. Join us and show your support.",
+    title: "Noa's Place | A Safe, Inclusive Hub for SEND Families",
+    description: "Noa's Place will be a warm, inclusive hub for children, adults, and families with additional needs. With sensory rooms, play spaces, a calm café, and support groups. No family should have to reach crisis before they get support.",
     url: 'https://noasplace.org.uk',
     siteName: "Noa's Place",
     locale: 'en_GB',

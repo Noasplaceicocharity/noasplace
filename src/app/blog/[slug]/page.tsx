@@ -53,15 +53,34 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export async function generateStaticParams() {
   try {
-    const { posts } = await getBlogPosts(50); // Get first 50 posts for static generation
-    return posts.map((post) => ({
+    // Get more posts to ensure we catch all of them, and also handle pagination
+    let allPosts: any[] = [];
+    let hasMore = true;
+    let cursor: string | undefined;
+    
+    while (hasMore && allPosts.length < 200) { // Safety limit
+      const result = await getBlogPosts(50, cursor);
+      allPosts = allPosts.concat(result.posts);
+      hasMore = result.hasMore;
+      cursor = result.nextCursor;
+      
+      if (!hasMore) break;
+    }
+    
+    console.log(`Generated static params for ${allPosts.length} blog posts`);
+    
+    return allPosts.map((post) => ({
       slug: post.slug,
     }));
   } catch (error) {
     console.error('Error generating static params:', error);
+    // Return empty array to allow dynamic generation
     return [];
   }
 }
+
+// Enable dynamic routes for posts not generated at build time
+export const dynamicParams = true;
 
 // Revalidate every hour
 export const revalidate = 60;

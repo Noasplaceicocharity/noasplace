@@ -5,6 +5,7 @@ import type { NotionPost, BlogListResponse } from '@/types/notion';
 import BlogSetupGuide from '@/components/BlogSetupGuide';
 import BlogErrorBoundary from '@/components/BlogErrorBoundary';
 import BlogLinkDebugger from '@/components/BlogLinkDebugger';
+import BlogPostTester from '@/components/BlogPostTester';
 import { format } from 'date-fns';
 import type { Metadata } from 'next';
 
@@ -92,6 +93,11 @@ export default async function BlogPage() {
             <p className="mx-auto mt-6 max-w-2xl text-xl text-ink/80">
               Stay updated with our journey, stories from our community, and insights about supporting families with additional needs.
             </p>
+            
+            {/* Debug component - remove after fixing */}
+            <div className="mt-6">
+              <BlogPostTester />
+            </div>
           </div>
         </div>
       </section>

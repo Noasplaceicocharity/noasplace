@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface BlogLinkDebuggerProps {
@@ -10,6 +11,7 @@ interface BlogLinkDebuggerProps {
 }
 
 export default function BlogLinkDebugger({ href, children, className }: BlogLinkDebuggerProps) {
+  const router = useRouter();
   const [debugInfo, setDebugInfo] = useState<{
     isProduction: boolean;
     userAgent: string;
@@ -18,13 +20,15 @@ export default function BlogLinkDebugger({ href, children, className }: BlogLink
 
   useEffect(() => {
     setDebugInfo({
-      isProduction: process.env.NODE_ENV === 'production',
+      isProduction: window.location.hostname !== 'localhost',
       userAgent: window.navigator.userAgent,
       href: href,
     });
   }, [href]);
 
   const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // Always prevent default to control navigation
+    
     console.log('Blog link clicked:', {
       href,
       debugInfo,
@@ -32,18 +36,30 @@ export default function BlogLinkDebugger({ href, children, className }: BlogLink
       clickEvent: e
     });
 
-    // Add a small delay to see if navigation happens
-    setTimeout(() => {
-      console.log('Navigation check:', {
-        currentLocation: window.location.href,
-        expectedHref: href
-      });
-    }, 100);
+    // Try multiple navigation methods
+    try {
+      // Method 1: Next.js router push
+      console.log('Attempting Next.js router.push:', href);
+      router.push(href);
+      
+      // Method 2: Fallback to window.location after a delay if router.push fails
+      setTimeout(() => {
+        if (window.location.pathname === '/blog') {
+          console.log('Router.push failed, using window.location:', href);
+          window.location.href = href;
+        }
+      }, 1000);
+      
+    } catch (error) {
+      console.error('Navigation error:', error);
+      // Method 3: Direct navigation as fallback
+      window.location.href = href;
+    }
   };
 
   return (
-    <Link href={href} className={className} onClick={handleClick}>
+    <div className={className} onClick={handleClick} style={{ cursor: 'pointer' }}>
       {children}
-    </Link>
+    </div>
   );
 }

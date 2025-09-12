@@ -144,4 +144,9 @@ export async function getRecordMapForPage(pageId: string) {
   return notionContent.getPage(pageId);
 }
 
+// Convenience alias for static generation usage
+export async function getAllNotionPosts(): Promise<BlogPost[]> {
+  return getPublishedPosts();
+}
+
 

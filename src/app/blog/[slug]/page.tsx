@@ -2,16 +2,19 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { format } from "date-fns";
 import NotionContent from "@/components/NotionContent";
-import { getPostBySlug, getPublishedPosts, getRecordMapForPage } from "@/lib/notion";
+import { getPostBySlug, getAllNotionPosts, getRecordMapForPage } from "@/lib/notion";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  const posts = await getPublishedPosts();
+  const posts = await getAllNotionPosts();
   return posts.map((p) => ({ slug: p.slug }));
 }
+
+export const dynamicParams = true;
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;

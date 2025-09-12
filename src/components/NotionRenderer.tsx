@@ -76,11 +76,6 @@ export function NotionRenderer({
         bodyClassName="notion-body"
         header={null}
         footer={null}
-        pageHeader={null}
-        pageFooter={null}
-        pageTitle={null}
-        pageActions={null}
-        pageCover={null}
       />
     </div>
   );

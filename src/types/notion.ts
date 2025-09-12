@@ -1,3 +1,4 @@
+import type { ExtendedRecordMap } from 'notion-types';
 export interface NotionPost {
   id: string;
   title: string;
@@ -16,7 +17,7 @@ export interface NotionPost {
 export interface NotionPage {
   id: string;
   title: string;
-  blocks: unknown;
+  blocks: ExtendedRecordMap;
 }
 
 export interface BlogListResponse {

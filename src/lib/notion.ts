@@ -12,13 +12,12 @@ export type BlogPost = {
 };
 
 const notionToken = process.env.NOTION_TOKEN;
-const notionTokenV2 = process.env.NOTION_TOKEN_V2; // Optional cookie token for notion-client
 // Support both the correct and commonly misspelled env var just in case
 const databaseId =
   process.env.NOTION_DATABASE_ID || process.env.NOATION_DATABASE_ID || "";
 
-// notion-client uses the unofficial API and, if provided, expects token_v2 (NOTION_TOKEN_V2)
-const notionContent = new NotionAPI({ auth: notionTokenV2 });
+// Use notion-client without token_v2; works for public pages
+const notionContent = new NotionAPI();
 
 async function notionApi<T>(path: string, body?: unknown): Promise<T> {
   if (!notionToken) throw new Error("NOTION_TOKEN is not set");

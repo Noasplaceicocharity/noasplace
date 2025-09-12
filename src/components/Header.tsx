@@ -99,6 +99,17 @@ export default function Header() {
               </Link>
 
               <Link 
+                href="/blog"
+                className={`font-medium text-lg transition-all duration-300 rounded-lg px-3 py-2 ${
+                  pathname?.startsWith("/blog") 
+                    ? "text-brand-800 font-bold bg-brand-50/80" 
+                    : "text-ink hover:text-brand-800 hover:bg-brand-50/60"
+                }`}
+              >
+                Blog
+              </Link>
+
+              <Link 
                 href="/contact"
                 className={`font-medium text-lg transition-all duration-300 rounded-lg px-3 py-2 ${
                   pathname === "/contact" 
@@ -219,6 +230,17 @@ export default function Header() {
               </Link>
 
               {/* Contact Link */}
+              <Link 
+                href="/blog"
+                className={`block font-medium text-lg transition-all duration-300 rounded-lg px-3 py-3 ${
+                  pathname?.startsWith("/blog") 
+                    ? "text-brand-800 font-bold bg-brand-50/80" 
+                    : "text-ink hover:text-brand-800 hover:bg-brand-50/60"
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
               <Link 
                 href="/contact"
                 className={`block font-medium text-lg transition-all duration-300 rounded-lg px-3 py-3 ${

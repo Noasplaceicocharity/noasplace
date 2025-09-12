@@ -1,0 +1,173 @@
+/* Remove ALL link icons and decorations */
+.notion-link,
+.notion-page-title-text .notion-link,
+.notion-header .notion-link,
+.notion-title .notion-link,
+.notion-h1 .notion-link,
+.notion-h2 .notion-link,
+.notion-h3 .notion-link {
+  opacity: 1 !important;
+  border: none !important;
+  text-decoration: none !important;
+}
+
+.notion-link::after,
+.notion-page-title-text .notion-link::after,
+.notion-header .notion-link::after,
+.notion-title .notion-link::after,
+.notion-h1 .notion-link::after,
+.notion-h2 .notion-link::after,
+.notion-h3 .notion-link::after {
+  display: none !important;
+}
+
+/* Remove link underlines from headers */
+.notion-page-title-text,
+.notion-header,
+.notion-title,
+.notion-h1,
+.notion-h2,
+.notion-h3 {
+  border: none !important;
+  text-decoration: none !important;
+}
+
+/* Match site branding */
+.notion-page {
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.notion-text {
+  padding: 0.25rem 0 !important;
+  font-family: var(--font-body) !important;
+  color: var(--ink) !important;
+}
+
+.notion-h1,
+.notion-h2,
+.notion-h3 {
+  padding: 1.5rem 0 0.75rem !important;
+  font-family: var(--font-ui) !important;
+  color: var(--brand-800) !important;
+}
+
+.notion-h1 {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important;
+}
+
+.notion-h2 {
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
+}
+
+.notion-h3 {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+
+/* Lists */
+.notion-list {
+  padding: 0.25rem 0 0.25rem 1.25rem !important;
+  color: var(--ink) !important;
+}
+
+/* Code blocks */
+.notion-code {
+  background: var(--brand-50) !important;
+  border: 1px solid var(--brand-100) !important;
+  border-radius: 0.75rem !important;
+}
+
+/* Quotes */
+.notion-quote {
+  padding: 0.5rem 1rem !important;
+  font-style: italic !important;
+  color: var(--ink) !important;
+  opacity: 0.8 !important;
+  border-left: 4px solid var(--brand-500) !important;
+  background: var(--brand-50) !important;
+  border-radius: 0 0.5rem 0.5rem 0 !important;
+}
+
+/* Tables */
+.notion-table {
+  border: 1px solid var(--brand-100) !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden !important;
+}
+
+.notion-table-header {
+  background: var(--brand-50) !important;
+  border-bottom: 1px solid var(--brand-100) !important;
+}
+
+.notion-table-cell {
+  padding: 0.75rem 1rem !important;
+  border: 1px solid var(--brand-100) !important;
+}
+
+/* Images */
+.notion-image {
+  border-radius: 0.75rem !important;
+  overflow: hidden !important;
+}
+
+/* Callouts */
+.notion-callout {
+  border-radius: 0.75rem !important;
+  border: 1px solid var(--brand-100) !important;
+  background: var(--brand-50) !important;
+}
+
+/* Collection cards */
+.notion-collection-card {
+  border-radius: 0.75rem !important;
+  border: 1px solid var(--brand-100) !important;
+  overflow: hidden !important;
+  transition: all 0.2s !important;
+}
+
+.notion-collection-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Hide the hash/link icon rendered for headings by react-notion-x */
+.notion-h1 .notion-hash-link,
+.notion-h2 .notion-hash-link,
+.notion-h3 .notion-hash-link,
+.notion-h4 .notion-hash-link,
+.notion-h5 .notion-hash-link,
+.notion-h6 .notion-hash-link {
+  display: none !important;
+}
+
+/* Also hide any before/after pseudo elements that may draw the icon */
+.notion-h1 .notion-hash-link::before,
+.notion-h1 .notion-hash-link::after,
+.notion-h2 .notion-hash-link::before,
+.notion-h2 .notion-hash-link::after,
+.notion-h3 .notion-hash-link::before,
+.notion-h3 .notion-hash-link::after,
+.notion-h4 .notion-hash-link::before,
+.notion-h4 .notion-hash-link::after,
+.notion-h5 .notion-hash-link::before,
+.notion-h5 .notion-hash-link::after,
+.notion-h6 .notion-hash-link::before,
+.notion-h6 .notion-hash-link::after {
+  display: none !important;
+}
+
+/* Prevent layout shift space for the icon */
+.notion-h1,
+.notion-h2,
+.notion-h3,
+.notion-h4,
+.notion-h5,
+.notion-h6 {
+  position: relative;
+}

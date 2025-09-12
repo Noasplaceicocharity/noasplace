@@ -1,6 +1,5 @@
 "use client";
 
-import DonationWidget from "@/components/DonationWidget";
 import DownloadResource from "@/components/DownloadResource";
 import Faq from "@/components/Faq";
 import ImageModal from "@/components/ImageModal";

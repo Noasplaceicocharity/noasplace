@@ -207,10 +207,10 @@ export default function Home() {
 			<section className="py-16 bg-gradient-to-b from-white to-gray-50/50">
 				<div className="mx-auto max-w-7xl px-6">
 					<div className="text-center">
-						<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">As Seen In</h2>
+						<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">As Featured On</h2>
 					</div>
 					<div className="mt-8">
-						<div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+						<div className="grid grid-cols-1 gap-12 md:grid-cols-4">
 							{/* Halifax Courier */}
 							<div className="flex flex-col items-center">
 								<a 
@@ -258,6 +258,24 @@ export default function Home() {
 									<Image
 										src="/images/yorkshirepost.png"
 										alt="Yorkshire Post"
+										fill
+										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
+										style={{ objectPosition: 'center' }}
+									/>
+								</a>
+							</div>
+
+							{/* BBC News */}
+							<div className="flex flex-col items-center">
+								<a 
+									href="https://www.bbc.co.uk/news"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="relative h-24 w-full cursor-pointer"
+								>
+									<Image
+										src="/images/BBC_News_Logo.png"
+										alt="BBC News"
 										fill
 										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
 										style={{ objectPosition: 'center' }}

@@ -268,7 +268,7 @@ export default function Home() {
 							{/* BBC News */}
 							<div className="flex flex-col items-center">
 								<a 
-									href="https://www.bbc.co.uk/news"
+									href="https://www.bbc.co.uk/news/articles/c5yq4xx2yp2o"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="relative h-24 w-full cursor-pointer"

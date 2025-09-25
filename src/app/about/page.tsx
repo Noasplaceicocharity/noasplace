@@ -202,6 +202,21 @@ export default function AboutUs() {
             <div className="text-center">
               <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
                 <Image
+                  src="/images/trustees/Sophia_Bentley_trustee_noas_place_halifax_west_yorkshire.jpg"
+                  alt="Sophia Bentley - Trustee"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="font-bold text-brand-800 text-lg">Dr. Sophia Bentley</h3>
+              <p className="text-ink/80 text-sm mt-2 max-w-sm mx-auto">
+                Educational and Child Psychologist and founder of Find A Way CIC. As a mum of two, Sophia combines professional expertise with personal understanding, always keeping families at the centre.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
+                <Image
                   src="/images/trustees/Laura_Maroney_trustee_noas_place_halifax_west_yorkshire.jpg"
                   alt="Laura Maroney - Trustee"
                   fill
@@ -262,15 +277,15 @@ export default function AboutUs() {
             <div className="text-center">
               <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
                 <Image
-                  src="/images/trustees/Sophia_Bentley_trustee_noas_place_halifax_west_yorkshire.jpg"
-                  alt="Sophia Bentley - Trustee"
+                  src="/images/trustees/Kathryn_Sullivsn_trustee_noas_place_halifax_west_yorkshire.png"
+                  alt="Kathryn Sullivan - Trustee"
                   fill
                   className="object-cover"
                 />
               </div>
-              <h3 className="font-bold text-brand-800 text-lg">Dr. Sophia Bentley</h3>
+              <h3 className="font-bold text-brand-800 text-lg">Kathryn Sullivan</h3>
               <p className="text-ink/80 text-sm mt-2 max-w-sm mx-auto">
-                Educational and Child Psychologist and founder of Find A Way CIC. As a mum of two, Sophia combines professional expertise with personal understanding, always keeping families at the centre.
+                An experienced governance professional with over 14 years as a charity trustee and school governor. As founder of MiraGold, Kathryn brings expertise in governance, leadership, and neurodiversity to support organisations with positive change.
               </p>
             </div>
           </div>

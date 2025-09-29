@@ -99,6 +99,17 @@ export default function Header() {
               </Link>
 
               <Link 
+                href="/interactive-tools"
+                className={`font-medium text-lg transition-all duration-300 rounded-lg px-3 py-2 ${
+                  pathname === "/interactive-tools" 
+                    ? "text-brand-800 font-bold bg-brand-50/80" 
+                    : "text-ink hover:text-brand-800 hover:bg-brand-50/60"
+                }`}
+              >
+                Interactive Tools
+              </Link>
+
+              <Link 
                 href="/contact"
                 className={`font-medium text-lg transition-all duration-300 rounded-lg px-3 py-2 ${
                   pathname === "/contact" 
@@ -216,6 +227,19 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Our Plans
+              </Link>
+
+              {/* Interactive Tools Link */}
+              <Link 
+                href="/interactive-tools"
+                className={`block font-medium text-lg transition-all duration-300 rounded-lg px-3 py-3 ${
+                  pathname === "/interactive-tools" 
+                    ? "text-brand-800 font-bold bg-brand-50/80" 
+                    : "text-ink hover:text-brand-800 hover:bg-brand-50/60"
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Interactive Tools
               </Link>
 
               {/* Contact Link */}

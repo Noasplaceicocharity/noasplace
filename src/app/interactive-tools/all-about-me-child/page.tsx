@@ -206,7 +206,7 @@ export default function AllAboutMeChildPage() {
       };
 
       // Helper function to add selections
-      const addSelections = (options: any[], selectedIds: string[], optionsArray: any[]) => {
+      const addSelections = (options: { id: string; label: string; icon: string; color: string }[], selectedIds: string[], optionsArray: { id: string; label: string; icon: string; color: string }[]) => {
         if (selectedIds.length > 0) {
           const selectedItems = optionsArray
             .filter(option => selectedIds.includes(option.id))

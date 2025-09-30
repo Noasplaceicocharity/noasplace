@@ -1,59 +1,251 @@
-"use client";
-
-import { useState } from "react";
-import SafetyPlanBuilder from "@/components/SafetyPlanBuilder";
-import FeelingsCopingPlan from "@/components/FeelingsCopingPlan";
-import TransitionPlan from "@/components/TransitionPlan";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function InteractiveTools() {
-  const [activeTool, setActiveTool] = useState<string>("safety-plan");
 
-  const tools = [
+  const toolsByAge = {
+    children: [
+      {
+        id: "all-about-me-child",
+        title: "All About Me",
+        description: "Create a special profile to share with teachers, nurses, and new people about who you are",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+            <path d="M12 2v5"/>
+            <path d="M17 7l-5 5"/>
+            <path d="M7 7l5 5"/>
+          </svg>
+        ),
+        href: "/interactive-tools/all-about-me-child",
+        isAvailable: true,
+        ageGroup: "children"
+      },
+      {
+        id: "bullying-help-child",
+        title: "Bullying Help",
+        description: "Simple tools to help children understand and deal with bullying, with help from parents and carers",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        ),
+        href: "/interactive-tools/bullying-help",
+        isAvailable: true,
+        ageGroup: "children"
+      },
+      {
+        id: "feelings-situations-child",
+        title: "My Feelings",
+        description: "Help children understand how they feel in different situations with pictures and simple words",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            <line x1="9" y1="9" x2="9.01" y2="9"/>
+            <line x1="15" y1="9" x2="15.01" y2="9"/>
+          </svg>
+        ),
+        href: "/interactive-tools/my-feelings",
+        isAvailable: true,
+        ageGroup: "children"
+      },
+      {
+        id: "transitions-child",
+        title: "My Transitions",
+        description: "Help children understand and prepare for new things happening in their life with pictures and simple activities",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 7L9 19l-5.5-5.5"/>
+            <path d="M21 7l-6-6"/>
+            <path d="M9 19l6 6"/>
+            <circle cx="12" cy="12" r="1"/>
+          </svg>
+        ),
+        href: "/interactive-tools/my-transitions",
+        isAvailable: true,
+        ageGroup: "children"
+      },
+      {
+        id: "coming-soon-child",
+        title: "Coming Soon",
+        description: "More tools for primary school age children are being developed",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12,6 12,12 16,14"/>
+          </svg>
+        ),
+        href: "#",
+        isAvailable: false,
+        ageGroup: "children"
+      },
+    ],
+    teens: [
+      {
+        id: "all-about-me-teen",
+        title: "All About Me Profile",
+        description: "Create a comprehensive profile to share with teachers, employers, and support services",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            <path d="M8 3.13a4 4 0 0 0 0 7.75"/>
+          </svg>
+        ),
+        href: "/interactive-tools/all-about-me-teen",
+        isAvailable: true,
+        ageGroup: "teens"
+      },
+      {
+        id: "bullying-support-teen",
+        title: "Bullying Support Tool",
+        description: "Assess your situation, understand your options, and create an action plan to deal with bullying",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 9h.01"/>
+            <path d="M15 9h.01"/>
+            <path d="M8 13a4 4 0 1 0 8 0"/>
+          </svg>
+        ),
+        href: "/interactive-tools/bullying-support",
+        isAvailable: true,
+        ageGroup: "teens"
+      },
+      {
+        id: "transitions-teen",
+        title: "Transition Planning",
+        description: "Plan and prepare for life changes with structured assessment and goal setting",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 7L9 19l-5.5-5.5"/>
+            <path d="M21 7l-6-6"/>
+            <path d="M9 19l6 6"/>
+            <path d="M12 12h.01"/>
+          </svg>
+        ),
+        href: "/interactive-tools/transition-planning",
+        isAvailable: true,
+        ageGroup: "teens"
+      },
+      {
+        id: "coming-soon-teen",
+        title: "Coming Soon",
+        description: "More tools for secondary school students are being developed",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12,6 12,12 16,14"/>
+          </svg>
+        ),
+        href: "#",
+        isAvailable: false,
+        ageGroup: "teens"
+      }
+    ],
+    adults: [
+      {
+        id: "all-about-me-adult",
+        title: "All About Me Profile",
+        description: "Comprehensive personal profile for sharing with healthcare providers, support services, and new contacts",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        ),
+        href: "/interactive-tools/all-about-me-adult",
+        isAvailable: true,
+        ageGroup: "adults"
+      },
+      {
+        id: "transitions-adult", 
+        title: "Life Transitions Support",
+        description: "Comprehensive planning tool for adults with additional needs facing life changes and transitions",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 7L9 19l-5.5-5.5M21 7l-6-6M9 19l6 6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+        ),
+        href: "/interactive-tools/life-transitions",
+        isAvailable: true,
+        ageGroup: "adults"
+      },
+      {
+        id: "coming-soon-adult",
+        title: "Coming Soon",
+        description: "More resources and tools for adults are in development",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12,6 12,12 16,14"/>
+          </svg>
+        ),
+        href: "#",
+        isAvailable: false,
+        ageGroup: "adults"
+      }
+    ]
+  };
+
+  const ageGroups = [
     {
-      id: "safety-plan",
-      title: "Anti-Bullying Safety Plan",
-      description: "Interactive worksheet for teens to create their personal anti-bullying safety plan",
+      id: "children",
+      title: "Children",
+      subtitle: "Primary School Age (4-11 years)",
+      description: "Interactive tools designed specifically for primary school children",
+      color: "from-blue-500 to-cyan-500",
+      image: "/images/interactive_tools_noas_place_halifax_primary_school.jpg",
+      imageAlt: "Primary school children engaged in learning activities at Noa's Place Halifax",
       icon: (
         <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <circle cx="12" cy="6" r="3"/>
+          <path d="M12 9v12"/>
+          <path d="M8 14l8 0"/>
+          <path d="M10 21l4 0"/>
+          <path d="M9 12l6 0"/>
         </svg>
       ),
-      isAvailable: true,
     },
     {
-      id: "feelings-coping",
-      title: "Feelings & Coping Plan",
-      description: "Help teens understand their emotions and create personalised coping strategies",
+      id: "teens",
+      title: "Teens",
+      subtitle: "Secondary School Age (11-18 years)",
+      description: "Tools and resources tailored for teenagers and young people",
+      color: "from-purple-500 to-pink-500",
+      image: "/images/interactive_tools_noas_place_halifax_secondary_school.jpg",
+      imageAlt: "Secondary school teenagers participating in interactive activities at Noa's Place Halifax",
       icon: (
         <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
         </svg>
       ),
-      isAvailable: true,
     },
     {
-      id: "transition-plan",
-      title: "Transition Plan",
-      description: "Reduce anxiety for SEND individuals transitioning to something new",
+      id: "adults",
+      title: "Adults",
+      subtitle: "Adults of All Ages (18+ years)",
+      description: "Resources and support tools for adults with additional needs",
+      color: "from-green-500 to-emerald-500",
+      image: "/images/interactive_tools_noas_place_halifax_adults.jpg",
+      imageAlt: "Adults with additional needs using interactive tools and resources at Noa's Place Halifax",
       icon: (
         <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 7L9 19l-5.5-5.5M21 7l-6-6M9 19l6 6"/>
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
         </svg>
       ),
-      isAvailable: true,
-    },
-    {
-      id: "coming-soon-1",
-      title: "Coming Soon",
-      description: "More interactive tools and resources are on the way",
-      icon: (
-        <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12,6 12,12 16,14"/>
-        </svg>
-      ),
-      isAvailable: false,
-    },
+    }
   ];
 
   return (
@@ -81,76 +273,137 @@ export default function InteractiveTools() {
               Interactive Tools
             </h1>
             <p className="text-xl font-bold text-ink sm:text-2xl md:text-3xl mb-4">
-              Helpful resources for children, teens, and families
+              Age-appropriate resources for children, teens, and adults
             </p>
             <p className="text-lg text-ink/80 max-w-3xl mx-auto">
-              Explore our collection of interactive tools designed to support young people and families with additional needs.
+              Discover interactive tools organised by age group to support individuals and families with additional needs at every stage of life.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Tools Navigation */}
-      <section className="bg-white border-b border-brand-100/30">
-        <div className="mx-auto max-w-7xl px-6 py-8">
-          <div className="flex flex-wrap gap-4 justify-center">
-            {tools.map((tool) => (
-              <button
-                key={tool.id}
-                onClick={() => tool.isAvailable && setActiveTool(tool.id)}
-                disabled={!tool.isAvailable}
-                className={`flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition duration-200 ${
-                  activeTool === tool.id && tool.isAvailable
-                    ? "bg-brand-800 text-white"
-                    : tool.isAvailable
-                    ? "bg-brand-50 text-brand-800 hover:bg-brand-100"
-                    : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                }`}
-              >
-                <span className={activeTool === tool.id && tool.isAvailable ? "text-white" : "text-current"}>
-                  {tool.icon}
-                </span>
-                <span>{tool.title}</span>
-                {!tool.isAvailable && (
-                  <span className="text-xs bg-gray-200 text-gray-500 px-2 py-1 rounded-full">
-                    Coming Soon
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-          
-          {/* Tool Description */}
-          <div className="mt-6 text-center">
-            <p className="text-ink/80 max-w-2xl mx-auto">
-              {tools.find(tool => tool.id === activeTool)?.description}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Active Tool Content */}
+      {/* Tools by Age Group */}
       <section className="py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          {activeTool === "safety-plan" && <SafetyPlanBuilder />}
-          {activeTool === "feelings-coping" && <FeelingsCopingPlan />}
-          {activeTool === "transition-plan" && <TransitionPlan />}
-          
-          {activeTool === "coming-soon-1" && (
-            <div className="text-center py-16">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-brand-100 rounded-full mb-6">
-                <svg className="size-10 text-brand-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12,6 12,12 16,14"/>
-                </svg>
+        <div className="mx-auto max-w-7xl px-6 space-y-16">
+          {ageGroups.map((ageGroup, index) => (
+            <div key={ageGroup.id} className="space-y-8">
+              {/* Age Group Header */}
+              <div className="relative rounded-3xl overflow-hidden bg-white shadow-lg border border-brand-100/20 mb-8">
+                {/* Background Image */}
+                <div className="relative h-56 sm:h-64 lg:h-72 overflow-hidden">
+                  <Image
+                    src={ageGroup.image}
+                    alt={ageGroup.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  {/* Gradient overlay for text readability */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${ageGroup.color} opacity-80`}></div>
+                  <div className="absolute inset-0 bg-black/20"></div>
+                </div>
+                
+                {/* Content overlay */}
+                <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+                  <div className="text-center text-white max-w-full">
+                    <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-sm rounded-full mb-4 sm:mb-6 border border-white/30">
+                      <span className="text-white scale-75 sm:scale-100">
+                        {ageGroup.icon}
+                      </span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-2 drop-shadow-lg leading-tight">
+                      {ageGroup.title}
+                    </h2>
+                    <p className="text-sm sm:text-lg lg:text-xl font-bold mb-3 sm:mb-4 drop-shadow-md leading-tight">
+                      {ageGroup.subtitle}
+                    </p>
+                    <p className="text-xs sm:text-sm lg:text-base max-w-2xl mx-auto drop-shadow-md font-medium leading-relaxed">
+                      {ageGroup.description}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-2xl font-bold text-ink mb-4">More Tools Coming Soon!</h3>
-              <p className="text-ink/80 max-w-2xl mx-auto">
-                We're working on additional interactive tools and resources to support families with additional needs. 
-                Check back soon for updates!
-              </p>
+
+              {/* Tools Grid for this age group */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                {toolsByAge[ageGroup.id as keyof typeof toolsByAge].map((tool) => {
+                  if (tool.isAvailable) {
+                    return (
+                      <Link
+                        key={tool.id}
+                        href={tool.href}
+                        className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 sm:p-6 lg:p-8 border border-brand-100/20 hover:border-brand-200 hover:-translate-y-1"
+                      >
+                        <div className="flex flex-col items-center text-center">
+                          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-brand-100 rounded-full mb-4 sm:mb-6 group-hover:bg-brand-200 transition-colors duration-300">
+                            <span className="text-brand-800 scale-75 sm:scale-90 lg:scale-100">
+                              {tool.icon}
+                            </span>
+                          </div>
+                          
+                          <h3 className="text-lg sm:text-xl font-bold text-ink mb-3 sm:mb-4 group-hover:text-brand-800 transition-colors duration-300 leading-tight">
+                            {tool.title}
+                          </h3>
+                          
+                          <p className="text-sm sm:text-base text-ink/70 mb-4 sm:mb-6 leading-relaxed">
+                            {tool.description}
+                          </p>
+                          
+                          <div className="mt-auto">
+                            <span className="inline-flex items-center gap-2 text-brand-800 font-medium group-hover:gap-3 transition-all duration-300 text-sm sm:text-base">
+                              Get Started
+                              <svg className="size-3 sm:size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M5 12h14"/>
+                                <path d="M12 5l7 7-7 7"/>
+                              </svg>
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <div
+                        key={tool.id}
+                        className="bg-gray-50 rounded-2xl shadow-sm p-8 border border-gray-200"
+                      >
+                        <div className="flex flex-col items-center text-center">
+                          <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-6">
+                            <span className="text-gray-400">
+                              {tool.icon}
+                            </span>
+                          </div>
+                          
+                          <h3 className="text-xl font-bold text-gray-500 mb-4">
+                            {tool.title}
+                          </h3>
+                          
+                          <p className="text-gray-400 mb-6 leading-relaxed">
+                            {tool.description}
+                          </p>
+                          
+                          <span className="inline-flex items-center gap-2 text-xs bg-gray-200 text-gray-500 px-3 py-2 rounded-full font-medium">
+                            <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <circle cx="12" cy="12" r="10"/>
+                              <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                            Coming Soon
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+
+              {/* Divider between age groups (except for the last one) */}
+              {index < ageGroups.length - 1 && (
+                <div className="flex items-center justify-center pt-8">
+                  <div className="w-24 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
+                </div>
+              )}
             </div>
-          )}
+          ))}
         </div>
       </section>
     </main>

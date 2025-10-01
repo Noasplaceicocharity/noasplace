@@ -2,11 +2,33 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function InteractiveTools() {
+  const searchParams = useSearchParams();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
   const [hasUserSelected, setHasUserSelected] = useState(false);
+
+  // Handle URL parameters on component mount
+  useEffect(() => {
+    const ageGroup = searchParams.get('age');
+    if (ageGroup && ['children', 'teens', 'adults'].includes(ageGroup)) {
+      setSelectedAgeGroup(ageGroup);
+      setHasUserSelected(true);
+      
+      // Scroll to tools section after a brief delay
+      setTimeout(() => {
+        const toolsSection = document.getElementById('tools-section');
+        if (toolsSection) {
+          toolsSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
 
   const toolsByAge = {
     children: [

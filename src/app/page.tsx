@@ -166,7 +166,7 @@ export default function Home() {
 							/>
         </div>
 						{/* Center content */}
-						<div className="relative mx-auto max-w-4xl text-center">
+						<div className="relative mx-auto max-w-4xl text-center px-8 lg:px-16">
 														<div className="flex justify-center">
           <Image
 									src="/images/noas place logo.png"
@@ -177,13 +177,14 @@ export default function Home() {
 									priority
 								/>
 							</div>
-							<h1 className="mx-auto mt-12 max-w-5xl text-balance">
-								<span className="block bg-gradient-to-r from-brand-800 to-brand-500 bg-clip-text text-4xl font-black text-transparent sm:text-6xl md:text-7xl">
-									A lifeline for families with additional needs
+							<h1 className="mx-auto mt-12 max-w-4xl text-balance">
+								<span className="block bg-gradient-to-r from-brand-800 to-brand-500 bg-clip-text text-3xl font-black text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
+									Help us build<br />
+									<span className="text-brand-600">Noa's Place</span><br />
+									<span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">add your name today</span>
 								</span>
-								<span className="mt-6 block text-xl font-bold leading-relaxed text-ink sm:text-2xl md:text-3xl">
-									We're building an inclusive hub with sensory rooms, quiet spaces, and play.<br />
-									Support that doesn't run on waiting lists.
+								<span className="mt-6 block text-lg font-bold leading-relaxed text-ink sm:text-xl md:text-2xl lg:text-3xl">
+									A lifeline for families with additional needs
 								</span>
 							</h1>
 							<div className="mt-12 mb-24 sm:mb-32 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -191,7 +192,7 @@ export default function Home() {
 									href="#register-form"
 									className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
 								>
-									Approve Our Plans
+									Add your name
 									<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
 										<path d="m6 9 6 6 6-6"/>
 									</svg>
@@ -282,6 +283,66 @@ export default function Home() {
 									/>
 								</a>
 							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Support Form Section - Duplicate */}
+			<section className="bg-brand-50/30 py-16">
+				<div className="mx-auto max-w-4xl px-6">
+					<div className="text-center">
+						{/* Signature Count Card */}
+						<div className="text-center mb-8">
+							<div className="inline-block bg-white/90 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-xl border border-brand-200/50">
+								<div className="text-5xl font-black text-brand-800 mb-3 tracking-tight">1,500+</div>
+								<div className="text-lg text-brand-700 font-semibold">Join others who have added their name</div>
+							</div>
+						</div>
+
+						<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
+							Show Your Support
+						</h2>
+						<div className="mt-6 space-y-4 text-lg text-ink/80">
+							<p>The overwhelming response shows just how much our community needs this space.</p>
+							<p>Add your name to join hundreds of others who believe in our vision.</p>
+							
+							<p className="font-medium text-brand-800">Together, we're creating a safe, inclusive space for children, adults, and families of every ability.</p>
+						</div>
+					</div>
+
+					<div className="mt-12">
+						<div className="overflow-hidden rounded-2xl bg-white shadow-lg p-8">
+							<MailchimpSubscribeForm />
+						</div>
+					</div>
+
+					{/* Social Media Links */}
+					<div className="mt-16 text-center">
+						<h3 className="text-xl font-bold text-ink mb-6">Follow Our Journey</h3>
+						<div className="flex items-center justify-center gap-4">
+							<a
+								href="https://www.facebook.com/noasplaceuk"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center justify-center rounded-full bg-[#1877F2] p-3 text-white hover:bg-[#166fe5] transition"
+							>
+								<span className="sr-only">Follow us on Facebook</span>
+								<svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+								</svg>
+							</a>
+							<a
+								href="https://www.instagram.com/noasplaceuk"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center justify-center rounded-full bg-[#E4405F] p-3 text-white hover:bg-[#d62e4c] transition"
+							>
+								<span className="sr-only">Follow us on Instagram</span>
+								<svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+								</svg>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -419,21 +480,175 @@ export default function Home() {
 				</div>
 			</section>
 
+			{/* Interactive Tools Section */}
+			<section className="bg-white py-24">
+				<div className="mx-auto max-w-6xl px-6">
+					<div className="text-center mb-16">
+						<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
+							Interactive Tools
+						</h2>
+						<p className="mx-auto mt-6 max-w-3xl text-lg text-ink/80">
+							Empowering tools designed for children, teens, and adults with additional needs. 
+							Create profiles, manage transitions, and develop coping strategies.
+						</p>
+					</div>
+
+					<div className="grid gap-8 md:grid-cols-3">
+						{/* Children Tools */}
+						<div className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-102">
+							<div className="relative h-80 overflow-hidden">
+								<Image
+									src="/images/interactive_tools_noas_place_halifax_primary_school.jpg"
+									alt="Primary school children engaged in learning activities at Noa's Place Halifax"
+									fill
+									className="object-cover transition-transform duration-300 group-hover:scale-110"
+									sizes="(max-width: 768px) 100vw, 33vw"
+								/>
+								<div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-80"></div>
+								<div className="absolute inset-0 bg-black/20"></div>
+							</div>
+							
+							<div className="absolute inset-0 flex items-center justify-center p-6">
+								<div className="text-center text-white w-[240px]">
+									<div className="inline-flex items-center justify-center w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full mb-4 border border-white/30">
+										<svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+											<circle cx="12" cy="6" r="3"/>
+											<path d="M12 9v12"/>
+											<path d="M8 14l8 0"/>
+											<path d="M10 21l4 0"/>
+											<path d="M9 12l6 0"/>
+										</svg>
+									</div>
+									<h3 className="text-xl font-bold mb-3 drop-shadow-lg">For Children</h3>
+									<p className="text-xs drop-shadow-md mb-4">Primary School Age (4-11 years)</p>
+									<div className="space-y-1 text-xs drop-shadow-md mb-4">
+										<div>• All About Me profiles</div>
+										<div>• Feelings & coping tools</div>
+										<div>• Sensory support guides</div>
+									</div>
+									<Link
+										href="/interactive-tools?age=children"
+										className="inline-flex items-center justify-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg text-xs font-semibold text-white border border-white/30 hover:bg-white/30 transition duration-200"
+									>
+										View Tools
+										<svg className="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+											<path d="m9 18 6-6-6-6"/>
+										</svg>
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						{/* Teens Tools */}
+						<div className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-102">
+							<div className="relative h-80 overflow-hidden">
+								<Image
+									src="/images/interactive_tools_noas_place_halifax_secondary_school.jpg"
+									alt="Secondary school teenagers participating in interactive activities at Noa's Place Halifax"
+									fill
+									className="object-cover transition-transform duration-300 group-hover:scale-110"
+									sizes="(max-width: 768px) 100vw, 33vw"
+								/>
+								<div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-80"></div>
+								<div className="absolute inset-0 bg-black/20"></div>
+							</div>
+							
+							<div className="absolute inset-0 flex items-center justify-center p-6">
+								<div className="text-center text-white w-[240px]">
+									<div className="inline-flex items-center justify-center w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full mb-4 border border-white/30">
+										<svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+											<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+											<circle cx="9" cy="7" r="4"/>
+											<path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+											<path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+										</svg>
+									</div>
+									<h3 className="text-xl font-bold mb-3 drop-shadow-lg">For Teens</h3>
+									<p className="text-xs drop-shadow-md mb-4">Secondary School Age (11-18 years)</p>
+									<div className="space-y-1 text-xs drop-shadow-md mb-4">
+										<div>• Transition planning</div>
+										<div>• Bullying support</div>
+										<div>• Sensory profiles</div>
+									</div>
+									<Link
+										href="/interactive-tools?age=teens"
+										className="inline-flex items-center justify-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg text-xs font-semibold text-white border border-white/30 hover:bg-white/30 transition duration-200"
+									>
+										View Tools
+										<svg className="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+											<path d="m9 18 6-6-6-6"/>
+										</svg>
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						{/* Adults Tools */}
+						<div className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-102">
+							<div className="relative h-80 overflow-hidden">
+								<Image
+									src="/images/interactive_tools_noas_place_halifax_adults.jpg"
+									alt="Adults with additional needs using interactive tools and resources at Noa's Place Halifax"
+									fill
+									className="object-cover transition-transform duration-300 group-hover:scale-110"
+									sizes="(max-width: 768px) 100vw, 33vw"
+								/>
+								<div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 opacity-80"></div>
+								<div className="absolute inset-0 bg-black/20"></div>
+							</div>
+							
+							<div className="absolute inset-0 flex items-center justify-center p-6">
+								<div className="text-center text-white w-[240px]">
+									<div className="inline-flex items-center justify-center w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full mb-4 border border-white/30">
+										<svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+											<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+											<circle cx="12" cy="7" r="4"/>
+										</svg>
+									</div>
+									<h3 className="text-xl font-bold mb-3 drop-shadow-lg">For Adults</h3>
+									<p className="text-xs drop-shadow-md mb-4">Adults of All Ages (18+ years)</p>
+									<div className="space-y-1 text-xs drop-shadow-md mb-4">
+										<div>• Healthcare profiles</div>
+										<div>• Safety planning</div>
+										<div>• Life transitions</div>
+									</div>
+									<Link
+										href="/interactive-tools?age=adults"
+										className="inline-flex items-center justify-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg text-xs font-semibold text-white border border-white/30 hover:bg-white/30 transition duration-200"
+									>
+										View Tools
+										<svg className="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+											<path d="m9 18 6-6-6-6"/>
+										</svg>
+									</Link>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div className="text-center mt-12">
+						<Link
+							href="/interactive-tools"
+							className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
+						>
+							Explore All Tools
+							<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+								<path d="m9 18 6-6-6-6"/>
+							</svg>
+						</Link>
+					</div>
+				</div>
+			</section>
+
 			{/* Support Form Section */}
 			<section id="register-form" className="bg-brand-50/30 py-16">
 				<div className="mx-auto max-w-4xl px-6">
 					<div className="text-center">
 						{/* Signature Count Card */}
-						<div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-4 py-2.5 rounded-full border border-brand-100 shadow-sm mb-8">
-							<div className="relative">
-								<div className="bg-brand-50 rounded-full h-11 w-11 flex items-center justify-center">
-									<span className="text-lg font-bold text-brand-800 tracking-tight">500+</span>
-								</div>
-								<div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-brand-200/50 rounded-full"></div>
-							</div>
-							<div className="flex flex-col">
-								<span className="text-brand-800 font-semibold text-base">Supporters</span>
-								<span className="text-brand-600 text-sm">in just 4 days</span>
+						<div className="text-center mb-8">
+							<div className="inline-block bg-white/90 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-xl border border-brand-200/50">
+								<div className="text-5xl font-black text-brand-800 mb-3 tracking-tight">1,500+</div>
+								<div className="text-lg text-brand-700 font-semibold">Join others who have added their name</div>
 							</div>
 						</div>
 

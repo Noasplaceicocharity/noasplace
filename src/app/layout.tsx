@@ -3,6 +3,7 @@ import Script from "next/script";
 import { cookies } from "next/headers";
 import CookieConsent from "@/components/CookieConsent";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Nunito, Inter } from "next/font/google";
 import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
@@ -177,6 +178,7 @@ fbq('track', 'PageView');
         <ScrollToTop />
         <Header />
         {children}
+        <Footer />
         <CookieConsent initiallyConsented={hasAnalyticsConsent} />
       </body>
     </html>

@@ -2,36 +2,65 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://noasplace.org.uk',
   generateRobotsTxt: true,
-  generateIndexSitemap: false, // Generate single sitemap instead of index
+  generateIndexSitemap: false,
   sitemapSize: 7000,
   changefreq: 'weekly',
   priority: 0.7,
   autoLastmod: true,
-  // Additional paths to include in sitemap
+  exclude: [
+    '/api/*',
+    '/_not-found',
+  ],
   additionalPaths: async (config) => {
-    return [
-      await config.transform(config, '/'),
-    ]
-  },
-  // Custom transformation for specific URLs
-  transform: async (config, path) => {
-    // Customise priority for important pages
-    if (path === '/') {
+    const staticPaths = [
+      '/',
+      '/about',
+      '/contact',
+      '/interactive-tools',
+      '/plans',
+      '/interactive-tools/all-about-me-adult',
+      '/interactive-tools/all-about-me-child',
+      '/interactive-tools/all-about-me-teen',
+      '/interactive-tools/bullying-help',
+      '/interactive-tools/bullying-support',
+      '/interactive-tools/feelings-coping',
+      '/interactive-tools/life-transitions',
+      '/interactive-tools/my-feelings',
+      '/interactive-tools/my-transitions',
+      '/interactive-tools/safety-plan',
+      '/interactive-tools/sensory-overload',
+      '/interactive-tools/sensory-overload-teen',
+      '/interactive-tools/sensory-profile-adult',
+      '/interactive-tools/transition-plan',
+      '/interactive-tools/transition-planning',
+    ];
+
+    return staticPaths.map((path) => {
+      if (path === '/') {
+        return {
+          loc: path,
+          changefreq: 'daily',
+          priority: 1.0,
+          lastmod: new Date().toISOString(),
+        };
+      }
+
+      if (['/about', '/contact', '/interactive-tools', '/plans'].includes(path)) {
+        return {
+          loc: path,
+          changefreq: 'weekly',
+          priority: 0.8,
+          lastmod: new Date().toISOString(),
+        };
+      }
+
       return {
         loc: path,
-        changefreq: 'daily',
-        priority: 1.0,
+        changefreq: 'weekly',
+        priority: 0.7,
         lastmod: new Date().toISOString(),
-      }
-    }
-
-    // Default transformation
-    return {
-      loc: path,
-      changefreq: config.changefreq,
-      priority: config.priority,
-      lastmod: new Date().toISOString(),
-    }
+      };
+    });
   },
   robotsTxtOptions: {
     policies: [

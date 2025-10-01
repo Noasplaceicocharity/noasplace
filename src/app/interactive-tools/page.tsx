@@ -1,14 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function InteractiveTools() {
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
+  const [hasUserSelected, setHasUserSelected] = useState(false);
 
   const toolsByAge = {
     children: [
       {
         id: "all-about-me-child",
         title: "All About Me",
-        description: "Create a special profile to share with teachers, nurses, and new people about who you are",
+        description: "Create a profile to share with teachers, nurses, and new people about who you are",
         icon: (
           <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -24,8 +29,8 @@ export default function InteractiveTools() {
       },
       {
         id: "bullying-help-child",
-        title: "Bullying Help",
-        description: "Simple tools to help children understand and deal with bullying, with help from parents and carers",
+        title: "When Someone Is Unkind",
+        description: "Simple tools to help children understand and deal with unkind behaviour, with help from parents and carers",
         icon: (
           <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -282,11 +287,136 @@ export default function InteractiveTools() {
         </div>
       </section>
 
+      {/* Age Group Selection */}
+      <section className="py-8 bg-gray-50">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-ink mb-4">
+              Choose who you're looking for help for:
+            </h2>
+            <p className="text-ink/70">
+              Select an age group to see the relevant tools and resources
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {ageGroups.map((ageGroup) => (
+              <button
+                key={ageGroup.id}
+                onClick={() => {
+                  setSelectedAgeGroup(selectedAgeGroup === ageGroup.id ? null : ageGroup.id);
+                  setHasUserSelected(true);
+                  
+                  // Scroll to tools section after a brief delay to allow state update
+                  setTimeout(() => {
+                    const toolsSection = document.getElementById('tools-section');
+                    if (toolsSection) {
+                      toolsSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  }, 100);
+                }}
+                className={`group relative rounded-2xl overflow-hidden transition-all duration-300 ${
+                  selectedAgeGroup === ageGroup.id
+                    ? 'ring-4 ring-brand-500 shadow-xl scale-105'
+                    : 'hover:shadow-lg hover:scale-102'
+                }`}
+              >
+                <div className="relative h-32 overflow-hidden">
+                  <Image
+                    src={ageGroup.image}
+                    alt={ageGroup.imageAlt}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-r ${ageGroup.color} ${
+                    selectedAgeGroup === ageGroup.id ? 'opacity-90' : 'opacity-80'
+                  }`}></div>
+                  <div className="absolute inset-0 bg-black/20"></div>
+                </div>
+                
+                <div className="absolute inset-0 flex items-center justify-center p-4">
+                  <div className="text-center text-white">
+                    <div className="inline-flex items-center justify-center w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full mb-2 border border-white/30">
+                      <span className="text-white scale-75">
+                        {ageGroup.icon}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-1 drop-shadow-lg">
+                      {ageGroup.title}
+                    </h3>
+                    <p className="text-xs drop-shadow-md">
+                      {ageGroup.subtitle}
+                    </p>
+                  </div>
+                </div>
+                
+                {selectedAgeGroup === ageGroup.id && (
+                  <div className="absolute top-2 right-2 w-6 h-6 bg-brand-500 rounded-full flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                )}
+              </button>
+            ))}
+          </div>
+          
+          {selectedAgeGroup && (
+            <div className="text-center mt-6">
+              <button
+                onClick={() => {
+                  setSelectedAgeGroup(null);
+                  setHasUserSelected(true);
+                  
+                  // Scroll to tools section after a brief delay to allow state update
+                  setTimeout(() => {
+                    const toolsSection = document.getElementById('tools-section');
+                    if (toolsSection) {
+                      toolsSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }
+                  }, 100);
+                }}
+                className="text-brand-600 hover:text-brand-800 font-medium text-sm underline"
+              >
+                Show all age groups
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Tools by Age Group */}
-      <section className="py-16">
+      <section id="tools-section" className="py-16">
         <div className="mx-auto max-w-7xl px-6 space-y-16">
-          {ageGroups.map((ageGroup, index) => (
-            <div key={ageGroup.id} className="space-y-8">
+          {!hasUserSelected ? (
+            <div className="text-center py-16">
+              <div className="max-w-2xl mx-auto">
+                <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-ink mb-4">
+                  Select an age group above to see relevant tools
+                </h3>
+                <p className="text-ink/70 text-lg">
+                  Choose from Children, Teens, or Adults to view the interactive tools designed specifically for that age group.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="transition-all duration-500 ease-in-out">
+              {ageGroups
+                .filter(ageGroup => !selectedAgeGroup || ageGroup.id === selectedAgeGroup)
+                .map((ageGroup, index) => (
+              <div key={ageGroup.id} className="space-y-8">
               {/* Age Group Header */}
               <div className="relative rounded-3xl overflow-hidden bg-white shadow-lg border border-brand-100/20 mb-8">
                 {/* Background Image */}
@@ -402,8 +532,11 @@ export default function InteractiveTools() {
                   <div className="w-24 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
                 </div>
               )}
+              </div>
+              ))
+            }
             </div>
-          ))}
+          )}
         </div>
       </section>
     </main>

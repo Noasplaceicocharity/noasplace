@@ -15,21 +15,27 @@ export default function MyTransitionsPage() {
     
     // Current feelings about the change
     currentFeelings: [] as string[],
+    currentFeelingsText: "",
     
     // What they know about the change
     whatIKnow: [] as string[],
+    whatIKnowText: "",
     
     // What they're worried about
     worries: [] as string[],
+    worriesText: "",
     
     // What they're excited about
     excited: [] as string[],
+    excitedText: "",
     
     // What would help
     whatWouldHelp: [] as string[],
+    whatWouldHelpText: "",
     
     // Who can help
     whoCanHelp: [] as string[],
+    whoCanHelpText: "",
     
     // Questions they have
     questions: "",
@@ -133,6 +139,13 @@ export default function MyTransitionsPage() {
     }
   };
 
+  const handleTextInput = (field: keyof typeof formData, value: string) => {
+    setFormData({
+      ...formData,
+      [field]: value
+    });
+  };
+
   const generatePDF = async () => {
     setIsGenerating(true);
     
@@ -198,6 +211,9 @@ export default function MyTransitionsPage() {
       } else {
         addText('• No feelings selected');
       }
+      if (formData.currentFeelingsText) {
+        addText(`Other feelings: ${formData.currentFeelingsText}`);
+      }
       yPosition += 5;
 
       // What I Know
@@ -210,6 +226,9 @@ export default function MyTransitionsPage() {
         addText(selectedKnow);
       } else {
         addText('• Nothing selected');
+      }
+      if (formData.whatIKnowText) {
+        addText(`Other things I know: ${formData.whatIKnowText}`);
       }
       yPosition += 5;
 
@@ -224,6 +243,9 @@ export default function MyTransitionsPage() {
       } else {
         addText('• No worries selected');
       }
+      if (formData.worriesText) {
+        addText(`Other worries: ${formData.worriesText}`);
+      }
       yPosition += 5;
 
       // Excited About
@@ -236,6 +258,9 @@ export default function MyTransitionsPage() {
         addText(selectedExcited);
       } else {
         addText('• Nothing selected');
+      }
+      if (formData.excitedText) {
+        addText(`Other things I'm excited about: ${formData.excitedText}`);
       }
       yPosition += 5;
 
@@ -250,6 +275,9 @@ export default function MyTransitionsPage() {
       } else {
         addText('• Nothing selected');
       }
+      if (formData.whatWouldHelpText) {
+        addText(`Other things that would help: ${formData.whatWouldHelpText}`);
+      }
       yPosition += 5;
 
       // Who Can Help
@@ -262,6 +290,9 @@ export default function MyTransitionsPage() {
         addText(selectedPeople);
       } else {
         addText('• No one selected');
+      }
+      if (formData.whoCanHelpText) {
+        addText(`Other people who can help: ${formData.whoCanHelpText}`);
       }
       yPosition += 5;
 
@@ -514,6 +545,18 @@ export default function MyTransitionsPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other feelings you have about this change:
+                </label>
+                <textarea
+                  value={formData.currentFeelingsText}
+                  onChange={(e) => handleTextInput('currentFeelingsText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about any other feelings you have about this change..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* What I Know */}
@@ -542,6 +585,18 @@ export default function MyTransitionsPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things you know about this change:
+                </label>
+                <textarea
+                  value={formData.whatIKnowText}
+                  onChange={(e) => handleTextInput('whatIKnowText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things you know about this change..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 
@@ -572,6 +627,18 @@ export default function MyTransitionsPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other worries you have:
+                </label>
+                <textarea
+                  value={formData.worriesText}
+                  onChange={(e) => handleTextInput('worriesText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about any other worries you have..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* Excited About */}
@@ -600,6 +667,18 @@ export default function MyTransitionsPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things you're excited about:
+                </label>
+                <textarea
+                  value={formData.excitedText}
+                  onChange={(e) => handleTextInput('excitedText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that make you excited or happy..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 
@@ -630,6 +709,18 @@ export default function MyTransitionsPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things that would help you feel better:
+                </label>
+                <textarea
+                  value={formData.whatWouldHelpText}
+                  onChange={(e) => handleTextInput('whatWouldHelpText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that would make this change easier..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* Who Can Help */}
@@ -658,6 +749,18 @@ export default function MyTransitionsPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other people who can help you:
+                </label>
+                <textarea
+                  value={formData.whoCanHelpText}
+                  onChange={(e) => handleTextInput('whoCanHelpText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other people who can help you with this change..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 

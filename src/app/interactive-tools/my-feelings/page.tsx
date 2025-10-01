@@ -8,11 +8,17 @@ export default function MyFeelingsPage() {
   const [formData, setFormData] = useState({
     childName: "",
     situations: {} as Record<string, string[]>,
+    situationsText: {} as Record<string, string>,
     calmingStrategies: [] as string[],
+    calmingStrategiesText: "",
     supportPeople: [] as string[],
+    supportPeopleText: "",
     favouriteActivities: [] as string[],
+    favouriteActivitiesText: "",
     warningSignsBody: [] as string[],
-    warningSignsFeelings: [] as string[]
+    warningSignsBodyText: "",
+    warningSignsFeelings: [] as string[],
+    warningSignsFeelingsText: ""
   });
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -179,6 +185,23 @@ export default function MyFeelingsPage() {
     }
   };
 
+  const handleTextInput = (field: keyof typeof formData, value: string) => {
+    setFormData({
+      ...formData,
+      [field]: value
+    });
+  };
+
+  const handleSituationTextInput = (situationId: string, value: string) => {
+    setFormData({
+      ...formData,
+      situationsText: {
+        ...formData.situationsText,
+        [situationId]: value
+      }
+    });
+  };
+
   const generatePDF = async () => {
     setIsGenerating(true);
     
@@ -245,6 +268,13 @@ export default function MyFeelingsPage() {
         } else {
           addText('• No feelings selected');
         }
+        
+        // Add additional feelings text if provided
+        const additionalFeelings = formData.situationsText[situation.id];
+        if (additionalFeelings) {
+          addText(`Other feelings: ${additionalFeelings}`);
+        }
+        
         yPosition += 8;
       });
 
@@ -259,6 +289,9 @@ export default function MyFeelingsPage() {
       } else {
         addText('• No calming strategies selected');
       }
+      if (formData.calmingStrategiesText) {
+        addText(`Other things that help me calm down: ${formData.calmingStrategiesText}`);
+      }
       yPosition += 8;
 
       // People I Can Talk To When Upset
@@ -271,6 +304,9 @@ export default function MyFeelingsPage() {
         addText(selectedPeople);
       } else {
         addText('• No support people selected');
+      }
+      if (formData.supportPeopleText) {
+        addText(`Other people I can talk to when upset: ${formData.supportPeopleText}`);
       }
       yPosition += 8;
 
@@ -285,6 +321,9 @@ export default function MyFeelingsPage() {
       } else {
         addText('• No activities selected');
       }
+      if (formData.favouriteActivitiesText) {
+        addText(`Other favourite activities that help: ${formData.favouriteActivitiesText}`);
+      }
       yPosition += 8;
 
       // Warning Signs I'm Getting Upset - Body
@@ -298,6 +337,9 @@ export default function MyFeelingsPage() {
       } else {
         addText('• No body warning signs selected');
       }
+      if (formData.warningSignsBodyText) {
+        addText(`Other warning signs in my body: ${formData.warningSignsBodyText}`);
+      }
       yPosition += 8;
 
       // Warning Signs I'm Getting Upset - Feelings
@@ -310,6 +352,9 @@ export default function MyFeelingsPage() {
         addText(selectedFeelingSigns);
       } else {
         addText('• No feeling warning signs selected');
+      }
+      if (formData.warningSignsFeelingsText) {
+        addText(`Other warning signs in my feelings: ${formData.warningSignsFeelingsText}`);
       }
 
       // Footer
@@ -482,6 +527,19 @@ export default function MyFeelingsPage() {
                     })}
                   </div>
                 </div>
+                
+                <div className="mt-6">
+                  <label className="block text-lg font-semibold text-gray-700 mb-3">
+                    Other feelings I have in this situation:
+                  </label>
+                  <textarea
+                    value={formData.situationsText[situation.id] || ""}
+                    onChange={(e) => handleSituationTextInput(situation.id, e.target.value)}
+                    rows={3}
+                    placeholder="Tell us about any other feelings you have in this situation..."
+                    className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                  />
+                </div>
               </div>
             ))}
 
@@ -512,6 +570,18 @@ export default function MyFeelingsPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things that help me calm down:
+                </label>
+                <textarea
+                  value={formData.calmingStrategiesText}
+                  onChange={(e) => handleTextInput('calmingStrategiesText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that help you feel better when you're upset..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* People I Can Talk To When Upset */}
@@ -540,6 +610,18 @@ export default function MyFeelingsPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other people I can talk to when upset:
+                </label>
+                <textarea
+                  value={formData.supportPeopleText}
+                  onChange={(e) => handleTextInput('supportPeopleText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other people you can talk to when you feel upset..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 
@@ -570,6 +652,18 @@ export default function MyFeelingsPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other favourite activities that help:
+                </label>
+                <textarea
+                  value={formData.favouriteActivitiesText}
+                  onChange={(e) => handleTextInput('favouriteActivitiesText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other activities that make you feel happy and calm..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* Warning Signs - Body */}
@@ -599,6 +693,18 @@ export default function MyFeelingsPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other warning signs in my body:
+                </label>
+                <textarea
+                  value={formData.warningSignsBodyText}
+                  onChange={(e) => handleTextInput('warningSignsBodyText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that happen in your body when you start to get upset..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* Warning Signs - Feelings */}
@@ -627,6 +733,18 @@ export default function MyFeelingsPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other warning signs in my feelings:
+                </label>
+                <textarea
+                  value={formData.warningSignsFeelingsText}
+                  onChange={(e) => handleTextInput('warningSignsFeelingsText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things you want to do when you start to get upset..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 

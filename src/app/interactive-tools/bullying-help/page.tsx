@@ -8,11 +8,15 @@ export default function BullyingHelpPage() {
   const [formData, setFormData] = useState({
     childName: "",
     feelings: [] as string[],
+    feelingsText: "",
     whatHappened: "",
     whereItHappened: "",
     whoCanHelp: [] as string[],
+    whoCanHelpText: "",
     safeSpaces: [] as string[],
-    copingStrategies: [] as string[]
+    safeSpacesText: "",
+    copingStrategies: [] as string[],
+    copingStrategiesText: ""
   });
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -67,6 +71,13 @@ export default function BullyingHelpPage() {
     }
   };
 
+  const handleTextInput = (field: keyof typeof formData, value: string) => {
+    setFormData({
+      ...formData,
+      [field]: value
+    });
+  };
+
   const generatePDF = async () => {
     setIsGenerating(true);
     
@@ -107,7 +118,7 @@ export default function BullyingHelpPage() {
       pdf.setTextColor(255, 255, 255);
       pdf.setFontSize(18);
       pdf.setFont(undefined, 'bold');
-      pdf.text('BULLYING HELP PLAN', margin + 5, yPosition + 10);
+      pdf.text('WHEN SOMEONE IS UNKIND - HELP PLAN', margin + 5, yPosition + 10);
       yPosition += 25;
       
       // Reset text color
@@ -127,6 +138,9 @@ export default function BullyingHelpPage() {
         addText(selectedFeelings);
       } else {
         addText('• Not filled in');
+      }
+      if (formData.feelingsText) {
+        addText(`Other feelings: ${formData.feelingsText}`);
       }
       yPosition += 5;
 
@@ -151,6 +165,9 @@ export default function BullyingHelpPage() {
       } else {
         addText('• Not filled in');
       }
+      if (formData.whoCanHelpText) {
+        addText(`Other people who can help: ${formData.whoCanHelpText}`);
+      }
       yPosition += 5;
 
       // Safe Spaces
@@ -163,6 +180,9 @@ export default function BullyingHelpPage() {
         addText(selectedSpaces);
       } else {
         addText('• Not filled in');
+      }
+      if (formData.safeSpacesText) {
+        addText(`Other places where I feel safe: ${formData.safeSpacesText}`);
       }
       yPosition += 5;
 
@@ -177,6 +197,9 @@ export default function BullyingHelpPage() {
       } else {
         addText('• Not filled in');
       }
+      if (formData.copingStrategiesText) {
+        addText(`Other things that make me feel better: ${formData.copingStrategiesText}`);
+      }
 
       // Footer
       yPosition += 15;
@@ -185,7 +208,7 @@ export default function BullyingHelpPage() {
       addText('Created with Noa\'s Place Interactive Tools - www.noasplace.org.uk', 10);
 
       // Save the PDF
-      const fileName = `${formData.childName || 'Child'}_Bullying_Help_Plan.pdf`;
+      const fileName = `${formData.childName || 'Child'}_When_Someone_Is_Unkind_Plan.pdf`;
       pdf.save(fileName);
       
     } catch (error) {
@@ -226,10 +249,10 @@ export default function BullyingHelpPage() {
             </div>
             
             <h1 className="text-4xl font-black text-white sm:text-5xl md:text-6xl mb-6 drop-shadow-lg">
-              Bullying Help
+              When Someone Is Unkind
             </h1>
             <p className="text-lg text-white/90 max-w-3xl mx-auto drop-shadow-md">
-              A simple tool to help children talk about bullying with their parents and carers
+              A simple tool to help children talk about unkind behaviour with their parents and carers
             </p>
           </div>
         </div>
@@ -250,7 +273,7 @@ export default function BullyingHelpPage() {
               <div>
                 <h3 className="text-lg font-bold text-blue-800 mb-2">For Parents and Carers</h3>
                 <p className="text-blue-700 text-sm leading-relaxed">
-                  This tool uses simple words and pictures to help your child talk about their experiences. 
+                  This tool uses simple words and pictures to help your child talk about their experiences with unkind behaviour. 
                   Sit with them as they fill it out, and help them by reading the questions and explaining the pictures. 
                   This isn't a test - it's a way to start important conversations and plan how to help your child feel safe.
                 </p>
@@ -338,6 +361,18 @@ export default function BullyingHelpPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other feelings you have:
+                </label>
+                <textarea
+                  value={formData.feelingsText}
+                  onChange={(e) => handleTextInput('feelingsText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about any other feelings you have..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* What Happened */}
@@ -402,6 +437,18 @@ export default function BullyingHelpPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other people who can help you:
+                </label>
+                <textarea
+                  value={formData.whoCanHelpText}
+                  onChange={(e) => handleTextInput('whoCanHelpText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other people who can help you..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* Safe Spaces */}
@@ -430,6 +477,18 @@ export default function BullyingHelpPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other places where you feel safe:
+                </label>
+                <textarea
+                  value={formData.safeSpacesText}
+                  onChange={(e) => handleTextInput('safeSpacesText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other places where you feel safe..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 
@@ -460,6 +519,18 @@ export default function BullyingHelpPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things that make you feel better:
+                </label>
+                <textarea
+                  value={formData.copingStrategiesText}
+                  onChange={(e) => handleTextInput('copingStrategiesText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that help you feel better when you're upset..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* Action Buttons */}
@@ -486,7 +557,7 @@ export default function BullyingHelpPage() {
                       <line x1="16" y1="17" x2="8" y2="17"/>
                       <polyline points="10,9 9,9 8,9"/>
                     </svg>
-                    Download My Bullying Help Plan PDF
+                    Download My When Someone Is Unkind Plan PDF
                   </>
                 )}
               </button>

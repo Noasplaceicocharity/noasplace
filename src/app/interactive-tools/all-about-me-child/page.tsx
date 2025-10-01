@@ -13,19 +13,25 @@ export default function AllAboutMeChildPage() {
     
     // Basic Information
     favouriteThings: [] as string[],
+    favouriteThingsText: "",
     dislikes: [] as string[],
+    dislikesText: "",
     hobbies: [] as string[],
     
     // How I Learn Best
     learningStyle: [] as string[],
+    learningStyleText: "",
     helpfulThings: [] as string[],
+    helpfulThingsText: "",
     
     // Things I Find Hard
     struggles: [] as string[],
+    strugglesText: "",
     triggers: [] as string[],
     
     // How I Cope
     copingStrategies: [] as string[],
+    copingStrategiesText: "",
     calmingActivities: [] as string[],
     
     // Communication
@@ -34,9 +40,11 @@ export default function AllAboutMeChildPage() {
     
     // People Who Help Me
     supportPeople: [] as string[],
+    supportPeopleText: "",
     
     // At School/Home
     schoolNeeds: [] as string[],
+    schoolNeedsText: "",
     homeRoutines: "",
     
     // Health and Safety
@@ -240,31 +248,49 @@ export default function AllAboutMeChildPage() {
       // Favourite Things
       addText('Things I Love:', 14, true);
       addSelections(favouriteOptions, formData.favouriteThings, favouriteOptions);
+      if (formData.favouriteThingsText) {
+        addText(`Other things I love: ${formData.favouriteThingsText}`);
+      }
       yPosition += 5;
 
       // Dislikes
       addText('Things I Don\'t Like:', 14, true);
       addSelections(dislikeOptions, formData.dislikes, dislikeOptions);
+      if (formData.dislikesText) {
+        addText(`Other things I don't like: ${formData.dislikesText}`);
+      }
       yPosition += 5;
 
       // How I Learn Best
       addText('How I Learn Best:', 14, true);
       addSelections(learningOptions, formData.learningStyle, learningOptions);
+      if (formData.learningStyleText) {
+        addText(`Other ways I learn best: ${formData.learningStyleText}`);
+      }
       yPosition += 5;
 
       // Helpful Things
       addText('Things That Help Me:', 14, true);
       addSelections(helpfulOptions, formData.helpfulThings, helpfulOptions);
+      if (formData.helpfulThingsText) {
+        addText(`Other things that help me: ${formData.helpfulThingsText}`);
+      }
       yPosition += 5;
 
       // Things I Find Hard
       addText('Things I Find Hard:', 14, true);
       addSelections(strugglesOptions, formData.struggles, strugglesOptions);
+      if (formData.strugglesText) {
+        addText(`Other things I find hard: ${formData.strugglesText}`);
+      }
       yPosition += 5;
 
       // How I Cope
       addText('How I Cope When Upset:', 14, true);
       addSelections(copingOptions, formData.copingStrategies, copingOptions);
+      if (formData.copingStrategiesText) {
+        addText(`Other ways I cope when upset: ${formData.copingStrategiesText}`);
+      }
       yPosition += 5;
 
       // Communication
@@ -278,11 +304,17 @@ export default function AllAboutMeChildPage() {
       // Support People
       addText('People Who Help Me:', 14, true);
       addSelections(supportPeopleOptions, formData.supportPeople, supportPeopleOptions);
+      if (formData.supportPeopleText) {
+        addText(`Other people who help me: ${formData.supportPeopleText}`);
+      }
       yPosition += 5;
 
       // School Needs
       addText('What I Need at School:', 14, true);
       addSelections(schoolNeedsOptions, formData.schoolNeeds, schoolNeedsOptions);
+      if (formData.schoolNeedsText) {
+        addText(`Other things I need at school: ${formData.schoolNeedsText}`);
+      }
       yPosition += 5;
 
       // Home Routines
@@ -512,6 +544,18 @@ export default function AllAboutMeChildPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things I love:
+                </label>
+                <textarea
+                  value={formData.favouriteThingsText}
+                  onChange={(e) => handleInputChange('favouriteThingsText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things you really love..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* Dislikes */}
@@ -540,6 +584,18 @@ export default function AllAboutMeChildPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things I don't like:
+                </label>
+                <textarea
+                  value={formData.dislikesText}
+                  onChange={(e) => handleInputChange('dislikesText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that make you feel uncomfortable or upset..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 
@@ -570,6 +626,18 @@ export default function AllAboutMeChildPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other ways I learn best:
+                </label>
+                <textarea
+                  value={formData.learningStyleText}
+                  onChange={(e) => handleInputChange('learningStyleText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other ways you like to learn new things..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* Things That Help Me */}
@@ -598,6 +666,18 @@ export default function AllAboutMeChildPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things that help me:
+                </label>
+                <textarea
+                  value={formData.helpfulThingsText}
+                  onChange={(e) => handleInputChange('helpfulThingsText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that make learning and life easier for you..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 
@@ -628,6 +708,18 @@ export default function AllAboutMeChildPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things I find hard:
+                </label>
+                <textarea
+                  value={formData.strugglesText}
+                  onChange={(e) => handleInputChange('strugglesText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that are tricky or difficult for you..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* How I Cope */}
@@ -656,6 +748,18 @@ export default function AllAboutMeChildPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other ways I cope when upset:
+                </label>
+                <textarea
+                  value={formData.copingStrategiesText}
+                  onChange={(e) => handleInputChange('copingStrategiesText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that help you feel better when you're upset or stressed..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 
@@ -727,6 +831,18 @@ export default function AllAboutMeChildPage() {
                   </button>
                 ))}
               </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other people who help me:
+                </label>
+                <textarea
+                  value={formData.supportPeopleText}
+                  onChange={(e) => handleInputChange('supportPeopleText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other people who help and support you..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
             </div>
 
             {/* School Needs */}
@@ -755,6 +871,18 @@ export default function AllAboutMeChildPage() {
                     </div>
                   </button>
                 ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other things I need at school:
+                </label>
+                <textarea
+                  value={formData.schoolNeedsText}
+                  onChange={(e) => handleInputChange('schoolNeedsText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other things that help you at school..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
               </div>
             </div>
 

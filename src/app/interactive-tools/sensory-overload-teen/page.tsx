@@ -195,10 +195,10 @@ export default function SensoryOverloadTeenPage() {
         }
         
         const lines = pdf.splitTextToSize(text, contentWidth);
-        const lineHeight = fontSize * 0.5;
+        const lineHeight = fontSize * 0.4;
         
         lines.forEach((line: string) => {
-          if (yPosition > 280) {
+          if (yPosition > 270) {
             pdf.addPage();
             yPosition = margin;
           }
@@ -206,7 +206,7 @@ export default function SensoryOverloadTeenPage() {
           yPosition += lineHeight;
         });
         
-        yPosition += 5; // Extra spacing after text block
+        yPosition += 3; // Extra spacing after text block
       };
 
       // Title

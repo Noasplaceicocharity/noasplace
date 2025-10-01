@@ -237,10 +237,10 @@ export default function SensoryOverloadPage() {
         }
         
         const lines = pdf.splitTextToSize(text, contentWidth);
-        const lineHeight = fontSize * 0.5;
+        const lineHeight = fontSize * 0.4;
         
         lines.forEach((line: string) => {
-          if (yPosition > 280) {
+          if (yPosition > 270) {
             pdf.addPage();
             yPosition = margin;
           }
@@ -248,7 +248,7 @@ export default function SensoryOverloadPage() {
           yPosition += lineHeight;
         });
         
-        yPosition += 5; // Extra spacing after text block
+        yPosition += 3; // Extra spacing after text block
       };
 
       // Title
@@ -270,7 +270,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Sound Triggers
-      addText('🔊 SOUND TRIGGERS - What sounds make me feel overwhelmed:', 14, true);
+      addText('SOUND TRIGGERS - What sounds make me feel overwhelmed:', 14, true);
       if (formData.soundTriggers.length > 0) {
         const selectedSounds = soundTriggerOptions
           .filter(s => formData.soundTriggers.includes(s.id))
@@ -286,7 +286,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Light Triggers
-      addText('💡 LIGHT TRIGGERS - What lights make me feel overwhelmed:', 14, true);
+      addText('LIGHT TRIGGERS - What lights make me feel overwhelmed:', 14, true);
       if (formData.lightTriggers.length > 0) {
         const selectedLights = lightTriggerOptions
           .filter(l => formData.lightTriggers.includes(l.id))
@@ -302,7 +302,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Touch Triggers
-      addText('🤲 TOUCH TRIGGERS - What touches make me feel overwhelmed:', 14, true);
+      addText('TOUCH TRIGGERS - What touches make me feel overwhelmed:', 14, true);
       if (formData.touchTriggers.length > 0) {
         const selectedTouches = touchTriggerOptions
           .filter(t => formData.touchTriggers.includes(t.id))
@@ -318,7 +318,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Smell Triggers
-      addText('👃 SMELL TRIGGERS - What smells make me feel overwhelmed:', 14, true);
+      addText('SMELL TRIGGERS - What smells make me feel overwhelmed:', 14, true);
       if (formData.smellTriggers.length > 0) {
         const selectedSmells = smellTriggerOptions
           .filter(s => formData.smellTriggers.includes(s.id))
@@ -334,7 +334,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Taste Triggers
-      addText('👅 TASTE TRIGGERS - What tastes make me feel overwhelmed:', 14, true);
+      addText('TASTE TRIGGERS - What tastes make me feel overwhelmed:', 14, true);
       if (formData.tasteTriggers.length > 0) {
         const selectedTastes = tasteTriggerOptions
           .filter(t => formData.tasteTriggers.includes(t.id))
@@ -350,7 +350,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Movement Triggers
-      addText('🏃 MOVEMENT TRIGGERS - What movements make me feel overwhelmed:', 14, true);
+      addText('MOVEMENT TRIGGERS - What movements make me feel overwhelmed:', 14, true);
       if (formData.movementTriggers.length > 0) {
         const selectedMovements = movementTriggerOptions
           .filter(m => formData.movementTriggers.includes(m.id))
@@ -366,11 +366,11 @@ export default function SensoryOverloadPage() {
       yPosition += 10;
 
       // Calming Strategies Section
-      addText('🌟 CALMING STRATEGIES - What helps me feel better:', 16, true);
+      addText('CALMING STRATEGIES - What helps me feel better:', 16, true);
       yPosition += 5;
 
       // Sound Calming
-      addText('🎵 SOUND CALMING - What sounds help me feel calm:', 14, true);
+      addText('SOUND CALMING - What sounds help me feel calm:', 14, true);
       if (formData.soundCalming.length > 0) {
         const selectedCalmingSounds = soundCalmingOptions
           .filter(s => formData.soundCalming.includes(s.id))
@@ -386,7 +386,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Light Calming
-      addText('🕯️ LIGHT CALMING - What lights help me feel calm:', 14, true);
+      addText('LIGHT CALMING - What lights help me feel calm:', 14, true);
       if (formData.lightCalming.length > 0) {
         const selectedCalmingLights = lightCalmingOptions
           .filter(l => formData.lightCalming.includes(l.id))
@@ -402,7 +402,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Touch Calming
-      addText('🧸 TOUCH CALMING - What touches help me feel calm:', 14, true);
+      addText('TOUCH CALMING - What touches help me feel calm:', 14, true);
       if (formData.touchCalming.length > 0) {
         const selectedCalmingTouches = touchCalmingOptions
           .filter(t => formData.touchCalming.includes(t.id))
@@ -418,7 +418,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Smell Calming
-      addText('🌸 SMELL CALMING - What smells help me feel calm:', 14, true);
+      addText('SMELL CALMING - What smells help me feel calm:', 14, true);
       if (formData.smellCalming.length > 0) {
         const selectedCalmingSmells = smellCalmingOptions
           .filter(s => formData.smellCalming.includes(s.id))
@@ -434,7 +434,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Taste Calming
-      addText('🍯 TASTE CALMING - What tastes help me feel calm:', 14, true);
+      addText('TASTE CALMING - What tastes help me feel calm:', 14, true);
       if (formData.tasteCalming.length > 0) {
         const selectedCalmingTastes = tasteCalmingOptions
           .filter(t => formData.tasteCalming.includes(t.id))
@@ -450,7 +450,7 @@ export default function SensoryOverloadPage() {
       yPosition += 5;
 
       // Movement Calming
-      addText('🧘 MOVEMENT CALMING - What movements help me feel calm:', 14, true);
+      addText('MOVEMENT CALMING - What movements help me feel calm:', 14, true);
       if (formData.movementCalming.length > 0) {
         const selectedCalmingMovements = movementCalmingOptions
           .filter(m => formData.movementCalming.includes(m.id))

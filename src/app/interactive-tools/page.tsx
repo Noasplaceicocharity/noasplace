@@ -74,6 +74,21 @@ export default function InteractiveTools() {
         ageGroup: "children"
       },
       {
+        id: "sensory-overload-child",
+        title: "My Sensory World",
+        description: "Help children identify what triggers sensory overload and what helps them feel calm and comfortable",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+            <path d="M20.2 7.8L16 12l4.2 4.2M3.8 7.8L8 12l-4.2 4.2"/>
+          </svg>
+        ),
+        href: "/interactive-tools/sensory-overload",
+        isAvailable: true,
+        ageGroup: "children"
+      },
+      {
         id: "coming-soon-child",
         title: "Coming Soon",
         description: "More tools for primary school age children are being developed",
@@ -138,6 +153,21 @@ export default function InteractiveTools() {
         ageGroup: "teens"
       },
       {
+        id: "sensory-overload-teen",
+        title: "My Sensory Profile",
+        description: "Identify your sensory triggers and develop personalised strategies for managing sensory overload",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+            <path d="M20.2 7.8L16 12l4.2 4.2M3.8 7.8L8 12l-4.2 4.2"/>
+          </svg>
+        ),
+        href: "/interactive-tools/sensory-overload-teen",
+        isAvailable: true,
+        ageGroup: "teens"
+      },
+      {
         id: "coming-soon-teen",
         title: "Coming Soon",
         description: "More tools for secondary school students are being developed",
@@ -180,6 +210,21 @@ export default function InteractiveTools() {
           </svg>
         ),
         href: "/interactive-tools/life-transitions",
+        isAvailable: true,
+        ageGroup: "adults"
+      },
+      {
+        id: "sensory-profile-adult",
+        title: "Sensory Profile",
+        description: "Comprehensive sensory assessment tool to identify triggers and develop personalised coping strategies",
+        icon: (
+          <svg className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+            <path d="M20.2 7.8L16 12l4.2 4.2M3.8 7.8L8 12l-4.2 4.2"/>
+          </svg>
+        ),
+        href: "/interactive-tools/sensory-profile-adult",
         isAvailable: true,
         ageGroup: "adults"
       },

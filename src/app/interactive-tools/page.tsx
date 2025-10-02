@@ -9,6 +9,7 @@ export default function InteractiveTools() {
   const searchParams = useSearchParams();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
   const [hasUserSelected, setHasUserSelected] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState(false);
 
   // Handle URL parameters on component mount
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function InteractiveTools() {
       }, 100);
     }
   }, [searchParams]);
+
 
   const toolsByAge = {
     children: [
@@ -322,6 +324,52 @@ export default function InteractiveTools() {
 
   return (
     <main className="bg-background text-ink">
+      {/* Video Modal */}
+      {showVideoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-black/30">
+          <div className="relative w-full max-w-4xl mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#6E3482] to-[#40BFBF]">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-white">Welcome to Noa's Place Interactive Tools</h3>
+              </div>
+              <button
+                onClick={() => setShowVideoModal(false)}
+                className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors duration-200"
+              >
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+            
+            {/* Video Content */}
+            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/5Kn9JROcwBA?autoplay=1&rel=0&modestbranding=1"
+                title="Noa's Place Interactive Tools Introduction"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            
+            {/* Footer */}
+            <div className="p-4 bg-gray-50">
+              <p className="text-sm text-gray-600 text-center">
+                Learn more about our interactive tools and how they can help you and your family
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="relative isolate min-h-[400px] overflow-hidden">
         {/* Background decorative elements */}
@@ -347,9 +395,18 @@ export default function InteractiveTools() {
             <p className="text-xl font-bold text-ink sm:text-2xl md:text-3xl mb-4">
               Age-appropriate resources for children, teens, and adults
             </p>
-            <p className="text-lg text-ink/80 max-w-3xl mx-auto">
+            <p className="text-lg text-ink/80 max-w-3xl mx-auto mb-6">
               Discover interactive tools organised by age group to support individuals and families with additional needs at every stage of life.
             </p>
+            <button
+              onClick={() => setShowVideoModal(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#6E3482] to-[#40BFBF] text-white font-semibold rounded-full hover:from-[#5a2a6b] hover:to-[#36a3a3] transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+              </svg>
+              Help & Introduction
+            </button>
           </div>
         </div>
       </section>

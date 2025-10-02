@@ -88,7 +88,7 @@ export default function TransitionPlanningPage() {
     "Research and gather information",
     "Practice new routines",
     "Develop necessary skills",
-    "Organize practical arrangements",
+    "Organise practical arrangements",
     "Create support networks",
     "Set up communication systems",
     "Plan coping strategies",
@@ -104,7 +104,7 @@ export default function TransitionPlanningPage() {
     "Coping with change and uncertainty",
     "Maintaining existing relationships",
     "Financial concerns",
-    "Time management and organization",
+    "Time management and organisation",
     "Health and wellbeing support"
   ];
 
@@ -136,7 +136,7 @@ export default function TransitionPlanningPage() {
 
   const resourceOptions = [
     "Academic support and tutoring",
-    "Counseling and mental health services",
+    "Counselling and mental health services",
     "Peer mentoring programs",
     "Study skills and time management training",
     "Social skills development",

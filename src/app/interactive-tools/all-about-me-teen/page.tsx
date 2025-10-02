@@ -67,7 +67,7 @@ export default function AllAboutMeTeenPage() {
   const strengthOptions = [
     "Creative thinking", "Problem solving", "Attention to detail", "Good memory",
     "Empathy and understanding", "Leadership skills", "Technical abilities", "Artistic talents",
-    "Mathematical skills", "Communication skills", "Organization", "Persistence",
+    "Mathematical skills", "Communication skills", "Organisation", "Persistence",
     "Helping others", "Independent thinking", "Research skills", "Practical skills"
   ];
 
@@ -96,7 +96,7 @@ export default function AllAboutMeTeenPage() {
     "Small groups", "One-on-one interactions", "Online communication", "Structured activities",
     "Shared interests", "Quiet environments", "Familiar people", "New experiences",
     "Leadership roles", "Supporting roles", "Creative collaboration", "Competitive activities",
-    "Casual hangouts", "Organized events", "Text-based communication", "Face-to-face meetings"
+    "Casual hangouts", "Organised events", "Text-based communication", "Face-to-face meetings"
   ];
 
   const communicationStyleOptions = [
@@ -124,19 +124,19 @@ export default function AllAboutMeTeenPage() {
     "Increased irritability", "Withdrawal from others", "Changes in sleep", "Loss of appetite",
     "Difficulty concentrating", "Increased anxiety", "Physical symptoms", "Mood swings",
     "Avoiding responsibilities", "Negative self-talk", "Increased conflicts", "Loss of interest",
-    "Fatigue", "Restlessness", "Perfectionist behaviors", "Risky behaviors"
+    "Fatigue", "Restlessness", "Perfectionist behaviours", "Risky behaviours"
   ];
 
   const supportStrategyOptions = [
     "Regular check-ins", "Flexible expectations", "Clear communication", "Emotional support",
-    "Practical assistance", "Professional counseling", "Peer support", "Family involvement",
+    "Practical assistance", "Professional counselling", "Peer support", "Family involvement",
     "Structured routines", "Goal setting", "Skill building", "Crisis planning",
     "Advocacy support", "Educational accommodations", "Workplace adjustments", "Community resources"
   ];
 
   const dailyLivingOptions = [
     "Personal hygiene", "Meal planning and cooking", "Money management", "Transportation",
-    "Time management", "Organization skills", "Household tasks", "Self-advocacy",
+    "Time management", "Organisation skills", "Household tasks", "Self-advocacy",
     "Healthcare management", "Technology use", "Social skills", "Problem-solving",
     "Emergency procedures", "Communication skills", "Work skills", "Leisure activities"
   ];
@@ -159,7 +159,7 @@ export default function AllAboutMeTeenPage() {
     "Communication skills", "Leadership abilities", "Technical skills", "Creative skills",
     "Problem-solving", "Time management", "Financial literacy", "Digital literacy",
     "Research skills", "Critical thinking", "Teamwork", "Self-advocacy",
-    "Stress management", "Conflict resolution", "Planning and organization", "Networking"
+    "Stress management", "Conflict resolution", "Planning and organisation", "Networking"
   ];
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {

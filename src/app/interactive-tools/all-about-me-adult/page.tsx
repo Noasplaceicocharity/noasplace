@@ -81,7 +81,7 @@ export default function AllAboutMeAdultPage() {
   const strengthOptions = [
     "Problem-solving", "Attention to detail", "Creative thinking", "Good memory",
     "Empathy and understanding", "Reliability", "Technical skills", "Communication skills",
-    "Organization", "Patience", "Persistence", "Leadership abilities",
+    "Organisation", "Patience", "Persistence", "Leadership abilities",
     "Artistic talents", "Mathematical skills", "Research abilities", "Practical skills"
   ];
 
@@ -129,7 +129,7 @@ export default function AllAboutMeAdultPage() {
 
   const commonChallengeOptions = [
     "Communication difficulties", "Social situations", "Changes in routine", "Sensory sensitivities",
-    "Time management", "Organization", "Memory issues", "Concentration problems",
+    "Time management", "Organisation", "Memory issues", "Concentration problems",
     "Anxiety and stress", "Decision making", "Problem-solving", "Managing emotions",
     "Physical limitations", "Technology challenges", "Financial management", "Transportation issues"
   ];
@@ -145,12 +145,12 @@ export default function AllAboutMeAdultPage() {
     "Increased anxiety or stress", "Changes in sleep patterns", "Loss of appetite", "Social withdrawal",
     "Difficulty concentrating", "Increased irritability", "Physical symptoms", "Neglecting self-care",
     "Avoiding responsibilities", "Mood changes", "Increased conflicts", "Loss of interest in activities",
-    "Changes in behavior", "Expressing hopelessness", "Increased substance use", "Risky behaviors"
+    "Changes in behaviour", "Expressing hopelessness", "Increased substance use", "Risky behaviours"
   ];
 
   const supportStrategyOptions = [
     "Regular check-ins", "Clear communication", "Flexible expectations", "Emotional support",
-    "Practical assistance", "Professional counseling", "Peer support groups", "Family involvement",
+    "Practical assistance", "Professional counselling", "Peer support groups", "Family involvement",
     "Structured routines", "Goal setting and planning", "Skills training", "Crisis planning",
     "Advocacy support", "Environmental modifications", "Technology support", "Community resources"
   ];
@@ -810,7 +810,7 @@ export default function AllAboutMeAdultPage() {
                     onChange={(e) => handleInputChange('mentalHealthSupport', e.target.value)}
                     rows={3}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                    placeholder="Describe any mental health support, counseling, or therapy you receive..."
+                    placeholder="Describe any mental health support, counselling, or therapy you receive..."
                   />
                 </div>
               </div>

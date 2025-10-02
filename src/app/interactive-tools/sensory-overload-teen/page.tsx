@@ -19,6 +19,7 @@ export default function SensoryOverloadTeenPage() {
     smellTriggers: [] as string[],
     tasteTriggers: [] as string[],
     movementTriggers: [] as string[],
+    interoceptionTriggers: [] as string[],
     
     // Calming strategies
     soundCalming: [] as string[],
@@ -27,6 +28,7 @@ export default function SensoryOverloadTeenPage() {
     smellCalming: [] as string[],
     tasteCalming: [] as string[],
     movementCalming: [] as string[],
+    interoceptionCalming: [] as string[],
     
     // Warning signs and strategies
     warningSigns: [] as string[],
@@ -100,14 +102,14 @@ export default function SensoryOverloadTeenPage() {
   // Taste trigger options for teens
   const tasteTriggerOptions = [
     "Spicy foods", "Bitter tastes", "Sour foods", "Mushy or soft textures",
-    "Mixed textures in food", "Very hot or cold foods", "Certain strong flavors", "Medication tastes",
-    "Artificial flavors", "Certain vegetables", "Overly sweet foods", "Unfamiliar foods"
+    "Mixed textures in food", "Very hot or cold foods", "Certain strong flavours", "Medication tastes",
+    "Artificial flavours", "Certain vegetables", "Overly sweet foods", "Unfamiliar foods"
   ];
 
   // Taste calming options for teens
   const tasteCalmingOptions = [
     "Sweet tastes", "Warm drinks (tea, hot chocolate)", "Cold drinks", "Chewing gum or mints",
-    "Familiar comfort foods", "Smooth textures", "Mild flavors", "Favourite snacks",
+    "Familiar comfort foods", "Smooth textures", "Mild flavours", "Favourite snacks",
     "Water or hydrating drinks", "Soft foods", "Familiar recipes", "Comforting textures"
   ];
 
@@ -123,6 +125,22 @@ export default function SensoryOverloadTeenPage() {
     "Deep breathing exercises", "Gentle stretching or yoga", "Slow walking", "Rocking or swaying",
     "Sitting still and quiet", "Gentle self-massage", "Pacing or walking in circles", "Swimming or floating",
     "Meditation or mindfulness", "Gentle exercise", "Dancing to calm music", "Being in nature"
+  ];
+
+  // Interoception trigger options for teens
+  const interoceptionTriggerOptions = [
+    "Feeling hungry or having an empty stomach", "Feeling thirsty or dehydrated", "Feeling tired or exhausted",
+    "Feeling too hot or overheated", "Feeling too cold or chilled", "Feeling pain or discomfort",
+    "Feeling too full or bloated", "Feeling nauseous or sick", "Feeling anxious or stressed",
+    "Feeling dizzy or lightheaded", "Feeling tense or tight muscles", "Feeling restless or fidgety"
+  ];
+
+  // Interoception calming options for teens
+  const interoceptionCalmingOptions = [
+    "Eating a healthy snack or meal", "Drinking water or hydrating", "Taking a rest or nap",
+    "Adjusting clothing for temperature", "Getting comfortable", "Taking deep breaths",
+    "Gentle stretching or movement", "Listening to calming music", "Being in a quiet space",
+    "Talking to someone supportive", "Doing something relaxing", "Taking time for self-care"
   ];
 
   // Warning signs options
@@ -329,12 +347,30 @@ export default function SensoryOverloadTeenPage() {
       }
       yPosition += 5;
 
+      // Interoception Triggers
+      addText('BODY SENSATIONS - What body feelings make me feel overwhelmed:', 14, true);
+      if (formData.interoceptionTriggers.length > 0) {
+        formData.interoceptionTriggers.forEach(trigger => addText(`• ${trigger}`));
+      } else {
+        addText('• No body sensation triggers selected');
+      }
+      yPosition += 5;
+
       // Movement Calming
       addText('MOVEMENT CALMING STRATEGIES - What movements help me feel calm:', 14, true);
       if (formData.movementCalming.length > 0) {
         formData.movementCalming.forEach(calming => addText(`• ${calming}`));
       } else {
         addText('• No calming movements selected');
+      }
+      yPosition += 5;
+
+      // Interoception Calming
+      addText('BODY SENSATION CALMING - What body feelings help me feel calm:', 14, true);
+      if (formData.interoceptionCalming.length > 0) {
+        formData.interoceptionCalming.forEach(calming => addText(`• ${calming}`));
+      } else {
+        addText('• No calming body sensations selected');
       }
       yPosition += 5;
 
@@ -445,7 +481,7 @@ export default function SensoryOverloadTeenPage() {
               My Sensory Profile
             </h1>
             <p className="text-lg text-white/90 max-w-3xl mx-auto drop-shadow-md">
-              Understand your sensory needs and develop strategies for managing sensory overload
+              Understand your sensory differences and develop strategies for managing sensory overload
             </p>
           </div>
         </div>
@@ -467,10 +503,10 @@ export default function SensoryOverloadTeenPage() {
                 <h3 className="text-lg font-bold text-purple-800 mb-2">About This Sensory Profile</h3>
                 <p className="text-purple-700 text-sm leading-relaxed">
                   This comprehensive sensory profile helps you identify what sensory experiences might be overwhelming 
-                  and what helps you feel calm and comfortable. Understanding your sensory needs can help you advocate 
+                  and what helps you feel calm and comfortable. Understanding your sensory differences can help you advocate 
                   for yourself, prevent sensory overload, and create better environments for learning and socialising. 
                   You can share your completed profile with teachers, employers, friends, and family to help them 
-                  understand your needs.
+                  understand your differences.
                 </p>
               </div>
             </div>
@@ -797,6 +833,44 @@ export default function SensoryOverloadTeenPage() {
               </div>
             </div>
 
+            {/* Interoception Triggers */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-brand-100/20">
+              <h2 className="text-2xl font-bold text-brand-800 mb-6">Body Sensations (Interoception) Triggers</h2>
+              <p className="text-gray-600 mb-6">Select body feelings that make you feel uncomfortable or overwhelmed:</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {interoceptionTriggerOptions.map((trigger) => (
+                  <label key={trigger} className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                    <input
+                      type="checkbox"
+                      checked={formData.interoceptionTriggers.includes(trigger)}
+                      onChange={() => handleMultiSelect('interoceptionTriggers', trigger)}
+                      className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                    />
+                    <span className="text-sm">{trigger}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Interoception Calming */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-brand-100/20">
+              <h2 className="text-2xl font-bold text-brand-800 mb-6">Body Sensations (Interoception) Calming Strategies</h2>
+              <p className="text-gray-600 mb-6">Select body feelings that help you feel calm and comfortable:</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {interoceptionCalmingOptions.map((calming) => (
+                  <label key={calming} className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+                    <input
+                      type="checkbox"
+                      checked={formData.interoceptionCalming.includes(calming)}
+                      onChange={() => handleMultiSelect('interoceptionCalming', calming)}
+                      className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                    />
+                    <span className="text-sm">{calming}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
             {/* Warning Signs */}
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-brand-100/20">
               <h2 className="text-2xl font-bold text-brand-800 mb-6">Warning Signs</h2>
@@ -913,7 +987,7 @@ export default function SensoryOverloadTeenPage() {
                     onChange={(e) => handleInputChange('importantInfo', e.target.value)}
                     rows={4}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    placeholder="Any other important information about your sensory needs that others should know..."
+                    placeholder="Any other important information about your sensory differences that others should know..."
                   />
                 </div>
               </div>

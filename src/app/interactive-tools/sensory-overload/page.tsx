@@ -23,6 +23,8 @@ export default function SensoryOverloadPage() {
     tasteTriggersText: "",
     movementTriggers: [] as string[],
     movementTriggersText: "",
+    interoceptionTriggers: [] as string[],
+    interoceptionTriggersText: "",
     
     // Calming strategies
     soundCalming: [] as string[],
@@ -37,6 +39,8 @@ export default function SensoryOverloadPage() {
     tasteCalmingText: "",
     movementCalming: [] as string[],
     movementCalmingText: "",
+    interoceptionCalming: [] as string[],
+    interoceptionCalmingText: "",
     
     // Warning signs
     warningSigns: [] as string[],
@@ -99,7 +103,7 @@ export default function SensoryOverloadPage() {
     { id: "soft-lighting", label: "Soft Lighting", icon: "💡", color: "bg-blue-100 hover:bg-blue-200" },
     { id: "candles", label: "Candles", icon: "🕯️", color: "bg-pink-100 hover:bg-pink-200" },
     { id: "darkness", label: "Darkness", icon: "🌙", color: "bg-purple-100 hover:bg-purple-200" },
-    { id: "colored-lights", label: "Colored Lights", icon: "🌈", color: "bg-green-100 hover:bg-green-200" },
+    { id: "colored-lights", label: "Coloured Lights", icon: "🌈", color: "bg-green-100 hover:bg-green-200" },
     { id: "no-calming", label: "No Light Calming", icon: "😊", color: "bg-gray-100 hover:bg-gray-200" }
   ];
 
@@ -193,6 +197,29 @@ export default function SensoryOverloadPage() {
     { id: "sitting-still", label: "Sitting Still", icon: "🧘", color: "bg-pink-100 hover:bg-pink-200" },
     { id: "swaying", label: "Gentle Swaying", icon: "🌊", color: "bg-teal-100 hover:bg-teal-200" },
     { id: "no-calming", label: "No Movement Calming", icon: "😊", color: "bg-gray-100 hover:bg-gray-200" }
+  ];
+
+  // Interoception trigger options
+  const interoceptionTriggerOptions = [
+    { id: "hunger", label: "Feeling Hungry", icon: "🍽️", color: "bg-orange-100 hover:bg-orange-200" },
+    { id: "thirst", label: "Feeling Thirsty", icon: "💧", color: "bg-blue-100 hover:bg-blue-200" },
+    { id: "tired", label: "Feeling Tired", icon: "😴", color: "bg-purple-100 hover:bg-purple-200" },
+    { id: "hot", label: "Feeling Too Hot", icon: "🔥", color: "bg-red-100 hover:bg-red-200" },
+    { id: "cold", label: "Feeling Too Cold", icon: "❄️", color: "bg-cyan-100 hover:bg-cyan-200" },
+    { id: "pain", label: "Feeling Pain", icon: "🤕", color: "bg-pink-100 hover:bg-pink-200" },
+    { id: "full", label: "Feeling Too Full", icon: "🤢", color: "bg-yellow-100 hover:bg-yellow-200" },
+    { id: "no-triggers", label: "No Body Sensation Triggers", icon: "😊", color: "bg-gray-100 hover:bg-gray-200" }
+  ];
+
+  // Interoception calming options
+  const interoceptionCalmingOptions = [
+    { id: "eating", label: "Eating Something", icon: "🍎", color: "bg-green-100 hover:bg-green-200" },
+    { id: "drinking", label: "Drinking Water", icon: "💧", color: "bg-blue-100 hover:bg-blue-200" },
+    { id: "resting", label: "Taking a Rest", icon: "😴", color: "bg-purple-100 hover:bg-purple-200" },
+    { id: "warm-clothes", label: "Wearing Warm Clothes", icon: "🧥", color: "bg-orange-100 hover:bg-orange-200" },
+    { id: "cool-down", label: "Cooling Down", icon: "❄️", color: "bg-cyan-100 hover:bg-cyan-200" },
+    { id: "comfort", label: "Getting Comfortable", icon: "🛋️", color: "bg-pink-100 hover:bg-pink-200" },
+    { id: "no-calming", label: "No Body Sensation Calming", icon: "😊", color: "bg-gray-100 hover:bg-gray-200" }
   ];
 
   const handleMultiSelect = (field: keyof typeof formData, value: string) => {
@@ -363,6 +390,22 @@ export default function SensoryOverloadPage() {
       if (formData.movementTriggersText) {
         addText(`Other movement triggers: ${formData.movementTriggersText}`);
       }
+      yPosition += 5;
+
+      // Interoception Triggers
+      addText('BODY SENSATIONS - What body feelings make me feel overwhelmed:', 14, true);
+      if (formData.interoceptionTriggers.length > 0) {
+        const selectedInteroception = interoceptionTriggerOptions
+          .filter(i => formData.interoceptionTriggers.includes(i.id))
+          .map(i => `• ${i.label}`)
+          .join('\n');
+        addText(selectedInteroception);
+      } else {
+        addText('• No body sensation triggers selected');
+      }
+      if (formData.interoceptionTriggersText) {
+        addText(`Other body sensation triggers: ${formData.interoceptionTriggersText}`);
+      }
       yPosition += 10;
 
       // Calming Strategies Section
@@ -463,6 +506,22 @@ export default function SensoryOverloadPage() {
       if (formData.movementCalmingText) {
         addText(`Other calming movements: ${formData.movementCalmingText}`);
       }
+      yPosition += 5;
+
+      // Interoception Calming
+      addText('BODY SENSATION CALMING - What body feelings help me feel calm:', 14, true);
+      if (formData.interoceptionCalming.length > 0) {
+        const selectedCalmingInteroception = interoceptionCalmingOptions
+          .filter(i => formData.interoceptionCalming.includes(i.id))
+          .map(i => `• ${i.label}`)
+          .join('\n');
+        addText(selectedCalmingInteroception);
+      } else {
+        addText('• No calming body sensations selected');
+      }
+      if (formData.interoceptionCalmingText) {
+        addText(`Other calming body sensations: ${formData.interoceptionCalmingText}`);
+      }
 
       // Footer
       yPosition += 15;
@@ -516,7 +575,7 @@ export default function SensoryOverloadPage() {
               My Sensory World
             </h1>
             <p className="text-lg text-white/90 max-w-3xl mx-auto drop-shadow-md">
-              Help children understand their sensory needs and what helps them feel comfortable
+              Help children understand their sensory differences and what helps them feel comfortable
             </p>
           </div>
         </div>
@@ -538,7 +597,7 @@ export default function SensoryOverloadPage() {
                 <h3 className="text-lg font-bold text-purple-800 mb-2">For Parents, Carers, Teachers & Nurses</h3>
                 <p className="text-purple-700 text-sm leading-relaxed">
                   This tool helps children identify what sensory experiences might be overwhelming for them and what helps them feel calm and comfortable. 
-                  Understanding a child's sensory needs can help prevent meltdowns and create better environments for learning and socialising. 
+                  Understanding a child's sensory differences can help prevent meltdowns and create better environments for learning and socialising. 
                   The completed form can be shared with schools, healthcare providers, and other professionals to ensure consistent support.
                 </p>
               </div>
@@ -873,6 +932,47 @@ export default function SensoryOverloadPage() {
               </div>
             </div>
 
+            {/* Interoception Triggers */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-brand-100/20">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🫀</span>
+                </div>
+                <h2 className="text-2xl font-bold text-brand-800">What body feelings make you feel overwhelmed?</h2>
+              </div>
+              <p className="text-gray-600 mb-6">Click on body feelings that make you feel uncomfortable or overwhelmed:</p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {interoceptionTriggerOptions.map((trigger) => (
+                  <button
+                    key={trigger.id}
+                    onClick={() => handleMultiSelect('interoceptionTriggers', trigger.id)}
+                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                      formData.interoceptionTriggers.includes(trigger.id)
+                        ? 'border-indigo-400 bg-indigo-50 scale-105'
+                        : 'border-gray-200 hover:border-gray-300'
+                    } ${trigger.color}`}
+                  >
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">{trigger.icon}</div>
+                      <div className="font-semibold text-gray-700 text-sm">{trigger.label}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other body feelings that make you feel overwhelmed:
+                </label>
+                <textarea
+                  value={formData.interoceptionTriggersText}
+                  onChange={(e) => handleTextInput('interoceptionTriggersText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other body feelings that make you feel uncomfortable..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
+            </div>
+
             {/* Calming Strategies Section */}
             <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8 shadow-lg border border-green-200">
               <div className="text-center mb-8">
@@ -1122,6 +1222,47 @@ export default function SensoryOverloadPage() {
                   onChange={(e) => handleTextInput('movementCalmingText', e.target.value)}
                   rows={3}
                   placeholder="Tell us about other movements that help you feel calm and comfortable..."
+                  className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
+                />
+              </div>
+            </div>
+
+            {/* Interoception Calming */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-brand-100/20">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🫀</span>
+                </div>
+                <h2 className="text-2xl font-bold text-brand-800">What body feelings help you feel calm?</h2>
+              </div>
+              <p className="text-gray-600 mb-6">Click on body feelings that help you feel better and more relaxed:</p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {interoceptionCalmingOptions.map((calming) => (
+                  <button
+                    key={calming.id}
+                    onClick={() => handleMultiSelect('interoceptionCalming', calming.id)}
+                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                      formData.interoceptionCalming.includes(calming.id)
+                        ? 'border-indigo-400 bg-indigo-50 scale-105'
+                        : 'border-gray-200 hover:border-gray-300'
+                    } ${calming.color}`}
+                  >
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">{calming.icon}</div>
+                      <div className="font-semibold text-gray-700 text-sm">{calming.label}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <div>
+                <label className="block text-lg font-semibold text-ink mb-3">
+                  Other body feelings that help you feel calm:
+                </label>
+                <textarea
+                  value={formData.interoceptionCalmingText}
+                  onChange={(e) => handleTextInput('interoceptionCalmingText', e.target.value)}
+                  rows={3}
+                  placeholder="Tell us about other body feelings that help you feel calm and comfortable..."
                   className="w-full px-4 py-3 rounded-xl border-0 bg-brand-50/50 text-ink placeholder:text-ink/50 focus:ring-2 focus:ring-brand-800"
                 />
               </div>

@@ -105,7 +105,7 @@ export default function LifeTransitionsPage() {
     "Travel and transportation",
     "Social and relationship skills",
     "Problem-solving and decision-making",
-    "Time management and organization",
+    "Time management and organisation",
     "Health and safety awareness",
     "Work or educational skills"
   ];
@@ -141,7 +141,7 @@ export default function LifeTransitionsPage() {
     "Domestic help and household tasks",
     "Transportation support",
     "Communication aids or interpreters",
-    "Counseling or mental health support",
+    "Counselling or mental health support",
     "Peer support or mentoring",
     "Advocacy and rights support",
     "Financial advice and management",

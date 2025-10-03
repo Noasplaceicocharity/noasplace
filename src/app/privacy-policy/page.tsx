@@ -18,11 +18,7 @@ export default function PrivacyPolicy() {
           <h1 className="text-4xl font-bold text-ink mb-8">Privacy Policy</h1>
           
           <p className="text-lg text-ink/80 mb-8">
-            <strong>Last updated:</strong> {new Date().toLocaleDateString('en-GB', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
+            <strong>Last updated:</strong> 1st January 2024
           </p>
 
           <p className="text-lg text-ink/80 mb-8">

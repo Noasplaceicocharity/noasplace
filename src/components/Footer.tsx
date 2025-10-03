@@ -145,9 +145,6 @@ export default function Footer() {
             <p className="text-white/60 text-sm text-center md:text-left">
               © {new Date().getFullYear()} Noa's Place CIO. All rights reserved.
             </p>
-            <p className="text-white/60 text-sm text-center md:text-right">
-              Creating inclusive spaces for families in Halifax, West Yorkshire
-            </p>
           </div>
         </div>
       </div>

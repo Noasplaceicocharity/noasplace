@@ -59,12 +59,15 @@ export default function AboutUs() {
        <section id="our-story" className="bg-white pt-8 pb-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-12 lg:grid-cols-2 items-center mb-16">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-              <Image
-                src="/images/family_photo_halifax_west_yorkshire.jpg"
-                alt="Our family together, showing the love and connection that inspired Noa's Place"
-                fill
-                className="object-cover"
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden">
+              <iframe
+                className="absolute inset-0 h-full w-full"
+                src="https://www.youtube.com/embed/8hlXxMlXsyo"
+                title="YouTube video player"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
               />
             </div>
             <div className="space-y-6">

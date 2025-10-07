@@ -6,7 +6,6 @@ import ImageModal from "@/components/ImageModal";
 import MailchimpSubscribeForm from "@/components/MailchimpSubscribeForm";
 import Squiggle from "@/components/Squiggle";
 import StickerCard from "@/components/StickerCard";
-import Story from "@/components/Story";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -204,161 +203,127 @@ export default function Home() {
 
 			</section>
 
-			{/* Press Coverage Section */}
-			<section className="py-16 bg-gradient-to-b from-white to-gray-50/50">
-				<div className="mx-auto max-w-7xl px-6">
-					<div className="text-center">
-						<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">As Featured On</h2>
-					</div>
-					<div className="mt-8">
-						<div className="grid grid-cols-1 gap-12 md:grid-cols-4">
-							{/* Halifax Courier */}
-							<div className="flex flex-col items-center">
-								<a 
-									href="https://www.halifaxcourier.co.uk/news/people/families-are-left-isolated-and-it-can-feel-like-a-storm-ripponden-family-launch-vision-for-noas-place-5304261"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="relative h-24 w-full cursor-pointer"
-								>
-									<Image
-										src="/images/halifaxcourier.webp"
-										alt="Halifax Courier"
-										fill
-										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
-										style={{ objectPosition: 'center' }}
-									/>
-								</a>
-							</div>
-
-							{/* Yorkshire Live */}
-							<div className="flex flex-col items-center">
-								<a 
-									href="https://www.examinerlive.co.uk/news/west-yorkshire-news/halifax-family-absolutely-blown-away-32400258?int_source=nba"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="relative h-24 w-full cursor-pointer"
-								>
-									<Image
-										src="/images/yorkshirelive.png"
-										alt="Yorkshire Live"
-										fill
-										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
-										style={{ objectPosition: 'center' }}
-									/>
-								</a>
-							</div>
-
-							{/* Yorkshire Post */}
-							<div className="flex flex-col items-center">
-								<a 
-									href="https://www.yorkshirepost.co.uk/community/calderdale-family-launch-vision-for-inclusive-hub-for-children-and-adults-with-additional-needs-5291748"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="relative h-24 w-full cursor-pointer"
-								>
-									<Image
-										src="/images/yorkshirepost.png"
-										alt="Yorkshire Post"
-										fill
-										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
-										style={{ objectPosition: 'center' }}
-									/>
-								</a>
-							</div>
-
-							{/* BBC News */}
-							<div className="flex flex-col items-center">
-								<a 
-									href="https://www.bbc.co.uk/news/articles/c5yq4xx2yp2o"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="relative h-24 w-full cursor-pointer"
-								>
-									<Image
-										src="/images/BBC_News_Logo.png"
-										alt="BBC News"
-										fill
-										className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
-										style={{ objectPosition: 'center' }}
-									/>
-								</a>
-							</div>
-						</div>
-					</div>
+{/* Press Coverage Section */}
+<section className="py-16 bg-gradient-to-b from-white to-gray-50/50">
+	<div className="mx-auto max-w-7xl px-6">
+		<div className="text-center">
+			<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">As Featured On</h2>
+		</div>
+		<div className="mt-8">
+			<div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+				{/* Halifax Courier */}
+				<div className="flex flex-col items-center">
+					<a 
+						href="https://www.halifaxcourier.co.uk/news/people/families-are-left-isolated-and-it-can-feel-like-a-storm-ripponden-family-launch-vision-for-noas-place-5304261"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="relative h-24 w-full cursor-pointer"
+					>
+						<Image
+							src="/images/halifaxcourier.webp"
+							alt="Halifax Courier"
+							fill
+							className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
+							style={{ objectPosition: 'center' }}
+						/>
+					</a>
 				</div>
-			</section>
 
-			{/* Support Form Section - Duplicate */}
-			<section className="bg-brand-50/30 py-16">
+				{/* Yorkshire Live */}
+				<div className="flex flex-col items-center">
+					<a 
+						href="https://www.examinerlive.co.uk/news/west-yorkshire-news/halifax-family-absolutely-blown-away-32400258?int_source=nba"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="relative h-24 w-full cursor-pointer"
+					>
+						<Image
+							src="/images/yorkshirelive.png"
+							alt="Yorkshire Live"
+							fill
+							className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
+							style={{ objectPosition: 'center' }}
+						/>
+					</a>
+				</div>
+
+				{/* Yorkshire Post */}
+				<div className="flex flex-col items-center">
+					<a 
+						href="https://www.yorkshirepost.co.uk/community/calderdale-family-launch-vision-for-inclusive-hub-for-children-and-adults-with-additional-needs-5291748"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="relative h-24 w-full cursor-pointer"
+					>
+						<Image
+							src="/images/yorkshirepost.png"
+							alt="Yorkshire Post"
+							fill
+							className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
+							style={{ objectPosition: 'center' }}
+						/>
+					</a>
+				</div>
+
+				{/* BBC News */}
+				<div className="flex flex-col items-center">
+					<a 
+						href="https://www.bbc.co.uk/news/articles/c5yq4xx2yp2o"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="relative h-24 w-full cursor-pointer"
+					>
+						<Image
+							src="/images/BBC_News_Logo.png"
+							alt="BBC News"
+							fill
+							className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
+							style={{ objectPosition: 'center' }}
+						/>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+			{/* Founders Video Section */}
+			<section className="py-20 bg-brand-50/30">
 				<div className="mx-auto max-w-4xl px-6">
 					<div className="text-center">
-						{/* Signature Count Card */}
-						<div className="text-center mb-8">
-							<div className="inline-block bg-white/90 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-xl border border-brand-200/50">
-								<div className="text-5xl font-black text-brand-800 mb-3 tracking-tight">1,500+</div>
-								<div className="text-lg text-brand-700 font-semibold">Join others who have added their name</div>
-							</div>
-						</div>
-
 						<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
-							Show Your Support
+							The Story Behind Noa’s Place
 						</h2>
 						<div className="mt-6 space-y-4 text-lg text-ink/80">
-							<p>The overwhelming response shows just how much our community needs this space.</p>
-							<p>Add your name to join hundreds of others who believe in our vision.</p>
-							
-							<p className="font-medium text-brand-800">Together, we're creating a safe, inclusive space for children, adults, and families of every ability.</p>
+							<p>Our journey with Noa showed us how isolating it can feel to wait for help that never comes.</p>
+							<p>We created Noa’s Place so no family ever has to face that alone.</p>
+							<p><strong>Watch our story below.</strong></p>
 						</div>
 					</div>
 
 					<div className="mt-12">
-						<div className="overflow-hidden rounded-2xl bg-white shadow-lg p-8">
-							<MailchimpSubscribeForm />
-						</div>
-					</div>
-
-					{/* Social Media Links */}
-					<div className="mt-16 text-center">
-						<h3 className="text-xl font-bold text-ink mb-6">Follow Our Journey</h3>
-						<div className="flex items-center justify-center gap-4">
-							<a
-								href="https://www.facebook.com/noasplaceuk"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="inline-flex items-center justify-center rounded-full bg-[#1877F2] p-3 text-white hover:bg-[#166fe5] transition"
-							>
-								<span className="sr-only">Follow us on Facebook</span>
-								<svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-								</svg>
-							</a>
-							<a
-								href="https://www.instagram.com/noasplaceuk"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="inline-flex items-center justify-center rounded-full bg-[#E4405F] p-3 text-white hover:bg-[#d62e4c] transition"
-							>
-								<span className="sr-only">Follow us on Instagram</span>
-								<svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-								</svg>
-							</a>
+						<div className="relative overflow-hidden rounded-2xl shadow-lg ring-1 ring-brand-100 bg-white">
+							{/* 16:9 responsive video */}
+							<div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+								<iframe
+									title="The Story Behind Noa’s Place"
+									className="absolute inset-0 h-full w-full"
+									src="https://www.youtube.com/embed/8hlXxMlXsyo"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+									referrerPolicy="strict-origin-when-cross-origin"
+									allowFullScreen
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<section className="relative overflow-hidden bg-brand-50/30">
-				<div className="pointer-events-none absolute inset-0">
-					<svg className="absolute right-0 top-0 h-32 w-32 rotate-90 text-[#40BFBF]/20" viewBox="0 0 100 100" fill="currentColor">
-						<path d="M70,35 C70,25 65,20 60,20 L40,20 C35,20 30,25 30,35 C30,40 25,45 20,45 C10,45 5,50 5,60 L5,80 C5,85 10,90 20,90 C25,90 30,95 30,100 C30,110 35,115 40,115 L60,115 C65,115 70,110 70,100 C70,95 75,90 80,90 C90,90 95,85 95,80 L95,60 C95,50 90,45 80,45 C75,45 70,40 70,35" />
-					</svg>
-					<div className="absolute left-1/4 top-1/3 size-4 rounded-full bg-[#FFB800]/20" />
-					<div className="absolute right-1/3 bottom-1/4 size-3 rounded-full bg-[#6E3482]/20" />
-				</div>
-				
-				<Story />
-			</section>
+
+
+			
+
+			
 
 			{/* Image Gallery */}
 			<section className="overflow-hidden bg-white py-24">

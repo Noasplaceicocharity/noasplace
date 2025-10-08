@@ -169,3 +169,11 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit;
   padding: 0;
 }
+
+.blog-content img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1rem 0;
+  display: block;
+}

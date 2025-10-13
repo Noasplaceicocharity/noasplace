@@ -18,6 +18,8 @@ export default function Home() {
     description: string;
     features: string[];
   } | null>(null);
+  
+  const [showVideoModal, setShowVideoModal] = useState(false);
 
   const spaces = [
     {
@@ -114,210 +116,183 @@ export default function Home() {
 
   return (
 		<main className="bg-background text-ink">
-			<section className="relative isolate min-h-[700px] overflow-hidden">
-				{/* Background decorative elements */}
-				<div className="pointer-events-none absolute inset-0 overflow-hidden">
-					{/* Top left puzzle piece */}
-					<svg className="absolute -left-12 top-12 h-32 w-32 rotate-[-12deg] text-[#6E3482]/40" viewBox="0 0 100 100" fill="currentColor">
-						<path d="M70,35 C70,25 65,20 60,20 L40,20 C35,20 30,25 30,35 C30,40 25,45 20,45 C10,45 5,50 5,60 L5,80 C5,85 10,90 20,90 C25,90 30,95 30,100 C30,110 35,115 40,115 L60,115 C65,115 70,110 70,100 C70,95 75,90 80,90 C90,90 95,85 95,80 L95,60 C95,50 90,45 80,45 C75,45 70,40 70,35" />
-					</svg>
-					{/* Top right infinity */}
-					<svg className="absolute -right-12 top-20 h-28 w-44 rotate-12 text-[#40BFBF]/40" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="8">
-						<path d="M30,25 C30,15 35,10 45,10 C55,10 60,15 60,25 C60,35 55,40 45,40 C35,40 30,35 30,25 M70,25 C70,15 75,10 85,10 C95,10 100,15 100,25 C100,35 95,40 85,40 C75,40 70,35 70,25" />
-					</svg>
-					{/* Bottom left squiggle */}
-					<svg className="absolute -left-8 bottom-32 h-24 w-44 text-[#FFB800]/40" viewBox="0 0 100 30" fill="none" stroke="currentColor" strokeWidth="6">
-						<path d="M0,15 Q25,0 50,15 T100,15" strokeLinecap="round" />
-					</svg>
-					{/* Scattered dots */}
-					<div className="absolute right-1/4 top-1/4 size-6 rounded-full bg-[#6E3482]/30" />
-					<div className="absolute left-1/3 bottom-1/3 size-5 rounded-full bg-[#40BFBF]/40" />
-					<div className="absolute right-1/3 top-2/3 size-4 rounded-full bg-[#FFB800]/30" />
-					{/* Stars */}
-					<svg className="absolute right-1/4 bottom-1/4 h-12 w-12 rotate-12 text-[#FFB800]/40" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M12,2 L15,9 L22,9 L16,14 L18,21 L12,17 L6,21 L8,14 L2,9 L9,9 Z" />
-					</svg>
-					<svg className="absolute left-1/3 top-1/3 h-10 w-10 -rotate-12 text-[#6E3482]/30" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M12,2 L15,9 L22,9 L16,14 L18,21 L12,17 L6,21 L8,14 L2,9 L9,9 Z" />
-					</svg>
-				</div>
+			{/* Hero Section */}
+			<section className="relative min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-100 overflow-hidden">
 
-				<div className="relative px-6 pt-16 pb-0 sm:pt-20">
-					<div className="relative">
-						{/* Left adult */}
-												<div className="absolute -left-16 -bottom-24 hidden lg:block">
-        <Image
-								src="/images/adults left.png"
-								alt=""
-								width={1000}
-								height={1200}
-								className="h-auto w-[500px] xl:w-[580px] 2xl:w-[660px]"
-							/>
+				<div className="relative px-6 pt-16 pb-16 sm:pt-20">
+					<div className="mx-auto max-w-7xl">
+						{/* "As seen on" badge */}
+						<div className="mb-8">
+						<a 
+							href="https://www.bbc.co.uk/news/articles/c5yq4xx2yp2o"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-purple-200/50 hover:bg-white"
+						>
+							<div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+							<span className="text-sm font-medium text-gray-700">As seen on BBC News</span>
+						</a>
 						</div>
-						{/* Right kid */}
-						<div className="absolute -right-16 -bottom-24 hidden lg:block xl:-right-24 2xl:-right-32">
-            <Image
-								src="/images/kids right.png"
-								alt=""
-								width={800}
-								height={1000}
-								className="h-auto w-[400px] xl:w-[480px] 2xl:w-[600px]"
-							/>
-        </div>
-						{/* Center content */}
-						<div className="relative mx-auto max-w-4xl text-center px-8 lg:px-16">
-														<div className="flex justify-center">
-          <Image
-									src="/images/noas place logo.png"
-									alt="Noa's Place"
-									width={500}
-									height={500}
-									className="h-auto w-[200px] sm:w-[300px]"
-									priority
-								/>
+
+						{/* Main content grid */}
+						<div className="grid lg:grid-cols-3 gap-12 items-center">
+							{/* Left side - Text and buttons */}
+							<div className="lg:col-span-2 space-y-8">
+								<h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
+									Building a calm, inclusive hub for families with additional needs
+								</h1>
+								
+								<p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
+									Noa's Place exists so no parent has to shout to be heard. Sensory-first spaces, inclusive play, and a calm café for parents and carers.
+								</p>
+
+								{/* Buttons */}
+								<div className="flex flex-col sm:flex-row gap-3">
+									<Link
+										href="#register-form"
+										className="inline-flex items-center justify-center rounded-lg bg-purple-600 px-6 py-3 text-base font-semibold text-white shadow-md hover:bg-purple-700 hover:shadow-lg transition duration-200"
+									>
+										Approve our plans
+									</Link>
+									<button
+										onClick={() => setShowVideoModal(true)}
+										className="inline-flex items-center justify-center rounded-lg bg-white border border-purple-600 px-6 py-3 text-base font-semibold text-purple-600 shadow-md hover:bg-purple-50 hover:shadow-lg transition duration-200"
+									>
+										Watch our story
+									</button>
+									<Link
+										href="/interactive-tools"
+										className="inline-flex items-center justify-center rounded-lg bg-yellow-400 px-6 py-3 text-base font-semibold text-gray-900 shadow-md hover:bg-yellow-500 hover:shadow-lg transition duration-200"
+									>
+										Try interactive tools
+									</Link>
+								</div>
 							</div>
-							<h1 className="mx-auto mt-12 max-w-4xl text-balance">
-								<span className="block bg-gradient-to-r from-brand-800 to-brand-500 bg-clip-text text-3xl font-black text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
-									Help us build<br />
-									<span className="text-brand-600">Noa's Place</span><br />
-									<span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">add your name today</span>
-								</span>
-								<span className="mt-6 block text-lg font-bold leading-relaxed text-ink sm:text-xl md:text-2xl lg:text-3xl">
-									A lifeline for families with additional needs
-								</span>
-							</h1>
-							<div className="mt-12 mb-24 sm:mb-32 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-								<a
-									href="#register-form"
-									className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
-								>
-									Add your name
-									<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-										<path d="m6 9 6 6 6-6"/>
-									</svg>
-								</a>
+
+							{/* Right side - Video */}
+							<div className="relative">
+								<div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-b from-gray-200 to-gray-400">
+									<div className="absolute top-4 left-4 text-sm text-gray-600 font-medium">
+										Parent and child hands in soft light
+									</div>
+									<iframe
+										title="The Story Behind Noa's Place"
+										className="absolute inset-0 h-full w-full"
+										src="https://www.youtube.com/embed/8hlXxMlXsyo"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+										referrerPolicy="strict-origin-when-cross-origin"
+										allowFullScreen
+									/>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
 
-			</section>
-
-{/* Press Coverage Section */}
-<section className="py-16 bg-gradient-to-b from-white to-gray-50/50">
-	<div className="mx-auto max-w-7xl px-6">
-		<div className="text-center">
-			<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">As Featured On</h2>
-		</div>
-		<div className="mt-8">
-			<div className="grid grid-cols-1 gap-12 md:grid-cols-4">
-				{/* Halifax Courier */}
-				<div className="flex flex-col items-center">
-					<a 
-						href="https://www.halifaxcourier.co.uk/news/people/families-are-left-isolated-and-it-can-feel-like-a-storm-ripponden-family-launch-vision-for-noas-place-5304261"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="relative h-24 w-full cursor-pointer"
-					>
-						<Image
-							src="/images/halifaxcourier.webp"
-							alt="Halifax Courier"
-							fill
-							className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
-							style={{ objectPosition: 'center' }}
-						/>
-					</a>
-				</div>
-
-				{/* Yorkshire Live */}
-				<div className="flex flex-col items-center">
-					<a 
-						href="https://www.examinerlive.co.uk/news/west-yorkshire-news/halifax-family-absolutely-blown-away-32400258?int_source=nba"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="relative h-24 w-full cursor-pointer"
-					>
-						<Image
-							src="/images/yorkshirelive.png"
-							alt="Yorkshire Live"
-							fill
-							className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
-							style={{ objectPosition: 'center' }}
-						/>
-					</a>
-				</div>
-
-				{/* Yorkshire Post */}
-				<div className="flex flex-col items-center">
-					<a 
-						href="https://www.yorkshirepost.co.uk/community/calderdale-family-launch-vision-for-inclusive-hub-for-children-and-adults-with-additional-needs-5291748"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="relative h-24 w-full cursor-pointer"
-					>
-						<Image
-							src="/images/yorkshirepost.png"
-							alt="Yorkshire Post"
-							fill
-							className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
-							style={{ objectPosition: 'center' }}
-						/>
-					</a>
-				</div>
-
-				{/* BBC News */}
-				<div className="flex flex-col items-center">
-					<a 
-						href="https://www.bbc.co.uk/news/articles/c5yq4xx2yp2o"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="relative h-24 w-full cursor-pointer"
-					>
-						<Image
-							src="/images/BBC_News_Logo.png"
-							alt="BBC News"
-							fill
-							className="object-contain filter grayscale hover:grayscale-0 transition duration-500"
-							style={{ objectPosition: 'center' }}
-						/>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-			{/* Founders Video Section */}
-			<section className="py-20 bg-brand-50/30">
-				<div className="mx-auto max-w-4xl px-6">
-					<div className="text-center">
-						<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
-							The Story Behind Noa’s Place
-						</h2>
-						<div className="mt-6 space-y-4 text-lg text-ink/80">
-							<p>Our journey with Noa showed us how isolating it can feel to wait for help that never comes.</p>
-							<p>We created Noa’s Place so no family ever has to face that alone.</p>
-							<p><strong>Watch our story below.</strong></p>
-						</div>
-					</div>
-
-					<div className="mt-12">
-						<div className="relative overflow-hidden rounded-2xl shadow-lg ring-1 ring-brand-100 bg-white">
-							{/* 16:9 responsive video */}
-							<div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-								<iframe
-									title="The Story Behind Noa’s Place"
-									className="absolute inset-0 h-full w-full"
-									src="https://www.youtube.com/embed/8hlXxMlXsyo"
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-									referrerPolicy="strict-origin-when-cross-origin"
-									allowFullScreen
-								/>
-							</div>
+						{/* Navigation cards */}
+						<div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+							<Link
+								href="/plans"
+								className="group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer"
+							>
+								<div className="relative h-32 overflow-hidden">
+									<Image
+										src="/images/all in one rooms.jpg"
+										alt="Our Plans - Flexible event and activity spaces"
+										fill
+										className="object-cover transition-transform duration-300 group-hover:scale-110"
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+								</div>
+								<div className="p-6">
+									<div className="text-2xl font-black text-purple-600 mb-2">Our Plans</div>
+									<div className="text-sm font-medium text-gray-700">View our vision & plans</div>
+								</div>
+							</Link>
+							<Link
+								href="/blog"
+								className="group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer"
+							>
+								<div className="relative h-32 overflow-hidden">
+									<Image
+										src="/images/family_photo_halifax_west_yorkshire.jpg"
+										alt="Blog - Our latest stories and updates"
+										fill
+										className="object-cover transition-transform duration-300 group-hover:scale-110"
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+								</div>
+								<div className="p-6">
+									<div className="text-2xl font-black text-purple-600 mb-2">Blog</div>
+									<div className="text-sm font-medium text-gray-700">Read our latest stories</div>
+								</div>
+							</Link>
+							<Link
+								href="/interactive-tools"
+								className="group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer"
+							>
+								<div className="relative h-32 overflow-hidden">
+									<Image
+										src="/images/interactive_tools_noas_place_halifax_primary_school.jpg"
+										alt="Interactive Tools - Helpful tools for families"
+										fill
+										className="object-cover transition-transform duration-300 group-hover:scale-110"
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+								</div>
+								<div className="p-6">
+									<div className="text-2xl font-black text-purple-600 mb-2">Interactive Tools</div>
+									<div className="text-sm font-medium text-gray-700">Try our helpful tools</div>
+								</div>
+							</Link>
+							<Link
+								href="#dreamboard"
+								className="group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer"
+							>
+								<div className="relative h-32 overflow-hidden">
+									<Image
+										src="/images/all play.jpg"
+										alt="Our Dreamboard - See our vision"
+										fill
+										className="object-cover transition-transform duration-300 group-hover:scale-110"
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+								</div>
+								<div className="p-6">
+									<div className="text-2xl font-black text-purple-600 mb-2">Our Dreamboard</div>
+									<div className="text-sm font-medium text-gray-700">See our vision</div>
+								</div>
+							</Link>
 						</div>
 					</div>
 				</div>
 			</section>
+
+			{/* Video Modal */}
+			{showVideoModal && (
+				<div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+					<div className="relative w-full max-w-4xl">
+						<button
+							onClick={() => setShowVideoModal(false)}
+							className="absolute -top-12 right-0 text-white hover:text-gray-300 transition duration-200"
+						>
+							<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+								<path d="M18 6L6 18M6 6l12 12"/>
+							</svg>
+						</button>
+						<div className="relative aspect-video rounded-2xl overflow-hidden">
+							<iframe
+								title="The Story Behind Noa's Place"
+								className="absolute inset-0 h-full w-full"
+								src="https://www.youtube.com/embed/8hlXxMlXsyo"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								referrerPolicy="strict-origin-when-cross-origin"
+								allowFullScreen
+							/>
+						</div>
+					</div>
+				</div>
+			)}
+
+
 
 
 
@@ -326,7 +301,7 @@ export default function Home() {
 			
 
 			{/* Image Gallery */}
-			<section className="overflow-hidden bg-white py-24">
+			<section id="dreamboard" className="overflow-hidden bg-white py-24">
 				<div className="mx-auto max-w-6xl px-6">
 					<h2 className="text-center text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl mb-12">
 						Our Dreamboard
@@ -665,32 +640,76 @@ export default function Home() {
 				</div>
 			</section>
 
-			{/* Testimonials Image Section */}
-			<section className="py-24 bg-white">
-				<div className="relative mx-auto max-w-7xl px-6">
-					{/* Section Title */}
+			{/* Press Coverage Section */}
+			<section className="py-12 bg-white/50">
+				<div className="mx-auto max-w-4xl px-6">
 					<div className="text-center mb-8">
-						<h2 className="text-3xl font-extrabold text-ink sm:text-4xl md:text-5xl">
-							What People Are Saying
-						</h2>
-					</div>
-
-					{/* Decorative elements */}
-					<div className="absolute -left-4 -top-4 w-72 h-72 bg-brand-50 rounded-full opacity-50 blur-3xl"></div>
-					<div className="absolute -right-4 -bottom-4 w-72 h-72 bg-brand-50 rounded-full opacity-50 blur-3xl"></div>
-					
-					{/* Image container */}
-					<div className="relative">
-						<div className="aspect-[16/9] overflow-hidden rounded-2xl">
-							<img
-								src="/images/testimonials.png"
-								alt="Community testimonials and quotes supporting Noa's Place"
-								className="w-full h-full object-cover"
-							/>
+						<div className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 mb-4">
+							<div className="w-1 h-1 bg-purple-400 rounded-full"></div>
+							As featured on
 						</div>
+					</div>
+					<div className="flex items-center justify-center gap-8 md:gap-12 opacity-60 hover:opacity-80 transition-opacity duration-300">
+						<a 
+							href="https://www.halifaxcourier.co.uk/news/people/families-are-left-isolated-and-it-can-feel-like-a-storm-ripponden-family-launch-vision-for-noas-place-5304261"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="relative h-12 w-auto hover:scale-105 transition-transform duration-200"
+						>
+							<Image
+								src="/images/halifaxcourier.webp"
+								alt="Halifax Courier"
+								width={150}
+								height={48}
+								className="h-full w-auto object-contain filter grayscale"
+							/>
+						</a>
+						<a 
+							href="https://www.examinerlive.co.uk/news/west-yorkshire-news/halifax-family-absolutely-blown-away-32400258?int_source=nba"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="relative h-12 w-auto hover:scale-105 transition-transform duration-200"
+						>
+							<Image
+								src="/images/yorkshirelive.png"
+								alt="Yorkshire Live"
+								width={150}
+								height={48}
+								className="h-full w-auto object-contain filter grayscale"
+							/>
+						</a>
+						<a 
+							href="https://www.yorkshirepost.co.uk/community/calderdale-family-launch-vision-for-inclusive-hub-for-children-and-adults-with-additional-needs-5291748"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="relative h-12 w-auto hover:scale-105 transition-transform duration-200"
+						>
+							<Image
+								src="/images/yorkshirepost.png"
+								alt="Yorkshire Post"
+								width={150}
+								height={48}
+								className="h-full w-auto object-contain filter grayscale"
+							/>
+						</a>
+						<a 
+							href="https://www.bbc.co.uk/news/articles/c5yq4xx2yp2o"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="relative h-12 w-auto hover:scale-105 transition-transform duration-200"
+						>
+							<Image
+								src="/images/BBC_News_Logo.png"
+								alt="BBC News"
+								width={150}
+								height={48}
+								className="h-full w-auto object-contain filter grayscale"
+							/>
+						</a>
 					</div>
 				</div>
 			</section>
+
 
 			{/* Get in Touch Section */}
 			<section id="contact" className="bg-white">

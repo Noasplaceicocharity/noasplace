@@ -178,7 +178,7 @@ export default function Home() {
 									<iframe
 										title="The Story Behind Noa's Place"
 										className="absolute inset-0 h-full w-full"
-										src="https://www.youtube.com/embed/8hlXxMlXsyo"
+										src="https://www.youtube.com/embed/8hlXxMlXsyo?rel=0"
 										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 										referrerPolicy="strict-origin-when-cross-origin"
 										allowFullScreen
@@ -282,7 +282,7 @@ export default function Home() {
 							<iframe
 								title="The Story Behind Noa's Place"
 								className="absolute inset-0 h-full w-full"
-								src="https://www.youtube.com/embed/8hlXxMlXsyo"
+								src="https://www.youtube.com/embed/8hlXxMlXsyo?rel=0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 								referrerPolicy="strict-origin-when-cross-origin"
 								allowFullScreen

@@ -143,7 +143,7 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-white/20">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-white/60 text-sm text-center md:text-left">
-              © {new Date().getFullYear()} Noa's Place CIO. All rights reserved.
+              © {new Date().getFullYear()} Noa's Place. All rights reserved.
             </p>
           </div>
         </div>

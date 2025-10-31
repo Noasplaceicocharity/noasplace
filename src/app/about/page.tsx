@@ -201,9 +201,45 @@ export default function AboutUs() {
             </p>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-            <div className="text-center">
-              <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
+          {/* Co-Chairs */}
+          <div className="grid gap-8 sm:grid-cols-2 mb-12">
+            <div className="group text-center rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-black/5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+              <div className="relative mx-auto mb-4 size-32 overflow-hidden rounded-full">
+                <Image
+                  src="/images/trustees/Megan_Taylor_trustee_noas_place_halifax_west_yorkshire.jpg"
+                  alt="Megan Taylor - Co-Chair"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="font-bold text-brand-800 text-lg">Megan Taylor</h3>
+              <span className="mt-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">Co-Chair</span>
+              <p className="text-ink/80 text-sm mt-3 max-w-sm mx-auto">
+                A neurodiverse parent of two neurodiverse children with expertise in academic research, marketing, and funding. Megan understands first-hand the challenges families face navigating SEN support.
+              </p>
+            </div>
+
+            <div className="group text-center rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-black/5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+              <div className="relative mx-auto mb-4 size-32 overflow-hidden rounded-full">
+                <Image
+                  src="/images/trustees/Laura_Maroney_trustee_noas_place_halifax_west_yorkshire.jpg"
+                  alt="Laura Maroney - Co-Chair"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="font-bold text-brand-800 text-lg">Laura Maroney</h3>
+              <span className="mt-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">Co-Chair</span>
+              <p className="text-ink/80 text-sm mt-3 max-w-sm mx-auto">
+                With years of experience in neurodiversity and inclusion, Laura is passionate about ensuring every child and family feels included, supported, and empowered.
+              </p>
+            </div>
+          </div>
+
+          {/* Trustees */}
+          <div className="grid gap-8 sm:grid-cols-2">
+            <div className="group text-center rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-black/5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+              <div className="relative mx-auto mb-4 size-32 overflow-hidden rounded-full">
                 <Image
                   src="/images/trustees/Sophia_Bentley_trustee_noas_place_halifax_west_yorkshire.jpg"
                   alt="Sophia Bentley - Trustee"
@@ -212,28 +248,14 @@ export default function AboutUs() {
                 />
               </div>
               <h3 className="font-bold text-brand-800 text-lg">Dr. Sophia Bentley</h3>
-              <p className="text-ink/80 text-sm mt-2 max-w-sm mx-auto">
+              <span className="mt-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">Trustee</span>
+              <p className="text-ink/80 text-sm mt-3 max-w-sm mx-auto">
                 Educational and Child Psychologist and founder of Find A Way CIC. As a mum of two, Sophia combines professional expertise with personal understanding, always keeping families at the centre.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
-                <Image
-                  src="/images/trustees/Laura_Maroney_trustee_noas_place_halifax_west_yorkshire.jpg"
-                  alt="Laura Maroney - Trustee"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="font-bold text-brand-800 text-lg">Laura Maroney</h3>
-              <p className="text-ink/80 text-sm mt-2 max-w-sm mx-auto">
-                With years of experience in neurodiversity and inclusion, Laura is passionate about ensuring every child and family feels included, supported, and empowered.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
+            <div className="group text-center rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-black/5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+              <div className="relative mx-auto mb-4 size-32 overflow-hidden rounded-full">
                 <Image
                   src="/images/trustees/Mathew_Atkinson_trustee_noas_place_halifax_west_yorkshire.jpg"
                   alt="Mathew Atkinson - Trustee"
@@ -242,28 +264,14 @@ export default function AboutUs() {
                 />
               </div>
               <h3 className="font-bold text-brand-800 text-lg">Mathew Atkinson</h3>
-              <p className="text-ink/80 text-sm mt-2 max-w-sm mx-auto">
+              <span className="mt-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">Trustee</span>
+              <p className="text-ink/80 text-sm mt-3 max-w-sm mx-auto">
                 Chief Executive Officer of The Priestley Academy Trust, serving over 2,500 children. A father of two, Mathew brings education leadership and strategic governance experience.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
-                <Image
-                  src="/images/trustees/Megan_Taylor_trustee_noas_place_halifax_west_yorkshire.jpg"
-                  alt="Megan Taylor - Trustee"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="font-bold text-brand-800 text-lg">Megan Taylor</h3>
-              <p className="text-ink/80 text-sm mt-2 max-w-sm mx-auto">
-                A neurodiverse parent of two neurodiverse children with expertise in academic research, marketing, and funding. Megan understands first-hand the challenges families face navigating SEN support.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
+            <div className="group text-center rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-black/5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+              <div className="relative mx-auto mb-4 size-32 overflow-hidden rounded-full">
                 <Image
                   src="/images/trustees/Nicole_Owen_trustee_noas_place_halifax_west_yorkshire.jpg"
                   alt="Nicole Owen - Trustee"
@@ -272,13 +280,14 @@ export default function AboutUs() {
                 />
               </div>
               <h3 className="font-bold text-brand-800 text-lg">Nicole Owen</h3>
-              <p className="text-ink/80 text-sm mt-2 max-w-sm mx-auto">
+              <span className="mt-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">Trustee</span>
+              <p className="text-ink/80 text-sm mt-3 max-w-sm mx-auto">
                 Chartered Accountant and Head of Finance with expertise in commercial strategy and operations. As a mum to a two-year-old, Nicole is passionate about creating inclusive spaces where every child can thrive.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 mx-auto max-w-[200px]">
+            <div className="group text-center rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-black/5 transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+              <div className="relative mx-auto mb-4 size-32 overflow-hidden rounded-full">
                 <Image
                   src="/images/trustees/Kathryn_Sullivsn_trustee_noas_place_halifax_west_yorkshire.png"
                   alt="Kathryn Sullivan - Trustee"
@@ -287,7 +296,8 @@ export default function AboutUs() {
                 />
               </div>
               <h3 className="font-bold text-brand-800 text-lg">Kathryn Sullivan</h3>
-              <p className="text-ink/80 text-sm mt-2 max-w-sm mx-auto">
+              <span className="mt-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">Trustee</span>
+              <p className="text-ink/80 text-sm mt-3 max-w-sm mx-auto">
                 An experienced governance professional with over 14 years as a charity trustee and school governor. As founder of MiraGold, Kathryn brings expertise in governance, leadership, and neurodiversity to support organisations with positive change.
               </p>
             </div>

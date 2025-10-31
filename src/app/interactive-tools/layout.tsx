@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ClientMount from "./ClientMount";
 
 export const metadata: Metadata = {
   title: "Interactive Tools | Noa's Place | Resources for SEND Families",
@@ -16,5 +17,5 @@ export default function InteractiveToolsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <ClientMount>{children}</ClientMount>;
 }

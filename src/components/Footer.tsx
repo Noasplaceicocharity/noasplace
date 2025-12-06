@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import NewsletterForm from "./NewsletterForm";
 
 export default function Footer() {
   const getTimeBasedGreeting = () => {
@@ -19,7 +20,7 @@ export default function Footer() {
   return (
     <footer className="bg-brand-800 text-white">
       <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
           {/* Logo and Description */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center mb-4">
@@ -32,7 +33,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-white/80 text-sm leading-relaxed mb-4 max-w-md">
-              A safe, inclusive hub for children, adults, and families with additional needs.
+              Together we make space for every family to shine
             </p>
             <p className="text-white font-bold text-sm mb-6 max-w-md">
               Have a great rest of your {getTimeBasedGreeting()}!
@@ -131,11 +132,23 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span className="text-white/60 text-sm">
-                  Registered Charity No. [To be confirmed]
-                </span>
+                <a 
+                  href="tel:+441422415274" 
+                  className="text-white/80 hover:text-white transition-colors text-sm"
+                >
+                  01422 415274
+                </a>
               </li>
             </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div className="lg:col-span-2">
+            <h3 className="text-lg font-semibold text-white mb-4">Newsletter</h3>
+            <p className="text-white/80 text-sm mb-4">
+              Stay updated with our latest news and updates.
+            </p>
+            <NewsletterForm />
           </div>
         </div>
 
@@ -144,6 +157,9 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-white/60 text-sm text-center md:text-left">
               © {new Date().getFullYear()} Noa's Place. All rights reserved.
+            </p>
+            <p className="text-white/60 text-sm text-center md:text-right">
+              Registered Charity No. [To be confirmed]
             </p>
           </div>
         </div>

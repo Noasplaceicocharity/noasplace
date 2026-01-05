@@ -6,9 +6,10 @@ import MailchimpSubscribeForm from "./MailchimpSubscribeForm";
 type MailchimpPopupProps = {
   triggerPercent?: number; // 0-100, default 50
   storageKey?: string; // sessionStorage key to avoid repeat in a session
+  disableAutoTrigger?: boolean; // If true, only opens via custom event
 };
 
-export default function MailchimpPopup({ triggerPercent = 50, storageKey = "np_mailchimp_popup_shown" }: MailchimpPopupProps) {
+export default function MailchimpPopup({ triggerPercent = 50, storageKey = "np_mailchimp_popup_shown", disableAutoTrigger = false }: MailchimpPopupProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,8 +19,20 @@ export default function MailchimpPopup({ triggerPercent = 50, storageKey = "np_m
     setHasShown(alreadyShown);
   }, [storageKey]);
 
+  // Listen for custom event to open popup
   useEffect(() => {
-    if (hasShown) return;
+    const handleOpenPopup = () => {
+      setIsOpen(true);
+    };
+
+    window.addEventListener("openMailchimpPopup", handleOpenPopup);
+    return () => {
+      window.removeEventListener("openMailchimpPopup", handleOpenPopup);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (hasShown || disableAutoTrigger) return;
 
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -42,7 +55,7 @@ export default function MailchimpPopup({ triggerPercent = 50, storageKey = "np_m
       window.clearTimeout(id);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [hasShown, storageKey, triggerPercent]);
+  }, [hasShown, storageKey, triggerPercent, disableAutoTrigger]);
 
   useEffect(() => {
     if (isOpen) {

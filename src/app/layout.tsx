@@ -21,10 +21,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Noa's Place | A Safe, Inclusive Hub for SEND Families",
+  title: "Noa's Place Halifax | SEND Support & Sensory Rooms West Yorkshire",
   description:
-    "Noa's Place is a new community project creating a safe, inclusive hub with sensory rooms, play spaces, and support for children, adults, and families with additional needs.",
-  keywords: "children's charity Halifax, family support West Yorkshire, SEND support Halifax, sensory rooms Yorkshire, community centre Halifax, family activities West Yorkshire, charity donation Halifax",
+    "Noa's Place Halifax - Creating an inclusive community hub with sensory rooms, SEND support, and family services in West Yorkshire. Supporting neurodivergent children, adults & families.",
+  keywords: "SEND support Halifax, sensory rooms West Yorkshire, neurodivergent support Calderdale, family support Halifax, children's charity West Yorkshire, autism support Halifax, ADHD support Yorkshire, inclusive community hub Halifax, special needs support Calderdale, disability services Halifax, family activities West Yorkshire, charity Halifax, sensory processing support Yorkshire",
   authors: [{ name: "Noa's Place" }],
   creator: "Noa's Place",
   publisher: "Noa's Place",
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     apple: '/images/noas place logo.png',
   },
   openGraph: {
-    title: "Noa's Place | A Safe, Inclusive Hub for SEND Families",
-    description: "Noa's Place will be a warm, inclusive hub for children, adults, and families with additional needs. With sensory rooms, play spaces, a calm café, and support groups. No family should have to reach crisis before they get support.",
+    title: "Noa's Place Halifax | SEND Support & Sensory Rooms West Yorkshire",
+    description: "Noa's Place Halifax - Creating an inclusive community hub with sensory rooms, SEND support, and family services in West Yorkshire. Supporting neurodivergent children, adults & families.",
     url: 'https://noasplace.org.uk',
     siteName: "Noa's Place",
     locale: 'en_GB',
@@ -54,7 +54,12 @@ export const metadata: Metadata = {
       }
     ]
   },
-  // Twitter card metadata will be added once social media accounts are set up
+  twitter: {
+    card: 'summary_large_image',
+    title: "Noa's Place Halifax | SEND Support & Sensory Rooms West Yorkshire",
+    description: "Creating an inclusive community hub with sensory rooms, SEND support, and family services in Halifax, West Yorkshire.",
+    images: ['/images/socialsharing.jpg'],
+  },
   alternates: {
     canonical: 'https://noasplace.org.uk'
   },
@@ -69,12 +74,16 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // Google verification will be added once Search Console is set up
   other: {
     'geo.region': 'GB-WYK',
     'geo.placename': 'Halifax, West Yorkshire',
+    'geo.position': '53.7219;-1.8658',
+    'ICBM': '53.7219, -1.8658',
     'og:region': 'West Yorkshire',
-    'og:locality': 'Halifax'
+    'og:locality': 'Halifax',
+    'og:postal-code': 'HX',
+    'place:location:latitude': '53.7219',
+    'place:location:longitude': '-1.8658',
   }
 };
 

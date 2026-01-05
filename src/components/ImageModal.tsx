@@ -1,113 +1,117 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect } from "react";
 
-type ImageModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  image: {
-    src: string;
-    alt: string;
-  };
-  title: string;
-  description: string;
-  features: string[];
-};
-
-export default function ImageModal({ isOpen, onClose, image, title, description, features }: ImageModalProps) {
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      setIsAnimating(true);
-      // Lock body scroll when modal is open
-      document.body.style.overflow = "hidden";
-    } else {
-      // Restore body scroll when modal is closed
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
-
-  if (!isOpen && !isAnimating) return null;
-
-  const handleAnimationEnd = () => {
-    if (!isOpen) {
-      setIsAnimating(false);
-    }
-  };
-
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
-  // Only render content if we have valid image data
-  const hasValidImage = image.src && image.src.length > 0;
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity duration-300 ${
-        isOpen ? "opacity-100" : "opacity-0"
-      }`}
-      onClick={handleBackdropClick}
-      onTransitionEnd={handleAnimationEnd}
-    >
-      <div
-        className={`relative w-full max-w-3xl max-h-[90vh] sm:max-h-[85vh] overflow-hidden rounded-2xl bg-white shadow-2xl transition-all duration-300 ${
-          isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
-        }`}
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute right-2 top-2 sm:right-4 sm:top-4 z-20 rounded-full bg-white p-3 text-ink shadow-lg ring-1 ring-brand-100 transition hover:bg-brand-50"
-          aria-label="Close modal"
-        >
-          <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-
-        <div className="max-h-[90vh] sm:max-h-[85vh] overflow-y-auto">
-          {/* Image */}
-          {hasValidImage && (
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-2xl bg-brand-50">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className={`object-cover ${
-                  image.src.includes("all in one rooms") ? "object-center scale-125" : ""
-                }`}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
-              />
-            </div>
-          )}
-
-          {/* Content */}
-          <div className="p-6 sm:p-8">
-            <h3 className="text-2xl font-bold text-brand-800 sm:text-3xl">{title}</h3>
-            <p className="mt-4 text-lg text-ink/80">{description}</p>
-            <ul className="mt-6 space-y-2">
-              {features.map((feature, index) => (
-                <li key={index} className="flex items-start gap-3 text-ink/80">
-                  <svg className="mt-1.5 size-4 shrink-0 text-brand-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+interface ImageModalProps {
+	isOpen: boolean;
+	onClose: () => void;
+	image: { src: string; alt: string };
+	title: string;
+	description: string;
+	features: string[];
 }
+
+export default function ImageModal({
+	isOpen,
+	onClose,
+	image,
+	title,
+	description,
+	features,
+}: ImageModalProps) {
+	// Handle escape key press
+	useEffect(() => {
+		const handleEscape = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				onClose();
+			}
+		};
+
+		if (isOpen) {
+			document.addEventListener("keydown", handleEscape);
+			document.body.style.overflow = "hidden";
+		}
+
+		return () => {
+			document.removeEventListener("keydown", handleEscape);
+			document.body.style.overflow = "unset";
+		};
+	}, [isOpen, onClose]);
+
+	if (!isOpen) return null;
+
+	return (
+		<div
+			className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-white/20 backdrop-blur-md animate-fade-in"
+			onClick={onClose}
+		>
+			<div
+				className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-brand-100/50"
+				onClick={(e) => e.stopPropagation()}
+			>
+				{/* Close button */}
+				<button
+					onClick={onClose}
+					className="absolute top-4 right-4 z-10 text-ink/80 hover:text-brand-800 transition-all duration-300 hover:scale-110 bg-white/80 backdrop-blur-md rounded-full p-2 shadow-lg border border-brand-100/40"
+					aria-label="Close modal"
+				>
+					<svg
+						className="w-6 h-6"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						strokeWidth="2.5"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					>
+						<path d="M18 6L6 18M6 6l12 12" />
+					</svg>
+				</button>
+
+				{/* Image */}
+				<div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-t-3xl">
+					<Image
+						src={image.src}
+						alt={image.alt}
+						fill
+						className="object-cover"
+						priority
+					/>
+				</div>
+
+				{/* Content */}
+				<div className="p-6 sm:p-8 md:p-10">
+					<h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-800 mb-4 tracking-tight">
+						{title}
+					</h2>
+					<p className="text-lg sm:text-xl text-ink/70 mb-6 leading-relaxed">
+						{description}
+					</p>
+					<ul className="space-y-3">
+						{features.map((feature, index) => (
+							<li
+								key={index}
+								className="flex items-start gap-3 text-base sm:text-lg text-ink/80"
+							>
+								<svg
+									className="w-5 h-5 sm:w-6 sm:h-6 text-brand-800 mt-0.5 flex-shrink-0"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+								>
+									<path
+										fillRule="evenodd"
+										d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+										clipRule="evenodd"
+									/>
+								</svg>
+								<span>{feature}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</div>
+	);
+}
+

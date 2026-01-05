@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | Noa's Place",
-  description: "Learn about how Noa's Place uses cookies and similar technologies on our website in compliance with UK GDPR and PECR regulations.",
+  title: "Cookie Policy | Noa's Place Halifax - Website Cookies",
+  description: "Noa's Place Halifax cookie policy - Learn how we use cookies & similar technologies on our website in compliance with UK GDPR & PECR regulations.",
+  keywords: "Noa's Place cookie policy, website cookies Halifax, UK GDPR cookies West Yorkshire, PECR compliance Calderdale, cookie consent charity Yorkshire",
   robots: {
     index: true,
     follow: true,
+  },
+  openGraph: {
+    title: "Cookie Policy | Noa's Place Halifax - Website Cookies",
+    description: "Noa's Place Halifax cookie policy - Learn how we use cookies & similar technologies on our website in compliance with UK GDPR & PECR regulations.",
+    url: 'https://noasplace.org.uk/cookie-policy',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://noasplace.org.uk/cookie-policy'
   },
 };
 

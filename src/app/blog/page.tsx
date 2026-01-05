@@ -6,12 +6,17 @@ import { format } from 'date-fns';
 import BlogClient from './BlogClient';
 
 export const metadata: Metadata = {
-  title: "Blog | Noa's Place",
-  description: "Read our latest blog posts about Noa's Place, community stories, and resources for families with additional needs.",
+  title: "Blog | Noa's Place Halifax - SEND Support Stories West Yorkshire",
+  description: "Read Noa's Place blog - latest stories, updates & resources for SEND families in Halifax & West Yorkshire. Community stories, support tips & charity news.",
+  keywords: "Noa's Place blog Halifax, SEND support blog West Yorkshire, neurodivergent family stories Calderdale, autism support blog Halifax, ADHD awareness Yorkshire, family support resources Halifax, charity blog West Yorkshire",
   openGraph: {
-    title: "Blog | Noa's Place",
-    description: "Read our latest blog posts about Noa's Place, community stories, and resources for families with additional needs.",
+    title: "Blog | Noa's Place Halifax - SEND Support Stories West Yorkshire",
+    description: "Read Noa's Place blog - latest stories, updates & resources for SEND families in Halifax & West Yorkshire. Community stories, support tips & charity news.",
     url: 'https://noasplace.org.uk/blog',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://noasplace.org.uk/blog'
   },
 };
 

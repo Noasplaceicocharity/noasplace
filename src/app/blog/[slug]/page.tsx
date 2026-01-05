@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getBlogPost, getAllBlogPosts } from '@/lib/blog';
 import { format } from 'date-fns';
+import BlogContentWrapper from '@/components/BlogContentWrapper';
+import MailchimpPopup from '@/components/MailchimpPopup';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -28,12 +30,23 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  const geoDescription = post.metaDescription || post.excerpt;
+  const geoTitle = `${post.title} | Noa's Place Blog Halifax`;
+  const geoDescriptionWithLocation = geoDescription.includes('Halifax') || geoDescription.includes('West Yorkshire') 
+    ? geoDescription 
+    : `${geoDescription} | Noa's Place Halifax, West Yorkshire`;
+
   return {
-    title: `${post.title} | Noa's Place Blog`,
-    description: post.metaDescription || post.excerpt,
+    title: geoTitle,
+    description: geoDescriptionWithLocation.length > 160 
+      ? geoDescriptionWithLocation.substring(0, 157) + '...'
+      : geoDescriptionWithLocation,
+    keywords: post.tags ? post.tags.join(', ') + ', Noa\'s Place Halifax, SEND support West Yorkshire, neurodivergent support Calderdale' : 'Noa\'s Place Halifax, SEND support West Yorkshire',
     openGraph: {
       title: post.title,
-      description: post.metaDescription || post.excerpt,
+      description: geoDescriptionWithLocation.length > 200 
+        ? geoDescriptionWithLocation.substring(0, 197) + '...'
+        : geoDescriptionWithLocation,
       url: `https://noasplace.org.uk/blog/${post.slug}`,
       type: 'article',
       publishedTime: post.date,
@@ -46,7 +59,25 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
           height: 630,
           alt: post.title,
         }
-      ] : undefined,
+      ] : [
+        {
+          url: '/images/socialsharing.jpg',
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: geoDescriptionWithLocation.length > 200 
+        ? geoDescriptionWithLocation.substring(0, 197) + '...'
+        : geoDescriptionWithLocation,
+      images: post.imageUrl ? [post.imageUrl] : ['/images/socialsharing.jpg'],
+    },
+    alternates: {
+      canonical: `https://noasplace.org.uk/blog/${post.slug}`
     },
   };
 }
@@ -155,11 +186,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* Article Content */}
       <section className="bg-white pt-8 pb-24">
         <article className="mx-auto max-w-4xl px-6">
-          <div className="blog-content">
-            <div 
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </div>
+          <BlogContentWrapper>
+            <div className="blog-content">
+              <div 
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </div>
+          </BlogContentWrapper>
 
 
           {/* Related Posts */}
@@ -192,6 +225,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </article>
       </section>
+      
+      {/* Mailchimp Popup - only opens via button clicks, not scroll */}
+      <MailchimpPopup disableAutoTrigger={true} />
     </main>
   );
 }

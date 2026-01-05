@@ -61,13 +61,13 @@ Consider supporting **Noa’s Place** by **adding your name to our vision**.
 Because **belonging isn’t a privilege, it’s a basic human need.**
 
 <div class="mt-8 flex justify-center">
-  <a
-    href="http://localhost:3000/#register-form"
-    class="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
+  <button
+    data-mailchimp-cta
+    class="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200 cursor-pointer"
   >
     Add your name in support of Noa's Place
     <svg class="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M7 17L17 7M17 7H7M17 7V17"/>
     </svg>
-  </a>
+  </button>
 </div>

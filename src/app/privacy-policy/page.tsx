@@ -2,11 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Noa's Place",
-  description: "Learn about how Noa's Place collects, uses, and protects your personal data in compliance with UK GDPR and the Data Protection Act 2018.",
+  title: "Privacy Policy | Noa's Place Halifax - Data Protection",
+  description: "Noa's Place Halifax privacy policy - Learn how we collect, use & protect your personal data in compliance with UK GDPR & Data Protection Act 2018. Charity data protection.",
+  keywords: "Noa's Place privacy policy, data protection Halifax, UK GDPR compliance West Yorkshire, charity privacy policy Calderdale, data protection charity Yorkshire",
   robots: {
     index: true,
     follow: true,
+  },
+  openGraph: {
+    title: "Privacy Policy | Noa's Place Halifax - Data Protection",
+    description: "Noa's Place Halifax privacy policy - Learn how we collect, use & protect your personal data in compliance with UK GDPR & Data Protection Act 2018.",
+    url: 'https://noasplace.org.uk/privacy-policy',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://noasplace.org.uk/privacy-policy'
   },
 };
 

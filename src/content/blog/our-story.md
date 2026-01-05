@@ -5,7 +5,7 @@ metaDescription: "Discover the story behind Noa’s Place — founded by Josh an
 imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/our-story-noas-place-halifax-west-yorkshire.jpg"
 date: "2025-10-08"
 author: "Noa's Place Team"
-featured: true
+featured: false
 tags: ["announcement", "community", "updates"]
 ---
 
@@ -45,9 +45,9 @@ Thank you for believing in this vision and standing with us. Together, we're bui
 If this story resonates with you, if you believe in creating a world where every family feels supported and understood, we'd love you to be part of our community.
 
 <div style="text-align: center; margin: 2rem 0;">
-  <a href="http://localhost:3000/#register-form" style="display: inline-flex; align-items: center; justify-content: center; background: #FFB800; color: #1F1F1F; padding: 1rem 2rem; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 16px rgba(255, 184, 0, 0.3); transition: all 0.2s ease; border: none; cursor: pointer; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Inter, 'Helvetica Neue', Arial, 'Noto Sans';" onmouseover="this.style.background='#ffc533'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='#FFB800'; this.style.transform='scale(1)'">
+  <button data-mailchimp-cta style="display: inline-flex; align-items: center; justify-content: center; background: #FFB800; color: #1F1F1F; padding: 1rem 2rem; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 16px rgba(255, 184, 0, 0.3); transition: all 0.2s ease; border: none; cursor: pointer; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Inter, 'Helvetica Neue', Arial, 'Noto Sans';" onmouseover="this.style.background='#ffc533'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='#FFB800'; this.style.transform='scale(1)'">
     Add your name to our list →
-  </a>
+  </button>
 </div>
 
 Be the first to know about our progress, upcoming events, and how you can help make Noa's Place a reality for families.

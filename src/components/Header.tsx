@@ -136,7 +136,7 @@ export default function Header() {
           </nav>
           
           {/* CTA Button & Mobile Menu Button */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setShowMailchimpPopup(true)}
               className="hidden lg:inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-5 py-2.5 text-sm font-semibold text-ink shadow-sm hover:bg-[#ffc533] hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-800 focus:ring-offset-2"
@@ -146,6 +146,17 @@ export default function Header() {
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </button>
+            <a
+              href="https://www.facebook.com/groups/814517921610517/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-brand-800 to-brand-900 px-6 py-2.5 text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:from-brand-900 hover:to-brand-950 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-800 focus:ring-offset-2 border border-brand-700/50"
+            >
+              <svg className="mr-2 size-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+              </svg>
+              Help Build Noa's Place
+            </a>
 
             {/* Mobile menu button */}
             <button 
@@ -257,7 +268,7 @@ export default function Header() {
               <MobileNavLink href="/blog" pathname={pathname} label="Blog" matchStart onClick={() => setIsMobileMenuOpen(false)} />
               <MobileNavLink href="/contact" pathname={pathname} label="Contact" onClick={() => setIsMobileMenuOpen(false)} />
 
-              {/* CTA Button */}
+              {/* CTA Buttons */}
               <button
                 onClick={() => {
                   setShowMailchimpPopup(true);
@@ -270,6 +281,18 @@ export default function Header() {
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </button>
+              <a
+                href="https://www.facebook.com/groups/814517921610517/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-brand-800 to-brand-900 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:from-brand-900 hover:to-brand-950 active:scale-[0.98] transition-all duration-200 w-full mt-3 border border-brand-700/50"
+              >
+                <svg className="mr-2 size-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+                </svg>
+                Help Build Noa's Place
+              </a>
             </div>
           </div>
         </div>

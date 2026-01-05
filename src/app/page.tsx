@@ -674,10 +674,10 @@ export default function Home() {
 									whileInView={{ scale: 1, rotate: 0 }}
 									viewport={{ once: true }}
 									transition={{ duration: 0.5, type: "spring" }}
-									className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 mb-6 shadow-lg"
+									className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 mb-6 shadow-lg"
 								>
-									<svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+									<svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+										<path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
 									</svg>
 								</motion.div>
 								
@@ -688,7 +688,7 @@ export default function Home() {
 									transition={{ duration: 0.6, ease: "easeOut" }}
 									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-800 mb-6 tracking-tight"
 								>
-									Help Us Make This Dream A Reality
+									Help Build Noa's Place With Us
 								</motion.h2>
 								
 								<motion.p 
@@ -698,7 +698,7 @@ export default function Home() {
 									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
 									className="mx-auto max-w-3xl text-xl text-ink/70 leading-relaxed mb-8"
 								>
-									Join our community and help us build an inclusive hub where every family feels supported, seen, and valued.
+									Join our Founding Families Community and be part of shaping Noa's Place from the ground up. Share your ideas, speak into our plans, and help us co-create an inclusive hub that truly serves our community.
 								</motion.p>
 							</motion.div>
 
@@ -707,9 +707,17 @@ export default function Home() {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true, margin: "-100px" }}
 								transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-								className="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border-2 border-brand-100/50"
+								className="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border-2 border-brand-100/50 overflow-hidden"
 							>
-								<MailchimpSubscribeForm />
+								<div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-gray-50">
+									<Image
+										src="/images/noas-place-community.png"
+										alt="Noa's Place Founding Families Community"
+										fill
+										className="object-contain"
+										priority
+									/>
+								</div>
 							</motion.div>
 
 							<motion.div 
@@ -719,26 +727,17 @@ export default function Home() {
 								transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
 								className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
 							>
-								<Link
-									href="/plans"
-									className="inline-flex items-center justify-center rounded-lg bg-brand-800 px-6 py-3 text-base font-semibold text-white shadow-md hover:bg-brand-900 transition-colors duration-200"
+								<a
+									href="https://www.facebook.com/groups/814517921610517/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-800 to-brand-900 px-8 py-3.5 text-base font-semibold text-white shadow-lg hover:shadow-xl hover:from-brand-900 hover:to-brand-950 transition-all duration-200 border border-brand-700/50"
 								>
-									View Our Three Year Plan
-									<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-										<path d="M5 12h14M12 5l7 7-7 7"/>
+									<svg className="mr-2 size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+										<path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
 									</svg>
-								</Link>
-								<Link
-									href="/about#trustees"
-									className="inline-flex items-center justify-center rounded-lg border-2 border-brand-800 px-6 py-3 text-base font-semibold text-brand-800 hover:bg-brand-50 transition-colors duration-200"
-								>
-									Meet the Trustees
-									<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-										<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-										<circle cx="9" cy="7" r="4"/>
-										<path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-									</svg>
-								</Link>
+									Help Build Noa's Place
+								</a>
 							</motion.div>
 						</div>
 					</motion.section>

@@ -230,8 +230,7 @@ export default function Home() {
 							{/* Left side - Text and buttons */}
 							<div className="lg:col-span-2 space-y-8 animate-fade-in">
 								<h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] tracking-tight">
-									Together we make space for every family to{" "}
-									<span className="animate-shine">shine</span>
+									Together we make space for every family to shine
 								</h1>
 								
 								<p className="text-xl sm:text-2xl text-gray-700 leading-relaxed max-w-2xl">

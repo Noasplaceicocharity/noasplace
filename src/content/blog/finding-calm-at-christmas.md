@@ -5,7 +5,7 @@ metaDescription: "Discover practical and compassionate tips for managing sensory
 imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/christmas%20blog.jpg"
 date: "2025-12-01"
 author: "Josh Barnes, Founder of Noa’s Place"
-featured: true
+featured: false
 tags: ["community", "family", "wellbeing", "christmas"]
 ---
 

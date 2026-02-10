@@ -77,18 +77,6 @@ Each trustee shares one thing in common: a belief that **inclusion isn’t just 
 
 ---
 
-### 👤 Kathryn Sullivan – Trustee  
-
-<div style="display: flex; gap: 1.5rem; align-items: flex-start; margin: 1.5rem 0;">
-  <img src="https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/kathryn-sullivan-trustee-noas-place-halifax-west-yorkshire.jpg" alt="Kathryn Sullivan" style="max-width: 150px; height: auto; border-radius: 0.75rem; flex-shrink: 0;" />
-  <div>
-    <p>Kathryn is an <strong>experienced governance consultant</strong> and former trustee with over 14 years' experience supporting charities across multiple sectors. She's passionate about strong governance, community-led change, and inclusion.</p>
-    <p>Kathryn brings her expertise in leadership, compliance, and strategic development to ensure Noa's Place grows with <strong>integrity and purpose</strong>.</p>
-  </div>
-</div>
-
----
-
 ## 💬 A Shared Vision
 
 Together, our trustees represent a blend of **professional excellence**, **lived experience**, and **shared passion for inclusion**.  

@@ -518,12 +518,6 @@ export default function AboutUs() {
                 role: "Trustee",
                 image: "/images/trustees/Nicole_Owen_trustee_noas_place_halifax_west_yorkshire.jpg",
                 description: "Chartered Accountant and Head of Finance with expertise in commercial strategy and operations. As a mum to a two year old, Nicole is passionate about creating inclusive spaces where every child can thrive."
-              },
-              {
-                name: "Kathryn Sullivan",
-                role: "Trustee",
-                image: "/images/trustees/Kathryn_Sullivsn_trustee_noas_place_halifax_west_yorkshire.png",
-                description: "An experienced governance professional with over 14 years as a charity trustee and school governor. As founder of MiraGold, Kathryn brings expertise in governance, leadership, and neurodiversity to support organisations with positive change."
               }
             ].map((trustee, index) => (
               <motion.div

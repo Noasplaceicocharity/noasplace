@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
+import type { Database } from '@/lib/supabase/types';
 
 const submitSchema = z.object({
   answers: z.record(z.union([z.string(), z.array(z.string())])),
@@ -45,10 +46,15 @@ export async function POST(
     return NextResponse.json({ error: 'Survey unavailable' }, { status: 500 });
   }
 
-  const { error: insertError } = await supabase.from('survey_responses').insert({
+  const payload: Database['public']['Tables']['survey_responses']['Insert'] = {
     survey_id: surveyId,
-    answers: parsed.data.answers as Record<string, unknown>,
-  });
+    answers: parsed.data.answers,
+  };
+  // Supabase client infers insert param as 'never' for this table; payload matches Insert type
+  const table = supabase.from('survey_responses') as unknown as {
+    insert: (v: Database['public']['Tables']['survey_responses']['Insert']) => Promise<{ error: { message: string } | null }>;
+  };
+  const { error: insertError } = await table.insert(payload);
 
   if (insertError) {
     console.error('[surveys] POST responses error:', insertError);

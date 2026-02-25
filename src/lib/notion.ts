@@ -127,13 +127,13 @@ function parsePageToItem(page: {
   const props = page.properties as Record<string, unknown>;
   const title =
     titleToPlain(getProp(props, 'Title', 'title', 'Name', 'name')) ||
-    titleToPlain(getPropByType(props, 'title'));
+    titleToPlain(getPropByType(props, 'title') as { title: Array<{ plain_text: string }> } | undefined);
   const slug = (richTextToPlain(getProp(props, 'Slug', 'slug')) || '').trim();
   const statusSelect = selectToPlain(getProp(props, 'Status', 'status'));
   const publishedCheckbox = checkboxValue(getProp(props, 'published', 'Published'));
   const isPublished = statusSelect === 'Published' || publishedCheckbox;
   const typeRaw = selectToPlain(getProp(props, 'Type', 'type'));
-  const tags = multiSelectToArray(getProp(props, 'Tags', 'tags')) || multiSelectToArray(getPropByType(props, 'multi_select'));
+  const tags = multiSelectToArray(getProp(props, 'Tags', 'tags')) || multiSelectToArray(getPropByType(props, 'multi_select') as { multi_select: Array<{ name: string }> } | undefined);
   const type = inferType(typeRaw, tags);
   const description = richTextToPlain(getProp(props, 'Description', 'description'));
   const summary = richTextToPlain(getProp(props, 'Summary', 'summary')) || description;
@@ -222,11 +222,11 @@ async function fetchTakeActionItemsUncached(): Promise<TakeActionListItem[]> {
       if (!parsed) {
         if (process.env.NODE_ENV === 'development' && results.length <= 5) {
           const props = p.properties as Record<string, unknown>;
-          const title = titleToPlain(getProp(props, 'Title', 'title', 'Name', 'name')) || titleToPlain(getPropByType(props, 'title'));
+          const title = titleToPlain(getProp(props, 'Title', 'title', 'Name', 'name')) || titleToPlain(getPropByType(props, 'title') as { title: Array<{ plain_text: string }> } | undefined);
           const slug = (richTextToPlain(getProp(props, 'Slug', 'slug')) || '').trim();
-          const pub = checkboxValue(getProp(props, 'published', 'Published')) || checkboxValue(getPropByType(props, 'checkbox'));
+          const pub = checkboxValue(getProp(props, 'published', 'Published')) || checkboxValue(getPropByType(props, 'checkbox') as { checkbox?: boolean } | undefined);
           const statusSel = selectToPlain(getProp(props, 'Status', 'status'));
-          const tags = multiSelectToArray(getProp(props, 'Tags', 'tags')) || multiSelectToArray(getPropByType(props, 'multi_select'));
+          const tags = multiSelectToArray(getProp(props, 'Tags', 'tags')) || multiSelectToArray(getPropByType(props, 'multi_select') as { multi_select: Array<{ name: string }> } | undefined);
           console.log('[Take Action] Skipped page – title:', !!title, 'slug:', slug || '(empty)', 'published:', pub, 'Status:', statusSel, 'tags:', tags);
         }
         continue;
@@ -385,13 +385,13 @@ function parsePageToBannerBar(page: {
   // Notion API keys properties by ID, not name – resolve by type (and order for multiple rich_text)
   const name =
     titleToPlain(getProp(props, 'Name', 'name', 'Title', 'title')) ||
-    titleToPlain(getPropByType(props, 'title'));
-  const published = checkboxValue(getProp(props, 'Published', 'published')) || checkboxValue(getPropByType(props, 'checkbox'));
+    titleToPlain(getPropByType(props, 'title') as { title: Array<{ plain_text: string }> } | undefined);
+  const published = checkboxValue(getProp(props, 'Published', 'published')) || checkboxValue(getPropByType(props, 'checkbox') as { checkbox?: boolean } | undefined);
   if (!published) return null;
 
   const link =
     urlToPlain(getProp(props, 'Link', 'link', 'URL', 'url')) ||
-    urlToPlain(getPropByType(props, 'url')) ||
+    urlToPlain(getPropByType(props, 'url') as { url: string | null } | undefined) ||
     richTextToPlain(getProp(props, 'Link', 'link'));
   const richTexts = getAllPropsByType(props, 'rich_text');
   const bannerTextFromName = richTextToPlain(getProp(props, 'Banner text', 'banner text', 'Banner Text', 'bannerText'));
@@ -399,7 +399,7 @@ function parsePageToBannerBar(page: {
   const bannerText =
     bannerTextFromName ||
     (richTexts.length >= 1 ? richTextToPlain(richTexts[0]) : '') ||
-    richTextToPlain(getPropByType(props, 'rich_text'));
+    richTextToPlain(getPropByType(props, 'rich_text') as { rich_text: Array<{ plain_text: string }> } | undefined);
   const buttonText =
     buttonTextFromName ||
     (richTexts.length >= 2 ? richTextToPlain(richTexts[1]) : '');

@@ -5,7 +5,7 @@ metaDescription: "Read Noa’s Place three year strategy and learn how we plan t
 imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/three-year-strategy.jpg"
 date: "2025-01-01"
 author: "Josh Barnes, Founder of Noa’s Place"
-featured: true
+featured: false
 tags: ["community", "strategy", "send", "updates"]
 ---
 

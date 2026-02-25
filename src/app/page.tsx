@@ -27,6 +27,10 @@ export default function Home() {
   const [showMailchimpPopup, setShowMailchimpPopup] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [featuredBlog, setFeaturedBlog] = useState<BlogPostMeta | null>(null);
+  const [featuredTakeAction, setFeaturedTakeAction] = useState<{
+    letterToMp: { slug: string; title: string } | null;
+    survey: { slug: string; title: string } | null;
+  }>({ letterToMp: null, survey: null });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -47,6 +51,20 @@ export default function Home() {
       })
       .catch(err => {
         console.error('Error fetching featured blog:', err);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/take-action/featured')
+      .then(res => res.json())
+      .then(data => {
+        setFeaturedTakeAction({
+          letterToMp: data.letterToMp ? { slug: data.letterToMp.slug, title: data.letterToMp.title } : null,
+          survey: data.survey ? { slug: data.survey.slug, title: data.survey.title } : null,
+        });
+      })
+      .catch(err => {
+        console.error('Error fetching featured take action:', err);
       });
   }, []);
 
@@ -649,38 +667,24 @@ export default function Home() {
 					</motion.section>
 				</AnimatedScrollSection>
 
-				{/* Support Us Section */}
+				{/* Take Action Section */}
 				<AnimatedScrollSection>
 					<motion.section 
-						className="relative bg-gradient-to-b from-white via-brand-50/60 to-white py-28 overflow-hidden"
+						className="relative bg-gradient-to-b from-white via-brand-50/50 to-white py-28 overflow-hidden"
 					>
-						{/* Subtle decorative background elements */}
 						<div className="absolute inset-0 overflow-hidden pointer-events-none">
-							<div className="absolute top-20 right-10 w-72 h-72 bg-purple-200/15 rounded-full blur-3xl"></div>
-							<div className="absolute bottom-20 left-10 w-96 h-96 bg-yellow-200/15 rounded-full blur-3xl"></div>
+							<div className="absolute top-20 right-10 w-72 h-72 bg-brand-500/20 rounded-full blur-3xl" />
+							<div className="absolute bottom-20 left-10 w-96 h-96 bg-brand-100/40 rounded-full blur-3xl" />
 						</div>
-						
-						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
+						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent" />
 						<div className="relative mx-auto max-w-5xl px-6">
 							<motion.div 
 								initial={{ opacity: 0, y: 30 }}
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true, margin: "-100px" }}
 								transition={{ duration: 0.6, ease: "easeOut" }}
-								className="text-center mb-12"
+								className="text-center mb-14"
 							>
-								<motion.div 
-									initial={{ scale: 0, rotate: -180 }}
-									whileInView={{ scale: 1, rotate: 0 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.5, type: "spring" }}
-									className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 mb-6 shadow-lg"
-								>
-									<svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-										<path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
-									</svg>
-								</motion.div>
-								
 								<motion.h2 
 									initial={{ opacity: 0, scale: 0.9 }}
 									whileInView={{ opacity: 1, scale: 1 }}
@@ -688,57 +692,83 @@ export default function Home() {
 									transition={{ duration: 0.6, ease: "easeOut" }}
 									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-800 mb-6 tracking-tight"
 								>
-									Help Build Noa's Place With Us
+									Take Action
 								</motion.h2>
-								
 								<motion.p 
 									initial={{ opacity: 0, y: 20 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
 									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-									className="mx-auto max-w-3xl text-xl text-ink/70 leading-relaxed mb-8"
+									className="mx-auto max-w-3xl text-xl text-ink/80 leading-relaxed"
 								>
-									Join our Founding Families Community and be part of shaping Noa's Place from the ground up. Share your ideas, speak into our plans, and help us co-create an inclusive hub that truly serves our community.
+									Our letters take 60 seconds to send. Just enter your details and go. Our surveys help us collect information to provide to MPs and decision makers.
 								</motion.p>
 							</motion.div>
 
-							<motion.div
-								initial={{ opacity: 0, y: 30 }}
+							<motion.div 
+								initial={{ opacity: 0, y: 24 }}
 								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true, margin: "-100px" }}
-								transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-								className="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border-2 border-brand-100/50 overflow-hidden"
+								viewport={{ once: true, margin: "-80px" }}
+								transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+								className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
 							>
-								<div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-gray-50">
-									<Image
-										src="/images/noas-place-community.png"
-										alt="Noa's Place Founding Families Community"
-										fill
-										className="object-contain"
-										priority
-									/>
-								</div>
+								{featuredTakeAction.letterToMp && (
+									<Link
+										href={`/take-action/${featuredTakeAction.letterToMp.slug}`}
+										className="group flex flex-col rounded-2xl bg-white border-2 border-brand-100 p-6 sm:p-8 shadow-lg hover:shadow-xl hover:border-brand-200 transition-all duration-300 hover:-translate-y-0.5"
+									>
+										<div className="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-800 text-white mb-4 group-hover:bg-brand-900 transition-colors">
+											<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+												<path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+											</svg>
+										</div>
+										<span className="text-sm font-bold uppercase tracking-wide text-brand-800 mb-1">Letter to MP</span>
+										<h3 className="text-lg font-extrabold text-ink mb-2 group-hover:text-brand-800 transition-colors">{featuredTakeAction.letterToMp.title}</h3>
+										<p className="text-ink/70 text-sm mb-5 flex-1">Have your voice heard in 60 seconds.</p>
+										<span className="inline-flex items-center justify-center rounded-xl bg-brand-800 px-6 py-3 text-base font-bold text-white shadow-md group-hover:bg-brand-900 group-hover:shadow-lg group-hover:scale-[1.02] transition-all duration-200">
+											Send your letter
+											<svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+										</span>
+									</Link>
+								)}
+								{featuredTakeAction.survey && (
+									<Link
+										href={`/take-action/${featuredTakeAction.survey.slug}`}
+										className="group flex flex-col rounded-2xl bg-white border-2 border-brand-100 p-6 sm:p-8 shadow-lg hover:shadow-xl hover:border-brand-200 transition-all duration-300 hover:-translate-y-0.5"
+									>
+										<div className="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-800 text-white mb-4 group-hover:bg-brand-900 transition-colors">
+											<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+												<path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m3 4H9m0 0l3 3m0-3l-3 3" />
+											</svg>
+										</div>
+										<span className="text-sm font-bold uppercase tracking-wide text-brand-800 mb-1">Survey</span>
+										<h3 className="text-lg font-extrabold text-ink mb-2 group-hover:text-brand-800 transition-colors">{featuredTakeAction.survey.title}</h3>
+										<p className="text-ink/70 text-sm mb-5 flex-1">Help us gather evidence for MPs and decision makers.</p>
+										<span className="inline-flex items-center justify-center rounded-xl bg-white border-2 border-brand-800 px-6 py-3 text-base font-bold text-brand-800 shadow-md group-hover:bg-brand-50 group-hover:shadow-lg group-hover:scale-[1.02] transition-all duration-200">
+											Take the survey
+											<svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+										</span>
+									</Link>
+								)}
 							</motion.div>
 
-							<motion.div 
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true }}
-								transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-								className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
-							>
-								<a
-									href="https://www.facebook.com/groups/814517921610517/"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-800 to-brand-900 px-8 py-3.5 text-base font-semibold text-white shadow-lg hover:shadow-xl hover:from-brand-900 hover:to-brand-950 transition-all duration-200 border border-brand-700/50"
+							{(featuredTakeAction.letterToMp || featuredTakeAction.survey) && (
+								<motion.div 
+									initial={{ opacity: 0 }}
+									whileInView={{ opacity: 1 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.4, delay: 0.35 }}
+									className="text-center mt-8"
 								>
-									<svg className="mr-2 size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-										<path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
-									</svg>
-									Help Build Noa's Place
-								</a>
-							</motion.div>
+									<Link
+										href="/take-action"
+										className="inline-flex items-center gap-2 text-brand-800 font-bold hover:text-brand-900 transition-colors"
+									>
+										View all actions
+										<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+									</Link>
+								</motion.div>
+							)}
 						</div>
 					</motion.section>
 				</AnimatedScrollSection>

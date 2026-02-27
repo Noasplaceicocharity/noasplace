@@ -34,6 +34,7 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
   const [lookupError, setLookupError] = useState<string>('');
   const [sendState, setSendState] = useState<SendState>('idle');
   const [sendError, setSendError] = useState<string>('');
+  const [gdprConsent, setGdprConsent] = useState(false);
 
   const templateData = useMemo(
     () => ({
@@ -130,6 +131,7 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
     setLookupError('');
     setSendState('idle');
     setSendError('');
+    setGdprConsent(false);
   };
 
   if (step === 1) {
@@ -140,7 +142,7 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
             <p className="text-sm font-semibold text-white/90 uppercase tracking-wide mb-2">Step 1 of 2</p>
             <h2 className="text-2xl font-extrabold text-white mb-3">Your details</h2>
             <p className="text-white/80 text-base">
-              Enter your details below. We&apos;ll find your MP and then show you the letter to review before sending.
+              Enter your details below. We&apos;ll find your MP and then show you the email to review before sending.
             </p>
           </div>
 
@@ -225,14 +227,14 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
               disabled={lookupState === 'loading'}
               className="rounded-full bg-white px-8 py-3 font-bold text-brand-800 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {lookupState === 'loading' ? 'Finding your MP…' : 'Continue to your letter'}
+              {lookupState === 'loading' ? 'Finding your MP…' : 'Continue to your email'}
             </button>
           </div>
         </form>
         </div>
 
         <p className="text-sm text-ink/60 max-w-2xl mx-auto text-center">
-          We use your details only to send this letter to your MP. We do not store your address.
+          We use your details only to send this email to your MP. We do not store your address.
         </p>
       </div>
     );
@@ -243,7 +245,7 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
       <div className="max-w-2xl mx-auto rounded-2xl bg-brand-800 border border-brand-500/30 p-6 sm:p-8 text-white">
         <div className="mb-6">
           <p className="text-sm font-semibold text-white/90 uppercase tracking-wide mb-2">Step 2 of 2</p>
-          <h2 className="text-2xl font-extrabold text-white mb-3">Review and send your letter</h2>
+          <h2 className="text-2xl font-extrabold text-white mb-3">Review and send your email</h2>
           <p className="text-lg text-white font-medium">
             Your MP is <span className="font-extrabold">{mpName}</span>.
           </p>
@@ -253,7 +255,7 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
             </p>
           )}
           <p className="text-white/80 text-base mt-2">
-            Check the letter below. When you&apos;re happy, click Send to email it to {mpName}.
+            Check the email below. When you&apos;re happy, click Send to email it to {mpName}.
           </p>
         </div>
 
@@ -276,28 +278,41 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
           )}
           {sendState === 'success' && (
             <div className="rounded-lg bg-green-50 border border-green-200 p-4 text-green-800">
-              Your letter has been sent successfully. Thank you for taking action.
+              Your email has been sent successfully. Thank you for taking action.
             </div>
           )}
 
           {sendState !== 'success' && (
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="submit"
-                disabled={sendState === 'submitting'}
-                className="rounded-full bg-white px-8 py-3 font-bold text-brand-800 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                {sendState === 'submitting' ? 'Sending…' : 'Send letter'}
-              </button>
-              <button
-                type="button"
-                onClick={goBackToStep1}
-                disabled={sendState === 'submitting'}
-                className="rounded-full border-2 border-white text-white px-6 py-3 font-bold hover:bg-white/10 disabled:opacity-50 transition-colors"
-              >
-                Change my details
-              </button>
-            </div>
+            <>
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={gdprConsent}
+                  onChange={(e) => setGdprConsent(e.target.checked)}
+                  className="mt-1 h-5 w-5 rounded border-white/30 bg-white text-brand-800 focus:ring-2 focus:ring-white/50"
+                />
+                <span className="text-sm text-white/90 group-hover:text-white">
+                  I allow you to send this email on my behalf. Any replies will come to the email I provided.
+                </span>
+              </label>
+              <div className="flex flex-wrap gap-3">
+                <button
+                  type="submit"
+                  disabled={sendState === 'submitting' || !gdprConsent}
+                  className="rounded-full bg-white px-8 py-3 font-bold text-brand-800 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {sendState === 'submitting' ? 'Sending…' : 'Send email'}
+                </button>
+                <button
+                  type="button"
+                  onClick={goBackToStep1}
+                  disabled={sendState === 'submitting'}
+                  className="rounded-full border-2 border-white text-white px-6 py-3 font-bold hover:bg-white/10 disabled:opacity-50 transition-colors"
+                >
+                  Change my details
+                </button>
+              </div>
+            </>
           )}
         </form>
       </div>

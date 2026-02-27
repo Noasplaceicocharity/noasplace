@@ -15,7 +15,7 @@ const TYPE_ORDER: TakeActionType[] = ['LETTER_TO_MP', 'SURVEY'];
 function typeBadgeLabel(type: TakeActionType): string {
   switch (type) {
     case 'LETTER_TO_MP':
-      return 'Letter to MP';
+      return 'Email to MP';
     case 'SURVEY':
       return 'Survey';
     default:

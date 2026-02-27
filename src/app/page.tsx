@@ -701,7 +701,7 @@ export default function Home() {
 									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
 									className="mx-auto max-w-3xl text-xl text-ink/80 leading-relaxed"
 								>
-									Our letters take 60 seconds to send. Just enter your details and go. Our surveys help us collect information to provide to MPs and decision makers.
+									Our emails take 60 seconds to send. Just enter your details and go. Our surveys help us collect information to provide to MPs and decision makers.
 								</motion.p>
 							</motion.div>
 
@@ -722,11 +722,11 @@ export default function Home() {
 												<path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
 											</svg>
 										</div>
-										<span className="text-sm font-bold uppercase tracking-wide text-brand-800 mb-1">Letter to MP</span>
+										<span className="text-sm font-bold uppercase tracking-wide text-brand-800 mb-1">Email to MP</span>
 										<h3 className="text-lg font-extrabold text-ink mb-2 group-hover:text-brand-800 transition-colors">{featuredTakeAction.letterToMp.title}</h3>
 										<p className="text-ink/70 text-sm mb-5 flex-1">Have your voice heard in 60 seconds.</p>
 										<span className="inline-flex items-center justify-center rounded-xl bg-brand-800 px-6 py-3 text-base font-bold text-white shadow-md group-hover:bg-brand-900 group-hover:shadow-lg group-hover:scale-[1.02] transition-all duration-200">
-											Send your letter
+											Send your email
 											<svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
 										</span>
 									</Link>

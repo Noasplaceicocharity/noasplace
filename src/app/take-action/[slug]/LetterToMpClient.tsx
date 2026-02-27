@@ -35,6 +35,7 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
   const [sendState, setSendState] = useState<SendState>('idle');
   const [sendError, setSendError] = useState<string>('');
   const [gdprConsent, setGdprConsent] = useState(false);
+  const [joinMailingList, setJoinMailingList] = useState(false);
 
   const templateData = useMemo(
     () => ({
@@ -119,6 +120,22 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
         return;
       }
       setSendState('success');
+
+      if (joinMailingList) {
+        try {
+          await fetch('/api/subscribe-mailchimp-letter-to-mp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              firstName: form.firstName,
+              lastName: form.lastName,
+              email: form.email,
+            }),
+          });
+        } catch {
+          // Non-blocking: email was sent; mailing list is best-effort
+        }
+      }
     } catch {
       setSendState('error');
       setSendError('Network error. Please try again.');
@@ -132,6 +149,7 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
     setSendState('idle');
     setSendError('');
     setGdprConsent(false);
+    setJoinMailingList(false);
   };
 
   if (step === 1) {
@@ -293,6 +311,17 @@ export default function LetterToMpClient({ action }: LetterToMpClientProps) {
                 />
                 <span className="text-sm text-white/90 group-hover:text-white">
                   I allow you to send this email on my behalf. Any replies will come to the email I provided.
+                </span>
+              </label>
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={joinMailingList}
+                  onChange={(e) => setJoinMailingList(e.target.checked)}
+                  className="mt-1 h-5 w-5 rounded border-white/30 bg-white text-brand-800 focus:ring-2 focus:ring-white/50"
+                />
+                <span className="text-sm text-white/90 group-hover:text-white">
+                  I want to be kept up to date with Noa&apos;s Place and added to your email list.
                 </span>
               </label>
               <div className="flex flex-wrap gap-3">

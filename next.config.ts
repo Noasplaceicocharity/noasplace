@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/roundtablelive",
+        destination:
+          "https://www.eventbrite.com/e/send-reform-what-families-needs-to-know-right-now-tickets-1985103122878?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=ebdsshcopyurl",
+        permanent: false,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

@@ -142,7 +142,7 @@ export default function Header() {
               onClick={() => setShowMailchimpPopup(true)}
               className="hidden lg:inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-5 py-2.5 text-sm font-semibold text-ink shadow-sm hover:bg-[#ffc533] hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-800 focus:ring-offset-2"
             >
-              Support Us
+              Be a Founding Supporter
               <svg className="ml-2 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -266,7 +266,7 @@ export default function Header() {
                 }}
                 className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-6 py-3 text-sm font-semibold text-ink shadow-sm hover:bg-[#ffc533] hover:shadow-md active:scale-[0.98] transition-all duration-200 w-full mt-4"
               >
-                Support Us
+                Be a Founding Supporter
                 <svg className="ml-2 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>

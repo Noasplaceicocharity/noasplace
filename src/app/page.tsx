@@ -32,6 +32,7 @@ export default function Home() {
     survey: { slug: string; title: string } | null;
   }>({ letterToMp: null, survey: null });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [selectedJourneyStep, setSelectedJourneyStep] = useState(3);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
@@ -104,9 +105,6 @@ export default function Home() {
 
   // Subtle parallax effects for depth
   const welcomeY = useTransform(scrollYProgress, [0, 0.25], [0, -30]);
-  const visionY = useTransform(scrollYProgress, [0.15, 0.35], [0, -20]);
-  const missionY = useTransform(scrollYProgress, [0.25, 0.45], [0, -20]);
-  const valuesY = useTransform(scrollYProgress, [0.35, 0.55], [0, -15]);
   const dreamboardY = useTransform(scrollYProgress, [0.45, 0.65], [0, -25]);
   const planY = useTransform(scrollYProgress, [0.55, 0.75], [0, -20]);
 
@@ -203,6 +201,18 @@ export default function Home() {
     },
   ];
 
+  const journeySteps = [
+    { step: 1, title: "The Vision & Strategy", status: "done", label: "Done", text: "Our vision, mission and 3-year strategic plan are in place to guide Noa's Place." },
+    { step: 2, title: "Digital Community & Support Network", status: "done", label: "Done", text: "Our online community is growing with over 2,000 supporters and families connected." },
+    { step: 3, title: "Listening to Families & Shaping the Hub", status: "progress", label: "In Progress", text: "Families are helping shape the future through conversations, feedback and co-design." },
+    { step: 4, title: "Building Partnerships & Community Links", status: "progress", label: "In Progress", text: "We are connecting with schools, organisations and local partners to strengthen support for families." },
+    { step: 5, title: "Becoming a Registered Charity", status: "progress", label: "In Progress", text: "Governance, trustees and charity registration steps are underway." },
+    { step: 6, title: "Fundraising for the Noa's Place Hub", status: "next", label: "Next Step", text: "Securing funding to create a dedicated, sensory-aware space for families." },
+    { step: 7, title: "Opening the Noa's Place Hub", status: "future", label: "Future Goal", text: "A calm, welcoming space where neurodivergent and disabled individuals and families can connect, belong and thrive." },
+  ] as const;
+  const activeJourneyStep = journeySteps.find((item) => item.step === selectedJourneyStep) ?? journeySteps[2];
+  const completedJourneySteps = journeySteps.filter((item) => item.status === "done").length;
+
 	return (
 		<main className="bg-background text-ink">
 			{/* Hero Section */}
@@ -228,7 +238,7 @@ export default function Home() {
 					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-200/10 rounded-full blur-3xl"></div>
 				</div>
 
-				<div className="relative px-6 pt-24 pb-20 sm:pt-32 sm:pb-24 z-20">
+				<div className="relative px-6 pt-16 pb-20 sm:pt-20 sm:pb-24 z-20">
 					<div className="mx-auto max-w-7xl">
 						{/* "As seen on" badge */}
 						<div className="mb-10 animate-fade-in">
@@ -252,7 +262,7 @@ export default function Home() {
 								</h1>
 								
 								<p className="text-xl sm:text-2xl text-gray-700 leading-relaxed max-w-2xl">
-									We create welcoming spaces where neurodivergent and disabled individuals and families find understanding, connection, and community. You're welcome exactly as you are.
+									We're building a home for neurodiversity in West Yorkshire and we need your help to open the doors.
 								</p>
 
 								{/* Buttons */}
@@ -261,7 +271,7 @@ export default function Home() {
 										onClick={() => setShowMailchimpPopup(true)}
 										className="inline-flex items-center justify-center rounded-xl bg-brand-800 px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-brand-900 hover:shadow-xl hover:scale-105 transition-all duration-300"
 									>
-										Support Us
+										Be a Founding Supporter
 										<svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
 										</svg>
@@ -308,8 +318,12 @@ export default function Home() {
 					</div>
 						</div>
 
+						<p className="mt-20 mb-6 text-lg sm:text-xl font-semibold text-gray-700 leading-relaxed max-w-3xl">
+							While we work on opening our physical hub, here are some tools to support you right now.
+						</p>
+
 						{/* Navigation cards */}
-						<div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 							<button
 								onClick={() => setShowMailchimpPopup(true)}
 								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-white/50 text-left"
@@ -317,14 +331,14 @@ export default function Home() {
 								<div className="relative h-40 overflow-hidden">
 									<Image
 										src="/images/family_photo_halifax_west_yorkshire.jpg"
-										alt="Support Us - Help us make this dream a reality"
+										alt="Be a Founding Supporter - Help us make this dream a reality"
 										fill
 										className="object-cover transition-transform duration-500 group-hover:scale-110"
 									/>
 									<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 								</div>
 								<div className="p-6">
-									<div className="text-2xl font-black text-brand-800 mb-2 group-hover:text-brand-900 transition-colors">Support Us</div>
+									<div className="text-2xl font-black text-brand-800 mb-2 group-hover:text-brand-900 transition-colors">Be a Founding Supporter</div>
 									<div className="text-sm font-medium text-gray-600">Help us make this dream a reality</div>
 								</div>
 							</button>
@@ -425,244 +439,198 @@ export default function Home() {
 					>
 						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
 						<div className="mx-auto max-w-7xl px-6">
-							<div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-								{/* Text Content */}
-								<div className="text-center lg:text-left">
-									<motion.h2 
-										initial={{ opacity: 0, scale: 0.9 }}
-										whileInView={{ opacity: 1, scale: 1 }}
-										viewport={{ once: true, margin: "-100px" }}
-										transition={{ duration: 0.6, ease: "easeOut" }}
-										className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-ink mb-8 tracking-tight"
-									>
-										Welcome to Noa's Place
-									</motion.h2>
-									<motion.p 
-										initial={{ opacity: 0, y: 20 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										viewport={{ once: true, margin: "-100px" }}
-										transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-										className="text-xl sm:text-2xl text-ink/70 leading-relaxed"
-									>
-										We're building a new, inclusive community hub in Halifax, West Yorkshire, designed specifically for neurodivergent and disabled individuals and families. Our mission is to create calm, welcoming spaces where everyone can feel understood, connected, and truly at home.
-									</motion.p>
-								</div>
-								
-								{/* Family Photo */}
-								<motion.div
-									initial={{ opacity: 0, x: 30 }}
-									whileInView={{ opacity: 1, x: 0 }}
-									viewport={{ once: true, margin: "-100px" }}
-									transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-									className="relative"
-								>
-									<div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
-										<Image
-											src="/images/family_photo_halifax_west_yorkshire.jpg"
-											alt="Family at Noa's Place - A welcoming community for neurodivergent and disabled individuals and families"
-											fill
-											className="object-cover"
-										/>
-										<div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent"></div>
-									</div>
-								</motion.div>
-							</div>
-						</div>
-					</motion.section>
-				</AnimatedScrollSection>
-
-				{/* Vision & Mission Section */}
-				<AnimatedScrollSection>
-					<motion.section 
-						style={{ y: visionY }}
-						className="relative bg-gradient-to-b from-white via-brand-50/40 to-white py-32 overflow-hidden"
-					>
-						{/* Decorative background elements */}
-						<div className="absolute inset-0 overflow-hidden pointer-events-none">
-							<div className="absolute top-20 right-10 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
-							<div className="absolute bottom-20 left-10 w-96 h-96 bg-yellow-200/20 rounded-full blur-3xl"></div>
-							<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-200/10 rounded-full blur-3xl"></div>
-						</div>
-						
-						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
-						<div className="relative mx-auto max-w-7xl px-6">
-							{/* Vision & Mission Combined */}
-							<div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-24">
-								{/* Vision */}
-								<motion.div 
-									initial={{ opacity: 0, y: 30 }}
-									whileInView={{ opacity: 1, y: 0 }}
+							<div className="text-center mb-10">
+								<motion.h2 
+									initial={{ opacity: 0, scale: 0.9 }}
+									whileInView={{ opacity: 1, scale: 1 }}
 									viewport={{ once: true, margin: "-100px" }}
 									transition={{ duration: 0.6, ease: "easeOut" }}
-									whileHover={{ y: -8 }}
-									className="group relative flex flex-col p-8 lg:p-10 rounded-3xl bg-gradient-to-br from-white via-purple-50/50 to-pink-50/50 backdrop-blur-sm border-2 border-purple-100/50 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-ink mb-6 tracking-tight"
 								>
-									{/* Decorative corner accent */}
-									<div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/20 to-transparent rounded-bl-full"></div>
-									<div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-pink-400/20 to-transparent rounded-tr-full"></div>
-									
-									<div className="relative z-10">
-										<motion.div 
-											initial={{ scale: 0, rotate: -180 }}
-											whileInView={{ scale: 1, rotate: 0 }}
-											viewport={{ once: true }}
-											transition={{ duration: 0.5, type: "spring" }}
-											className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
-										>
-											<svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-											</svg>
-										</motion.div>
-										<motion.h2 
-											initial={{ opacity: 0, y: 20 }}
-											whileInView={{ opacity: 1, y: 0 }}
-											viewport={{ once: true, margin: "-100px" }}
-											transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-											className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-800 mb-6 tracking-tight"
-										>
-											Our Vision
-										</motion.h2>
-										<motion.p 
-											initial={{ opacity: 0, y: 20 }}
-											whileInView={{ opacity: 1, y: 0 }}
-											viewport={{ once: true, margin: "-100px" }}
-											transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-											className="text-xl text-ink/80 leading-relaxed font-medium"
-										>
-											We create welcoming spaces where neurodivergent and disabled individuals and families find understanding, connection, and community. You're welcome exactly as you are. This is a place where everyone can simply be themselves and shine.
-										</motion.p>
-									</div>
-								</motion.div>
-
-								{/* Mission */}
-								<motion.div 
-									initial={{ opacity: 0, y: 30 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									viewport={{ once: true, margin: "-100px" }}
-									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-									whileHover={{ y: -8 }}
-									className="group relative flex flex-col p-8 lg:p-10 rounded-3xl bg-gradient-to-br from-white via-brand-50/80 to-yellow-50/50 backdrop-blur-sm border-2 border-brand-100/30 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
-								>
-									{/* Decorative corner accent */}
-									<div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-brand-400/20 to-transparent rounded-br-full"></div>
-									<div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-yellow-400/20 to-transparent rounded-tl-full"></div>
-									
-									<div className="relative z-10">
-										<motion.div 
-											initial={{ scale: 0, rotate: -180 }}
-											whileInView={{ scale: 1, rotate: 0 }}
-											viewport={{ once: true }}
-											transition={{ duration: 0.5, type: "spring", delay: 0.1 }}
-											className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
-										>
-											<svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-											</svg>
-										</motion.div>
-										<motion.h2 
-											initial={{ opacity: 0, y: 20 }}
-											whileInView={{ opacity: 1, y: 0 }}
-											viewport={{ once: true, margin: "-100px" }}
-											transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-											className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-800 mb-6 tracking-tight"
-										>
-											Our Mission
-										</motion.h2>
-										<motion.p 
-											initial={{ opacity: 0, y: 20 }}
-											whileInView={{ opacity: 1, y: 0 }}
-											viewport={{ once: true, margin: "-100px" }}
-											transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-											className="text-xl text-ink/80 leading-relaxed font-medium"
-										>
-											Our mission is to create calm, inclusive, and sensory aware spaces thoughtfully designed for neurodivergent and disabled individuals and families. We listen, we understand, and we respond with kindness, building a supportive community where no one is ever left to face challenges alone.
-										</motion.p>
-									</div>
-								</motion.div>
-							</div>
-
-							{/* Values */}
-							<motion.div 
-								style={{ y: valuesY }}
-								initial={{ opacity: 0, y: 30 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true, margin: "-100px" }}
-								transition={{ duration: 0.6, ease: "easeOut" }}
-								className="text-center"
-							>
-								<motion.div 
-									initial={{ scale: 0, rotate: -180 }}
-									whileInView={{ scale: 1, rotate: 0 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.5, type: "spring" }}
-									className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 mb-6 shadow-lg"
-								>
-									<svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-									</svg>
-								</motion.div>
-								<motion.h2 
-									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									viewport={{ once: true, margin: "-100px" }}
-									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-800 mb-6 tracking-tight"
-								>
-									Our Values
+									Welcome to Noa's Place
 								</motion.h2>
 								<motion.p 
 									initial={{ opacity: 0, y: 20 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true, margin: "-100px" }}
 									transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-									className="mx-auto max-w-2xl text-xl text-ink/80 font-medium mb-16"
+									className="mx-auto max-w-3xl text-xl sm:text-2xl text-ink/70 leading-relaxed"
 								>
-									These values guide everything we do and shape how we support families.
+									We're building a new, inclusive community hub in Halifax, West Yorkshire, designed specifically for neurodivergent and disabled individuals and families. Our mission is to create calm, welcoming spaces where everyone can feel understood, connected, and truly at home.
 								</motion.p>
-								<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-									{[
-										{ name: "Kindness", image: "/images/values/Kindness.png", description: "We meet every family with patience, compassion and warmth." },
-										{ name: "Belonging", image: "/images/values/belonging.png", description: "No one should feel alone here. Everyone has a place." },
-										{ name: "Listening", image: "/images/values/Listening.png", description: "Families and individuals help shape what we do and how we do it." },
-										{ name: "Calm", image: "/images/values/calm.png", description: "We create gentle, sensory-considerate spaces where people can breathe." },
-										{ name: "Growth", image: "/images/values/growth.png", description: "We support small steps, personal strengths and long-term flourishing." },
-									].map((value, index) => (
-										<motion.div
-											key={value.name}
-											initial={{ opacity: 0, y: 20 }}
-											whileInView={{ opacity: 1, y: 0 }}
-											viewport={{ once: true, margin: "-100px" }}
-											transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-											whileHover={{ y: -8 }}
-											className="group relative flex flex-col items-center p-6 lg:p-8 rounded-3xl bg-gradient-to-br from-white via-brand-50/50 to-white backdrop-blur-sm border-2 border-brand-100/30 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
-										>
-											{/* Decorative corner accent */}
-											<div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-brand-300/20 to-transparent rounded-bl-full"></div>
-											<div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-brand-200/20 to-transparent rounded-tr-full"></div>
-											
-											<div className="relative z-10 flex flex-col items-center">
-												<motion.div 
-													className="relative w-28 h-28 mb-6"
-													whileHover={{ scale: 1.1, rotate: 5 }}
-													transition={{ type: "spring", stiffness: 300 }}
-												>
-													<Image
-														src={value.image}
-														alt={value.name}
-														fill
-														className="object-contain"
-													/>
-												</motion.div>
-												<h3 className="text-xl font-bold text-brand-800 mb-3">{value.name}</h3>
-												<p className="text-sm text-ink/70 text-center leading-relaxed">
-													{value.description}
-												</p>
-											</div>
-										</motion.div>
-									))}
+							</div>
+							<motion.div
+								initial={{ opacity: 0, y: 24 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, margin: "-100px" }}
+								transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+								className="flex justify-center"
+							>
+								<div className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/50 bg-black">
+									<video
+										src="https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/The%20Story%20Behind%20Noa%E2%80%99s%20Place%20_%20A%20New%20Hope%20for%20Families%20with%20SEND.mp4"
+										controls
+										playsInline
+										className="w-full h-full object-contain"
+										aria-label="The Story Behind Noa's Place - A New Hope for Families with SEND"
+									>
+										Your browser does not support the video tag.
+									</video>
 								</div>
 							</motion.div>
+						</div>
+					</motion.section>
+				</AnimatedScrollSection>
+
+				{/* Image Gallery - Dreamboard */}
+				<AnimatedScrollSection>
+					<motion.section 
+						id="dreamboard"
+						style={{ y: dreamboardY }}
+						className="relative overflow-hidden bg-gradient-to-b from-white via-brand-50/30 to-white py-28"
+					>
+						{/* Section divider */}
+						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
+						
+						<div className="mx-auto max-w-7xl px-6">
+							<motion.div 
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, margin: "-100px" }}
+								transition={{ duration: 0.6, ease: "easeOut" }}
+								className="text-center mb-16"
+							>
+								<motion.h2 
+									initial={{ opacity: 0, scale: 0.9 }}
+									whileInView={{ opacity: 1, scale: 1 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.6, ease: "easeOut" }}
+									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-ink mb-6 tracking-tight"
+								>
+									Our Dreamboard
+								</motion.h2>
+								<motion.p 
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+									className="mx-auto max-w-3xl text-xl text-ink/70 leading-relaxed mb-4"
+								>
+									This is what we imagine Noa's Place will look like - a calm, welcoming space where every family can simply be themselves and shine.
+								</motion.p>
+								<motion.p 
+									initial={{ opacity: 0 }}
+									whileInView={{ opacity: 1 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+									className="mx-auto max-w-2xl text-base text-brand-800 flex items-center justify-center gap-2 font-medium"
+								>
+									<svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+										<path d="M21 2H3v16h5v4l4-4h5l4-4V2zM12 7v4M12 15h.01" />
+									</svg>
+									Click any space to learn more about it
+								</motion.p>
+							</motion.div>
+
+							{/* Progress tracker - compact interactive stepper */}
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, margin: "-50px" }}
+								transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+								className="mb-10"
+							>
+								<div className="rounded-2xl border border-brand-200 bg-white/80 backdrop-blur-sm p-5 sm:p-6 shadow-lg">
+									<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+										<h3 className="text-lg font-bold text-ink">Where we are on the journey</h3>
+										<p className="text-sm text-ink/70">{completedJourneySteps} of {journeySteps.length} completed</p>
+									</div>
+
+									<div className="h-2 w-full rounded-full bg-gray-200 mb-4 overflow-hidden" role="progressbar" aria-valuenow={completedJourneySteps} aria-valuemin={0} aria-valuemax={journeySteps.length} aria-label="Journey progress">
+										<div className="h-full bg-green-500 transition-all duration-500" style={{ width: `${(completedJourneySteps / journeySteps.length) * 100}%` }} />
+									</div>
+
+									<div className="flex gap-2 overflow-x-auto pb-2 mb-4">
+										{journeySteps.map((item) => (
+											<button
+												key={item.step}
+												type="button"
+												onClick={() => setSelectedJourneyStep(item.step)}
+												aria-pressed={selectedJourneyStep === item.step}
+												className={`shrink-0 inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition-colors ${
+													selectedJourneyStep === item.step
+														? "border-brand-700 bg-brand-800 text-white"
+														: "border-brand-200 bg-white text-ink hover:bg-brand-50"
+												}`}
+											>
+												<span
+													className={`flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold ${
+														item.status === "done"
+															? "bg-green-500 text-white"
+															: item.status === "progress"
+															? "bg-amber-400 text-amber-900"
+															: item.status === "next"
+															? "bg-blue-300 text-blue-900"
+															: "bg-gray-200 text-gray-600"
+													}`}
+												>
+													{item.status === "done" ? "✓" : item.step}
+												</span>
+												<span>Step {item.step}</span>
+											</button>
+										))}
+									</div>
+
+									<div className="rounded-xl border border-brand-100 bg-brand-50/50 p-4">
+										<p className="text-xs uppercase tracking-wide text-ink/60 mb-1">{activeJourneyStep.label}</p>
+										<p className="text-base sm:text-lg font-semibold text-ink">{activeJourneyStep.title}</p>
+										<p className="mt-1 text-sm sm:text-base text-ink/80 leading-relaxed">{activeJourneyStep.text}</p>
+									</div>
+								</div>
+							</motion.div>
+
+							<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+								{spaces.map((space, index) => (
+									<motion.button
+										key={space.id}
+										initial={{ opacity: 0, y: 30 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										viewport={{ once: true, margin: "-50px" }}
+										transition={{ 
+											duration: 0.6, 
+											delay: index * 0.08, 
+											ease: [0.16, 1, 0.3, 1] 
+										}}
+										whileHover={{ y: -8 }}
+										whileTap={{ scale: 0.98 }}
+										onClick={() => setSelectedSpace(space)}
+										className="group relative aspect-[4/3] block overflow-hidden rounded-3xl bg-brand-50 lg:col-span-2 cursor-pointer focus:outline-none focus:ring-4 focus:ring-brand-800/50 focus:ring-offset-4 transition-shadow duration-500 hover:shadow-2xl border-2 border-transparent hover:border-brand-200"
+									>
+										<div className="relative h-full w-full overflow-hidden">
+											<Image
+												src={space.image.src}
+												alt={space.image.alt}
+												width={600}
+												height={450}
+												className={`transition-transform duration-700 ease-out ${
+													space.id === "event-spaces" 
+														? "h-full w-full object-cover scale-150 object-top -translate-y-16 group-hover:scale-[1.65]" 
+														: "h-full w-full object-cover group-hover:scale-110"
+												}`}
+											/>
+										</div>
+										<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+										<div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+											<span className="text-xl font-bold text-white drop-shadow-lg group-hover:underline transition-all duration-300">
+												{space.title}
+											</span>
+											<span className="text-sm text-white bg-brand-800/90 px-4 py-2 rounded-full backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 font-semibold">
+												Learn more →
+											</span>
+										</div>
+									</motion.button>
+								))}
+							</div>
 						</div>
 					</motion.section>
 				</AnimatedScrollSection>
@@ -769,101 +737,6 @@ export default function Home() {
 									</Link>
 								</motion.div>
 							)}
-						</div>
-					</motion.section>
-				</AnimatedScrollSection>
-
-				{/* Image Gallery - Dreamboard */}
-				<AnimatedScrollSection>
-					<motion.section 
-						id="dreamboard"
-						style={{ y: dreamboardY }}
-						className="relative overflow-hidden bg-gradient-to-b from-white via-brand-50/30 to-white py-28"
-					>
-						{/* Section divider */}
-						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
-						
-						<div className="mx-auto max-w-7xl px-6">
-							<motion.div 
-								initial={{ opacity: 0, y: 30 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true, margin: "-100px" }}
-								transition={{ duration: 0.6, ease: "easeOut" }}
-								className="text-center mb-16"
-							>
-								<motion.h2 
-									initial={{ opacity: 0, scale: 0.9 }}
-									whileInView={{ opacity: 1, scale: 1 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.6, ease: "easeOut" }}
-									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-ink mb-6 tracking-tight"
-								>
-									Our Dreamboard
-								</motion.h2>
-								<motion.p 
-									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-									className="mx-auto max-w-3xl text-xl text-ink/70 leading-relaxed mb-4"
-								>
-									This is what we imagine Noa's Place will look like - a calm, welcoming space where every family can simply be themselves and shine.
-								</motion.p>
-								<motion.p 
-									initial={{ opacity: 0 }}
-									whileInView={{ opacity: 1 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-									className="mx-auto max-w-2xl text-base text-brand-800 flex items-center justify-center gap-2 font-medium"
-								>
-									<svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-										<path d="M21 2H3v16h5v4l4-4h5l4-4V2zM12 7v4M12 15h.01" />
-									</svg>
-									Click any space to learn more about it
-								</motion.p>
-							</motion.div>
-							<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-								{spaces.map((space, index) => (
-									<motion.button
-										key={space.id}
-										initial={{ opacity: 0, y: 30 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										viewport={{ once: true, margin: "-50px" }}
-										transition={{ 
-											duration: 0.6, 
-											delay: index * 0.08, 
-											ease: [0.16, 1, 0.3, 1] 
-										}}
-										whileHover={{ y: -8 }}
-										whileTap={{ scale: 0.98 }}
-										onClick={() => setSelectedSpace(space)}
-										className="group relative aspect-[4/3] block overflow-hidden rounded-3xl bg-brand-50 lg:col-span-2 cursor-pointer focus:outline-none focus:ring-4 focus:ring-brand-800/50 focus:ring-offset-4 transition-shadow duration-500 hover:shadow-2xl border-2 border-transparent hover:border-brand-200"
-									>
-										<div className="relative h-full w-full overflow-hidden">
-											<Image
-												src={space.image.src}
-												alt={space.image.alt}
-												width={600}
-												height={450}
-												className={`transition-transform duration-700 ease-out ${
-													space.id === "event-spaces" 
-														? "h-full w-full object-cover scale-150 object-top -translate-y-16 group-hover:scale-[1.65]" 
-														: "h-full w-full object-cover group-hover:scale-110"
-												}`}
-											/>
-										</div>
-										<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-										<div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
-											<span className="text-xl font-bold text-white drop-shadow-lg group-hover:underline transition-all duration-300">
-												{space.title}
-											</span>
-											<span className="text-sm text-white bg-brand-800/90 px-4 py-2 rounded-full backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 font-semibold">
-												Learn more →
-											</span>
-										</div>
-									</motion.button>
-								))}
-							</div>
 						</div>
 					</motion.section>
 				</AnimatedScrollSection>

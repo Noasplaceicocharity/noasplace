@@ -1,7 +1,5 @@
 "use client";
 
-import DownloadResource from "@/components/DownloadResource";
-import Faq from "@/components/Faq";
 import ImageModal from "@/components/ImageModal";
 import Squiggle from "@/components/Squiggle";
 import StickerCard from "@/components/StickerCard";
@@ -27,10 +25,6 @@ export default function Home() {
   const [showMailchimpPopup, setShowMailchimpPopup] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [featuredBlog, setFeaturedBlog] = useState<BlogPostMeta | null>(null);
-  const [featuredTakeAction, setFeaturedTakeAction] = useState<{
-    letterToMp: { slug: string; title: string } | null;
-    survey: { slug: string; title: string } | null;
-  }>({ letterToMp: null, survey: null });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [selectedJourneyStep, setSelectedJourneyStep] = useState(3);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,20 +46,6 @@ export default function Home() {
       })
       .catch(err => {
         console.error('Error fetching featured blog:', err);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('/api/take-action/featured')
-      .then(res => res.json())
-      .then(data => {
-        setFeaturedTakeAction({
-          letterToMp: data.letterToMp ? { slug: data.letterToMp.slug, title: data.letterToMp.title } : null,
-          survey: data.survey ? { slug: data.survey.slug, title: data.survey.title } : null,
-        });
-      })
-      .catch(err => {
-        console.error('Error fetching featured take action:', err);
       });
   }, []);
 
@@ -106,7 +86,6 @@ export default function Home() {
   // Subtle parallax effects for depth
   const welcomeY = useTransform(scrollYProgress, [0, 0.25], [0, -30]);
   const dreamboardY = useTransform(scrollYProgress, [0.45, 0.65], [0, -25]);
-  const planY = useTransform(scrollYProgress, [0.55, 0.75], [0, -20]);
 
   const spaces = [
     {
@@ -238,26 +217,13 @@ export default function Home() {
 					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-200/10 rounded-full blur-3xl"></div>
 				</div>
 
-				<div className="relative px-6 pt-16 pb-20 sm:pt-20 sm:pb-24 z-20">
+				<div className="relative px-6 pt-8 pb-20 sm:pt-10 sm:pb-24 z-20">
 					<div className="mx-auto max-w-7xl">
-						{/* "As seen on" badge */}
-						<div className="mb-10 animate-fade-in">
-							<a 
-								href="https://www.bbc.co.uk/news/articles/c5yq4xx2yp2o"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-full shadow-sm border border-purple-200/50 hover:bg-white hover:shadow-md hover:scale-105 transition-all duration-300"
-							>
-								<div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-								<span className="text-sm font-semibold text-gray-700">As seen on BBC News</span>
-							</a>
-						</div>
-
 						{/* Main content grid */}
 						<div className="grid lg:grid-cols-3 gap-12 lg:gap-16 items-center">
 							{/* Left side - Text and buttons */}
 							<div className="lg:col-span-2 space-y-8 animate-fade-in">
-								<h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] tracking-tight">
+								<h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] tracking-tight max-w-2xl">
 									Together we make space for every family to shine
 								</h1>
 								
@@ -266,40 +232,40 @@ export default function Home() {
 								</p>
 
 								{/* Buttons */}
-								<div className="flex flex-col sm:flex-row gap-4 pt-2">
+								<div className="flex flex-col sm:flex-row gap-3 pt-2">
 									<button
 										onClick={() => setShowMailchimpPopup(true)}
-										className="inline-flex items-center justify-center rounded-xl bg-brand-800 px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-brand-900 hover:shadow-xl hover:scale-105 transition-all duration-300"
+										className="inline-flex items-center justify-center rounded-lg bg-brand-800 px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-brand-900 hover:shadow-lg hover:scale-105 transition-all duration-300"
 									>
 										Be a Founding Supporter
-										<svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<svg className="ml-1.5 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
 										</svg>
 									</button>
 									<button
 										onClick={() => setShowVideoModal(true)}
-										className="inline-flex items-center justify-center rounded-xl bg-white border-2 border-brand-800 px-8 py-4 text-base font-bold text-brand-800 shadow-md hover:bg-brand-50 hover:shadow-lg hover:scale-105 transition-all duration-300"
+										className="inline-flex items-center justify-center rounded-lg bg-white border-2 border-brand-800 px-5 py-2.5 text-sm font-bold text-brand-800 shadow-md hover:bg-brand-50 hover:shadow-lg hover:scale-105 transition-all duration-300"
 									>
-										<svg className="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+										<svg className="mr-1.5 w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
 											<path d="M8 5v14l11-7z"/>
 										</svg>
 										Watch our story
 									</button>
 									<Link
 										href="/interactive-tools"
-										className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-base font-bold text-gray-900 shadow-lg hover:bg-[#ffc533] hover:shadow-xl hover:scale-105 transition-all duration-300"
+										className="inline-flex items-center justify-center rounded-lg bg-[#FFB800] px-5 py-2.5 text-sm font-bold text-gray-900 shadow-md hover:bg-[#ffc533] hover:shadow-lg hover:scale-105 transition-all duration-300"
 									>
 										Try interactive tools
-										<svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<svg className="ml-1.5 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
 										</svg>
 									</Link>
 								</div>
 							</div>
 
-					{/* Right side - Image */}
-					<div className="relative lg:mt-0">
-						<div className="relative w-full h-[500px] lg:h-[600px] overflow-visible">
+					{/* Right side - Image (hidden on mobile) */}
+					<div className="relative hidden lg:block lg:mt-0">
+						<div className="relative w-full h-[150px] lg:h-[190px] overflow-visible">
 							<div 
 								className="absolute inset-0 w-[250%] h-[250%] -left-[75%] -top-[75%] transition-transform duration-300 ease-out"
 								style={{
@@ -318,35 +284,13 @@ export default function Home() {
 					</div>
 						</div>
 
-						<p className="mt-20 mb-6 text-lg sm:text-xl font-semibold text-gray-700 leading-relaxed max-w-3xl">
-							While we work on opening our physical hub, here are some tools to support you right now.
-						</p>
-
-						{/* Navigation cards */}
-						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-							<button
-								onClick={() => setShowMailchimpPopup(true)}
-								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-white/50 text-left"
-							>
-								<div className="relative h-40 overflow-hidden">
-									<Image
-										src="/images/family_photo_halifax_west_yorkshire.jpg"
-										alt="Be a Founding Supporter - Help us make this dream a reality"
-										fill
-										className="object-cover transition-transform duration-500 group-hover:scale-110"
-									/>
-									<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
-								</div>
-								<div className="p-6">
-									<div className="text-2xl font-black text-brand-800 mb-2 group-hover:text-brand-900 transition-colors">Be a Founding Supporter</div>
-									<div className="text-sm font-medium text-gray-600">Help us make this dream a reality</div>
-								</div>
-							</button>
+						{/* Navigation cards - Blog 50%, Interactive Tools 25%, Dreamboard 25% */}
+						<div className="mt-16 grid grid-cols-1 lg:grid-cols-4 gap-6">
 							<Link
 								href="/blog"
-								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-white/50"
+								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-white/50 lg:col-span-2"
 							>
-								<div className="relative h-40 overflow-hidden">
+								<div className="relative h-52 overflow-hidden">
 									{featuredBlog?.imageUrl ? (
 										<Image
 											src={featuredBlog.imageUrl}
@@ -362,34 +306,34 @@ export default function Home() {
 											className="object-cover transition-transform duration-500 group-hover:scale-110"
 										/>
 									)}
-									<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+									<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
 								</div>
-								{/* Container for the content sections */}
-								<div className="relative overflow-hidden">
-									{/* White content section that lifts on hover */}
-									<div className="p-6 bg-white/90 backdrop-blur-md group-hover:-translate-y-full transition-transform duration-300 ease-out relative z-10">
-										<div className="text-2xl font-black text-brand-800 mb-2 group-hover:text-brand-900 transition-colors">
-											Blog
-										</div>
-										<div className="text-sm font-medium text-gray-600">
-											Read our latest blog
-										</div>
+								<div className="p-6">
+									<div className="text-2xl font-black text-brand-800 mb-3 group-hover:text-brand-900 transition-colors">
+										Blog
 									</div>
-									{/* Hidden title that appears on hover */}
-									{featuredBlog?.title && (
-										<div className="absolute bottom-0 left-0 right-0 p-6 bg-white/90 backdrop-blur-md transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-											<div className="text-sm font-medium text-gray-600 line-clamp-2">
-												{featuredBlog.title}
-											</div>
-										</div>
+									{featuredBlog?.excerpt ? (
+										<p className="text-sm text-gray-600 line-clamp-3 mb-4">
+											{featuredBlog.excerpt}
+										</p>
+									) : (
+										<p className="text-sm text-gray-600 mb-4">
+											Read our latest stories and updates.
+										</p>
 									)}
+									<span className="inline-flex items-center text-sm font-semibold text-brand-800 group-hover:text-brand-900">
+										Read more
+										<svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+										</svg>
+									</span>
 								</div>
 							</Link>
 							<Link
 								href="/interactive-tools"
-								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-white/50"
+								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-white/50 lg:col-span-1"
 							>
-								<div className="relative h-40 overflow-hidden">
+								<div className="relative h-52 overflow-hidden">
 									<Image
 										src="/images/interactive_tools_noas_place_halifax_primary_school.jpg"
 										alt="Interactive Tools - Helpful tools for families"
@@ -399,15 +343,23 @@ export default function Home() {
 									<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 								</div>
 								<div className="p-6">
-									<div className="text-2xl font-black text-brand-800 mb-2 group-hover:text-brand-900 transition-colors">Interactive Tools</div>
-									<div className="text-sm font-medium text-gray-600">Try our helpful tools</div>
+									<div className="text-2xl font-black text-brand-800 mb-3 group-hover:text-brand-900 transition-colors">Interactive Tools</div>
+									<p className="text-sm text-gray-600 mb-3">
+										Safety plans, sensory profiles, transition planning and more free resources designed with neurodivergent families in mind.
+									</p>
+									<span className="inline-flex items-center text-sm font-semibold text-brand-800 group-hover:text-brand-900">
+										Try our tools
+										<svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+										</svg>
+									</span>
 								</div>
 							</Link>
 							<Link
 								href="#dreamboard"
-								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-white/50"
+								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-white/50 lg:col-span-1"
 							>
-								<div className="relative h-40 overflow-hidden">
+								<div className="relative h-52 overflow-hidden">
 									<Image
 										src="/dreamboard/indoor_playground.jpg"
 										alt="Our Dreamboard - See our vision"
@@ -417,8 +369,16 @@ export default function Home() {
 									<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 								</div>
 								<div className="p-6">
-									<div className="text-2xl font-black text-brand-800 mb-2 group-hover:text-brand-900 transition-colors">Our Dreamboard</div>
-									<div className="text-sm font-medium text-gray-600">See our vision</div>
+									<div className="text-2xl font-black text-brand-800 mb-3 group-hover:text-brand-900 transition-colors">Our Dreamboard</div>
+									<p className="text-sm text-gray-600 mb-3">
+										Our vision for an inclusive community hub in West Yorkshire — sensory rooms, safe play spaces and a welcoming place for every family.
+									</p>
+									<span className="inline-flex items-center text-sm font-semibold text-brand-800 group-hover:text-brand-900">
+										See our vision
+										<svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+										</svg>
+									</span>
 								</div>
 							</Link>
 						</div>
@@ -439,45 +399,49 @@ export default function Home() {
 					>
 						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
 						<div className="mx-auto max-w-7xl px-6">
-							<div className="text-center mb-10">
-								<motion.h2 
-									initial={{ opacity: 0, scale: 0.9 }}
-									whileInView={{ opacity: 1, scale: 1 }}
-									viewport={{ once: true, margin: "-100px" }}
-									transition={{ duration: 0.6, ease: "easeOut" }}
-									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-ink mb-6 tracking-tight"
-								>
-									Welcome to Noa's Place
-								</motion.h2>
-								<motion.p 
-									initial={{ opacity: 0, y: 20 }}
+							<div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+								{/* Left: text */}
+								<div className="text-left order-2 lg:order-1">
+									<motion.h2 
+										initial={{ opacity: 0, scale: 0.9 }}
+										whileInView={{ opacity: 1, scale: 1 }}
+										viewport={{ once: true, margin: "-100px" }}
+										transition={{ duration: 0.6, ease: "easeOut" }}
+										className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-ink mb-6 tracking-tight"
+									>
+										Welcome to Noa's Place
+									</motion.h2>
+									<motion.p 
+										initial={{ opacity: 0, y: 20 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										viewport={{ once: true, margin: "-100px" }}
+										transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+										className="text-xl sm:text-2xl text-ink/70 leading-relaxed"
+									>
+										We’re developing a new community hub in Halifax, West Yorkshire, designed specifically for the SEND community. Our mission is to provide a welcoming, sensory-aware environment where families can finally feel they belong.
+									</motion.p>
+								</div>
+								{/* Right: video */}
+								<motion.div
+									initial={{ opacity: 0, y: 24 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true, margin: "-100px" }}
-									transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-									className="mx-auto max-w-3xl text-xl sm:text-2xl text-ink/70 leading-relaxed"
+									transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+									className="order-1 lg:order-2"
 								>
-									We're building a new, inclusive community hub in Halifax, West Yorkshire, designed specifically for neurodivergent and disabled individuals and families. Our mission is to create calm, welcoming spaces where everyone can feel understood, connected, and truly at home.
-								</motion.p>
+									<div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/50 bg-black">
+										<video
+											src="https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/The%20Story%20Behind%20Noa%E2%80%99s%20Place%20_%20A%20New%20Hope%20for%20Families%20with%20SEND.mp4"
+											controls
+											playsInline
+											className="w-full h-full object-contain"
+											aria-label="The Story Behind Noa's Place - A New Hope for Families with SEND"
+										>
+											Your browser does not support the video tag.
+										</video>
+									</div>
+								</motion.div>
 							</div>
-							<motion.div
-								initial={{ opacity: 0, y: 24 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true, margin: "-100px" }}
-								transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-								className="flex justify-center"
-							>
-								<div className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/50 bg-black">
-									<video
-										src="https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/The%20Story%20Behind%20Noa%E2%80%99s%20Place%20_%20A%20New%20Hope%20for%20Families%20with%20SEND.mp4"
-										controls
-										playsInline
-										className="w-full h-full object-contain"
-										aria-label="The Story Behind Noa's Place - A New Hope for Families with SEND"
-									>
-										Your browser does not support the video tag.
-									</video>
-								</div>
-							</motion.div>
 						</div>
 					</motion.section>
 				</AnimatedScrollSection>
@@ -534,6 +498,7 @@ export default function Home() {
 
 							{/* Progress tracker - compact interactive stepper */}
 							<motion.div
+								id="journey"
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true, margin: "-50px" }}
@@ -635,161 +600,13 @@ export default function Home() {
 					</motion.section>
 				</AnimatedScrollSection>
 
-				{/* Take Action Section */}
+				{/* Three Year Strategic Plan */}
 				<AnimatedScrollSection>
 					<motion.section 
-						className="relative bg-gradient-to-b from-white via-brand-50/50 to-white py-28 overflow-hidden"
+						className="relative bg-gradient-to-b from-white via-brand-50/30 to-white py-28 overflow-hidden"
 					>
-						<div className="absolute inset-0 overflow-hidden pointer-events-none">
-							<div className="absolute top-20 right-10 w-72 h-72 bg-brand-500/20 rounded-full blur-3xl" />
-							<div className="absolute bottom-20 left-10 w-96 h-96 bg-brand-100/40 rounded-full blur-3xl" />
-						</div>
-						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent" />
-						<div className="relative mx-auto max-w-5xl px-6">
-							<motion.div 
-								initial={{ opacity: 0, y: 30 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true, margin: "-100px" }}
-								transition={{ duration: 0.6, ease: "easeOut" }}
-								className="text-center mb-14"
-							>
-								<motion.h2 
-									initial={{ opacity: 0, scale: 0.9 }}
-									whileInView={{ opacity: 1, scale: 1 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.6, ease: "easeOut" }}
-									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-800 mb-6 tracking-tight"
-								>
-									Take Action
-								</motion.h2>
-								<motion.p 
-									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-									className="mx-auto max-w-3xl text-xl text-ink/80 leading-relaxed"
-								>
-									Our emails take 60 seconds to send. Just enter your details and go. Our surveys help us collect information to provide to MPs and decision makers.
-								</motion.p>
-							</motion.div>
-
-							<motion.div 
-								initial={{ opacity: 0, y: 24 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true, margin: "-80px" }}
-								transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-								className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
-							>
-								{featuredTakeAction.letterToMp && (
-									<Link
-										href={`/take-action/${featuredTakeAction.letterToMp.slug}`}
-										className="group flex flex-col rounded-2xl bg-white border-2 border-brand-100 p-6 sm:p-8 shadow-lg hover:shadow-xl hover:border-brand-200 transition-all duration-300 hover:-translate-y-0.5"
-									>
-										<div className="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-800 text-white mb-4 group-hover:bg-brand-900 transition-colors">
-											<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-												<path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-											</svg>
-										</div>
-										<span className="text-sm font-bold uppercase tracking-wide text-brand-800 mb-1">Email to MP</span>
-										<h3 className="text-lg font-extrabold text-ink mb-2 group-hover:text-brand-800 transition-colors">{featuredTakeAction.letterToMp.title}</h3>
-										<p className="text-ink/70 text-sm mb-5 flex-1">Have your voice heard in 60 seconds.</p>
-										<span className="inline-flex items-center justify-center rounded-xl bg-brand-800 px-6 py-3 text-base font-bold text-white shadow-md group-hover:bg-brand-900 group-hover:shadow-lg group-hover:scale-[1.02] transition-all duration-200">
-											Send your email
-											<svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-										</span>
-									</Link>
-								)}
-								{featuredTakeAction.survey && (
-									<Link
-										href={`/take-action/${featuredTakeAction.survey.slug}`}
-										className="group flex flex-col rounded-2xl bg-white border-2 border-brand-100 p-6 sm:p-8 shadow-lg hover:shadow-xl hover:border-brand-200 transition-all duration-300 hover:-translate-y-0.5"
-									>
-										<div className="flex items-center justify-center w-12 h-12 rounded-xl bg-brand-800 text-white mb-4 group-hover:bg-brand-900 transition-colors">
-											<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-												<path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m3 4H9m0 0l3 3m0-3l-3 3" />
-											</svg>
-										</div>
-										<span className="text-sm font-bold uppercase tracking-wide text-brand-800 mb-1">Survey</span>
-										<h3 className="text-lg font-extrabold text-ink mb-2 group-hover:text-brand-800 transition-colors">{featuredTakeAction.survey.title}</h3>
-										<p className="text-ink/70 text-sm mb-5 flex-1">Help us gather evidence for MPs and decision makers.</p>
-										<span className="inline-flex items-center justify-center rounded-xl bg-white border-2 border-brand-800 px-6 py-3 text-base font-bold text-brand-800 shadow-md group-hover:bg-brand-50 group-hover:shadow-lg group-hover:scale-[1.02] transition-all duration-200">
-											Take the survey
-											<svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-										</span>
-									</Link>
-								)}
-							</motion.div>
-
-							{(featuredTakeAction.letterToMp || featuredTakeAction.survey) && (
-								<motion.div 
-									initial={{ opacity: 0 }}
-									whileInView={{ opacity: 1 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.4, delay: 0.35 }}
-									className="text-center mt-8"
-								>
-									<Link
-										href="/take-action"
-										className="inline-flex items-center gap-2 text-brand-800 font-bold hover:text-brand-900 transition-colors"
-									>
-										View all actions
-										<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-									</Link>
-								</motion.div>
-							)}
-						</div>
-					</motion.section>
-				</AnimatedScrollSection>
-
-				{/* Three Year Strategy Plan - Featured Section */}
-				<AnimatedScrollSection>
-					<motion.section 
-						style={{ y: planY }}
-						className="relative bg-gradient-to-br from-brand-800 via-brand-900 to-purple-900 py-32 overflow-hidden"
-					>
-						{/* Decorative background elements */}
-						<div className="absolute inset-0 overflow-hidden pointer-events-none">
-							<motion.div 
-								animate={{ 
-									scale: [1, 1.2, 1],
-									opacity: [0.1, 0.15, 0.1]
-								}}
-								transition={{ 
-									duration: 8,
-									repeat: Infinity,
-									ease: "easeInOut"
-								}}
-								className="absolute top-10 right-10 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl"
-							/>
-							<motion.div 
-								animate={{ 
-									scale: [1, 1.1, 1],
-									opacity: [0.1, 0.12, 0.1]
-								}}
-								transition={{ 
-									duration: 6,
-									repeat: Infinity,
-									ease: "easeInOut",
-									delay: 1
-								}}
-								className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-pink-400/10 rounded-full blur-3xl"
-							/>
-							<motion.div 
-								animate={{ 
-									scale: [1, 1.15, 1],
-									opacity: [0.05, 0.08, 0.05]
-								}}
-								transition={{ 
-									duration: 10,
-									repeat: Infinity,
-									ease: "easeInOut",
-									delay: 2
-								}}
-								className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl"
-							/>
-						</div>
-
-						<div className="relative mx-auto max-w-6xl px-6">
+						<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
+						<div className="mx-auto max-w-4xl px-6">
 							<motion.div 
 								initial={{ opacity: 0, y: 30 }}
 								whileInView={{ opacity: 1, y: 0 }}
@@ -797,24 +614,12 @@ export default function Home() {
 								transition={{ duration: 0.6, ease: "easeOut" }}
 								className="text-center"
 							>
-								<motion.div 
-									initial={{ scale: 0, rotate: -180 }}
-									whileInView={{ scale: 1, rotate: 0 }}
-									viewport={{ once: true }}
-									transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
-									className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-white/10 backdrop-blur-sm mb-8 border-2 border-white/20"
-								>
-									<svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-									</svg>
-								</motion.div>
-								
 								<motion.h2 
-									initial={{ opacity: 0, y: 20, scale: 0.95 }}
-									whileInView={{ opacity: 1, y: 0, scale: 1 }}
+									initial={{ opacity: 0, scale: 0.9 }}
+									whileInView={{ opacity: 1, scale: 1 }}
 									viewport={{ once: true }}
-									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-									className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-tight"
+									transition={{ duration: 0.6, ease: "easeOut" }}
+									className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-ink mb-6 tracking-tight"
 								>
 									Our Three Year Strategic Plan
 								</motion.h2>
@@ -822,32 +627,26 @@ export default function Home() {
 									initial={{ opacity: 0, y: 20 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
-									transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-									className="mx-auto max-w-3xl text-2xl text-white/90 leading-relaxed mb-12 font-medium"
+									transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+									className="mx-auto max-w-3xl text-xl text-ink/70 leading-relaxed mb-6"
 								>
-									Discover our vision for the next three years. See how we're planning to grow, expand our services, and create a meaningful impact in our community.
+									We are currently in year one of our roadmap. Our strategic plan sets out our vision for the next three years. How we plan to grow, expand our services, and create a meaningful impact in our community.
 								</motion.p>
 								<motion.div 
 									initial={{ opacity: 0, y: 20 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
-									transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-									className="flex flex-col sm:flex-row items-center justify-center gap-4"
+									transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
 								>
-									<motion.div
-										whileHover={{ scale: 1.1 }}
-										whileTap={{ scale: 0.95 }}
+									<Link
+										href="/plans"
+										className="inline-flex items-center justify-center rounded-xl bg-brand-800 px-8 py-4 text-lg font-bold text-white shadow-md hover:bg-brand-900 hover:shadow-lg transition-all duration-300"
 									>
-										<Link
-											href="/plans"
-											className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-12 py-6 text-xl font-bold text-ink shadow-2xl hover:bg-[#ffc533] hover:shadow-3xl transition-all duration-300"
-										>
-											View Our Three Year Strategic Plan
-											<svg className="ml-3 size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-												<path d="m9 18 6-6-6-6"/>
-											</svg>
-										</Link>
-									</motion.div>
+										View Our Three Year Strategic Plan
+										<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+											<path d="m9 18 6-6-6-6"/>
+										</svg>
+									</Link>
 								</motion.div>
 							</motion.div>
 						</div>
@@ -890,211 +689,12 @@ export default function Home() {
 
 			
 
-			{/* Free Resource Section */}
-			<section className="relative overflow-hidden bg-gradient-to-b from-white via-brand-50/40 to-white py-28">
-				<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
-				<div className="mx-auto max-w-5xl px-6">
-					<DownloadResource />
-				</div>
-			</section>
-
-			{/* Interactive Tools Section */}
-			<section className="relative bg-gradient-to-b from-brand-50/30 via-white to-white py-28">
-				<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
-				<div className="mx-auto max-w-7xl px-6">
-					<div className="text-center mb-20">
-						<h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-ink mb-6 tracking-tight">
-							Interactive Tools
-						</h2>
-						<p className="mx-auto max-w-3xl text-xl text-ink/70 leading-relaxed">
-							Supportive tools designed for children, teens, and adults. Create profiles, manage transitions, and develop coping strategies that work for you.
-						</p>
-					</div>
-
-					<div className="grid gap-8 md:grid-cols-3">
-						{/* Children Tools */}
-						<div className="group relative rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-brand-200">
-							<div className="relative h-96 overflow-hidden">
-								<Image
-									src="/images/interactive_tools_noas_place_halifax_primary_school.jpg"
-									alt="Primary school children engaged in learning activities at Noa's Place Halifax"
-									fill
-									className="object-cover transition-transform duration-700 group-hover:scale-110"
-									sizes="(max-width: 768px) 100vw, 33vw"
-								/>
-								<div className="absolute inset-0 bg-gradient-to-br from-blue-600/85 to-cyan-600/85"></div>
-								<div className="absolute inset-0 bg-black/10"></div>
-							</div>
-							
-							<div className="absolute inset-0 flex items-center justify-center p-8">
-								<div className="text-center text-white">
-									<div className="inline-flex items-center justify-center w-16 h-16 bg-white/25 backdrop-blur-md rounded-2xl mb-6 border border-white/30 group-hover:scale-110 transition-transform duration-300">
-										<svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-											<circle cx="12" cy="6" r="3"/>
-											<path d="M12 9v12"/>
-											<path d="M8 14l8 0"/>
-											<path d="M10 21l4 0"/>
-											<path d="M9 12l6 0"/>
-										</svg>
-									</div>
-									<h3 className="text-2xl font-bold mb-3 drop-shadow-lg">For Children</h3>
-									<p className="text-sm drop-shadow-md mb-6 font-medium">Primary School Age (4-11 years)</p>
-									<div className="space-y-2 text-sm drop-shadow-md mb-6 text-left max-w-xs mx-auto">
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											All About Me profiles
-										</div>
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											Feelings & coping tools
-										</div>
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											Sensory support guides
-										</div>
-									</div>
-									<Link
-										href="/interactive-tools?age=children"
-										className="inline-flex items-center justify-center bg-white/25 backdrop-blur-md px-6 py-3 rounded-xl text-sm font-bold text-white border-2 border-white/40 hover:bg-white/35 hover:scale-105 transition-all duration-300"
-									>
-										View Tools
-										<svg className="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-											<path d="m9 18 6-6-6-6"/>
-										</svg>
-									</Link>
-								</div>
-							</div>
-						</div>
-
-						{/* Teens Tools */}
-						<div className="group relative rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-brand-200">
-							<div className="relative h-96 overflow-hidden">
-								<Image
-									src="/images/interactive_tools_noas_place_halifax_secondary_school.jpg"
-									alt="Secondary school teenagers participating in interactive activities at Noa's Place Halifax"
-									fill
-									className="object-cover transition-transform duration-700 group-hover:scale-110"
-									sizes="(max-width: 768px) 100vw, 33vw"
-								/>
-								<div className="absolute inset-0 bg-gradient-to-br from-purple-600/85 to-pink-600/85"></div>
-								<div className="absolute inset-0 bg-black/10"></div>
-							</div>
-							
-							<div className="absolute inset-0 flex items-center justify-center p-8">
-								<div className="text-center text-white">
-									<div className="inline-flex items-center justify-center w-16 h-16 bg-white/25 backdrop-blur-md rounded-2xl mb-6 border border-white/30 group-hover:scale-110 transition-transform duration-300">
-										<svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-											<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-											<circle cx="9" cy="7" r="4"/>
-											<path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-											<path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-										</svg>
-									</div>
-									<h3 className="text-2xl font-bold mb-3 drop-shadow-lg">For Teens</h3>
-									<p className="text-sm drop-shadow-md mb-6 font-medium">Secondary School Age (11-18 years)</p>
-									<div className="space-y-2 text-sm drop-shadow-md mb-6 text-left max-w-xs mx-auto">
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											Transition planning
-										</div>
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											Bullying support
-										</div>
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											Sensory profiles
-										</div>
-									</div>
-									<Link
-										href="/interactive-tools?age=teens"
-										className="inline-flex items-center justify-center bg-white/25 backdrop-blur-md px-6 py-3 rounded-xl text-sm font-bold text-white border-2 border-white/40 hover:bg-white/35 hover:scale-105 transition-all duration-300"
-									>
-										View Tools
-										<svg className="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-											<path d="m9 18 6-6-6-6"/>
-										</svg>
-									</Link>
-								</div>
-							</div>
-						</div>
-
-						{/* Adults Tools */}
-						<div className="group relative rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-brand-200">
-							<div className="relative h-96 overflow-hidden">
-								<Image
-									src="/images/interactive_tools_noas_place_halifax_adults.jpg"
-									alt="Adults with additional needs using interactive tools and resources at Noa's Place Halifax"
-									fill
-									className="object-cover transition-transform duration-700 group-hover:scale-110"
-									sizes="(max-width: 768px) 100vw, 33vw"
-								/>
-								<div className="absolute inset-0 bg-gradient-to-br from-green-600/85 to-emerald-600/85"></div>
-								<div className="absolute inset-0 bg-black/10"></div>
-							</div>
-							
-							<div className="absolute inset-0 flex items-center justify-center p-8">
-								<div className="text-center text-white">
-									<div className="inline-flex items-center justify-center w-16 h-16 bg-white/25 backdrop-blur-md rounded-2xl mb-6 border border-white/30 group-hover:scale-110 transition-transform duration-300">
-										<svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-											<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-											<circle cx="12" cy="7" r="4"/>
-										</svg>
-									</div>
-									<h3 className="text-2xl font-bold mb-3 drop-shadow-lg">For Adults</h3>
-									<p className="text-sm drop-shadow-md mb-6 font-medium">Adults of All Ages (18+ years)</p>
-									<div className="space-y-2 text-sm drop-shadow-md mb-6 text-left max-w-xs mx-auto">
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											Healthcare profiles
-										</div>
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											Safety planning
-										</div>
-										<div className="flex items-center gap-2">
-											<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-											Life transitions
-										</div>
-									</div>
-									<Link
-										href="/interactive-tools?age=adults"
-										className="inline-flex items-center justify-center bg-white/25 backdrop-blur-md px-6 py-3 rounded-xl text-sm font-bold text-white border-2 border-white/40 hover:bg-white/35 hover:scale-105 transition-all duration-300"
-									>
-										View Tools
-										<svg className="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-											<path d="m9 18 6-6-6-6"/>
-										</svg>
-									</Link>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div className="text-center mt-16">
-						<Link
-							href="/interactive-tools"
-							className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-10 py-5 text-lg font-bold text-ink shadow-xl hover:bg-[#ffc533] hover:shadow-2xl hover:scale-105 transition-all duration-300"
-						>
-							Explore All Tools
-							<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-								<path d="m9 18 6-6-6-6"/>
-							</svg>
-						</Link>
-					</div>
-				</div>
-			</section>
-
 			{/* Press Coverage Section */}
-			<section className="relative py-20 bg-gradient-to-b from-brand-50/30 to-white">
-				<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
+			<section className="relative py-10 border-t border-brand-100 bg-white">
 				<div className="mx-auto max-w-5xl px-6">
-					<div className="text-center mb-12">
-						<div className="inline-flex items-center gap-3 text-base font-semibold text-brand-800 mb-6 px-4 py-2 bg-brand-100/50 rounded-full">
-							<div className="w-2 h-2 bg-brand-600 rounded-full animate-pulse"></div>
-							As featured on
-						</div>
-					</div>
+					<p className="text-center text-xs font-medium uppercase tracking-wider text-ink/60 mb-8">
+						As featured on
+					</p>
 					<div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 opacity-70 hover:opacity-100 transition-opacity duration-300">
 						<a 
 							href="https://www.halifaxcourier.co.uk/news/people/families-are-left-isolated-and-it-can-feel-like-a-storm-ripponden-family-launch-vision-for-noas-place-5304261"
@@ -1160,31 +760,40 @@ export default function Home() {
 			<section className="bg-gradient-to-br from-brand-800 via-brand-900 to-purple-900 py-24 text-white">
 				<div className="mx-auto max-w-4xl px-6 text-center">
 					<h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6">
-						Join Our Mission
+						Please help us make Noa&apos;s Place a reality
 					</h2>
 					<p className="text-xl text-white/90 mb-8 leading-relaxed">
 						Together, we can create a community where every family feels supported, seen, and valued. <strong>Your support makes a difference.</strong>
 					</p>
-					<div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+					<div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
 						<button
 							onClick={() => setShowMailchimpPopup(true)}
-							className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
+							className="inline-flex items-center justify-center rounded-lg bg-[#FFB800] px-5 py-2.5 text-sm font-bold text-ink shadow-md hover:bg-[#ffc533] hover:scale-105 transition duration-200"
 						>
 							Support Our Vision
-							<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+							<svg className="ml-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
 								<path d="M5 12h14M12 5l7 7-7 7"/>
 							</svg>
 						</button>
 						<Link
 							href="/contact"
-							className="inline-flex items-center justify-center rounded-xl border-2 border-white/30 px-8 py-4 text-lg font-bold text-white hover:bg-white/10 hover:border-white/50 transition duration-200"
+							className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 px-5 py-2.5 text-sm font-bold text-white hover:bg-white/10 hover:border-white/50 transition duration-200"
 						>
 							Get in Touch
-							<svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+							<svg className="ml-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
 								<path d="M4 4h16v16H4z"/>
 								<path d="m22 6-10 7L2 6"/>
 							</svg>
 						</Link>
+						<a
+							href="mailto:hello@noasplace.org.uk?subject=Partnership%20enquiry%20-%20Noa%27s%20Place&body=Hello%2C%0A%0AWe%20would%20like%20to%20explore%20partnering%20with%20Noa%27s%20Place.%0A%0AOrganisation%20name%3A%0A%0AHow%20we%27d%20like%20to%20partner%3A%0A%0AContact%20details%3A"
+							className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 px-5 py-2.5 text-sm font-bold text-white hover:bg-white/10 hover:border-white/50 transition duration-200"
+						>
+							Partner with us
+							<svg className="ml-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+								<path d="m22 6-10 7L2 6"/>
+							</svg>
+						</a>
 					</div>
 				</div>
 			</section>

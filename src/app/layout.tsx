@@ -6,7 +6,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BannerBar from "@/components/BannerBar";
 import { getPublishedBannerBar } from "@/lib/notion";
-import FacebookGroupPopup from "@/components/FacebookGroupPopup";
 import { Nunito, Inter } from "next/font/google";
 import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
@@ -195,7 +194,6 @@ fbq('track', 'PageView');
         {children}
         <Footer />
         <CookieConsent initiallyConsented={hasAnalyticsConsent} />
-        <FacebookGroupPopup triggerPercent={10} />
       </body>
     </html>
   );

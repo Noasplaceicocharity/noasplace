@@ -10,8 +10,10 @@ import MailchimpSubscribeForm from "./MailchimpSubscribeForm";
 export default function Header() {
   const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isFreeResourcesOpen, setIsFreeResourcesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
+  const [isMobileFreeResourcesOpen, setIsMobileFreeResourcesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showMailchimpPopup, setShowMailchimpPopup] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -50,23 +52,22 @@ export default function Header() {
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link 
-            href="/" 
-            className="flex items-center group transition-transform duration-300 hover:scale-105"
-          >
-            <Image
-              src="/images/noas place logo.png"
-              alt="Noa's Place"
-              width={150}
-              height={150}
-              className="h-auto w-[100px] sm:w-[110px] md:w-[120px] transition-opacity duration-300 group-hover:opacity-90"
-              priority
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 ml-8">
+          {/* Logo + Desktop Navigation (left) */}
+          <div className="flex items-center min-w-0">
+            <Link 
+              href="/" 
+              className="flex items-center shrink-0 group transition-transform duration-300 hover:scale-105"
+            >
+              <Image
+                src="/images/noas place logo.png"
+                alt="Noa's Place"
+                width={150}
+                height={150}
+                className="h-auto w-[100px] sm:w-[110px] md:w-[120px] transition-opacity duration-300 group-hover:opacity-90"
+                priority
+              />
+            </Link>
+            <nav className="hidden lg:flex items-center gap-1 ml-4 sm:ml-6 lg:ml-8">
             {/* About Dropdown */}
             <div 
               className="relative"
@@ -130,12 +131,69 @@ export default function Header() {
             </div>
 
             <NavLink href="/plans" pathname={pathname} label="Our Plans" />
-            <NavLink href="/interactive-tools" pathname={pathname} label="Interactive Tools" />
-            <NavLink href="/blog" pathname={pathname} label="Blog" matchStart />
-            <NavLink href="/take-action" pathname={pathname} label="Take Action" matchStart />
+            {/* Free Resources Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsFreeResourcesOpen(true)}
+              onMouseLeave={() => setIsFreeResourcesOpen(false)}
+            >
+              <span
+                className={`relative font-medium text-[15px] transition-all duration-200 rounded-lg px-4 py-2.5 flex items-center gap-1.5 cursor-default ${
+                  pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog") || pathname.startsWith("/take-action")
+                    ? "text-brand-800 font-semibold"
+                    : "text-ink/80 hover:text-brand-800"
+                }`}
+              >
+                Free Resources
+                <svg
+                  className={`size-3.5 transition-transform duration-200 ${
+                    isFreeResourcesOpen ? "rotate-180" : ""
+                  }`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+                {(pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog") || pathname.startsWith("/take-action")) && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand-800" />
+                )}
+              </span>
+
+              <div
+                className={`absolute top-full left-0 pt-2 transition-all duration-200 ${
+                  isFreeResourcesOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+                }`}
+              >
+                <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-brand-100/50 py-2 min-w-[200px]">
+                  <Link
+                    href="/interactive-tools"
+                    className="block px-4 py-2.5 text-sm text-ink/80 hover:text-brand-800 hover:bg-brand-50/60 transition-all duration-200 rounded-lg mx-1"
+                  >
+                    Interactive Tools
+                  </Link>
+                  <Link
+                    href="/blog"
+                    className="block px-4 py-2.5 text-sm text-ink/80 hover:text-brand-800 hover:bg-brand-50/60 transition-all duration-200 rounded-lg mx-1"
+                  >
+                    Blog
+                  </Link>
+                  <Link
+                    href="/take-action"
+                    className="block px-4 py-2.5 text-sm text-ink/80 hover:text-brand-800 hover:bg-brand-50/60 transition-all duration-200 rounded-lg mx-1"
+                  >
+                    Take Action
+                  </Link>
+                </div>
+              </div>
+            </div>
             <NavLink href="/contact" pathname={pathname} label="Contact" />
-          </nav>
-          
+            </nav>
+          </div>
+
           {/* CTA Button & Mobile Menu Button */}
           <div className="flex items-center gap-3">
             <button
@@ -177,6 +235,17 @@ export default function Header() {
             </button>
           </div>
         </div>
+
+        {/* Compact plans bar - We're in Year one, link to full 3-year plan */}
+        <Link
+          href="/plans"
+          className="flex items-center justify-center gap-x-2 sm:gap-x-3 border-t border-brand-100/30 py-2 sm:py-2.5 hover:bg-brand-50/30 transition-colors"
+          aria-label="We're in Year one of our 3-year plan - view our plans"
+        >
+          <span className="text-xs text-ink/70">We're in</span>
+          <span className="text-xs font-semibold text-brand-800">Year one</span>
+          <span className="text-xs text-ink/70">of our 3-year plan</span>
+        </Link>
 
         {/* Mobile Navigation Menu */}
         <div 
@@ -253,9 +322,68 @@ export default function Header() {
               </div>
 
               <MobileNavLink href="/plans" pathname={pathname} label="Our Plans" onClick={() => setIsMobileMenuOpen(false)} />
-              <MobileNavLink href="/interactive-tools" pathname={pathname} label="Interactive Tools" onClick={() => setIsMobileMenuOpen(false)} />
-              <MobileNavLink href="/blog" pathname={pathname} label="Blog" matchStart onClick={() => setIsMobileMenuOpen(false)} />
-              <MobileNavLink href="/take-action" pathname={pathname} label="Take Action" matchStart onClick={() => setIsMobileMenuOpen(false)} />
+              {/* Free Resources Collapsible */}
+              <div>
+                <div className="flex items-center">
+                  <span
+                    className={`flex-1 font-medium text-base transition-all duration-200 rounded-xl px-4 py-3 ${
+                      pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog") || pathname.startsWith("/take-action")
+                        ? "text-brand-800 font-semibold bg-brand-50/60"
+                        : "text-ink/80"
+                    }`}
+                  >
+                    Free Resources
+                  </span>
+                  <button
+                    className="p-3 text-ink/60 hover:text-brand-800 transition-all duration-200 rounded-xl hover:bg-brand-50/40"
+                    onClick={() => setIsMobileFreeResourcesOpen(!isMobileFreeResourcesOpen)}
+                  >
+                    <svg
+                      className={`size-4 transition-transform duration-200 ${
+                        isMobileFreeResourcesOpen ? "rotate-180" : ""
+                      }`}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
+                </div>
+
+                <div
+                  className={`overflow-hidden transition-all duration-200 ${
+                    isMobileFreeResourcesOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="ml-4 mt-2 space-y-1 border-l-2 border-brand-100/40 pl-4">
+                    <Link
+                      href="/interactive-tools"
+                      className="block text-sm text-ink/70 hover:text-brand-800 hover:bg-brand-50/40 transition-all duration-200 rounded-lg px-3 py-2"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Interactive Tools
+                    </Link>
+                    <Link
+                      href="/blog"
+                      className="block text-sm text-ink/70 hover:text-brand-800 hover:bg-brand-50/40 transition-all duration-200 rounded-lg px-3 py-2"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Blog
+                    </Link>
+                    <Link
+                      href="/take-action"
+                      className="block text-sm text-ink/70 hover:text-brand-800 hover:bg-brand-50/40 transition-all duration-200 rounded-lg px-3 py-2"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Take Action
+                    </Link>
+                  </div>
+                </div>
+              </div>
               <MobileNavLink href="/contact" pathname={pathname} label="Contact" onClick={() => setIsMobileMenuOpen(false)} />
 
               {/* CTA Buttons */}

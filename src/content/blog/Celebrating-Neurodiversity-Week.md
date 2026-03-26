@@ -5,7 +5,7 @@ metaDescription: "If you’ve been following our journey at Noa’s Place, you k
 imageUrl: "https://cdn.marblism.com/aSNCImvGNVw.webp"
 date: "2026-03-17"
 author: "Josh Barnes, Founder of Noa’s Place"
-featured: true
+featured: fasle
 tags: ["wellbeing", "neurodiversity","community"]
 ---
 

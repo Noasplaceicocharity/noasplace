@@ -5,7 +5,7 @@ imageUrl: "https://cdn.marblism.com/2Hvu1hxsAS4.webp"
 date: "2026-03-26"
 author: "Josh Barnes, Founder of Noa’s Place"
 featured: true
-tags: ["community", "strategy", "send", "updates"]
+tags: ["Noa's Place"]
 ---
 I’ll be honest with you: I spend a lot of time thinking about keys. 
 

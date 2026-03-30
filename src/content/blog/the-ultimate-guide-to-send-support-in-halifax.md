@@ -5,7 +5,7 @@ imageUrl: "https://cdn.marblism.com/xktWivyvpto.webp"
 date: "2026-03-09"
 author: "Josh Barnes, Founder of Noa’s Place"
 featured: false
-tags: ["community", "strategy", "send"]
+tags: ["School & Education"]
 ---
 
 If you’re reading this, chances are you’re tired. 

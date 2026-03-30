@@ -6,7 +6,7 @@ imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/our-story-noas-pl
 date: "2025-10-08"
 author: "Noa's Place Team"
 featured: false
-tags: ["announcement", "community", "updates"]
+tags: ["Noa's Place"]
 ---
 
 Hi, I'm **Josh**, and together with my wife **Taya**, we're building something that we wish had existed when we needed it most.

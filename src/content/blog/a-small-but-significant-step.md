@@ -6,7 +6,7 @@ imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/steps-in-sand.jpg
 date: "2025-10-31"
 author: "Josh Barnes, Founder of Noa’s Place"
 featured: false
-tags: ["community", "updates"]
+tags: ["Noa's Place"]
 ---
 
 Some steps in a journey feel small on the surface, but mean everything underneath.

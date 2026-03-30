@@ -6,7 +6,7 @@ imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/response.jpg"
 date: "2026-02-24"
 author: "Noa’s Place Team"
 featured: true
-tags: ["send", "policy", "updates"]
+tags: ["School & Education"]
 ---
 
 The announcement of the **Every Child Achieving and Thriving White Paper** marks one of the most significant proposed changes to the SEND system in England in over a decade. The government has outlined a £4 billion reform package aimed at improving support for children and increasing inclusion within mainstream schools.

@@ -6,7 +6,7 @@ imageUrl: "https://cdn.marblism.com/GDL1efO7du-.webp"
 date: "2026-03-12"
 author: "Josh Barnes, Founder of Noa’s Place"
 featured: false
-tags: ["wellbeing", "neurodiversity"]
+tags: ["Support & Tools"]
 ---
 
 Have you ever walked into a supermarket and felt like the lights were screaming at you?

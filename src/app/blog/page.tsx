@@ -1,8 +1,5 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
-import Image from 'next/image';
 import { getAllBlogPosts, getAllTags } from '@/lib/blog';
-import { format } from 'date-fns';
 import BlogClient from './BlogClient';
 
 export const metadata: Metadata = {

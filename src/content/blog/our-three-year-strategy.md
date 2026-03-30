@@ -6,7 +6,7 @@ imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/three-year-strate
 date: "2025-01-01"
 author: "Josh Barnes, Founder of Noa’s Place"
 featured: false
-tags: ["community", "strategy", "send", "updates"]
+tags: ["Noa's Place"]
 ---
 
 At Noa’s Place, we often talk about **making space**.  

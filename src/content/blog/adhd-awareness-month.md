@@ -6,7 +6,7 @@ imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/ADHD-awareness-mo
 date: "2025-10-01"
 author: "Noa's Place Team"
 featured: false
-tags: ["community", "updates"]
+tags: ["Understanding Your Child"]
 ---
 
 October is **ADHD Awareness Month**, a time when we come together to shine a light on what it really means to live with ADHD.  

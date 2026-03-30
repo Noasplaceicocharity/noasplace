@@ -1,8 +1,6 @@
 "use client";
 
 import ImageModal from "@/components/ImageModal";
-import Squiggle from "@/components/Squiggle";
-import StickerCard from "@/components/StickerCard";
 import { AnimatedScrollSection, ScrollProgressIndicator } from "@/components/AnimatedScrollSection";
 import Image from "next/image";
 import Link from "next/link";

@@ -6,7 +6,7 @@ imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/trustees-noas-pla
 date: "2025-09-21"
 author: "Noa's Place Team"
 featured: false
-tags: ["announcement", "community", "updates"]
+tags: ["Noa's Place"]
 ---
 
 At **Noa’s Place**, our mission is simple but powerful — to create a world where children, adults, and families of every ability can **play, learn, and belong together**.

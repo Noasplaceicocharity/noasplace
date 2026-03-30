@@ -6,7 +6,7 @@ imageUrl: "https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/response.jpg"
 date: "2025-12-05"
 author: "Noa’s Place Team"
 featured: false
-tags: ["send", "updates", "community"]
+tags: ["School & Education"]
 ---
 
 Noa’s Place welcomes the government’s new commitment to building a **prevention first early support system** rooted in fairness, connection and long-term outcomes for children and families. For many years, families navigating neurodiversity and SEND have told us that support often comes too late, is difficult to access, or requires them to reach crisis point before help becomes available. This announcement recognises the need for earlier, more coordinated support, something we strongly support.

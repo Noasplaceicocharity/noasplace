@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 import { getAllBlogPosts } from '@/lib/blog';
+import { pickFeaturedBlogPost } from '@/lib/blog-shared';
 
 export async function GET() {
   try {
     const allPosts = await getAllBlogPosts();
-    const featuredPost = allPosts.find(post => post.featured);
+    const featuredPost = pickFeaturedBlogPost(allPosts);
     
     if (!featuredPost) {
       return NextResponse.json({ post: null });

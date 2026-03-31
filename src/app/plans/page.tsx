@@ -163,6 +163,22 @@ export default function OurPlans() {
             <p className="text-lg sm:text-xl text-ink/80 max-w-3xl mx-auto leading-relaxed">
               Our strategic plan outlines how we'll create an inclusive hub where neurodivergent and disabled individuals and families find understanding, connection, and community.
             </p>
+            <div className="mt-10 mx-auto max-w-4xl">
+              <div className="overflow-hidden rounded-2xl border-2 border-brand-100/50 bg-white/70 shadow-lg backdrop-blur-sm">
+                <video
+                  controls
+                  preload="metadata"
+                  className="w-full h-auto"
+                  aria-label="Our plans overview video"
+                >
+                  <source
+                    src="https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/our-plans-subbed.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
           </div>
         </div>
       </section>

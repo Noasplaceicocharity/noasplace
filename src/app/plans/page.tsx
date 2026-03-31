@@ -17,7 +17,6 @@ export default function OurPlans() {
     description: string;
     features: string[];
   } | null>(null);
-  const [selectedYear, setSelectedYear] = useState<number>(1);
   const [expandedPriority, setExpandedPriority] = useState<number | null>(null);
   const [showMailchimpPopup, setShowMailchimpPopup] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -340,7 +339,7 @@ export default function OurPlans() {
         </section>
       </AnimatedScrollSection>
 
-      {/* 3-Year Roadmap Section */}
+      {/* Plan Documents Section */}
       <AnimatedScrollSection>
         <section className="bg-gradient-to-b from-white via-brand-50/30 to-white py-24 overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent"></div>
@@ -353,87 +352,65 @@ export default function OurPlans() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-extrabold text-brand-800 sm:text-4xl md:text-5xl mb-6 tracking-tight">
-                Our 3-Year Roadmap
+                Read Our Plans
               </h2>
               <p className="text-xl text-ink/80 max-w-4xl mx-auto leading-relaxed">
-                Here's our journey over the next three years as we work towards creating an inclusive hub for every family.
+                Open our full plan documents to explore our three-year roadmap and strategic priorities through to 2029.
               </p>
             </motion.div>
 
-            {/* Interactive Year Tabs */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-8"
-            >
-              <div className="flex flex-wrap justify-center gap-4">
-                {[1, 2, 3].map((year) => (
-                  <motion.button
-                    key={year}
-                    onClick={() => setSelectedYear(year)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
-                      selectedYear === year
-                        ? "bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-lg"
-                        : "bg-white/80 backdrop-blur-sm border-2 border-brand-100 text-brand-800 hover:bg-brand-50 hover:border-brand-200"
-                    }`}
+            <div className="grid gap-8 md:grid-cols-2">
+              {[
+                {
+                  title: "3 Year Roadmap",
+                  description: "A mapped-out plan for the next three years.",
+                  cover: "/3yearplan/Noa's Place 3 Year Plan (full).jpg",
+                  pdf: "/3yearplan/Noa's Place 3 Year Plan (full).pdf",
+                  coverAlt: "Cover of Noa's Place 3 Year Plan document",
+                },
+                {
+                  title: "Strategic Plan 2026-2029",
+                  description:
+                    "A more in-depth plan explaining our priorities, goals, and outcomes by 2029.",
+                  cover: "/3yearplan/Noa's Place Strategic Plan 2026-2029 (full).jpg",
+                  pdf: "/3yearplan/Noa's Place Strategic Plan 2026-2029 (full).pdf",
+                  coverAlt: "Cover of Noa's Place Strategic Plan 2026 to 2029 booklet",
+                },
+              ].map((doc, index) => (
+                <motion.article
+                  key={doc.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="rounded-3xl border-2 border-brand-100/40 bg-gradient-to-br from-white via-brand-50/40 to-white p-6 shadow-lg"
+                >
+                  <div className="relative mb-6 overflow-hidden rounded-2xl ring-1 ring-brand-100">
+                    <Image
+                      src={doc.cover}
+                      alt={doc.coverAlt}
+                      width={900}
+                      height={1200}
+                      className="h-auto w-full object-cover"
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold text-brand-800 mb-3">{doc.title}</h3>
+                  <p className="text-ink/80 mb-6 leading-relaxed">{doc.description}</p>
+                  <a
+                    href={doc.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-brand-800 px-5 py-3 font-semibold text-white transition hover:bg-brand-900"
                   >
-                    Year {year}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Roadmap Content */}
-            <motion.div
-              key={selectedYear}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4 }}
-              className="bg-gradient-to-br from-white via-brand-50/50 to-white rounded-3xl p-8 shadow-lg border-2 border-brand-100/30"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="size-16 rounded-full bg-gradient-to-br from-brand-600 to-brand-800 text-white flex items-center justify-center text-3xl font-bold shadow-lg">
-                  {selectedYear}
-                </div>
-                <h3 className="text-3xl font-bold text-brand-800">Year {selectedYear}</h3>
-              </div>
-              <div className="relative w-full rounded-2xl overflow-hidden bg-white shadow-sm ring-2 ring-brand-100/50">
-                <Image
-                  src={`/3yearplan/year ${selectedYear}.jpg`}
-                  alt={`Year ${selectedYear} roadmap for Noa's Place`}
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto object-contain"
-                />
-              </div>
-            </motion.div>
-
-            {/* Timeline Indicator */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-8 flex justify-center items-center gap-4"
-            >
-              <div className="flex gap-2">
-                {[1, 2, 3].map((year) => (
-                  <motion.div
-                    key={year}
-                    animate={{
-                      width: selectedYear === year ? 32 : 8,
-                      backgroundColor: selectedYear === year ? "#6E3482" : "#E7DBEF"
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="h-2 rounded-full"
-                  />
-                ))}
-              </div>
-            </motion.div>
+                    Open PDF
+                    <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17 17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </a>
+                </motion.article>
+              ))}
+            </div>
           </div>
         </section>
       </AnimatedScrollSection>

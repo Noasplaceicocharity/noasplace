@@ -50,6 +50,14 @@ type WebflowCollectionItem = {
   fieldData?: Record<string, unknown>;
 };
 
+/** Webflow list items expose createdOn; some payloads may use snake_case. */
+function getWebflowItemCreatedOn(item: WebflowCollectionItem): string | undefined {
+  const raw =
+    item.createdOn ?? (item as Record<string, unknown>)['created_on'];
+  if (typeof raw === 'string' && raw.trim()) return raw.trim();
+  return undefined;
+}
+
 type WebflowCollectionField = {
   type?: string;
   slug?: string;
@@ -370,13 +378,13 @@ function mapWebflowItemToBlogPost(
       getFieldValue(fieldData, 'WEBFLOW_BLOG_AUTHOR_FIELD', ['author', 'author-name'])
     ) || "Noa's Place";
 
+  // Do not auto-map fieldData "date" / "publish-date" etc.: those often track last publish and
+  // match lastUpdated. Only read a date from CMS when WEBFLOW_BLOG_DATE_FIELD names a static field.
+  const cmsDateOverride = toStringValue(
+    getFieldValue(fieldData, 'WEBFLOW_BLOG_DATE_FIELD', [])
+  );
   const date =
-    toStringValue(
-      getFieldValue(fieldData, 'WEBFLOW_BLOG_DATE_FIELD', ['date', 'publish-date', 'published-on', 'post-date'])
-    ) ||
-    item.lastPublished ||
-    item.lastUpdated ||
-    item.createdOn;
+    getWebflowItemCreatedOn(item) || cmsDateOverride || item.lastPublished;
 
   const featured = toBooleanValue(
     getFieldValue(fieldData, 'WEBFLOW_BLOG_FEATURED_FIELD', [

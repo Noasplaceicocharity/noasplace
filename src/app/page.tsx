@@ -189,6 +189,13 @@ export default function Home() {
   ] as const;
   const activeJourneyStep = journeySteps.find((item) => item.step === selectedJourneyStep) ?? journeySteps[2];
   const completedJourneySteps = journeySteps.filter((item) => item.status === "done").length;
+  const featuredBlogHref = featuredBlog ? `/blog/${featuredBlog.slug}` : '/blog';
+  const decodedFeaturedExcerpt = (() => {
+    if (!featuredBlog?.excerpt || typeof window === 'undefined') return featuredBlog?.excerpt ?? '';
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = featuredBlog.excerpt;
+    return textarea.value;
+  })();
 
 	return (
 		<main className="bg-background text-ink">
@@ -285,7 +292,7 @@ export default function Home() {
 						{/* Navigation cards - Blog 50%, Interactive Tools 25%, Dreamboard 25% */}
 						<div className="mt-16 grid grid-cols-1 lg:grid-cols-4 gap-6">
 							<Link
-								href="/blog"
+								href={featuredBlogHref}
 								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-white/50 lg:col-span-2"
 							>
 								<div className="relative h-52 overflow-hidden">
@@ -310,9 +317,9 @@ export default function Home() {
 									<div className="text-2xl font-black text-brand-800 mb-3 group-hover:text-brand-900 transition-colors">
 										Blog
 									</div>
-									{featuredBlog?.excerpt ? (
+									{decodedFeaturedExcerpt ? (
 										<p className="text-sm text-gray-600 line-clamp-3 mb-4">
-											{featuredBlog.excerpt}
+											{decodedFeaturedExcerpt}
 										</p>
 									) : (
 										<p className="text-sm text-gray-600 mb-4">

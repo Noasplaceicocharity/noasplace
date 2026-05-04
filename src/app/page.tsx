@@ -237,7 +237,7 @@ export default function Home() {
 								</p>
 
 								{/* Buttons */}
-								<div className="flex flex-col sm:flex-row gap-3 pt-2">
+								<div id="founding-supporter" className="flex flex-col sm:flex-row gap-3 pt-2 scroll-mt-24">
 									<button
 										onClick={() => setShowMailchimpPopup(true)}
 										className="inline-flex items-center justify-center rounded-lg bg-brand-800 px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-brand-900 hover:shadow-lg hover:scale-105 transition-all duration-300"

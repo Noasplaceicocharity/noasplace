@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     }
 
     const resolvedFirstName =
-      typeof firstName === 'string' && firstName.trim() ? firstName.trim() : 'Blog';
+      typeof firstName === 'string' && firstName.trim() ? firstName.trim() : 'Supporter';
     const resolvedLastName =
       typeof lastName === 'string' && lastName.trim() ? lastName.trim() : 'Reader';
     const resolvedUserType =

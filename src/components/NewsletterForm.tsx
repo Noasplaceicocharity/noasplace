@@ -3,11 +3,7 @@
 import { useState } from 'react';
 
 const NewsletterForm = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-  });
+  const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -23,9 +19,7 @@ const NewsletterForm = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
+          email,
           mobile: '',
           userType: 'Community supporter / local resident',
         }),
@@ -38,91 +32,53 @@ const NewsletterForm = () => {
       }
 
       setStatus('success');
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-      });
+      setEmail('');
     } catch (error) {
       setStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Something went wrong');
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="newsletter-firstName" className="sr-only">
-            First Name
-          </label>
-          <input
-            type="text"
-            id="newsletter-firstName"
-            name="firstName"
-            required
-            value={formData.firstName}
-            onChange={handleChange}
-            className="w-full px-4 py-2.5 rounded-lg border-0 bg-white/10 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white/50 focus:bg-white/20 transition-colors"
-            placeholder="First Name"
-          />
-        </div>
-        <div>
-          <label htmlFor="newsletter-lastName" className="sr-only">
-            Last Name
-          </label>
-          <input
-            type="text"
-            id="newsletter-lastName"
-            name="lastName"
-            required
-            value={formData.lastName}
-            onChange={handleChange}
-            className="w-full px-4 py-2.5 rounded-lg border-0 bg-white/10 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white/50 focus:bg-white/20 transition-colors"
-            placeholder="Last Name"
-          />
-        </div>
-      </div>
       <div>
         <label htmlFor="newsletter-email" className="sr-only">
-          Email Address
+          Email address
         </label>
         <input
           type="email"
           id="newsletter-email"
           name="email"
           required
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full px-4 py-2.5 rounded-lg border-0 bg-white/10 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white/50 focus:bg-white/20 transition-colors"
-          placeholder="Email Address"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full rounded-lg border-0 bg-white/10 px-4 py-2.5 text-white placeholder:text-white/60 transition-colors focus:bg-white/20 focus:ring-2 focus:ring-white/50"
+          placeholder="Email"
         />
       </div>
       <button
         type="submit"
         disabled={status === 'loading'}
-        className={`w-full px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${
-          status === 'loading' 
-            ? 'bg-white/20 text-white/50 cursor-not-allowed' 
-            : 'bg-white text-brand-800 hover:bg-white/90 hover:scale-105'
+        className={`w-full rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 ${
+          status === 'loading'
+            ? 'cursor-not-allowed bg-white/20 text-white/50'
+            : 'bg-white text-brand-800 hover:scale-105 hover:bg-white/90'
         }`}
       >
         {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
       </button>
 
       {(status === 'success' || status === 'error') && (
-        <div className={`rounded-lg p-3 text-sm text-center ${
-          status === 'success' 
-            ? 'bg-white/20 text-white' 
-            : 'bg-red-500/20 text-white'
-        }`}>
-          {status === 'success' 
-            ? 'Thank you for subscribing!' 
+        <div
+          className={`rounded-lg p-3 text-center text-sm ${
+            status === 'success'
+              ? 'bg-white/20 text-white'
+              : 'bg-red-500/20 text-white'
+          }`}
+        >
+          {status === 'success'
+            ? 'Thank you for subscribing!'
             : errorMessage}
         </div>
       )}
@@ -131,4 +87,3 @@ const NewsletterForm = () => {
 };
 
 export default NewsletterForm;
-

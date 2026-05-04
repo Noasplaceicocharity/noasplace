@@ -190,6 +190,7 @@ export default function Header() {
                 </div>
               </div>
             </div>
+            <NavLink href="/join-the-team" pathname={pathname} label="Join the Team" matchStart />
             <NavLink href="/contact" pathname={pathname} label="Contact" />
             </nav>
           </div>
@@ -384,6 +385,13 @@ export default function Header() {
                   </div>
                 </div>
               </div>
+              <MobileNavLink
+                href="/join-the-team"
+                pathname={pathname}
+                label="Join the Team"
+                matchStart
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
               <MobileNavLink href="/contact" pathname={pathname} label="Contact" onClick={() => setIsMobileMenuOpen(false)} />
 
               {/* CTA Buttons */}

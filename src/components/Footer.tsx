@@ -100,6 +100,14 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/join-the-team"
+                  className="text-white/80 hover:text-white transition-colors text-sm"
+                >
+                  Join the Team
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -154,13 +162,15 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/20">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-white/60 text-sm text-center md:text-left">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row md:items-start">
+            <p className="text-white/60 text-sm text-center md:text-left shrink-0">
               © {new Date().getFullYear()} Noa's Place. All rights reserved.
             </p>
-            <p className="text-white/60 text-sm text-center md:text-right">
-              Registered Charity No. [To be confirmed]
-            </p>
+            <div className="text-white/60 text-sm text-center md:text-right space-y-1 md:max-w-md">
+              <p className="text-white/80 font-semibold">Noa&apos;s Place CIO</p>
+              <p>Registered as a charitable incorporated organisation in England &amp; Wales</p>
+              <p>Registered Charity No: 1217825</p>
+            </div>
           </div>
         </div>
       </div>

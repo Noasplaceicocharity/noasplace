@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import MailchimpEmailBar from '@/components/MailchimpEmailBar';
 import { BlogPostMeta } from '@/lib/blog';
-import { pickFeaturedBlogPost } from '@/lib/blog-shared';
 import { format } from 'date-fns';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
@@ -37,21 +36,6 @@ export default function BlogClient({ posts, tags }: BlogClientProps) {
     if (!selectedTag) return posts;
     return posts.filter(post => post.tags?.includes(selectedTag));
   }, [posts, selectedTag]);
-
-  /** Featured first, then remaining posts (same card layout for all). */
-  const displayPosts = useMemo(() => {
-    const featured = pickFeaturedBlogPost(filteredPosts);
-    if (!featured) return filteredPosts;
-    const rest = filteredPosts.filter((p) => p.slug !== featured.slug);
-    return [featured, ...rest];
-  }, [filteredPosts]);
-
-  /** All featured posts site-wide, newest first — for the right sidebar. */
-  const featuredSidebarPosts = useMemo(() => {
-    return [...posts]
-      .filter((p) => p.featured)
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }, [posts]);
 
   return (
     <main className="bg-background text-ink">
@@ -103,7 +87,7 @@ export default function BlogClient({ posts, tags }: BlogClientProps) {
         </section>
       )}
 
-      {/* Main Content Section — 3-column card grid (main column flush-left on large screens when sidebar is present) */}
+      {/* Main content — 16:9 card grid */}
       <section className="w-full bg-gradient-to-b from-white to-brand-50/20 pt-10 pb-24">
         <div className="w-full">
           {filteredPosts.length === 0 ? (
@@ -128,28 +112,24 @@ export default function BlogClient({ posts, tags }: BlogClientProps) {
               )}
             </div>
           ) : (
-            <div
-              className={`grid w-full grid-cols-1 gap-10 ${featuredSidebarPosts.length > 0 ? 'lg:grid-cols-[minmax(0,1fr)_17.5rem] xl:grid-cols-[minmax(0,1fr)_20rem] lg:gap-x-6 xl:gap-x-8' : ''}`}
-            >
-              <div
-                className={`min-w-0 ${featuredSidebarPosts.length > 0 ? 'pl-4 sm:pl-6 lg:pl-8' : 'px-4 sm:px-6 lg:px-8'}`}
-              >
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 xl:grid-cols-3 xl:gap-10">
-                  {displayPosts.map((post) => {
-                    const isFeaturedCard = Boolean(post.featured);
-                    const categoryLabel = post.tags?.[0];
-                    return (
-                      <Link
-                        key={post.slug}
-                        href={`/blog/${post.slug}`}
-                        className="group relative isolate block aspect-[3/4] w-full overflow-hidden rounded-3xl shadow-xl shadow-black/25 ring-1 ring-white/15 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-white/25"
-                      >
+            <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 xl:grid-cols-3 xl:gap-10">
+                {filteredPosts.map((post) => {
+                  const isFeaturedCard = Boolean(post.featured);
+                  const categoryLabel = post.tags?.[0];
+                  return (
+                    <Link
+                      key={post.slug}
+                      href={`/blog/${post.slug}`}
+                      className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-xl shadow-black/10 ring-1 ring-brand-900/10 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-brand-800/20"
+                    >
+                      <div className="relative aspect-video w-full shrink-0 bg-brand-50">
                         {post.imageUrl ? (
                           <Image
                             src={post.imageUrl}
                             alt={post.title}
                             fill
-                            className="object-cover transition duration-700 group-hover:scale-105"
+                            className="object-contain transition duration-500 group-hover:scale-[1.02]"
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                           />
                         ) : (
@@ -158,100 +138,35 @@ export default function BlogClient({ posts, tags }: BlogClientProps) {
                             aria-hidden
                           />
                         )}
-                        <div
-                          className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/50 to-black/20"
-                          aria-hidden
-                        />
                         {isFeaturedCard && (
-                          <span className="absolute left-4 top-4 z-10 rounded-full bg-[#FFB800] px-3 py-1 text-xs font-bold text-ink shadow-md">
+                          <span className="absolute left-3 top-3 z-10 rounded-full bg-[#FFB800] px-3 py-1 text-xs font-bold text-ink shadow-md">
                             Featured
                           </span>
                         )}
-                        <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col p-5 sm:p-6">
-                          {categoryLabel ? (
-                            <span className="mb-3 inline-flex max-w-full self-start truncate rounded-lg bg-[#6E3482] px-3 py-1.5 text-xs font-semibold text-white shadow-md">
-                              {categoryLabel}
-                            </span>
-                          ) : null}
-                          <h2 className="line-clamp-2 text-lg font-extrabold leading-snug text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.5)] sm:text-xl">
-                            {post.title}
-                          </h2>
-                          <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-white/92 sm:text-base">
-                            {post.excerpt}
-                          </p>
-                          <time
-                            className="mt-3 text-xs font-semibold text-white/75"
-                            dateTime={post.date}
-                          >
-                            {format(new Date(post.date), 'dd MMM yyyy')}
-                          </time>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
+                      </div>
+                      <div className="flex min-h-0 flex-1 flex-col p-4 sm:p-5">
+                        {categoryLabel ? (
+                          <span className="mb-2 inline-flex max-w-full self-start truncate rounded-lg bg-[#6E3482] px-2.5 py-1 text-xs font-semibold text-white shadow-sm">
+                            {categoryLabel}
+                          </span>
+                        ) : null}
+                        <h2 className="line-clamp-3 text-base font-extrabold leading-snug text-brand-900 group-hover:text-brand-800 sm:text-lg">
+                          {post.title}
+                        </h2>
+                        <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-ink/75">
+                          {post.excerpt}
+                        </p>
+                        <time
+                          className="mt-3 text-xs font-semibold text-ink/55"
+                          dateTime={post.date}
+                        >
+                          {format(new Date(post.date), 'dd MMM yyyy')}
+                        </time>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
-
-              {featuredSidebarPosts.length > 0 ? (
-                <aside
-                  className="hidden min-w-0 shrink-0 pr-4 sm:pr-6 lg:block lg:pr-8"
-                  aria-label="Featured posts"
-                >
-                  <div className="sticky top-24 space-y-5">
-                    <h2 className="text-lg font-extrabold text-brand-800 xl:text-xl">
-                      Featured
-                    </h2>
-                    <div className="flex flex-col gap-5">
-                      {featuredSidebarPosts.map((post) => {
-                        const categoryLabel = post.tags?.[0];
-                        return (
-                          <Link
-                            key={`sidebar-${post.slug}`}
-                            href={`/blog/${post.slug}`}
-                            className="group flex w-full flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-brand-900/10 transition duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-                          >
-                            <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-100">
-                              {post.imageUrl ? (
-                                <Image
-                                  src={post.imageUrl}
-                                  alt={post.title}
-                                  fill
-                                  className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                                  sizes="280px"
-                                />
-                              ) : (
-                                <div
-                                  className="absolute inset-0 bg-gradient-to-br from-[#6E3482] to-brand-900"
-                                  aria-hidden
-                                />
-                              )}
-                              <span className="absolute left-3 top-3 rounded-full bg-[#FFB800] px-2.5 py-0.5 text-[10px] font-bold text-ink shadow-sm">
-                                Featured
-                              </span>
-                            </div>
-                            <div className="flex flex-col p-4">
-                              {categoryLabel ? (
-                                <span className="mb-2 inline-flex max-w-full self-start truncate rounded-md bg-[#6E3482] px-2.5 py-1 text-[10px] font-semibold text-white">
-                                  {categoryLabel}
-                                </span>
-                              ) : null}
-                              <h3 className="line-clamp-3 text-sm font-extrabold leading-snug text-brand-900 group-hover:text-brand-800">
-                                {post.title}
-                              </h3>
-                              <time
-                                className="mt-2 text-[11px] font-medium text-ink/55"
-                                dateTime={post.date}
-                              >
-                                {format(new Date(post.date), 'dd MMM yyyy')}
-                              </time>
-                            </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </aside>
-              ) : null}
             </div>
           )}
         </div>

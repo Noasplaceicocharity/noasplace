@@ -289,7 +289,7 @@ export default function Home() {
 					</div>
 						</div>
 
-						{/* Navigation cards - Blog 50%, Interactive Tools 25%, Dreamboard 25% */}
+						{/* Navigation cards - Blog 50%, Interactive Tools 25%, The Hub 25% */}
 						<div className="mt-16 grid grid-cols-1 lg:grid-cols-4 gap-6">
 							<Link
 								href={featuredBlogHref}
@@ -361,25 +361,25 @@ export default function Home() {
 								</div>
 							</Link>
 							<Link
-								href="#dreamboard"
+								href="/the-hub"
 								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-white/50 lg:col-span-1"
 							>
 								<div className="relative h-52 overflow-hidden">
 									<Image
 										src="/dreamboard/indoor_playground.jpg"
-										alt="Our Dreamboard - See our vision"
+										alt="The Hub - our vision for Noa's Place"
 										fill
 										className="object-cover transition-transform duration-500 group-hover:scale-110"
 									/>
 									<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 								</div>
 								<div className="p-6">
-									<div className="text-2xl font-black text-brand-800 mb-3 group-hover:text-brand-900 transition-colors">Our Dreamboard</div>
+									<div className="text-2xl font-black text-brand-800 mb-3 group-hover:text-brand-900 transition-colors">The Hub</div>
 									<p className="text-sm text-gray-600 mb-3">
 										Our vision for an inclusive community hub in West Yorkshire — sensory rooms, safe play spaces and a welcoming place for every family.
 									</p>
 									<span className="inline-flex items-center text-sm font-semibold text-brand-800 group-hover:text-brand-900">
-										See our vision
+										Explore the Hub
 										<svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
 										</svg>

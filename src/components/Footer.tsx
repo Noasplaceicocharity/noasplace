@@ -85,6 +85,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/the-hub"
+                  className="text-white/80 hover:text-white transition-colors text-sm"
+                >
+                  The Hub
+                </Link>
+              </li>
+              <li>
                 <Link 
                   href="/interactive-tools" 
                   className="text-white/80 hover:text-white transition-colors text-sm"

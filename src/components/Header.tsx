@@ -6,14 +6,19 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import MailchimpSubscribeForm from "./MailchimpSubscribeForm";
+import { theHubDropdownLinks } from "@/data/dreamboardSpaces";
 
 export default function Header() {
   const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isFreeResourcesOpen, setIsFreeResourcesOpen] = useState(false);
+  const [isHubDropdownOpen, setIsHubDropdownOpen] = useState(false);
+  const [isFamiliesDropdownOpen, setIsFamiliesDropdownOpen] = useState(false);
+  const [isGetInvolvedDropdownOpen, setIsGetInvolvedDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
-  const [isMobileFreeResourcesOpen, setIsMobileFreeResourcesOpen] = useState(false);
+  const [isMobileHubOpen, setIsMobileHubOpen] = useState(false);
+  const [isMobileFamiliesOpen, setIsMobileFamiliesOpen] = useState(false);
+  const [isMobileGetInvolvedOpen, setIsMobileGetInvolvedOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showMailchimpPopup, setShowMailchimpPopup] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -131,23 +136,25 @@ export default function Header() {
             </div>
 
             <NavLink href="/plans" pathname={pathname} label="Our Plans" />
-            {/* Free Resources Dropdown */}
+
+            {/* The Hub dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setIsFreeResourcesOpen(true)}
-              onMouseLeave={() => setIsFreeResourcesOpen(false)}
+              onMouseEnter={() => setIsHubDropdownOpen(true)}
+              onMouseLeave={() => setIsHubDropdownOpen(false)}
             >
-              <span
-                className={`relative font-medium text-[15px] transition-all duration-200 rounded-lg px-4 py-2.5 flex items-center gap-1.5 cursor-default ${
-                  pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog") || pathname.startsWith("/take-action")
+              <Link
+                href="/the-hub"
+                className={`relative font-medium text-[15px] transition-all duration-200 rounded-lg px-4 py-2.5 flex items-center gap-1.5 ${
+                  pathname.startsWith("/the-hub")
                     ? "text-brand-800 font-semibold"
                     : "text-ink/80 hover:text-brand-800"
                 }`}
               >
-                Free Resources
+                The Hub
                 <svg
                   className={`size-3.5 transition-transform duration-200 ${
-                    isFreeResourcesOpen ? "rotate-180" : ""
+                    isHubDropdownOpen ? "rotate-180" : ""
                   }`}
                   viewBox="0 0 24 24"
                   fill="none"
@@ -158,39 +165,142 @@ export default function Header() {
                 >
                   <path d="m6 9 6 6 6-6" />
                 </svg>
-                {(pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog") || pathname.startsWith("/take-action")) && (
+                {pathname.startsWith("/the-hub") && (
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand-800" />
                 )}
-              </span>
-
+              </Link>
               <div
                 className={`absolute top-full left-0 pt-2 transition-all duration-200 ${
-                  isFreeResourcesOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+                  isHubDropdownOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
                 }`}
               >
-                <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-brand-100/50 py-2 min-w-[200px]">
+                <div className="max-h-[min(75vh,28rem)] min-w-[220px] overflow-y-auto rounded-2xl border border-brand-100/50 bg-white/95 py-2 shadow-xl backdrop-blur-md">
+                  {theHubDropdownLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="mx-1 block rounded-lg px-4 py-2 text-sm text-ink/80 transition-all duration-200 hover:bg-brand-50/60 hover:text-brand-800"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Families & Support dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsFamiliesDropdownOpen(true)}
+              onMouseLeave={() => setIsFamiliesDropdownOpen(false)}
+            >
+              <span
+                className={`relative flex cursor-default items-center gap-1.5 rounded-lg px-4 py-2.5 text-[15px] font-medium transition-all duration-200 ${
+                  pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog")
+                    ? "font-semibold text-brand-800"
+                    : "text-ink/80 hover:text-brand-800"
+                }`}
+              >
+                Families &amp; Support
+                <svg
+                  className={`size-3.5 transition-transform duration-200 ${
+                    isFamiliesDropdownOpen ? "rotate-180" : ""
+                  }`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+                {(pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog")) && (
+                  <span className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-brand-800" />
+                )}
+              </span>
+              <div
+                className={`absolute top-full left-0 pt-2 transition-all duration-200 ${
+                  isFamiliesDropdownOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+                }`}
+              >
+                <div className="min-w-[200px] rounded-2xl border border-brand-100/50 bg-white/95 py-2 shadow-xl backdrop-blur-md">
                   <Link
                     href="/interactive-tools"
-                    className="block px-4 py-2.5 text-sm text-ink/80 hover:text-brand-800 hover:bg-brand-50/60 transition-all duration-200 rounded-lg mx-1"
+                    className="mx-1 block rounded-lg px-4 py-2.5 text-sm text-ink/80 transition-all duration-200 hover:bg-brand-50/60 hover:text-brand-800"
                   >
                     Interactive Tools
                   </Link>
                   <Link
                     href="/blog"
-                    className="block px-4 py-2.5 text-sm text-ink/80 hover:text-brand-800 hover:bg-brand-50/60 transition-all duration-200 rounded-lg mx-1"
+                    className="mx-1 block rounded-lg px-4 py-2.5 text-sm text-ink/80 transition-all duration-200 hover:bg-brand-50/60 hover:text-brand-800"
                   >
                     Blog
-                  </Link>
-                  <Link
-                    href="/take-action"
-                    className="block px-4 py-2.5 text-sm text-ink/80 hover:text-brand-800 hover:bg-brand-50/60 transition-all duration-200 rounded-lg mx-1"
-                  >
-                    Take Action
                   </Link>
                 </div>
               </div>
             </div>
-            <NavLink href="/join-the-team" pathname={pathname} label="Join the Team" matchStart />
+
+            {/* Get involved dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsGetInvolvedDropdownOpen(true)}
+              onMouseLeave={() => setIsGetInvolvedDropdownOpen(false)}
+            >
+              <span
+                className={`relative flex cursor-default items-center gap-1.5 rounded-lg px-4 py-2.5 text-[15px] font-medium transition-all duration-200 ${
+                  pathname.startsWith("/join-the-team")
+                    ? "font-semibold text-brand-800"
+                    : "text-ink/80 hover:text-brand-800"
+                }`}
+              >
+                Get involved
+                <svg
+                  className={`size-3.5 transition-transform duration-200 ${
+                    isGetInvolvedDropdownOpen ? "rotate-180" : ""
+                  }`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+                {pathname.startsWith("/join-the-team") && (
+                  <span className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-brand-800" />
+                )}
+              </span>
+              <div
+                className={`absolute top-full left-0 pt-2 transition-all duration-200 ${
+                  isGetInvolvedDropdownOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+                }`}
+              >
+                <div className="min-w-[220px] rounded-2xl border border-brand-100/50 bg-white/95 py-2 shadow-xl backdrop-blur-md">
+                  <button
+                    type="button"
+                    onClick={() => setShowMailchimpPopup(true)}
+                    className="mx-1 block w-full rounded-lg px-4 py-2.5 text-left text-sm text-ink/80 transition-all duration-200 hover:bg-brand-50/60 hover:text-brand-800"
+                  >
+                    Be a Founding Supporter
+                  </button>
+                  <Link
+                    href="/join-the-team"
+                    className="mx-1 block rounded-lg px-4 py-2.5 text-sm text-ink/80 transition-all duration-200 hover:bg-brand-50/60 hover:text-brand-800"
+                  >
+                    Join the Team
+                  </Link>
+                  <Link
+                    href="/join-the-team/volunteer"
+                    className="mx-1 block rounded-lg px-4 py-2.5 text-sm text-ink/80 transition-all duration-200 hover:bg-brand-50/60 hover:text-brand-800"
+                  >
+                    Volunteer
+                  </Link>
+                </div>
+              </div>
+            </div>
+
             <NavLink href="/contact" pathname={pathname} label="Contact" />
             </nav>
           </div>
@@ -251,7 +361,7 @@ export default function Header() {
         {/* Mobile Navigation Menu */}
         <div 
           className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+            isMobileMenuOpen ? 'max-h-[min(90vh,1400px)] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
           <div className="border-t border-brand-100/30 bg-white/95 backdrop-blur-sm py-4">
@@ -323,26 +433,30 @@ export default function Header() {
               </div>
 
               <MobileNavLink href="/plans" pathname={pathname} label="Our Plans" onClick={() => setIsMobileMenuOpen(false)} />
-              {/* Free Resources Collapsible */}
+
+              {/* The Hub — collapsible */}
               <div>
                 <div className="flex items-center">
-                  <span
-                    className={`flex-1 font-medium text-base transition-all duration-200 rounded-xl px-4 py-3 ${
-                      pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog") || pathname.startsWith("/take-action")
-                        ? "text-brand-800 font-semibold bg-brand-50/60"
-                        : "text-ink/80"
+                  <Link
+                    href="/the-hub"
+                    className={`flex-1 rounded-xl px-4 py-3 text-base font-medium transition-all duration-200 ${
+                      pathname.startsWith("/the-hub")
+                        ? "bg-brand-50/60 font-semibold text-brand-800"
+                        : "text-ink/80 hover:bg-brand-50/40 hover:text-brand-800"
                     }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Free Resources
-                  </span>
+                    The Hub
+                  </Link>
                   <button
-                    className="p-3 text-ink/60 hover:text-brand-800 transition-all duration-200 rounded-xl hover:bg-brand-50/40"
-                    onClick={() => setIsMobileFreeResourcesOpen(!isMobileFreeResourcesOpen)}
+                    type="button"
+                    className="rounded-xl p-3 text-ink/60 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
+                    onClick={() => setIsMobileHubOpen(!isMobileHubOpen)}
+                    aria-expanded={isMobileHubOpen}
+                    aria-label={isMobileHubOpen ? "Collapse The Hub sections" : "Expand The Hub sections"}
                   >
                     <svg
-                      className={`size-4 transition-transform duration-200 ${
-                        isMobileFreeResourcesOpen ? "rotate-180" : ""
-                      }`}
+                      className={`size-4 transition-transform duration-200 ${isMobileHubOpen ? "rotate-180" : ""}`}
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -354,53 +468,159 @@ export default function Header() {
                     </svg>
                   </button>
                 </div>
-
                 <div
                   className={`overflow-hidden transition-all duration-200 ${
-                    isMobileFreeResourcesOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+                    isMobileHubOpen ? "max-h-[32rem] overflow-y-auto opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="ml-4 mt-2 space-y-1 border-l-2 border-brand-100/40 pl-4">
+                    {theHubDropdownLinks.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block rounded-lg px-3 py-2 text-sm text-ink/70 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Families & Support — collapsible */}
+              <div>
+                <div className="flex items-center">
+                  <span
+                    className={`flex-1 rounded-xl px-4 py-3 text-base font-medium ${
+                      pathname.startsWith("/interactive-tools") || pathname.startsWith("/blog")
+                        ? "bg-brand-50/60 font-semibold text-brand-800"
+                        : "text-ink/80"
+                    }`}
+                  >
+                    Families &amp; Support
+                  </span>
+                  <button
+                    type="button"
+                    className="rounded-xl p-3 text-ink/60 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
+                    onClick={() => setIsMobileFamiliesOpen(!isMobileFamiliesOpen)}
+                    aria-expanded={isMobileFamiliesOpen}
+                    aria-label={
+                      isMobileFamiliesOpen ? "Collapse Families and Support" : "Expand Families and Support"
+                    }
+                  >
+                    <svg
+                      className={`size-4 transition-transform duration-200 ${isMobileFamiliesOpen ? "rotate-180" : ""}`}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  className={`overflow-hidden transition-all duration-200 ${
+                    isMobileFamiliesOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
                   <div className="ml-4 mt-2 space-y-1 border-l-2 border-brand-100/40 pl-4">
                     <Link
                       href="/interactive-tools"
-                      className="block text-sm text-ink/70 hover:text-brand-800 hover:bg-brand-50/40 transition-all duration-200 rounded-lg px-3 py-2"
+                      className="block rounded-lg px-3 py-2 text-sm text-ink/70 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Interactive Tools
                     </Link>
                     <Link
                       href="/blog"
-                      className="block text-sm text-ink/70 hover:text-brand-800 hover:bg-brand-50/40 transition-all duration-200 rounded-lg px-3 py-2"
+                      className="block rounded-lg px-3 py-2 text-sm text-ink/70 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Blog
                     </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Get involved — collapsible */}
+              <div>
+                <div className="flex items-center">
+                  <span
+                    className={`flex-1 rounded-xl px-4 py-3 text-base font-medium ${
+                      pathname.startsWith("/join-the-team")
+                        ? "bg-brand-50/60 font-semibold text-brand-800"
+                        : "text-ink/80"
+                    }`}
+                  >
+                    Get involved
+                  </span>
+                  <button
+                    type="button"
+                    className="rounded-xl p-3 text-ink/60 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
+                    onClick={() => setIsMobileGetInvolvedOpen(!isMobileGetInvolvedOpen)}
+                    aria-expanded={isMobileGetInvolvedOpen}
+                    aria-label={isMobileGetInvolvedOpen ? "Collapse Get involved" : "Expand Get involved"}
+                  >
+                    <svg
+                      className={`size-4 transition-transform duration-200 ${isMobileGetInvolvedOpen ? "rotate-180" : ""}`}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  className={`overflow-hidden transition-all duration-200 ${
+                    isMobileGetInvolvedOpen ? "max-h-56 opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="ml-4 mt-2 space-y-1 border-l-2 border-brand-100/40 pl-4">
+                    <button
+                      type="button"
+                      className="block w-full rounded-lg px-3 py-2 text-left text-sm text-ink/70 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
+                      onClick={() => {
+                        setShowMailchimpPopup(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      Be a Founding Supporter
+                    </button>
                     <Link
-                      href="/take-action"
-                      className="block text-sm text-ink/70 hover:text-brand-800 hover:bg-brand-50/40 transition-all duration-200 rounded-lg px-3 py-2"
+                      href="/join-the-team"
+                      className="block rounded-lg px-3 py-2 text-sm text-ink/70 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      Take Action
+                      Join the Team
+                    </Link>
+                    <Link
+                      href="/join-the-team/volunteer"
+                      className="block rounded-lg px-3 py-2 text-sm text-ink/70 transition-all duration-200 hover:bg-brand-50/40 hover:text-brand-800"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Volunteer
                     </Link>
                   </div>
                 </div>
               </div>
-              <MobileNavLink
-                href="/join-the-team"
-                pathname={pathname}
-                label="Join the Team"
-                matchStart
-                onClick={() => setIsMobileMenuOpen(false)}
-              />
+
               <MobileNavLink href="/contact" pathname={pathname} label="Contact" onClick={() => setIsMobileMenuOpen(false)} />
 
-              {/* CTA Buttons */}
               <button
+                type="button"
                 onClick={() => {
                   setShowMailchimpPopup(true);
                   setIsMobileMenuOpen(false);
                 }}
-                className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-6 py-3 text-sm font-semibold text-ink shadow-sm hover:bg-[#ffc533] hover:shadow-md active:scale-[0.98] transition-all duration-200 w-full mt-4"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-[#FFB800] px-6 py-3 text-sm font-semibold text-ink shadow-sm transition-all duration-200 hover:bg-[#ffc533] hover:shadow-md active:scale-[0.98]"
               >
                 Be a Founding Supporter
                 <svg className="ml-2 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

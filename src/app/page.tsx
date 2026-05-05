@@ -183,7 +183,7 @@ export default function Home() {
     { step: 2, title: "Digital Community & Support Network", status: "done", label: "Done", text: "Our online community is growing with over 2,000 supporters and families connected." },
     { step: 3, title: "Listening to Families & Shaping the Hub", status: "progress", label: "In Progress", text: "Families are helping shape the future through conversations, feedback and co-design." },
     { step: 4, title: "Building Partnerships & Community Links", status: "progress", label: "In Progress", text: "We are connecting with schools, organisations and local partners to strengthen support for families." },
-    { step: 5, title: "Becoming a Registered Charity", status: "progress", label: "In Progress", text: "Governance, trustees and charity registration steps are underway." },
+    { step: 5, title: "Becoming a Registered Charity", status: "done", label: "Done", text: "We are now a registered charity, with trustees and governance in place." },
     { step: 6, title: "Fundraising for the Noa's Place Hub", status: "next", label: "Next Step", text: "Securing funding to create a dedicated, sensory-aware space for families." },
     { step: 7, title: "Opening the Noa's Place Hub", status: "future", label: "Future Goal", text: "A calm, welcoming space where neurodivergent and disabled individuals and families can connect, belong and thrive." },
   ] as const;

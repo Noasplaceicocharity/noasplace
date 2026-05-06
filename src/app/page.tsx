@@ -289,15 +289,15 @@ export default function Home() {
 
 								{/* Buttons */}
 								<div id="founding-supporter" className="flex flex-col sm:flex-row gap-3 pt-2 scroll-mt-24">
-									<button
-										onClick={() => setShowMailchimpPopup(true)}
+									<Link
+										href="/donate"
 										className="inline-flex items-center justify-center rounded-lg bg-brand-800 px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-brand-900 hover:shadow-lg hover:scale-105 transition-all duration-300"
 									>
-										Be a Founding Supporter
+										Donate
 										<svg className="ml-1.5 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
 										</svg>
-									</button>
+									</Link>
 									<button
 										onClick={() => setShowVideoModal(true)}
 										className="inline-flex items-center justify-center rounded-lg bg-white border-2 border-brand-800 px-5 py-2.5 text-sm font-bold text-brand-800 shadow-md hover:bg-brand-50 hover:shadow-lg hover:scale-105 transition-all duration-300"
@@ -822,15 +822,15 @@ export default function Home() {
 						Together, we can create a community where every family feels supported, seen, and valued. <strong>Your support makes a difference.</strong>
 					</p>
 					<div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-						<button
-							onClick={() => setShowMailchimpPopup(true)}
+						<Link
+							href="/donate"
 							className="inline-flex items-center justify-center rounded-lg bg-[#FFB800] px-5 py-2.5 text-sm font-bold text-ink shadow-md hover:bg-[#ffc533] hover:scale-105 transition duration-200"
 						>
-							Support Our Vision
+							Donate
 							<svg className="ml-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
 								<path d="M5 12h14M12 5l7 7-7 7"/>
 							</svg>
-						</button>
+						</Link>
 						<Link
 							href="/contact"
 							className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 px-5 py-2.5 text-sm font-bold text-white hover:bg-white/10 hover:border-white/50 transition duration-200"

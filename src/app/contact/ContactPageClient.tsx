@@ -533,17 +533,17 @@ export default function ContactPageClient() {
         <section className="bg-white py-16" aria-labelledby="support-cta-heading">
           <div className="mx-auto max-w-4xl px-6 text-center">
             <h2 id="support-cta-heading" className="text-3xl font-bold text-ink sm:text-4xl">
-              Ready to Support Our Vision?
+              Ready to Donate?
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-ink/80">
               Join hundreds of others who believe in creating an inclusive space for everyone.
             </p>
             <div className="mt-8">
               <Link
-                href="/#register-form"
+                href="/donate"
                 className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200 focus:outline-none focus:ring-2 focus:ring-brand-800 focus:ring-offset-2"
               >
-                Show Your Support
+                Donate
                 <svg
                   className="ml-2 size-5"
                   viewBox="0 0 24 24"

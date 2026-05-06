@@ -172,7 +172,7 @@ export default function OurPlans() {
                   aria-label="Our plans overview video"
                 >
                   <source
-                    src="https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/our-plans-subbed.mp4"
+                    src="https://pub-c8d04e15fd394bb18ba7c7e5f0129c6b.r2.dev/Charity%20Announcement%20Subtitles.mp4"
                     type="video/mp4"
                   />
                   Your browser does not support the video tag.
@@ -688,15 +688,15 @@ export default function OurPlans() {
             Together, we can create a community where every family feels supported, seen, and valued. <strong>Your support makes a difference.</strong>
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <button
-              onClick={() => setShowMailchimpPopup(true)}
+            <Link
+              href="/donate"
               className="inline-flex items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg hover:bg-[#ffc533] hover:scale-105 transition duration-200"
             >
-              Support Our Vision
+              Donate
               <svg className="ml-2 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </button>
+            </Link>
             <Link
               href="/contact"
               className="inline-flex items-center justify-center rounded-xl border-2 border-white/30 px-8 py-4 text-lg font-bold text-white hover:bg-white/10 hover:border-white/50 transition duration-200"

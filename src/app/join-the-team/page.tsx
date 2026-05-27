@@ -1,16 +1,36 @@
 import Link from "next/link";
-import { getVacanciesByType } from "@/lib/vacancies-notion";
+import AlwaysOpenVolunteerCard from "@/components/AlwaysOpenVolunteerCard";
+import VacancyCard from "@/components/VacancyCard";
+import { getOpenVacancies, type Vacancy } from "@/lib/vacancies-notion";
 
 export const revalidate = 60;
 
-export default async function JoinTheTeamPage() {
-  const [trustees, staff, volunteer] = await Promise.all([
-    getVacanciesByType("Trustee"),
-    getVacanciesByType("Staff"),
-    getVacanciesByType("Volunteer"),
-  ]);
+const ROLE_TYPE_ORDER: Record<Vacancy["roleType"], number> = {
+  Trustee: 0,
+  Staff: 1,
+  Volunteer: 2,
+};
 
-  const cards = [
+function sortOpenRoles(vacancies: Vacancy[]): Vacancy[] {
+  return [...vacancies].sort((a, b) => {
+    const byType = ROLE_TYPE_ORDER[a.roleType] - ROLE_TYPE_ORDER[b.roleType];
+    if (byType !== 0) return byType;
+    return a.title.localeCompare(b.title, "en-GB");
+  });
+}
+
+export default async function JoinTheTeamPage() {
+  const openVacancies = await getOpenVacancies();
+  const listedRoles = sortOpenRoles(
+    openVacancies.filter((vacancy) => vacancy.roleType !== "Volunteer")
+  );
+  const trustees = openVacancies.filter((vacancy) => vacancy.roleType === "Trustee");
+  const staff = openVacancies.filter((vacancy) => vacancy.roleType === "Staff");
+
+  const cards: Array<
+    | { title: string; description: string; href: string; count: number }
+    | { title: string; description: string; href: string; statusLabel: string }
+  > = [
     {
       title: "Become a Trustee",
       description:
@@ -21,7 +41,7 @@ export default async function JoinTheTeamPage() {
     {
       title: "Lead Roles",
       description:
-        "Shape our future. These volunteer lead roles make things happen, from managing our programs to building the partnerships that help us grow. If you're a leader who wants to roll up your sleeves and help us build a more inclusive West Yorkshire, keep an eye here for our latest openings.",
+        "Shape our future. Our lead roles make things happen, from managing our programmes to building the partnerships that help us grow. They can be paid or volunteer. If you're a leader who wants to roll up your sleeves and help us build a more inclusive West Yorkshire, keep an eye here for our latest openings.",
       href: "/join-the-team/lead-roles",
       count: staff.length,
     },
@@ -30,7 +50,7 @@ export default async function JoinTheTeamPage() {
       description:
         "Come as you are. Our volunteers are the heartbeat of Noa’s Place. It’s flexible, rewarding, and a chance to help every family shine.",
       href: "/join-the-team/volunteer",
-      count: volunteer.length,
+      statusLabel: "Always open. Register your interest",
     },
   ];
 
@@ -53,9 +73,11 @@ export default async function JoinTheTeamPage() {
               <h2 className="text-2xl font-bold text-brand-900">{card.title}</h2>
               <p className="mt-3 flex-grow text-ink/85">{card.description}</p>
               <p className="mt-5 text-sm font-semibold text-brand-800">
-                {card.count > 0
-                  ? `${card.count} open ${card.count === 1 ? "opportunity" : "opportunities"}`
-                  : "No current openings, register your interest"}
+                {"statusLabel" in card
+                  ? card.statusLabel
+                  : card.count > 0
+                    ? `${card.count} open ${card.count === 1 ? "opportunity" : "opportunities"}`
+                    : "No current openings, register your interest"}
               </p>
               <Link
                 href={card.href}
@@ -66,6 +88,18 @@ export default async function JoinTheTeamPage() {
             </section>
           ))}
         </div>
+
+        <section className="mt-16" aria-labelledby="open-roles-heading">
+          <h2 id="open-roles-heading" className="text-3xl font-bold text-brand-900">
+            Open roles
+          </h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {listedRoles.map((vacancy) => (
+              <VacancyCard key={vacancy.id} vacancy={vacancy} />
+            ))}
+            <AlwaysOpenVolunteerCard />
+          </div>
+        </section>
       </div>
     </main>
   );

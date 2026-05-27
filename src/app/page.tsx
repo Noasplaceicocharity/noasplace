@@ -346,23 +346,25 @@ export default function Home() {
 								href={featuredBlogHref}
 								className="group bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-white/50 lg:col-span-2"
 							>
-								<div className="relative h-52 overflow-hidden">
+								<div className="relative aspect-video w-full overflow-hidden bg-brand-50">
 									{featuredBlog?.imageUrl ? (
 										<Image
 											src={featuredBlog.imageUrl}
 											alt={featuredBlog.title}
 											fill
-											className="object-cover transition-transform duration-500 group-hover:scale-110"
+											sizes="(max-width: 1024px) 100vw, 50vw"
+											className="object-contain transition-transform duration-500 group-hover:scale-[1.02]"
 										/>
 									) : (
 										<Image
 											src="/images/family_photo_halifax_west_yorkshire.jpg"
 											alt="Blog - Our latest stories and updates"
 											fill
-											className="object-cover transition-transform duration-500 group-hover:scale-110"
+											sizes="(max-width: 1024px) 100vw, 50vw"
+											className="object-contain transition-transform duration-500 group-hover:scale-[1.02]"
 										/>
 									)}
-									<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+									<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 								</div>
 								<div className="p-6">
 									<div className="text-2xl font-black text-brand-800 mb-3 group-hover:text-brand-900 transition-colors">

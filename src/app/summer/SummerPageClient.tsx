@@ -190,7 +190,14 @@ export default function SummerPageClient() {
             <span className="font-medium text-brand-800">10:30am–12pm</span> or <span className="font-medium text-brand-800">1pm–2:30pm</span>
             <br className="hidden sm:inline" />
             <span className="text-ink/50 sm:mx-2">·</span>
-            Little Stars Family Hub, Halifax
+            <a
+              href="https://calderdalefamilyhubs.org.uk/hub-locations/little-stars/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-brand-800 underline decoration-brand-300 underline-offset-2 transition-colors hover:text-brand-900 hover:decoration-brand-500"
+            >
+              Little Stars Family Hub, Halifax
+            </a>
           </p>
         </div>
       </section>

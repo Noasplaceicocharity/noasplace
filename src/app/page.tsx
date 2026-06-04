@@ -8,6 +8,7 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import MailchimpSubscribeForm from "@/components/MailchimpSubscribeForm";
+import OurFunders from "@/components/OurFunders";
 import { BlogPostMeta } from "@/lib/blog";
 
 export default function Home() {
@@ -31,57 +32,6 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let cancelled = false;
-
-    void import("canvas-confetti").then(({ default: confetti }) => {
-      if (cancelled) return;
-
-      const colors = [
-        "#6b21a8",
-        "#7c3aed",
-        "#FFB800",
-        "#db2777",
-        "#f59e0b",
-        "#ffffff",
-      ];
-
-      const fire = (opts?: Parameters<typeof confetti>[0]) => {
-        if (cancelled) return;
-        confetti({
-          particleCount: 110,
-          spread: 92,
-          startVelocity: 42,
-          gravity: 1,
-          decay: 0.92,
-          scalar: 1.12,
-          ticks: 280,
-          zIndex: 9999,
-          colors,
-          ...opts,
-        });
-      };
-
-      // A few bursts along the top — enough coverage without overwhelming the page
-      const topXs = [0.22, 0.42, 0.58, 0.78];
-      for (const x of topXs) {
-        fire({
-          origin: { x, y: 0 },
-          angle: 90,
-          spread: 105,
-          particleCount: 95,
-        });
-      }
-    });
-
-    return () => {
-      cancelled = true;
-    };
   }, []);
 
   useEffect(() => {
@@ -441,6 +391,12 @@ export default function Home() {
 							</Link>
 						</div>
 					</div>
+				</div>
+			</section>
+
+			<section className="border-b border-brand-100/60 bg-white py-8 sm:py-10">
+				<div className="mx-auto max-w-7xl px-6">
+					<OurFunders heading="Our funders" align="center" />
 				</div>
 			</section>
 

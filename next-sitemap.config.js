@@ -19,6 +19,7 @@ module.exports = {
       '/interactive-tools',
       '/plans',
       '/the-hub',
+      '/summer',
       '/policies',
       '/interactive-tools/all-about-me-adult',
       '/interactive-tools/all-about-me-child',
@@ -47,7 +48,7 @@ module.exports = {
         };
       }
 
-      if (['/about', '/contact', '/interactive-tools', '/plans', '/the-hub', '/policies'].includes(path)) {
+      if (['/about', '/contact', '/interactive-tools', '/plans', '/the-hub', '/summer', '/policies'].includes(path)) {
         return {
           loc: path,
           changefreq: 'weekly',

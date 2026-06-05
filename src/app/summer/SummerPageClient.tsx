@@ -23,19 +23,19 @@ const ZONES = [
   {
     title: "Calm corner",
     tone: "from-brand-50/80 to-white",
-    intro: "When everything feels a bit much, this is the place to land.",
+    intro: "A space that aims to support if things become too much.",
     details: "Soft lighting, sensory tents, bean bags, and quiet nooks where your child (or you) can decompress at your own speed.",
   },
   {
     title: "Move & play",
     tone: "from-amber-50/60 to-white",
-    intro: "For children who need to move before they can settle.",
+    intro: "For children who enjoy movement play.",
     details: "Trampolines, climbing, and a ball pool, with staff keeping a gentle eye on safety so you can relax a little.",
   },
   {
     title: "Focus & create",
     tone: "from-sky-50/50 to-white",
-    intro: "Gentle, hands-on activities for children who like something structured to lean into.",
+    intro: "Gentle hands on activities.",
     details: "Sensory trays, sorting games, activity boards, and busy boards designed to engage without rushing anyone.",
   },
   {
@@ -140,7 +140,7 @@ export default function SummerPageClient() {
               transition={{ duration: 0.5, delay: 0.15 }}
               className="max-w-xl text-lg leading-relaxed text-ink/75"
             >
-              Calm, flexible, sensory-informed sessions where your child can explore at their own pace, and you can breathe.
+              Our sessions aim to provide a Calm, flexible, sensory-informed space where your child can explore at their own pace.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -211,13 +211,12 @@ export default function SummerPageClient() {
               child. These sessions are different on purpose.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-ink/80">
-              Instead of one crowded room, the space is split into gentle zones. Your child can choose where they feel
+              The space is split into gentle zones. Your child can choose where they feel
               safest, and you can stay close without having to explain or apologise for how they experience the world.
             </p>
             <p className="mt-6 rounded-3xl bg-brand-50/60 px-6 py-5 text-base leading-relaxed text-brand-900/90">
-              <strong className="font-semibold text-brand-800">You do not have to perform.</strong> There is no pressure
-              to join in, sit still, or stay for the full session. Siblings, carers, and grandparents are all welcome.
-              We keep numbers small (around six families) so it never feels overwhelming.
+              There is no pressure to join in, sit still, or stay for the full session. Siblings, carers, and
+              grandparents are all welcome. We keep numbers small (around six families).
             </p>
           </div>
 

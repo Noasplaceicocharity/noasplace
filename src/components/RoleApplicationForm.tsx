@@ -2,19 +2,23 @@
 
 import { useState } from 'react';
 
+const SEND_EXPERIENCE_OPTIONS = [
+  { value: 'lived_experience', label: 'Lived experience' },
+  { value: 'basic_knowledge', label: 'Basic knowledge' },
+  { value: 'professional', label: 'Professional' },
+] as const;
+
 const inputClassName =
   'w-full rounded-lg border border-brand-200 px-4 py-3 text-ink placeholder:text-ink/50 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition duration-200';
 
 const labelClassName = 'block text-sm font-semibold text-ink mb-2';
 
-const SEND_EXPERIENCE_OPTIONS = [
-  { value: 'lived_experience', label: 'Lived experience' },
-  { value: 'basic_knowledge', label: 'Basic knowledge' },
-  { value: 'expert_knowledge', label: 'Expert knowledge' },
-  { value: 'no_knowledge', label: 'No knowledge' },
-] as const;
+type RoleApplicationFormProps = {
+  roleId: string;
+  roleName: string;
+};
 
-export default function VolunteerInterestForm() {
+export default function RoleApplicationForm({ roleId, roleName }: RoleApplicationFormProps) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -27,7 +31,7 @@ export default function VolunteerInterestForm() {
     const formData = new FormData(form);
 
     try {
-      const response = await fetch('/api/volunteer-interest', {
+      const response = await fetch(`/api/roles/${roleId}/applications`, {
         method: 'POST',
         body: formData,
       });
@@ -51,10 +55,10 @@ export default function VolunteerInterestForm() {
   if (status === 'success') {
     return (
       <div className="mt-10 rounded-2xl border border-brand-100 bg-brand-50/50 p-6 sm:p-8">
-        <h2 className="text-2xl font-bold text-brand-900">Interest submitted</h2>
+        <h2 className="text-2xl font-bold text-brand-900">Application submitted</h2>
         <p className="mt-3 text-ink/85">
-          Thank you for registering your interest in volunteering with Noa&apos;s Place. We&apos;ll
-          be in touch soon.
+          Thank you for applying for {roleName}. We&apos;ll be in touch if your application is
+          successful.
         </p>
       </div>
     );
@@ -62,11 +66,12 @@ export default function VolunteerInterestForm() {
 
   return (
     <div className="mt-10 rounded-2xl border border-brand-100 bg-white p-6 shadow-sm sm:p-8">
+      <h2 className="text-2xl font-bold text-brand-900">Apply for this role</h2>
       <form
         onSubmit={handleSubmit}
-        className="space-y-6"
+        className="mt-6 space-y-6"
         noValidate
-        aria-label="Volunteer registration"
+        aria-label={`Application form for ${roleName}`}
       >
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
@@ -152,14 +157,38 @@ export default function VolunteerInterestForm() {
           />
         </div>
 
+        <fieldset>
+          <legend className={labelClassName}>
+            Current DBS held <span className="text-red-500" aria-label="required">*</span>
+          </legend>
+          <div className="flex flex-wrap gap-6">
+            <label className="flex cursor-pointer items-center gap-2 text-sm text-ink/90">
+              <input
+                type="radio"
+                name="dbsHeld"
+                value="yes"
+                required
+                className="size-4 text-brand-800 focus:ring-brand-500"
+              />
+              Yes
+            </label>
+            <label className="flex cursor-pointer items-center gap-2 text-sm text-ink/90">
+              <input
+                type="radio"
+                name="dbsHeld"
+                value="no"
+                required
+                className="size-4 text-brand-800 focus:ring-brand-500"
+              />
+              No
+            </label>
+          </div>
+        </fieldset>
+
         <div>
           <label htmlFor="sendExperience" className={labelClassName}>
             SEND experience <span className="text-red-500" aria-label="required">*</span>
           </label>
-          <p className="mb-2 text-sm text-ink/75">
-            This does not affect your volunteer opportunity. It just helps us understand where
-            your time is best spent.
-          </p>
           <select
             id="sendExperience"
             name="sendExperience"
@@ -233,7 +262,7 @@ export default function VolunteerInterestForm() {
             disabled={status === 'submitting'}
             className="inline-flex w-full items-center justify-center rounded-xl bg-[#FFB800] px-8 py-4 text-lg font-bold text-ink shadow-lg transition duration-200 hover:scale-105 hover:bg-[#ffc533] focus:outline-none focus:ring-2 focus:ring-brand-800 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
-            {status === 'submitting' ? 'Submitting…' : 'Submit interest'}
+            {status === 'submitting' ? 'Submitting…' : 'Submit application'}
             <svg
               className="ml-2 size-5"
               viewBox="0 0 24 24"

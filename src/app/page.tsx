@@ -9,6 +9,7 @@ import { createPortal } from "react-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import MailchimpSubscribeForm from "@/components/MailchimpSubscribeForm";
 import OurFunders from "@/components/OurFunders";
+import FeaturedSummerSessions from "@/components/FeaturedSummerSessions";
 import { BlogPostMeta } from "@/lib/blog";
 
 export default function Home() {
@@ -393,6 +394,8 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
+
+			<FeaturedSummerSessions />
 
 			<section className="border-b border-brand-100/60 bg-white py-8 sm:py-10">
 				<div className="mx-auto max-w-7xl px-6">

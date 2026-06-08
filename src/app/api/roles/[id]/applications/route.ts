@@ -8,6 +8,13 @@ import {
   cvAttachmentFromFile,
   sendRoleApplicationEmails,
 } from '@/lib/recruitmentEmails';
+import {
+  formatSensorySessionSelections,
+  hasSensorySessionSelection,
+  parseSensorySessionSelections,
+  roleRequiresSensorySessionDates,
+  sensorySessionSelectionsToColumns,
+} from '@/lib/sensorySessions';
 
 const sendExperienceSchema = z.enum(['lived_experience', 'basic_knowledge', 'professional']);
 
@@ -70,7 +77,7 @@ export async function POST(
   const supabase = await createClient();
   const { data: role, error: roleError } = await supabase
     .from('roles')
-    .select('id, status, role_name')
+    .select('id, status, role_name, slug')
     .eq('id', roleId)
     .eq('status', 'open')
     .single();
@@ -79,7 +86,19 @@ export async function POST(
     return NextResponse.json({ error: 'Role not found or no longer open' }, { status: 404 });
   }
 
-  const roleName = (role as { role_name: string }).role_name;
+  const roleRow = role as { role_name: string; slug: string };
+  const roleName = roleRow.role_name;
+  const requiresSensorySessions = roleRequiresSensorySessionDates(roleRow.slug);
+  const sensorySessionSelections = requiresSensorySessions
+    ? parseSensorySessionSelections(formData)
+    : null;
+
+  if (requiresSensorySessions && !hasSensorySessionSelection(sensorySessionSelections!)) {
+    return NextResponse.json(
+      { error: 'Please select at least one session date' },
+      { status: 400 }
+    );
+  }
 
   const cvFile = formData.get('cv');
   const cvAttachment = await cvAttachmentFromFile(cvFile);
@@ -129,6 +148,9 @@ export async function POST(
     cv_path: cvPath,
     consent_contact: true,
     consent_news: parseBooleanField(formData.get('consentNews')),
+    ...(sensorySessionSelections
+      ? sensorySessionSelectionsToColumns(sensorySessionSelections)
+      : {}),
   };
 
   const table = supabase.from('role_applications') as unknown as {
@@ -164,6 +186,9 @@ export async function POST(
     dbsHeld: parsed.data.dbsHeld === 'yes',
     sendExperience: parsed.data.sendExperience,
     consentNews,
+    sensorySessions: sensorySessionSelections
+      ? formatSensorySessionSelections(sensorySessionSelections)
+      : null,
     cv: cvAttachment,
   });
 

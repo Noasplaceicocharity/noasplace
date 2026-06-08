@@ -116,7 +116,11 @@ export default function RoleDetail({ role }: RoleDetailProps) {
           ) : null}
         </div>
 
-        <RoleApplicationForm roleId={role.id} roleName={role.roleName} />
+        <RoleApplicationForm
+          roleId={role.id}
+          roleName={role.roleName}
+          roleSlug={role.slug}
+        />
       </div>
     </main>
   );

@@ -154,6 +154,11 @@ export type Database = {
           cv_path: string | null;
           consent_contact: boolean;
           consent_news: boolean;
+          session_thu_30_jul: boolean | null;
+          session_thu_6_aug: boolean | null;
+          session_thu_13_aug: boolean | null;
+          session_thu_20_aug: boolean | null;
+          session_thu_27_aug: boolean | null;
           created_at: string;
         };
         Insert: {
@@ -169,6 +174,11 @@ export type Database = {
           cv_path?: string | null;
           consent_contact: boolean;
           consent_news: boolean;
+          session_thu_30_jul?: boolean | null;
+          session_thu_6_aug?: boolean | null;
+          session_thu_13_aug?: boolean | null;
+          session_thu_20_aug?: boolean | null;
+          session_thu_27_aug?: boolean | null;
           created_at?: string;
         };
         Update: {
@@ -184,6 +194,11 @@ export type Database = {
           cv_path?: string | null;
           consent_contact?: boolean;
           consent_news?: boolean;
+          session_thu_30_jul?: boolean | null;
+          session_thu_6_aug?: boolean | null;
+          session_thu_13_aug?: boolean | null;
+          session_thu_20_aug?: boolean | null;
+          session_thu_27_aug?: boolean | null;
           created_at?: string;
         };
       };

@@ -1,6 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import {
+  roleRequiresSensorySessionDates,
+  SENSORY_SESSION_OPTIONS,
+} from '@/lib/sensorySessions';
 
 const SEND_EXPERIENCE_OPTIONS = [
   { value: 'lived_experience', label: 'Lived experience' },
@@ -16,9 +20,15 @@ const labelClassName = 'block text-sm font-semibold text-ink mb-2';
 type RoleApplicationFormProps = {
   roleId: string;
   roleName: string;
+  roleSlug: string;
 };
 
-export default function RoleApplicationForm({ roleId, roleName }: RoleApplicationFormProps) {
+export default function RoleApplicationForm({
+  roleId,
+  roleName,
+  roleSlug,
+}: RoleApplicationFormProps) {
+  const showSensorySessions = roleRequiresSensorySessionDates(roleSlug);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -184,6 +194,32 @@ export default function RoleApplicationForm({ roleId, roleName }: RoleApplicatio
             </label>
           </div>
         </fieldset>
+
+        {showSensorySessions ? (
+          <fieldset>
+            <legend className={labelClassName}>
+              Which sessions are you applying for?{' '}
+              <span className="text-red-500" aria-label="required">*</span>
+            </legend>
+            <p className="mb-3 text-sm text-ink/75">Select all dates you are available for.</p>
+            <div className="space-y-3">
+              {SENSORY_SESSION_OPTIONS.map((option) => (
+                <label
+                  key={option.field}
+                  className="flex cursor-pointer items-center gap-3 text-sm text-ink/90"
+                >
+                  <input
+                    type="checkbox"
+                    name={option.field}
+                    value="yes"
+                    className="size-4 shrink-0 rounded border-brand-300 text-brand-800 focus:ring-brand-500"
+                  />
+                  {option.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ) : null}
 
         <div>
           <label htmlFor="sendExperience" className={labelClassName}>

@@ -109,6 +109,7 @@ export async function sendRoleApplicationEmails(input: {
   dbsHeld: boolean;
   sendExperience: string;
   consentNews: boolean;
+  sensorySessions?: string | null;
   cv?: EmailAttachment | null;
 }): Promise<void> {
   const applicantName = `${input.firstName} ${input.lastName}`;
@@ -121,6 +122,9 @@ export async function sendRoleApplicationEmails(input: {
     { label: 'Email', value: input.email },
     { label: 'Mobile', value: input.mobile },
     { label: 'Address', value: input.address },
+    ...(input.sensorySessions
+      ? [{ label: 'Sessions applying for', value: input.sensorySessions }]
+      : []),
     { label: 'Current DBS held', value: yesNo(input.dbsHeld) },
     { label: 'SEND experience', value: sendExperienceLabel },
     { label: 'Happy to receive latest news', value: yesNo(input.consentNews) },

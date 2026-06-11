@@ -55,7 +55,6 @@ export async function POST(
       dbsHeld: z.enum(['yes', 'no']),
       sendExperience: sendExperienceSchema,
       consentContact: z.literal('yes'),
-      consentNews: z.string().optional(),
     })
     .safeParse({
       firstName: formData.get('firstName'),
@@ -66,7 +65,6 @@ export async function POST(
       dbsHeld: formData.get('dbsHeld'),
       sendExperience: formData.get('sendExperience'),
       consentContact: formData.get('consentContact'),
-      consentNews: formData.get('consentNews'),
     });
 
   if (!parsed.success) {

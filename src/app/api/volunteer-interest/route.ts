@@ -44,7 +44,6 @@ export async function POST(request: Request) {
       address: z.string().trim().min(1, 'Address is required'),
       sendExperience: sendExperienceSchema,
       consentContact: z.literal('yes'),
-      consentNews: z.string().optional(),
     })
     .safeParse({
       firstName: formData.get('firstName'),
@@ -54,7 +53,6 @@ export async function POST(request: Request) {
       address: formData.get('address'),
       sendExperience: formData.get('sendExperience'),
       consentContact: formData.get('consentContact'),
-      consentNews: formData.get('consentNews'),
     });
 
   if (!parsed.success) {
